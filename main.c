@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2023/12/18 13:10:31 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2023/12/18 13:47:55 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ int	main(int ac, char **av, char **env)
 		print_entry();
 		signal(SIGINT, handle_sigint);
 		ptr = readline("");
-		if (!ft_strncmp("exit", ptr, 4))
+		if (!ft_strncmp("exit", ptr, 5))
 			break ;
 	}
+	print_exit();
 	return (0);
 }

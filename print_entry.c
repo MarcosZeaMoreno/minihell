@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 18:09:15 by mzea-mor          #+#    #+#             */
-/*   Updated: 2023/12/14 18:28:25 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2023/12/18 13:48:46 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ void	print_entry(void)
 	char	buffer[4096 + 1];
 
 	cwd = getcwd(buffer, 4096);
-	printf("%s ", cwd);
-	printf("\x1b[31mMini Hell: \x1b[0m");
+	ft_printf("%s ", cwd);
+	ft_printf("%sMini-Hell: %s", RED, RST);
+}
+
+void	print_exit(void)
+{
+	ft_printf("%s%s%s\n", CYAN, "Goodbye!", RST);
 }
