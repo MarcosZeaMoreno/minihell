@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2023/12/19 17:37:30 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2023/12/19 17:42:05 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /*
 * variables de entorno
 * echar un ojo a: readdir, closedir, getenv
+* ejecutar comandos como "ls" por rutal alterlativa "PATH"
 */
 
 int	main(int ac, char **av, char **env)
