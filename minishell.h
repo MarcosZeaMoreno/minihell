@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2023/12/18 13:37:12 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2023/12/19 16:53:52 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <fcntl.h>
 # include <signal.h>
 # include <sys/wait.h>
+# include <dirent.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
@@ -41,5 +42,7 @@
 void	handle_sigint(int sig);
 void	print_entry(void);
 void	print_exit(void);
+int		check_comand(char *ptr);
+
 
 #endif

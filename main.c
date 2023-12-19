@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2023/12/18 13:47:55 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2023/12/19 17:37:30 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 /*
 * variables de entorno
-* echar un ojo a: readdir, closedir, getcwd, getenv
+* echar un ojo a: readdir, closedir, getenv
 */
+
 int	main(int ac, char **av, char **env)
 {
 	char *ptr;
@@ -28,6 +29,11 @@ int	main(int ac, char **av, char **env)
 		print_entry();
 		signal(SIGINT, handle_sigint);
 		ptr = readline("");
+		if (check_comand(ptr) == 0)
+			{
+				print_entry();
+				printf("%s: command not found\n", ptr);
+			}
 		if (!ft_strncmp("exit", ptr, 5))
 			break ;
 	}

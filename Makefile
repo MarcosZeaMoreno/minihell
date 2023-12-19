@@ -6,7 +6,7 @@
 #    By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 15:37:18 by mzea-mor          #+#    #+#              #
-#    Updated: 2023/12/18 11:58:04 by mzea-mor         ###   ########.fr        #
+#    Updated: 2023/12/19 16:53:52 by mzea-mor         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,8 @@ NAME = minishell
 USER := $(shell whoami)
 CC = gcc
 CFLAGS = -fsanitize=address -Wall -Werror -Wextra
-SRC = main.c signals.c print_entry.c
 LDFLAGS = -L/Users/mzea-mor/.brew/opt/readline/lib -lreadline
+SRC = main.c signals.c print_entry.c check_comand.c
 
 $(NAME): $(OBJ)
 	@echo "📘$(COLOUR_BLUE) ¡Compiling ft_printf library! $(END_COLOUR)📘"
