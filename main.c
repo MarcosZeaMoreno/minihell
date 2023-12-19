@@ -15,6 +15,7 @@
 /*
 * variables de entorno
 * echar un ojo a: readdir, closedir, getenv
+* ejecutar comandos como "ls" por rutal alterlativa "PATH"
 */
 
 int	main(int ac, char **av, char **env)
