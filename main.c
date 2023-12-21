@@ -6,18 +6,20 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2023/12/19 17:42:05 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2023/12/21 17:07:26 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-* variables de entorno
-* echar un ojo a: readdir, closedir, getenv
-* ejecutar comandos como "ls" por rutal alterlativa "PATH"
-*/
-
+/**
+ * @brief Main function 
+ * 
+ * @param ac Argument count
+ * @param av Argument value
+ * @param env Enviroment vars
+ * @return int 
+ */
 int	main(int ac, char **av, char **env)
 {
 	char *ptr;
@@ -25,6 +27,7 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	(void)env;
+	print_header();
 	while (1)
 	{
 		print_entry();
@@ -33,7 +36,7 @@ int	main(int ac, char **av, char **env)
 		if (check_comand(ptr) == 0)
 			{
 				print_entry();
-				printf("%s: command not found\n", ptr);
+				ft_printf("%s: command not found\n", ptr);
 			}
 		if (!ft_strncmp("exit", ptr, 5))
 			break ;
