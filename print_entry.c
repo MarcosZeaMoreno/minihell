@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 18:09:15 by mzea-mor          #+#    #+#             */
-/*   Updated: 2023/12/19 15:21:47 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2023/12/21 15:31:51 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,20 @@ void	print_entry(void)
 void	print_exit(void)
 {
 	ft_printf("%s%s%s\n", CYAN, "Goodbye!", RST);
+}
+
+void	print_header(void)
+{
+	printf("");
+	printf("");
+	printf("");
+	printf("");
+	printf("");
+	printf("");
+	printf("");
+	printf("");
+	printf("");
+	printf("");
+	printf("");
+	printf("");
 }
