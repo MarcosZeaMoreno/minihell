@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2023/12/27 15:44:02 by vkatason         ###   ########.fr       */
+/*   Updated: 2023/12/28 18:12:45 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "./libs/ft_printf/Libft/libft.h"
 # include "./libs/ft_printf/ft_printf.h"
-# include <dirent.h>
+// # include <dirent.h>
 # include <errno.h>
 # include <fcntl.h>
 # include <readline/history.h>
@@ -45,10 +45,38 @@
 # define CYAN "\033[1;36m"    /* Bold Cyan */
 # define WHITE "\033[1;37m"   /* Bold White */
 
+/*----- STRUCTURES -----*/
+
+/**
+ * @brief Structure to handle the enviroment variables
+ * 
+ * @param key The key of the variable
+ * @param value The value of the variable
+ * @param role The special characterictic 
+ * 			   allows you to define a special value for the variable. 
+ *             E.g.: 
+ * 		       '?' - variable storing the status of the last command,
+ * 		       'p' - is a PWD variable containing the current directory,
+ * 		       'q' - is a special value for OLDPWD if the previous 
+ * 				     directory was not set
+ * @param status stores the return code of the last 
+ * 				 executed command, if meaning =='?'. 
+ * 				 It is used to get the status 
+ * 				 of the previous command and to check for errors.
+ */
+typedef struct s_env
+{
+	char			*key;
+	char			*value;
+	char			role;
+	int				status;
+	struct s_env	*next;
+}					t_env;
+
+/*-----  FUNCTIONS ----*/
 void				handle_sigint(int sig);
 void				print_entry(void);
 void				print_exit(void);
 void				print_header(void);
 int					check_comand(char *ptr);
-
 #endif

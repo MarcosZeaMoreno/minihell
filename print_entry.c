@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 18:09:15 by mzea-mor          #+#    #+#             */
-/*   Updated: 2023/12/27 16:14:44 by vkatason         ###   ########.fr       */
+/*   Updated: 2023/12/28 15:26:14 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /**
  * @brief Function to print a prompt with the actual directory
- * 			and the name of the proyect.
+ * and the name of the proyect.
  * 
  */
 void	print_entry(void)
@@ -47,9 +47,12 @@ void	print_header(void)
 	ft_printf(RED "*  | | | | -_| |  _| . |     | -_|  |  _| . |   *\n" RST);
 	ft_printf(RED "*  |_____|___|_|___|___|_|_|_|___|  |_| |___|   *\n" RST);
 	ft_printf(RED "*                                               *\n" RST);
+	ft_printf(RED "*                                               *\n" RST);
 	ft_printf(RED "*         _____ _     _    __ __     _ _        *\n" RST);
 	ft_printf(RED "*        |     |_|___|_|  |  |  |___| | |       *\n" RST);
 	ft_printf(RED "*        | | | | |   | |  |     | -_| | |       *\n" RST);
 	ft_printf(RED "*        |_|_|_|_|_|_|_|  |__|__|___|_|_|       *\n" RST);
+	ft_printf(RED "*                                               *\n" RST);
 	ft_printf(RED "*************************************************\n" RST);
 }
+

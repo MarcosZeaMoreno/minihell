@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2023/12/27 12:49:59 by vkatason         ###   ########.fr       */
+/*   Updated: 2023/12/28 18:21:25 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@
  * @param ac Argument count
  * @param av Argument value
  * @param env Enviroment vars
- * @return int 
+ * @return int
+ * @warning He cambiado el nombre de ptr a usr_input
  */
 int	main(int ac, char **av, char **env)
 {
-	char	*usr_input; // He cambiado el nombre de ptr a usr_input
-
+	char	*usr_input;
+	//t_env	*env_vars;
 	(void)ac;
 	(void)av;
 	(void)env;
-
 	print_header();
 	while (1)
 	{
