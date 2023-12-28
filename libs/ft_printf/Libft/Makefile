@@ -1,4 +1,16 @@
-CC = gcc
+#COLORS
+BOLD	:= \033[1m
+BLACK	:= \033[30;1m
+RED		:= \033[31;1m
+GREEN	:= \033[32;1m
+YELLOW	:= \033[33;1m
+BLUE	:= \033[34;1m
+MAGENTA	:= \033[35;1m
+CYAN	:= \033[36;1m
+WHITE	:= \033[37;1m
+RST		:= \033[0m 
+
+CC = @gcc
 CFLAGS = -Wall -Wextra -Werror
 NAME = libft.a
 SRC =	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
@@ -19,21 +31,24 @@ OBJ_BONUS = $(SRC_BONUS:.c=.o)
 all: $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo "$(GREEN)Compiling:$(RST) $(notdir $<)"
 
 $(NAME): $(OBJ)
-	ar rcs $(NAME) $(OBJ)
-
+	@ar rcs $(NAME) $(OBJ)
+#	@echo "📒$(YELLOW) Libft library had been successfully compiled! $(RST)📒"
 clean:
-	rm -f $(OBJ)
-	rm -f $(OBJ_BONUS)
+	@rm -f $(OBJ)
+	@rm -f $(OBJ_BONUS)
+#	@echo "📒$(RED) Libft object files had been successfully removed! $(RST)📒"
 
 fclean: clean
-	rm -f libft.a
-
+	@rm -f libft.a
+	@echo "📒$(RED) Libft had been successfully cleaned! $(RST)📒"
 re: fclean all
 
 bonus: $(NAME) $(OBJ_BONUS)
-	ar rcs $(NAME) $(OBJ_BONUS)
+	@ar rcs $(NAME) $(OBJ_BONUS)
 
 .PHONY: all clean fclean re
+
