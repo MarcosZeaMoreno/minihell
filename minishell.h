@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2023/12/21 17:07:26 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2023/12/27 15:44:02 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 
 # include "./libs/ft_printf/Libft/libft.h"
 # include "./libs/ft_printf/ft_printf.h"
+# include <dirent.h>
 # include <errno.h>
+# include <fcntl.h>
+# include <readline/history.h>
+# include <readline/readline.h>
+# include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/wait.h>
 # include <termios.h>
 # include <unistd.h>
-# include <fcntl.h>
-# include <signal.h>
-# include <sys/wait.h>
-# include <dirent.h>
-# include <readline/readline.h>
-# include <readline/history.h>
 
 /*
 ** ASCII colors escape sequences for printf
@@ -45,10 +45,10 @@
 # define CYAN "\033[1;36m"    /* Bold Cyan */
 # define WHITE "\033[1;37m"   /* Bold White */
 
-void	handle_sigint(int sig);
-void	print_entry(void);
-void	print_exit(void);
-void	print_header(void);
-int		check_comand(char *ptr);
+void				handle_sigint(int sig);
+void				print_entry(void);
+void				print_exit(void);
+void				print_header(void);
+int					check_comand(char *ptr);
 
 #endif

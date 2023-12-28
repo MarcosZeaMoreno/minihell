@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_comand.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:46:14 by mzea-mor          #+#    #+#             */
-/*   Updated: 2023/12/21 17:07:26 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2023/12/27 16:15:23 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	check_comand(char *ptr)
 	else if (!ft_strncmp("env", ptr, 4))
 		return (1);
 	else if (!ft_strncmp("exit", ptr, 5))
-			return (1);
+		return (1);
 	else
 		return (0);
 }

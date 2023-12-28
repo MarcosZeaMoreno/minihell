@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2023/12/21 17:07:26 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2023/12/27 12:49:59 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,24 @@
  */
 int	main(int ac, char **av, char **env)
 {
-	char *ptr;
+	char	*usr_input; // He cambiado el nombre de ptr a usr_input
 
 	(void)ac;
 	(void)av;
 	(void)env;
+
 	print_header();
 	while (1)
 	{
 		print_entry();
 		signal(SIGINT, handle_sigint);
-		ptr = readline("");
-		if (check_comand(ptr) == 0)
-			{
-				print_entry();
-				ft_printf("%s: command not found\n", ptr);
-			}
-		if (!ft_strncmp("exit", ptr, 5))
+		usr_input = readline("");
+		if (check_comand(usr_input) == 0)
+		{
+			print_entry();
+			ft_printf("%s: command not found\n", usr_input);
+		}
+		if (!ft_strncmp("exit", usr_input, 5))
 			break ;
 	}
 	print_exit();
