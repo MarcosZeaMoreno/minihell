@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/08 14:21:10 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/01/08 15:22:02 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,22 @@ typedef struct s_env
 	struct s_env	*next;
 }					t_env;
 
+/**
+ * @brief Structure to handle the data
+ * 
+ * @param env The enviroment variables
+ */
+typedef struct s_data
+{
+	t_env	*env_copy;
+}				t_data;
+
+
 /*-----  FUNCTIONS ----*/
 void				handle_sigint(int sig);
 void				print_entry(void);
 void				print_exit(void);
 void				print_header(void);
 int					check_comand(char *ptr);
+void				ft_data_init(t_data *data);
 #endif
