@@ -6,15 +6,14 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/08 14:05:09 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/01/08 14:21:10 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "./libs/ft_printf/Libft/libft.h"
-# include "./libs/ft_printf/ft_printf.h"
+# include "libft/libft.h"
 // # include <dirent.h>
 # include <errno.h>
 # include <fcntl.h>

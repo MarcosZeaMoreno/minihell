@@ -5,10 +5,65 @@
 #                                                     +:+ +:+         +:+      #
 #    By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/12/14 15:37:18 by mzea-mor          #+#    #+#              #
-#    Updated: 2023/12/28 22:06:59 by vkatason         ###   ########.fr        #
+#    Created: 2023/12/08 15:13:18 by vkatason          #+#    #+#              #
+#    Updated: 2024/01/08 14:27:13 by vkatason         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+NAME = minishell.a
+USER := $(shell whoami)
+APPNAME = minishell
+CC = gcc -g
+CLEAN = rm -Rf
+CFLAGS = -fsanitize=address -Wall -Werror -Wextra
+LDFLAGS = -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
+LIBFT = libft
+SRC =  check_comand.c main.c print_entry.c signals.c
+
+OBJS := $(SRC:.c=.o)
+
+all: libftmake $(APPNAME)
+
+$(APPNAME): $(NAME)
+	@$(CC) $(CFLAGS) $(LDFLAGS) $(NAME) $(LIBFT)/libft.a -o $(APPNAME)
+	@echo "$(GREEN)The app $(APPNAME) was successfully compiled. $(DEFAULT)"
+
+.c.o:
+	@$(CC) $(CFLAGS) -c $< -o ${<:.c=.o}
+	@echo "$(GREEN)Compiling:$(DEFAULT) $(notdir $<)"
+	
+$(NAME): $(OBJS)
+	@ar rcs $(NAME) $(OBJS)
+	@echo "$(GREEN)Library $(NAME) was successfully created.$(DEFAULT)"
+
+clean: libftclean
+	@$(CLEAN) ./$(OBJS)
+	@echo "$(RED)Removing:$(DEFAULT) all objects of $(APPNAME)."
+
+fclean: libftfclean
+	@$(CLEAN) ./$(OBJS)
+	@echo "$(RED)Removing:$(DEFAULT) all objects of $(APPNAME)."
+	@$(CLEAN) ./$(NAME) ./$(APPNAME)
+	@echo "$(RED)Removing:$(DEFAULT) $(NAME) library."
+	@echo "$(RED)Removing:$(DEFAULT) $(APPNAME) program."
+
+re: fclean all
+
+norma: libftnorma
+	@norminette $(SRC) philo.h
+libftnorma:
+	@make norma -C $(LIBFT)
+norma_color: libftnorma_color
+	@norminette $(SRC) philo.h 2>&1 | sed -e "s/Warning/\x1b[1;33m&\x1b[0m/" -e "s/Error/\x1b[1;31m&\x1b[0m/" -e "s/OK/\x1b[1;32m&\x1b[0m/"
+libftnorma_color:
+	@make norma_color -C $(LIBFT)
+libftmake:
+	@make -C $(LIBFT)
+libftclean:
+	@make clean -C $(LIBFT)
+libftfclean:
+	@make fclean -C $(LIBFT)
+libftre: libftclean libftmake
 
 #COLORS
 BOLD	:= \033[1m
@@ -20,38 +75,7 @@ BLUE	:= \033[34;1m
 MAGENTA	:= \033[35;1m
 CYAN	:= \033[36;1m
 WHITE	:= \033[37;1m
-RST		:= \033[0m 
+DEFAULT	:= \033[0m
 
-OBJ = $(SRC:.c=.o)
-NAME = minishell
-USER := $(shell whoami)
-CC = @gcc
-CFLAGS = -fsanitize=address -Wall -Werror -Wextra
-LDFLAGS = -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
-SRC = main.c signals.c print_entry.c check_comand.c
-
-all: $(NAME)
-
-%.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
-	@echo "$(GREEN)Compiling:$(RST) $(notdir $<)"
-
-$(NAME): $(OBJ)
-	@echo "📘$(BLUE) Compiling ft_printf library! $(RST)📘"
-	@cd libs/ft_printf && make
-	@$(CC) $(CFLAGS) $(LDFLAGS) $(SRC) libs/ft_printf/libftprintf.a -o minishell
-	@echo "😈$(MAGENTA) MiniHell had been compiled successfully! $(RST)😈"
-
-
-clean:
-	@cd libs/ft_printf && make clean
-	@rm -f *.o
-
-fclean: clean
-	@cd libs/ft_printf && make fclean
-	@rm -f minishell
-	@echo "👿$(RED) MiniHell files had been successfully removed! $(RST)👿"
-
-re: fclean all
-
-.PHONY: all clean fclean re
+.PHONY : all clean fclean re \
+libftmake libftclean libftfclean libftre
