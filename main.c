@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2023/12/28 18:21:25 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/01/08 14:09:05 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 int	main(int ac, char **av, char **env)
 {
 	char	*usr_input;
-	//t_env	*env_vars;
+
 	(void)ac;
 	(void)av;
 	(void)env;

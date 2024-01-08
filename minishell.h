@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2023/12/28 18:12:45 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/01/08 14:05:09 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,24 +52,11 @@
  * 
  * @param key The key of the variable
  * @param value The value of the variable
- * @param role The special characterictic 
- * 			   allows you to define a special value for the variable. 
- *             E.g.: 
- * 		       '?' - variable storing the status of the last command,
- * 		       'p' - is a PWD variable containing the current directory,
- * 		       'q' - is a special value for OLDPWD if the previous 
- * 				     directory was not set
- * @param status stores the return code of the last 
- * 				 executed command, if meaning =='?'. 
- * 				 It is used to get the status 
- * 				 of the previous command and to check for errors.
  */
 typedef struct s_env
 {
 	char			*key;
 	char			*value;
-	char			role;
-	int				status;
 	struct s_env	*next;
 }					t_env;
 
