@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkatason <vkatason@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:07:05 by vkatason          #+#    #+#             */
-/*   Updated: 2022/10/19 19:14:22 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/01/08 14:31:06 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 ** s: La string que iterar.
 ** f: La función a aplicar sobre cada carácter.
 */
-
 #include "libft.h"
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char *))
