@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/08 14:09:05 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/01/08 16:34:53 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ int	main(int ac, char **av, char **env)
 	{
 		print_entry();
 		signal(SIGINT, handle_sigint);
-		usr_input = readline("");
+		usr_input = readline(" ");
 		if (check_comand(usr_input) == 0)
 		{
 			print_entry();
-			ft_printf("%s: command not found\n", usr_input);
+			ft_printf(" %s: command not found\n", usr_input);
 		}
 		if (!ft_strncmp("exit", usr_input, 5))
 			break ;
