@@ -6,11 +6,23 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:46:14 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/08 16:36:09 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/08 18:52:23 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int check_execv(char *usr_input)
+{
+	char *path;
+
+	path = ft_strjoin("/bin/", usr_input);
+	if (execv(path, NULL) == -1)
+		return (0);
+	else
+		execv(path, NULL);
+	return (1);
+}
 
 /**
  * @brief Function used to detect if a command is valid.
@@ -37,5 +49,5 @@ int	check_comand(char *usr_input)
 	else if (!ft_strncmp("", usr_input, 1))
 		return (1);
 	else
-		return (0);
+		return (check_execv(usr_input));
 }
