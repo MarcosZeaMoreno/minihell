@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/08 16:53:18 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/01/08 16:54:18 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	main(int ac, char **av, char **env)
 		if (check_comand(usr_input) == 0)
 		{
 			print_entry();
-			ft_printf("%s: command not found\n", usr_input);
+			ft_printf(" %s: command not found\n", usr_input);
 		}
 		if (!ft_strncmp("exit", usr_input, 5))
 			break ;
