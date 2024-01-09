@@ -18,6 +18,11 @@
  */
 void	ft_data_init(t_data *data)
 {
+	char	*cwd;
+	char	buffer[4096 + 1];
+
+	cwd = getcwd(buffer, 4096);
+	data->cwd = cwd;
 	data->env_copy = NULL;
 }
 
@@ -69,7 +74,6 @@ int	main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
-	(void)env;
 	ft_data_init(&data);
 	print_header();
 	ft_get_env_cpy(&data, env);
@@ -79,13 +83,15 @@ int	main(int ac, char **av, char **env)
 		print_entry();
 		signal(SIGINT, handle_sigint);
 		usr_input = readline(" ");
-		if (check_comand(usr_input) == 0)
+		if (check_builtin(usr_input) == 0)
 		{
 			print_entry();
 			ft_printf(" %s: command not found\n", usr_input);
 		}
 		if (!ft_strncmp("exit", usr_input, 5))
 			break ;
+		else
+			exec_builtin(&data, usr_input);
 	}
 	print_exit();
 	return (0);

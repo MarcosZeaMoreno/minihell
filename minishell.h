@@ -68,6 +68,7 @@ typedef struct s_env
 typedef struct s_data
 {
 	t_env			*env_copy;
+	char			*cwd;
 }					t_data;
 
 /*-----  FUNCTIONS ----*/
@@ -75,8 +76,18 @@ void				handle_sigint(int sig);
 void				print_entry(void);
 void				print_exit(void);
 void				print_header(void);
-int					check_comand(char *ptr);
+int					check_builtin(char *ptr);
 void				ft_data_init(t_data *data);
+int					check_execv(char *usr_input);
+void				exec_builtin(char *usr_input);
+
+/*-----  BUILTINS ----*/
+void				ft_echo(t_data *data, char *usr_input);
+void				ft_cd(t_data *data, char *usr_input);
+void				ft_pwd(t_data *data);
+void				ft_export(t_data *data, char *usr_input);
+void				ft_unset(t_data *data, char *usr_input);
+void				ft_env(t_env *env);
 
 /*-----  ENVIRONMENT VARIABLES ----*/
 t_env				*ft_env_lst_add_back(t_data *data, char *env);

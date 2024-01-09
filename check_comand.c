@@ -12,6 +12,12 @@
 
 #include "minishell.h"
 
+/**
+ * @brief Function used to execute a command by path.
+ * 
+ * @param usr_input: a pointer that contain the string of readline.
+ * @return int: "1" if ok, "0" if error.
+ */
 int check_execv(char *usr_input)
 {
 	char *path;
@@ -25,12 +31,12 @@ int check_execv(char *usr_input)
 }
 
 /**
- * @brief Function used to detect if a command is valid.
+ * @brief Function used to detect if a command is a builtin.
  * 
  * @param usr_input: a pointer that contain the string of readline.
  * @return int: "1" if ok, "0" if error.
  */
-int	check_comand(char *usr_input)
+int	check_builtin(char *usr_input)
 {
 	if (!ft_strncmp("echo", usr_input, 5))
 		return (1);
@@ -50,4 +56,22 @@ int	check_comand(char *usr_input)
 		return (1);
 	else
 		return (check_execv(usr_input));
+}
+
+void	exec_builtin(t_data data, *usr_input)
+{
+	if (!ft_strncmp("echo", usr_input, 5))
+		ft_echo(data, usr_input);
+	else if (!ft_strncmp("cd", usr_input, 3))
+		ft_cd(data, usr_input);
+	else if (!ft_strncmp("pwd", usr_input, 4))
+		ft_pwd(data);
+	else if (!ft_strncmp("export", usr_input, 7))
+		ft_export(data->env_copy, usr_input);
+	else if (!ft_strncmp("unset", usr_input, 6))
+		ft_unset(data->env_copy, usr_input);
+	else if (!ft_strncmp("env", usr_input, 4))
+		ft_env(data->env_copy);
+	else if (!ft_strncmp("", usr_input, 1))
+		return ;
 }
