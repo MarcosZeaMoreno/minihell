@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/08 18:49:30 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/09 17:37:56 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,40 +16,36 @@
  * @brief Inits main data structure
  * 
  */
-void ft_data_init(t_data *data)
+void	ft_data_init(t_data *data)
 {
 	data->env_copy = NULL;
 }
 
-t_data *ft_get_env_cpy(t_data *data, char **env)
+t_data	*ft_get_env_cpy(t_data *data, char **env)
 {
-	int i;
+	int		i;
+	char	*env_var;
 
 	i = 0;
-	while (env[i] != NULL)
+	env_var = env[i];
+	while (env_var != NULL)
 	{
 		if (data->env_copy == NULL)
-		{
-			data->env_copy = malloc(sizeof(t_env));
-			data->env_copy->key = ft_strtok(env[i], '=');
-			data->env_copy->value = ft_strtok(env[i], '\0');
-			data->env_copy->next = NULL;
-		}
+			data->env_copy = ft_env_lst_new(data, env_var);
 		else
-		{
-			ft_lstadd_back(*data->env_copy, ft_lstnew(data->env_copy));
-		}
+			data->env_copy = ft_env_lst_add_back(data, env_var);
 		i++;
+		env_var = env[i];
 	}
-	return (data);	
+	return (data);
 }
 
-void ft_print_env_copy(t_data *data)
+void	ft_print_env_copy(t_data *data)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
 	tmp = data->env_copy;
-	while (tmp != NULL)
+	while (tmp->next != NULL)
 	{
 		ft_printf("%s=%s\n", tmp->key, tmp->value);
 		tmp = tmp->next;
@@ -70,7 +66,6 @@ int	main(int ac, char **av, char **env)
 {
 	t_data	data;
 	char	*usr_input;
-	//char	*envp;
 
 	(void)ac;
 	(void)av;

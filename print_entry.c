@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_entry.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 18:09:15 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/08 16:34:09 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/09 15:00:29 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	print_exit(void)
 }
 
 /**
- * @brief Function to print a header.
+ * @brief Function to print a minishell header.
  * 
  */
 void	print_header(void)

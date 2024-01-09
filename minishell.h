@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/08 18:52:23 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/09 17:12:56 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <sys/wait.h>
 # include <termios.h>
 # include <unistd.h>
+# include <string.h>
 
 /*
 ** ASCII colors escape sequences for printf
@@ -66,9 +67,8 @@ typedef struct s_env
  */
 typedef struct s_data
 {
-	t_env	*env_copy;
-}				t_data;
-
+	t_env			*env_copy;
+}					t_data;
 
 /*-----  FUNCTIONS ----*/
 void				handle_sigint(int sig);
@@ -77,4 +77,11 @@ void				print_exit(void);
 void				print_header(void);
 int					check_comand(char *ptr);
 void				ft_data_init(t_data *data);
+
+/*-----  ENVIRONMENT VARIABLES ----*/
+t_env				*ft_env_lst_add_back(t_data *data, char *env);
+t_env				*ft_env_lst_last(t_data *data);
+t_env				*ft_env_lst_new(t_data *data, char *env);
+t_data				*ft_get_env_cpy(t_data *data, char **env);
+void				ft_print_env_copy(t_data *data);
 #endif
