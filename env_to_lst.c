@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_to_lst.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 15:01:14 by vkatason          #+#    #+#             */
-/*   Updated: 2024/01/09 17:39:09 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/01/10 19:03:27 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,14 @@ t_env	*ft_env_lst_new(t_data *data, char *env)
  * @param data main data structure
  * @return t_env* updated env_copy
  */
-t_env	*ft_env_lst_last(t_data *data)
+void	ft_env_lst_last(t_data *data, t_env *env_lst)
 {
-	if (!data->env_copy)
-		return (0);
-	while (data->env_copy->next)
-		data->env_copy = data->env_copy->next;
-	return (data->env_copy);
+	t_env    *tmp;
+
+    tmp = data->env_copy;
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+	tmp->next = env_lst;
 }
 
 /**
@@ -66,6 +67,33 @@ t_env	*ft_env_lst_add_back(t_data *data, char *env)
 	env_lst->key = strtok(env, "=");
 	env_lst->value = strtok(NULL, "=");
 	env_lst->next = NULL;
-	ft_env_lst_last(data)->next = env_lst;
+	ft_env_lst_last(data, env_lst);
 	return (data->env_copy);
+}
+
+/**
+ * @brief Function that copies the enviroment variables
+ * to the env_copy list
+ * 
+ * @param data main data structure
+ * @param env enviroment variables
+ * @return t_data* updated data
+ */
+t_data	*ft_get_env_cpy(t_data *data, char **env)
+{
+	int		i;
+	char	*env_var;
+
+	i = 0;
+	env_var = env[i];
+	while (env_var != NULL)
+	{
+		if (data->env_copy == NULL)
+			data->env_copy = ft_env_lst_new(data, env_var);
+		else
+			data->env_copy = ft_env_lst_add_back(data, env_var);
+		i++;
+		env_var = env[i];
+	}
+	return (data);
 }
