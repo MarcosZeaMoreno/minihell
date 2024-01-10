@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 18:23:45 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/09 18:23:45 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/10 16:41:27 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void    ft_echo(t_data *data, char *usr_input)
     int i;
     int flag;
 
+    (void)data;
     i = 0;
     flag = 0;
     if (usr_input[4] == '-')
@@ -36,7 +37,7 @@ void    ft_echo(t_data *data, char *usr_input)
         i++;
     }
     if (flag == 0)
-        ft_printf('\n', 1);
+        ft_printf("\n", 1);
 }
 
 /**
@@ -47,6 +48,8 @@ void    ft_echo(t_data *data, char *usr_input)
  */
 void    ft_cd(t_data *data, char *usr_input)
 {
+	(void)data;
+	(void)usr_input;
 }
 
 /**
@@ -67,6 +70,8 @@ void    ft_pwd(t_data *data)
  */
 void    ft_export(t_data *data, char *usr_input)
 {
+	(void)data;
+	(void)usr_input;
 }
 
 /**
@@ -77,6 +82,8 @@ void    ft_export(t_data *data, char *usr_input)
  */
 void    ft_unset(t_data *data, char *usr_input)
 {
+	(void)data;
+	(void)usr_input;
 }
 
 /**

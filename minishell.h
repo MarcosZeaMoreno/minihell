@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/09 17:12:56 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/01/10 18:51:25 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ void				print_header(void);
 int					check_builtin(char *ptr);
 void				ft_data_init(t_data *data);
 int					check_execv(char *usr_input);
-void				exec_builtin(char *usr_input);
+void				exec_builtin(t_data *data, char *usr_input);
+
 
 /*-----  BUILTINS ----*/
 void				ft_echo(t_data *data, char *usr_input);
@@ -91,8 +92,7 @@ void				ft_env(t_env *env);
 
 /*-----  ENVIRONMENT VARIABLES ----*/
 t_env				*ft_env_lst_add_back(t_data *data, char *env);
-t_env				*ft_env_lst_last(t_data *data);
+void				ft_env_lst_last(t_data *data, t_env *env_lst);
 t_env				*ft_env_lst_new(t_data *data, char *env);
 t_data				*ft_get_env_cpy(t_data *data, char **env);
-void				ft_print_env_copy(t_data *data);
 #endif

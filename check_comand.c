@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:46:14 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/08 18:52:23 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/10 19:04:14 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,17 @@
 int check_execv(char *usr_input)
 {
 	char *path;
+	char **split;
 
+	split = ft_split(usr_input,' ');
 	path = ft_strjoin("/bin/", usr_input);
-	if (execv(path, NULL) == -1)
+	ft_printf("%s\n", path);
+	ft_printf("%s\n", split[0]);
+	ft_printf("%s\n", split[1]);
+	if (execve(path, split, NULL) == -1)
 		return (0);
 	else
-		execv(path, NULL);
+		execve(path, split, NULL);
 	return (1);
 }
 
@@ -39,6 +44,8 @@ int check_execv(char *usr_input)
 int	check_builtin(char *usr_input)
 {
 	if (!ft_strncmp("echo", usr_input, 5))
+		return (1);
+	else if (!ft_strncmp("echo -n", usr_input, 5))
 		return (1);
 	else if (!ft_strncmp("cd", usr_input, 3))
 		return (1);
@@ -58,7 +65,13 @@ int	check_builtin(char *usr_input)
 		return (check_execv(usr_input));
 }
 
-void	exec_builtin(t_data data, *usr_input)
+/**
+ * @brief Function used to execute a builtin.
+ * 
+ * @param data: a pointer that contain the main data structure.
+ * @param usr_input: a pointer that contain the string of readline.
+ */
+void	exec_builtin(t_data *data, char *usr_input)
 {
 	if (!ft_strncmp("echo", usr_input, 5))
 		ft_echo(data, usr_input);
@@ -67,9 +80,9 @@ void	exec_builtin(t_data data, *usr_input)
 	else if (!ft_strncmp("pwd", usr_input, 4))
 		ft_pwd(data);
 	else if (!ft_strncmp("export", usr_input, 7))
-		ft_export(data->env_copy, usr_input);
+		ft_export(data, usr_input);
 	else if (!ft_strncmp("unset", usr_input, 6))
-		ft_unset(data->env_copy, usr_input);
+		ft_unset(data, usr_input);
 	else if (!ft_strncmp("env", usr_input, 4))
 		ft_env(data->env_copy);
 	else if (!ft_strncmp("", usr_input, 1))

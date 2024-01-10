@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+         #
+#    By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/08 15:13:18 by vkatason          #+#    #+#              #
-#    Updated: 2024/01/09 15:02:10 by vkatason         ###   ########.fr        #
+#    Updated: 2024/01/10 16:39:39 by mzea-mor         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ CFLAGS = -fsanitize=address -Wall -Werror -Wextra
 LDFLAGS = -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
 LIBFT = libft
 SRC =  check_comand.c main.c print_entry.c signals.c \
-		env_to_lst.c 
+		env_to_lst.c builtins.c
 
 OBJS := $(SRC:.c=.o)
 

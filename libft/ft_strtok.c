@@ -3,29 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtok.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:32:04 by vkatason          #+#    #+#             */
-/*   Updated: 2024/01/09 17:48:47 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/01/10 16:18:40 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strtok(char *str, const char *delim)
+char	*ft_strtok(char *str, const char delim)
 {
-	static char	*lasts;
-	int			ch;
+	static char	*stock;
+	char			*ptr;
+	int				flg;
 
-	if (str == NULL)
-		str = lasts;
-	ch = *str++;
-	if (ch == '\0')
-		return (NULL);
-	while (ft_strchr(delim, ch) != NULL && ((ch = *str++) != '\0'));
-	--str;
-	lasts = str + TODO ft_strcspn(str, delim);
-	if (*lasts != '\0')
-		*lasts++ = '\0';
-	return (str);
+	flg = 0;
+	ptr = NULL;
+	stock = NULL;
+	if (str != NULL)
+		stock = ft_strdup(str);
+	while (*stock != '\0')
+	{
+		if (flg == 0 && *stock != delim)
+		{
+			flg = 1;
+			ptr = stock;
+		}
+		else if (flg == 1 && *stock == delim)
+		{
+			*stock = '\0';
+			stock += 1;
+			break ;
+		}
+		stock += 1;
+	}
+	return (ptr);
 }
