@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_to_lst.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 15:01:14 by vkatason          #+#    #+#             */
-/*   Updated: 2024/01/10 19:03:27 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/11 14:34:15 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ t_env	*ft_env_lst_new(t_data *data, char *env)
  */
 void	ft_env_lst_last(t_data *data, t_env *env_lst)
 {
-	t_env    *tmp;
+	t_env	*tmp;
 
-    tmp = data->env_copy;
+	tmp = data->env_copy;
 	while (tmp->next != NULL)
 		tmp = tmp->next;
 	tmp->next = env_lst;

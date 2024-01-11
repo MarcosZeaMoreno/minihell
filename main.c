@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/10 18:56:55 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/11 14:50:05 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	ft_data_init(t_data *data)
  * @param av Argument value
  * @param env Enviroment vars
  * @return int
- * @warning He cambiado el nombre de ptr a usr_input
  */
 int	main(int ac, char **av, char **env)
 {
@@ -45,6 +44,7 @@ int	main(int ac, char **av, char **env)
 	ft_data_init(&data);
 	print_header();
 	ft_get_env_cpy(&data, env);
+	// ft_env(data.env_copy);
 	while (1)
 	{
 		print_entry();

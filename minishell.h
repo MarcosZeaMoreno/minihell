@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/10 18:51:25 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/11 14:36:19 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ typedef struct s_env
 /**
  * @brief Structure to handle the data
  * 
- * @param env The enviroment variables
+ * @param env_copy Structure with a copy of enviroment variables
+ * @param cwd Current working directory
  */
 typedef struct s_data
 {
