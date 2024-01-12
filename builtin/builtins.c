@@ -6,11 +6,11 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 18:23:45 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/12 17:32:22 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/12 17:35:19 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 /**
  * @brief Function to handle the echo builtin
@@ -50,16 +50,6 @@ void    ft_cd(t_data *data, char *usr_input)
 {
 	(void)data;
 	(void)usr_input;
-}
-
-/**
- * @brief Function to handle the pwd builtin
- * 
- * @param data 
- */
-void    ft_pwd(t_data *data)
-{
-    ft_printf("%s\n", data->cwd);
 }
 
 /**
