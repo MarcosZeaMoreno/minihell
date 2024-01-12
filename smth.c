@@ -3,12 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   smth.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 18:01:46 by vkatason          #+#    #+#             */
-/*   Updated: 2024/01/12 18:40:59 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/12 18:39:03 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-Example text.
+some text goes here
