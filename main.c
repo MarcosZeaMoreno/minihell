@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/12 17:29:44 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/12 17:31:17 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ int	main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
-	if (ft_init(&data, ac, av, env) == 1)
-		return (0);
+	ft_data_init(&data);
+	print_header();
+	ft_get_env_cpy(&data, env);
 	while (1)
 	{
 		signal(SIGINT, handle_sigint);

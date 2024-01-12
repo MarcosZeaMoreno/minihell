@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/12 17:29:44 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/12 17:31:48 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ typedef struct s_token
  * @brief Structure to handle the data
  * 
  * @param env The enviroment variables
- * @param token The tokens list
  */
 typedef struct s_data
 {
