@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:52:22 by vkatason          #+#    #+#             */
-/*   Updated: 2023/09/30 16:51:45 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/01/11 16:29:19 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ static int	ft_wordcount(char const *s, char c)
 		{
 			word++;
 			while (s[i] != c && s[i])
-			i++;
+				i++;
 		}
 		else
-		i++;
+			i++;
 	}
 	return (word);
 }

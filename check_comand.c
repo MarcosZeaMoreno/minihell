@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:46:14 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/10 19:04:14 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/11 16:27:23 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,13 @@
  * @param usr_input: a pointer that contain the string of readline.
  * @return int: "1" if ok, "0" if error.
  */
-int check_execv(char *usr_input)
+int	check_execv(char *usr_input)
 {
-	char *path;
-	char **split;
+	char	*path;
+	char	**split;
 
-	split = ft_split(usr_input,' ');
+	split = ft_split(usr_input, ' ');
 	path = ft_strjoin("/bin/", usr_input);
-	ft_printf("%s\n", path);
-	ft_printf("%s\n", split[0]);
-	ft_printf("%s\n", split[1]);
 	if (execve(path, split, NULL) == -1)
 		return (0);
 	else

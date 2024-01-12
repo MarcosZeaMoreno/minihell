@@ -1,27 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/14 17:27:25 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/11 16:44:12 by mzea-mor         ###   ########.fr       */
+/*   Created: 2024/01/11 16:32:25 by mzea-mor          #+#    #+#             */
+/*   Updated: 2024/01/12 17:29:44 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 /**
- * @brief Funtion to handle the sigint
+ * @brief Function to handle the echo builtin
  * 
- * @param sig 
+ * @param data 
+ * @param usr_input 
  */
-void	handle_sigint(int sig)
+void	ft_echo(t_data *data, char *usr_input)
 {
-	if (sig == SIGINT)
+	int	i;
+	int	flag;
+
+	(void)data;
+	i = 4;
+	flag = 0;
+	if (usr_input[4] == '-' && usr_input[5] == 'n')
 	{
-		ft_printf("\n");
-		signal(SIGINT, handle_sigint);
+		i = 6;
+		flag = 1;
 	}
+	while (usr_input[i] != '\0')
+	{
+		ft_printf("%c", usr_input[i]);
+		i++;
+	}
+	if (flag == 0)
+		ft_printf("\n", 1);
 }

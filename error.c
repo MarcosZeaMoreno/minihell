@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/14 17:27:25 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/11 16:44:12 by mzea-mor         ###   ########.fr       */
+/*   Created: 2024/01/12 16:25:58 by mzea-mor          #+#    #+#             */
+/*   Updated: 2024/01/12 16:39:31 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/**
- * @brief Funtion to handle the sigint
- * 
- * @param sig 
- */
-void	handle_sigint(int sig)
+void	ft_error(char *usr_input, int type_error)
 {
-	if (sig == SIGINT)
-	{
-		ft_printf("\n");
-		signal(SIGINT, handle_sigint);
-	}
+	ft_printf("%sMiniHell:%s", RED, RST);
+	if (type_error == 1)
+		ft_printf(" %s: command not found\n", usr_input);
 }

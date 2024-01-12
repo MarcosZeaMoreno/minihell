@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 14:53:21 by vkatason          #+#    #+#             */
-/*   Updated: 2022/10/08 15:30:25 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/01/11 16:30:16 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t	dstsize)
 // 	if (sz >= sizeof(bf))
 // 		printf("reduced: from %zu to %lu simbols !\n", sz, sizeof(bf) - 1);
 // 	if (szmine >= sizeof(bf))
-// 		printf("with mine: from %zu to %lu simbols !\n", szmine, sizeof(bf) - 1);
+// 		printf("mine: from %zu to %lu simbols !\n", szmine, sizeof(bf) - 1);
 // 	printf(":  \"%s\"\n", bf);
 // 	return (0);
 // }

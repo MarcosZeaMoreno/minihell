@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/10 18:56:55 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/12 17:29:44 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,18 @@
  * @brief Inits main data structure
  * 
  */
-void	ft_data_init(t_data *data)
+int	ft_init(t_data *data, int ac, char **av, char **env)
 {
-	char	*cwd;
-	char	buffer[4096 + 1];
-
-	cwd = getcwd(buffer, 4096);
-	data->cwd = cwd;
+	(void)av;
+	if (ac > 1)
+	{
+		ft_putstr_fd("The program no needs any argument\n", 2);
+		return (1);
+	}
+	print_header();
 	data->env_copy = NULL;
+	ft_get_env_cpy(data, env);
+	return (0);
 }
 
 /**
@@ -33,7 +37,6 @@ void	ft_data_init(t_data *data)
  * @param av Argument value
  * @param env Enviroment vars
  * @return int
- * @warning He cambiado el nombre de ptr a usr_input
  */
 int	main(int ac, char **av, char **env)
 {
@@ -42,23 +45,22 @@ int	main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
-	ft_data_init(&data);
-	print_header();
-	ft_get_env_cpy(&data, env);
+	if (ft_init(&data, ac, av, env) == 1)
+		return (0);
 	while (1)
 	{
-		print_entry();
 		signal(SIGINT, handle_sigint);
-		usr_input = readline(" ");
+		usr_input = readline("\033[1;31mMiniHell: \033[0m");
 		if (check_builtin(usr_input) == 0)
-		{
-			print_entry();
-			ft_printf(" %s: command not found\n", usr_input);
-		}
+			ft_error(usr_input, CMND_NOT_FOUND);
 		if (!ft_strncmp("exit", usr_input, 5))
 			break ;
 		else
+		{
+			add_history(usr_input);
 			exec_builtin(&data, usr_input);
+		}
+		free(usr_input);
 	}
 	print_exit();
 	return (0);

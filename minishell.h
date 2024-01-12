@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/10 18:51:25 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/12 17:29:44 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,11 @@
 # define CYAN "\033[1;36m"    /* Bold Cyan */
 # define WHITE "\033[1;37m"   /* Bold White */
 
+/*
+ * The following defines are used to identify the type of error
+ */
+# define CMND_NOT_FOUND 1
+
 /*----- STRUCTURES -----*/
 
 /**
@@ -61,26 +66,29 @@ typedef struct s_env
 }					t_env;
 
 /**
+ * @brief Structure to handle the tokens
+ * 
+ * @param token The token
+ * @param next The next token
+ */
+typedef struct s_token
+{
+	char			*value;
+	struct s_token	*next;
+}					t_token;
+
+
+/**
  * @brief Structure to handle the data
  * 
  * @param env The enviroment variables
+ * @param token The tokens list
  */
 typedef struct s_data
 {
 	t_env			*env_copy;
-	char			*cwd;
+	t_token			*token;
 }					t_data;
-
-/*-----  FUNCTIONS ----*/
-void				handle_sigint(int sig);
-void				print_entry(void);
-void				print_exit(void);
-void				print_header(void);
-int					check_builtin(char *ptr);
-void				ft_data_init(t_data *data);
-int					check_execv(char *usr_input);
-void				exec_builtin(t_data *data, char *usr_input);
-
 
 /*-----  BUILTINS ----*/
 void				ft_echo(t_data *data, char *usr_input);
@@ -95,4 +103,16 @@ t_env				*ft_env_lst_add_back(t_data *data, char *env);
 void				ft_env_lst_last(t_data *data, t_env *env_lst);
 t_env				*ft_env_lst_new(t_data *data, char *env);
 t_data				*ft_get_env_cpy(t_data *data, char **env);
+
+/*-----  FUNCTIONS ----*/
+void				handle_sigint(int sig);
+void				print_exit(void);
+void				print_header(void);
+int					check_builtin(char *ptr);
+int					ft_init(t_data *data, int ac, char **av, char **env);;
+int					check_execv(char *usr_input);
+void				exec_builtin(t_data *data, char *usr_input);
+char				*get_env_value(t_env *env, char *key);
+void				ft_error(char *str, int type_error);
+
 #endif

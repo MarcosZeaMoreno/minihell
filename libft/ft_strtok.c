@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:32:04 by vkatason          #+#    #+#             */
-/*   Updated: 2024/01/10 16:18:40 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/11 16:30:58 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 char	*ft_strtok(char *str, const char delim)
 {
 	static char	*stock;
-	char			*ptr;
-	int				flg;
+	char		*ptr;
+	int			flg;
 
 	flg = 0;
 	ptr = NULL;
