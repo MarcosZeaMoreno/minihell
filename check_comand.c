@@ -18,17 +18,17 @@
  * @param usr_input: a pointer that contain the string of readline.
  * @return int: "1" if ok, "0" if error.
  */
-int	check_execv(char *usr_input)
+int	check_execv(char *usr_input, char **env)
 {
 	char	*path;
 	char	**split;
 
 	split = ft_split(usr_input, ' ');
 	path = ft_strjoin("/bin/", usr_input);
-	if (execve(path, split, NULL) == -1)
+	if (execve(path, split, env) == -1)
 		return (0);
 	else
-		execve(path, split, NULL);
+		execve(path, split, env);
 	return (1);
 }
 
@@ -38,7 +38,7 @@ int	check_execv(char *usr_input)
  * @param usr_input: a pointer that contain the string of readline.
  * @return int: "1" if ok, "0" if error.
  */
-int	check_builtin(char *usr_input)
+int	check_builtin(char *usr_input, char **env)
 {
 	if (!ft_strncmp("echo", usr_input, 5))
 		return (1);
@@ -59,7 +59,7 @@ int	check_builtin(char *usr_input)
 	else if (!ft_strncmp("", usr_input, 1))
 		return (1);
 	else
-		return (check_execv(usr_input));
+		return (check_execv(usr_input, env));
 }
 
 /**

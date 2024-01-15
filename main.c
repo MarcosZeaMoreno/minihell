@@ -51,7 +51,7 @@ int	main(int ac, char **av, char **env)
 	{
 		signal(SIGINT, handle_sigint);
 		usr_input = readline("\033[1;31mMiniHell: \033[0m");
-		if (check_builtin(usr_input) == 0)
+		if (check_builtin(usr_input, env) == 0)
 			ft_error(usr_input, CMND_NOT_FOUND);
 		if (!ft_strncmp("exit", usr_input, 5))
 			break ;

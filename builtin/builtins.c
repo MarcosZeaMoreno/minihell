@@ -13,34 +13,6 @@
 #include "../minishell.h"
 
 /**
- * @brief Function to handle the echo builtin
- * 
- * @param data 
- * @param usr_input 
- */
-void    ft_echo(t_data *data, char *usr_input)
-{
-    int i;
-    int flag;
-
-    (void)data;
-    i = 0;
-    flag = 0;
-    if (usr_input[4] == '-')
-    {
-        if (usr_input[5] == 'n')
-            flag = 1;
-    }
-    while (usr_input[i] != '\0')
-    {
-        ft_printf("%c", usr_input[i]);
-        i++;
-    }
-    if (flag == 0)
-        ft_printf("\n", 1);
-}
-
-/**
  * @brief Function to handle the cd builtin
  * 
  * @param data 
