@@ -6,7 +6,7 @@
 #    By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/08 15:13:18 by vkatason          #+#    #+#              #
-#    Updated: 2024/01/12 16:36:37 by mzea-mor         ###   ########.fr        #
+#    Updated: 2024/01/16 15:42:44 by mzea-mor         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ LDFLAGS = -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
 LIBFT = libft
 SRC =  check_comand.c main.c print_entry.c signals.c \
 		env_to_lst.c error.c ./builtin/builtins.c \
-		./builtin/echo.c ./builtin/pwd.c
+		./builtin/echo.c ./builtin/pwd.c env_fts.c
 
 OBJS := $(SRC:.c=.o)
 

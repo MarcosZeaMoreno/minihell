@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/12 17:31:48 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:13:47 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@
 # define CMND_NOT_ARG 8
 # define CMND_NOT_PIPE 9
 # define CMND_NOT_FORK 10
-# define CMND_NOT_PIPE 11
 
 /*----- STRUCTURES -----*/
 
@@ -97,6 +96,7 @@ typedef struct s_data
 {
 	t_env			*env_copy;
 	t_token			*token;
+	pid_t			pid;
 }					t_data;
 
 /*-----  BUILTINS ----*/
@@ -112,6 +112,9 @@ t_env				*ft_env_lst_add_back(t_data *data, char *env);
 void				ft_env_lst_last(t_data *data, t_env *env_lst);
 t_env				*ft_env_lst_new(t_data *data, char *env);
 t_data				*ft_get_env_cpy(t_data *data, char **env);
+void				add_env_var(t_data *data, char *key, char *value);
+void				remove_env_var(t_data *data, char *key);
+void				change_value_env(t_data *data, char *key, char *value);
 
 /*-----  FUNCTIONS ----*/
 void				handle_sigint(int sig);

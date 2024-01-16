@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:32:25 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/12 17:29:44 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:12:41 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,5 @@ void	ft_echo(t_data *data, char *usr_input)
 		i++;
 	}
 	if (flag == 0)
-		ft_printf("\n", 1);
+		ft_printf("\n");
 }

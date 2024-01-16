@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:27:25 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/11 16:44:12 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:05:47 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	handle_sigint(int sig)
 {
 	if (sig == SIGINT)
 	{
-		ft_printf("\n");
-		signal(SIGINT, handle_sigint);
+		ioctl(STDIN_FILENO, TIOCSTI, "\n");
 	}
 }
