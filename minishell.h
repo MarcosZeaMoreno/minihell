@@ -49,6 +49,16 @@
  * The following defines are used to identify the type of error
  */
 # define CMND_NOT_FOUND 1
+# define CMND_NOT_EXEC 2
+# define CMND_NOT_DIR 3
+# define CMND_NOT_FILE 4
+# define CMND_NOT_PERM 5
+# define CMND_NOT_VALID 6
+# define CMND_NOT_MEM 7
+# define CMND_NOT_ARG 8
+# define CMND_NOT_PIPE 9
+# define CMND_NOT_FORK 10
+# define CMND_NOT_PIPE 11
 
 /*----- STRUCTURES -----*/
 
