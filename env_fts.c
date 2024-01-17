@@ -75,3 +75,20 @@ void	add_env_var(t_data *data, char *key, char *value)
 	env_v = ft_strjoin(env_v, value);
 	data->env_copy = ft_env_lst_add_back(data, env_v);
 }
+
+char	**lst_to_char(t_data *data)
+{
+	char	**cmds;
+	int		i;
+
+	i = 0;
+	cmds = malloc(sizeof(char *) * (ft_lstsize(data->token) + 1));
+	while (data->token->next != NULL)
+	{
+		cmds[i] = ft_strdup(data->token->value);
+		data->token = data->token->next;
+		i++;
+	}
+	cmds[i] = NULL;
+	return (cmds);
+}

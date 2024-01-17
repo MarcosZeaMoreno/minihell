@@ -77,8 +77,6 @@ int	main(int ac, char **av, char **env)
 {
 	t_data	data;
 
-	(void)ac;
-	(void)av;
 	if (ft_init(&data, ac, av, env) == 1)
 		return (0);
 	while (1)

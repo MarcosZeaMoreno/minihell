@@ -16,49 +16,62 @@
  * @brief Function to handle the cd builtin
  * 
  * @param data 
- * @param usr_input 
+ * @param token
  */
-void    ft_cd(t_data *data, char *usr_input)
+void    ft_cd(t_data *data, t_token token)
 {
-	char	*pwd_old;
+    char	*pwd_old;
+    char	*pwd_new;
 
-	pwd_old = get_env_value(data->env_copy, "OLDPWD");
-	if (!pwd_old)
-		pwd_old = get_env_value(data->env_copy, "PWD");
-	if (chdir(usr_input) == -1)
-	{
-		ft_printf("cd: %s: No such file or directory\n", usr_input);
-		return ;
-	}
-	change_value_env(data, "OLDPWD", pwd_old);
-	change_value_env(data, "PWD", usr_input);
+    token = token->next;
+    pwd_old = get_env_value(data->env_copy, "OLDPWD");
+    if (!pwd_old)
+        pwd_old = get_env_value(data->env_copy, "PWD");
+    if (chdir(token->value) == -1)
+    {
+        ft_printf("cd: %s: No such file or directory\n", token->value);
+        return;
+    }
+    pwd_new = getcwd(NULL, 0);
+    if (!pwd_new)
+    {
+        ft_printf("cd: error retrieving current directory\n");
+        return;
+    }
+    change_value_env(data, "OLDPWD", pwd_old);
+    change_value_env(data, "PWD", pwd_new);
+    free(pwd_new);
 }
 
 /*
 ** Function to handle the export builtin
 * @param data
-* @param usr_input
+* @param token
 */
-void ft_export(t_data *data, char *usr_input)
+void ft_export(t_data *data, t_token *token)
 {
     char *key;
     char *value;
     char *delimiter_position;
 
-    delimiter_position = strchr(usr_input, '=');
-    if (delimiter_position == NULL) {
-        ft_printf("export: %s: Invalid argument\n", usr_input);
-        return;
-    }
+	token = token->next;
+    while (token != NULL)
+	{
+        delimiter_position = strchr(token->value, '=');
+        if (delimiter_position == NULL) {
+            ft_printf("export: %s: Invalid argument\n", token->value);
+            return;
+        }
 
-    *delimiter_position = '\0';
-    key = usr_input;
-    value = delimiter_position + 1;
+        *delimiter_position = '\0';
+        key = token->value;
+        value = delimiter_position + 1;
 
-    if (get_env_value(data->env_copy, key) != NULL) {
-        change_value_env(data, key, value);
-    } else {
-        add_env_var(data, key, value);
+        if (get_env_value(data->env_copy, key) != NULL)
+			change_value_env(data, key, value);
+        else
+            add_env_var(data, key, value);
+        token = token->next;
     }
 }
 
@@ -66,15 +79,28 @@ void ft_export(t_data *data, char *usr_input)
  * @brief Function to handle the unset builtin
  * 
  * @param data 
- * @param usr_input 
+ * @param token 
  */
-void    ft_unset(t_data *data, char *usr_input)
+void    ft_unset(t_data *data, t_token token)
 {
-	char *key;
+	char	*key;
+	char	*delimiter_position;
 
-	key = usr_input;
-	if (get_env_value(data->env_copy, key) != NULL)
-		remove_env_var(data, key);
+	token = token->next;
+	while(token != NULL)
+	{
+		delimiter_position = strchr(token->value, '=');
+        if (delimiter_position == NULL)
+		{
+            ft_printf("unset: %s: Invalid argument\n", token->value);
+            token = token->next;
+			continue;
+        }
+		key = strtok(token->value, "=");
+		if (get_env_value(data->env_copy, key) != NULL)
+			remove_env_var(data, key);
+		token = token->next;
+	}
 }
 
 /**

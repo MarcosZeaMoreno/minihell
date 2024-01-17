@@ -18,23 +18,24 @@
  * @param data 
  * @param usr_input 
  */
-void	ft_echo(t_data *data, char *usr_input)
+void	ft_echo(t_data *data, t_token token)
 {
-	int	i;
-	int	flag;
+	int		flag;
+	t_token	tmp;
 
 	(void)data;
-	i = 4;
+	tmp = token;
+	tmp = tmp->next;
 	flag = 0;
-	if (usr_input[4] == '-' && usr_input[5] == 'n')
+	if (!ft_strncmp("-n", token->next->value, 3))
 	{
-		i = 6;
+		tmp = tmp->next;
 		flag = 1;
 	}
-	while (usr_input[i] != '\0')
+	while (tmp->next != NULL)
 	{
-		ft_printf("%c", usr_input[i]);
-		i++;
+		ft_printf("%s", tmp->value);
+		tmp = tmp->next;
 	}
 	if (flag == 0)
 		ft_printf("\n");

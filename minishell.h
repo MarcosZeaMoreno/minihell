@@ -100,17 +100,18 @@ typedef struct s_data
 }					t_data;
 
 /*-----  BUILTINS ----*/
-void				ft_echo(t_data *data, char *usr_input);
-void				ft_cd(t_data *data, char *usr_input);
+void				ft_echo(t_data *data, t_token token);
+void				ft_cd(t_data *data, t_token token);
 void				ft_pwd(t_data *data);
-void				ft_export(t_data *data, char *usr_input);
-void				ft_unset(t_data *data, char *usr_input);
+void				ft_export(t_data *data, t_token token);
+void				ft_unset(t_data *data, t_token token);
 void				ft_env(t_env *env);
 
 /*-----  ENVIRONMENT VARIABLES ----*/
 t_env				*ft_env_lst_add_back(t_data *data, char *env);
 void				ft_env_lst_last(t_data *data, t_env *env_lst);
 t_env				*ft_env_lst_new(t_data *data, char *env);
+char				**lst_to_char(t_data *data);
 t_data				*ft_get_env_cpy(t_data *data, char **env);
 void				add_env_var(t_data *data, char *key, char *value);
 void				remove_env_var(t_data *data, char *key);
