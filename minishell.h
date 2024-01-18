@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/12 17:31:48 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/18 17:37:28 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,15 @@
  * The following defines are used to identify the type of error
  */
 # define CMND_NOT_FOUND 1
+# define CMND_NOT_EXEC 2
+# define CMND_NOT_DIR 3
+# define CMND_NOT_FILE 4
+# define CMND_NOT_PERM 5
+# define CMND_NOT_VALID 6
+# define CMND_NOT_MEM 7
+# define CMND_NOT_ARG 8
+# define CMND_NOT_PIPE 9
+# define CMND_NOT_FORK 10
 
 /*----- STRUCTURES -----*/
 
@@ -77,7 +86,6 @@ typedef struct s_token
 	struct s_token	*next;
 }					t_token;
 
-
 /**
  * @brief Structure to handle the data
  * 
@@ -87,31 +95,46 @@ typedef struct s_data
 {
 	t_env			*env_copy;
 	t_token			*token;
+	pid_t			pid;
 }					t_data;
 
 /*-----  BUILTINS ----*/
-void				ft_echo(t_data *data, char *usr_input);
-void				ft_cd(t_data *data, char *usr_input);
+void				ft_echo(t_data *data, t_token *token);
+void				ft_cd(t_data *data, t_token *token);
 void				ft_pwd(t_data *data);
-void				ft_export(t_data *data, char *usr_input);
-void				ft_unset(t_data *data, char *usr_input);
+void				ft_export(t_data *data, t_token *token);
+void				ft_unset(t_data *data, t_token *token);
 void				ft_env(t_env *env);
+
+/*-----  PARSING ----*/
+void				ft_parse_input(t_data *data, char *usr_input);
+
+/*-----  TOKENIZER ----*/
+t_token				*ft_tokenizer(char *usr_input);
+t_token				*ft_token_lst_new(char *value);
+void				ft_token_lst_add_back(t_token *token, char *value);
+t_token				*ft_token_lst_last(t_token *token);
 
 /*-----  ENVIRONMENT VARIABLES ----*/
 t_env				*ft_env_lst_add_back(t_data *data, char *env);
 void				ft_env_lst_last(t_data *data, t_env *env_lst);
 t_env				*ft_env_lst_new(t_data *data, char *env);
+char				**lst_to_char(t_token *token);
 t_data				*ft_get_env_cpy(t_data *data, char **env);
+void				add_env_var(t_data *data, char *key, char *value);
+void				remove_env_var(t_data *data, char *key);
+void				change_value_env(t_data *data, char *key, char *value);
 
 /*-----  FUNCTIONS ----*/
 void				handle_sigint(int sig);
 void				print_exit(void);
 void				print_header(void);
-int					check_builtin(char *ptr);
+int					check_builtin(t_token *token, char **env);
 int					ft_init(t_data *data, int ac, char **av, char **env);;
-int					check_execv(char *usr_input);
-void				exec_builtin(t_data *data, char *usr_input);
+int					check_execv(t_token *token, char **env);
+void				exec_builtin(t_data *data, t_token *token);
 char				*get_env_value(t_env *env, char *key);
 void				ft_error(char *str, int type_error);
+void				free_split(char **split);
 
 #endif

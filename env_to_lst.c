@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 15:01:14 by vkatason          #+#    #+#             */
-/*   Updated: 2024/01/12 17:32:55 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/18 17:43:18 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	ft_env_lst_last(t_data *data, t_env *env_lst)
 	while (tmp->next != NULL)
 		tmp = tmp->next;
 	tmp->next = env_lst;
+	tmp = tmp->next;
+	tmp->next = NULL;
 }
 
 /**
@@ -96,4 +98,21 @@ t_data	*ft_get_env_cpy(t_data *data, char **env)
 		env_var = env[i];
 	}
 	return (data);
+}
+
+/**
+ * @brief Function to get a value from an environment variable
+ * 
+ * @param data 
+ * @param usr_input 
+ */
+char	*get_env_value(t_env *env, char *key)
+{
+	while (env != NULL)
+	{
+		if (strcmp(env->key, key) == 0)
+			return (env->value);
+		env = env->next;
+	}
+	return (NULL);
 }

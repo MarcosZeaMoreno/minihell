@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 16:25:58 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/18 17:50:45 by mzea-mor         ###   ########.fr       */
+/*   Created: 2024/01/18 16:25:15 by mzea-mor          #+#    #+#             */
+/*   Updated: 2024/01/18 17:37:42 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_error(char *usr_input, int type_error)
+void	free_split(char **split)
 {
-	ft_printf("%sMiniHell:%s", RED, RST);
-	if (type_error == 1)
-		ft_printf(" %s: command not found\n", usr_input);
-	else if (type_error == 2)
-		ft_printf(" %s: command not exec\n", usr_input);
-	else if (type_error == 3)
-		ft_printf(" %s: no such file or directory\n", usr_input);
-	else if (type_error == 4)
-		ft_printf(" %s: is not a directory\n", usr_input);
+	int	i;
+
+	i = 0;
+	while (split[i] != NULL)
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
 }
