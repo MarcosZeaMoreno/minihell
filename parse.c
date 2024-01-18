@@ -1,44 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/11 16:32:25 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/18 16:29:20 by mzea-mor         ###   ########.fr       */
+/*   Created: 2024/01/18 16:08:57 by mzea-mor          #+#    #+#             */
+/*   Updated: 2024/01/18 16:20:40 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 /**
- * @brief Function to handle the echo builtin
+ * @brief Function to handle the parse input
  * 
  * @param data 
  * @param usr_input 
  */
-void	ft_echo(t_data *data, t_token *token)
+void	ft_parse_input(t_data *data, char *usr_input)
 {
-	int		flag;
-	t_token	*tmp;
+	t_token	*token;
 
-	(void)data;
-	tmp = token;
-	tmp = tmp->next;
-	flag = 0;
-	if (!ft_strncmp("-n", token->next->value, 3))
-	{
-		tmp = tmp->next;
-		flag = 1;
-	}
-	while (tmp != NULL)
-	{
-		ft_printf("%s", tmp->value);
-		if (tmp->next != NULL)
-			ft_printf(" ");
-		tmp = tmp->next;
-	}
-	if (flag == 0)
-		ft_printf("\n");
+	token = NULL;
+	token = ft_tokenizer(usr_input);
+	ft_token_lst_last(token);
+	data->token = token;
 }

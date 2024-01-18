@@ -6,12 +6,17 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/16 18:39:26 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/18 18:18:40 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/**
+ * @brief Function to get pid
+ * 
+ * @param sig 
+ */
 void	ft_getpid(t_data *data)
 {
 	pid_t	pid;
@@ -42,6 +47,7 @@ int	ft_init(t_data *data, int ac, char **av, char **env)
 	}
 	print_header();
 	data->env_copy = NULL;
+	data->token = NULL;
 	ft_getpid(data);
 	ft_get_env_cpy(data, env);
 	return (0);
@@ -52,16 +58,17 @@ int	get_promp(t_data *data, char **env)
 	char	*usr_input;
 
 	usr_input = readline("\033[1;31mMiniHell: \033[0m");
-		if (check_builtin(usr_input, env) == 0)
-			ft_error(usr_input, CMND_NOT_FOUND);
-		if (!ft_strncmp("exit", usr_input, 5))
-			return (1);
-		else
-		{
-			add_history(usr_input);
-			exec_builtin(data, usr_input);
-		}
-		free(usr_input);
+	ft_parse_input(data, usr_input);
+	if (check_builtin(data->token, env) == 0)
+		ft_error(usr_input, CMND_NOT_FOUND);
+	if (!ft_strncmp("exit", data->token->value, 5))
+		return (1);
+	else
+	{
+		add_history(usr_input);
+		exec_builtin(data, data->token);
+	}
+	free(usr_input);
 	return (0);
 }
 

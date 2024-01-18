@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 15:01:14 by vkatason          #+#    #+#             */
-/*   Updated: 2024/01/16 16:09:32 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/18 17:43:18 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,21 @@ t_data	*ft_get_env_cpy(t_data *data, char **env)
 		env_var = env[i];
 	}
 	return (data);
+}
+
+/**
+ * @brief Function to get a value from an environment variable
+ * 
+ * @param data 
+ * @param usr_input 
+ */
+char	*get_env_value(t_env *env, char *key)
+{
+	while (env != NULL)
+	{
+		if (strcmp(env->key, key) == 0)
+			return (env->value);
+		env = env->next;
+	}
+	return (NULL);
 }

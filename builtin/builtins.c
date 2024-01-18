@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 18:23:45 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/12 17:35:19 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/18 17:54:45 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,29 +18,29 @@
  * @param data 
  * @param token
  */
-void    ft_cd(t_data *data, t_token token)
+void	ft_cd(t_data *data, t_token *token)
 {
-    char	*pwd_old;
-    char	*pwd_new;
+	char	*pwd_old;
+	char	*pwd_new;
 
-    token = token->next;
-    pwd_old = get_env_value(data->env_copy, "OLDPWD");
-    if (!pwd_old)
-        pwd_old = get_env_value(data->env_copy, "PWD");
-    if (chdir(token->value) == -1)
-    {
-        ft_printf("cd: %s: No such file or directory\n", token->value);
-        return;
-    }
-    pwd_new = getcwd(NULL, 0);
-    if (!pwd_new)
-    {
-        ft_printf("cd: error retrieving current directory\n");
-        return;
-    }
-    change_value_env(data, "OLDPWD", pwd_old);
-    change_value_env(data, "PWD", pwd_new);
-    free(pwd_new);
+	pwd_old = getcwd(NULL, 0);
+	if (!pwd_old || chdir(token->next->value) == -1)
+	{
+		ft_error(token->next->value, 4);
+		free(pwd_old);
+		return ;
+	}
+	pwd_new = getcwd(NULL, 0);
+	if (!pwd_new)
+	{
+		ft_printf("cd: error\n");
+		free(pwd_old);
+		return ;
+	}
+	change_value_env(data, "OLDPWD", pwd_old);
+	change_value_env(data, "PWD", pwd_new);
+	free(pwd_old);
+	free(pwd_new);
 }
 
 /*
@@ -48,31 +48,27 @@ void    ft_cd(t_data *data, t_token token)
 * @param data
 * @param token
 */
-void ft_export(t_data *data, t_token *token)
+void	ft_export(t_data *data, t_token *token)
 {
-    char *key;
-    char *value;
-    char *delimiter_position;
+	char	*key;
+	char	*value;
 
 	token = token->next;
-    while (token != NULL)
+	while (token != NULL)
 	{
-        delimiter_position = strchr(token->value, '=');
-        if (delimiter_position == NULL) {
-            ft_printf("export: %s: Invalid argument\n", token->value);
-            return;
-        }
-
-        *delimiter_position = '\0';
-        key = token->value;
-        value = delimiter_position + 1;
-
-        if (get_env_value(data->env_copy, key) != NULL)
+		key = strtok(token->value, "=");
+		value = strtok(NULL, "=");
+		if (key == NULL || value == NULL)
+		{
+			ft_printf("export: %s: Invalid argument\n", token->value);
+			return ;
+		}
+		if (get_env_value(data->env_copy, key) != NULL)
 			change_value_env(data, key, value);
-        else
-            add_env_var(data, key, value);
-        token = token->next;
-    }
+		else
+			add_env_var(data, key, value);
+		token = token->next;
+	}
 }
 
 /**
@@ -81,22 +77,20 @@ void ft_export(t_data *data, t_token *token)
  * @param data 
  * @param token 
  */
-void    ft_unset(t_data *data, t_token token)
+void	ft_unset(t_data *data, t_token *token)
 {
 	char	*key;
-	char	*delimiter_position;
 
 	token = token->next;
-	while(token != NULL)
+	while (token != NULL)
 	{
-		delimiter_position = strchr(token->value, '=');
-        if (delimiter_position == NULL)
+		key = token->value;
+		if (key == NULL)
 		{
-            ft_printf("unset: %s: Invalid argument\n", token->value);
-            token = token->next;
-			continue;
-        }
-		key = strtok(token->value, "=");
+			ft_printf("unset: %s: Invalid argument\n", token->value);
+			token = token->next;
+			continue ;
+		}
 		if (get_env_value(data->env_copy, key) != NULL)
 			remove_env_var(data, key);
 		token = token->next;
@@ -108,11 +102,24 @@ void    ft_unset(t_data *data, t_token token)
  * 
  * @param env
  */
-void    ft_env(t_env *env)
+void	ft_env(t_env *env)
 {
-    while (env->next != NULL)
-    {
-        ft_printf("%s=%s\n", env->key, env->value);
-        env = env->next;
-    }
+	while (env != NULL)
+	{
+		ft_printf("%s=%s\n", env->key, env->value);
+		env = env->next;
+	}
+}
+
+/**
+ * @brief Function to handle the pwd builtin
+ * 
+ * @param data 
+ */
+void	ft_pwd(t_data *data)
+{
+	if (get_env_value(data->env_copy, "PWD") != NULL)
+		ft_printf("%s\n", get_env_value(data->env_copy, "PWD"));
+	else
+		ft_printf("%s\n", get_env_value(data->env_copy, "HOME"));
 }

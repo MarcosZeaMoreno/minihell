@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/16 18:13:47 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/18 17:37:28 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ typedef struct s_token
 	struct s_token	*next;
 }					t_token;
 
-
 /**
  * @brief Structure to handle the data
  * 
@@ -100,18 +99,27 @@ typedef struct s_data
 }					t_data;
 
 /*-----  BUILTINS ----*/
-void				ft_echo(t_data *data, t_token token);
-void				ft_cd(t_data *data, t_token token);
+void				ft_echo(t_data *data, t_token *token);
+void				ft_cd(t_data *data, t_token *token);
 void				ft_pwd(t_data *data);
-void				ft_export(t_data *data, t_token token);
-void				ft_unset(t_data *data, t_token token);
+void				ft_export(t_data *data, t_token *token);
+void				ft_unset(t_data *data, t_token *token);
 void				ft_env(t_env *env);
+
+/*-----  PARSING ----*/
+void				ft_parse_input(t_data *data, char *usr_input);
+
+/*-----  TOKENIZER ----*/
+t_token				*ft_tokenizer(char *usr_input);
+t_token				*ft_token_lst_new(char *value);
+void				ft_token_lst_add_back(t_token *token, char *value);
+t_token				*ft_token_lst_last(t_token *token);
 
 /*-----  ENVIRONMENT VARIABLES ----*/
 t_env				*ft_env_lst_add_back(t_data *data, char *env);
 void				ft_env_lst_last(t_data *data, t_env *env_lst);
 t_env				*ft_env_lst_new(t_data *data, char *env);
-char				**lst_to_char(t_data *data);
+char				**lst_to_char(t_token *token);
 t_data				*ft_get_env_cpy(t_data *data, char **env);
 void				add_env_var(t_data *data, char *key, char *value);
 void				remove_env_var(t_data *data, char *key);
@@ -121,11 +129,12 @@ void				change_value_env(t_data *data, char *key, char *value);
 void				handle_sigint(int sig);
 void				print_exit(void);
 void				print_header(void);
-int					check_builtin(char *ptr, char **env);
+int					check_builtin(t_token *token, char **env);
 int					ft_init(t_data *data, int ac, char **av, char **env);;
-int					check_execv(char *usr_input, char **env);
-void				exec_builtin(t_data *data, char *usr_input);
+int					check_execv(t_token *token, char **env);
+void				exec_builtin(t_data *data, t_token *token);
 char				*get_env_value(t_env *env, char *key);
 void				ft_error(char *str, int type_error);
+void				free_split(char **split);
 
 #endif

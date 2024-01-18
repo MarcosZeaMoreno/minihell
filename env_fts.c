@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:18:21 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/16 15:57:33 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/18 18:15:01 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,17 @@
  */
 void	change_value_env(t_data *data, char *key, char *value)
 {
-	while (data->env_copy->next != NULL)
+	t_env	*temp;
+
+	temp = data->env_copy;
+	while (temp != NULL)
 	{
-		if (!ft_strncmp(data->env_copy->key, key, ft_strlen(key)))
+		if (!ft_strncmp(temp->key, key, ft_strlen(key) + 1))
 		{
-			free(data->env_copy->value);
-			data->env_copy->value = ft_strdup(value);
+			temp->value = ft_strdup(value);
 			return ;
 		}
-		data->env_copy = data->env_copy->next;
+		temp = temp->next;
 	}
 }
 
@@ -41,22 +43,24 @@ void	change_value_env(t_data *data, char *key, char *value)
  */
 void	remove_env_var(t_data *data, char *key)
 {
+	t_env	*current;
 	t_env	*prev;
 
-	prev = data->env_copy;
-	while (data->env_copy->next != NULL)
+	current = data->env_copy;
+	prev = NULL;
+	while (current != NULL)
 	{
-		if (!ft_strncmp(data->env_copy->key, key, ft_strlen(key)))
+		if (!ft_strncmp(current->key, key, ft_strlen(key)))
 		{
-			prev->next = data->env_copy->next;
-			free(data->env_copy->key);
-			free(data->env_copy->value);
-			free(data->env_copy);
-			data->env_copy = prev;
+			if (prev == NULL)
+				data->env_copy = current->next;
+			else
+				prev->next = current->next;
+			free(current);
 			return ;
 		}
-		prev = data->env_copy;
-		data->env_copy = data->env_copy->next;
+		prev = current;
+		current = current->next;
 	}
 }
 
@@ -70,25 +74,43 @@ void	remove_env_var(t_data *data, char *key)
 void	add_env_var(t_data *data, char *key, char *value)
 {
 	char	*env_v;
+	char	*temp;
 
 	env_v = ft_strjoin(key, "=");
+	temp = env_v;
 	env_v = ft_strjoin(env_v, value);
+	free(temp);
 	data->env_copy = ft_env_lst_add_back(data, env_v);
 }
 
-char	**lst_to_char(t_data *data)
+int	ft_token_size(t_token *token)
 {
-	char	**cmds;
-	int		i;
+    int	i;
 
-	i = 0;
-	cmds = malloc(sizeof(char *) * (ft_lstsize(data->token) + 1));
-	while (data->token->next != NULL)
-	{
-		cmds[i] = ft_strdup(data->token->value);
-		data->token = data->token->next;
-		i++;
-	}
-	cmds[i] = NULL;
-	return (cmds);
+    i = 0;
+    while (token != NULL)
+    {
+        token = token->next;
+        i++;
+    }
+    return (i);
+}
+
+char	**lst_to_char(t_token *token)
+{
+    char	**cmds;
+    int		i;
+
+    i = 0;
+    cmds = malloc(sizeof(char *) * (ft_token_size(token) + 1));
+    if (!cmds)
+        return (NULL);
+    while (token != NULL)
+    {
+        cmds[i] = ft_strdup(token->value);
+        token = token->next;
+        i++;
+    }
+    cmds[i] = NULL;
+    return (cmds);
 }

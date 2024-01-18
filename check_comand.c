@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:46:14 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/16 16:29:25 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/18 17:33:16 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,24 @@ int	check_builtin(t_token *token, char **env)
 	char	*value;
 
 	value = token->value;
-		if (!ft_strncmp("echo", value, 5))
-			return (1);
-		else if (!ft_strncmp("cd", value, 3))
-			return (1);
-		else if (!ft_strncmp("pwd", value, 4))
-			return (1);
-		else if (!ft_strncmp("export", value, 7))
-			return (1);
-		else if (!ft_strncmp("unset", value, 6))
-			return (1);
-		else if (!ft_strncmp("env", value, 4))
-			return (1);
-		else if (!ft_strncmp("exit", value, 5))
-			return (1);
-		else if (!ft_strncmp("", value, 1))
-			return (1);
-		else
-			return (check_execv(token, env));
+	if (!ft_strncmp("echo", value, 5))
+		return (1);
+	else if (!ft_strncmp("cd", value, 3))
+		return (1);
+	else if (!ft_strncmp("pwd", value, 4))
+		return (1);
+	else if (!ft_strncmp("export", value, 7))
+		return (1);
+	else if (!ft_strncmp("unset", value, 6))
+		return (1);
+	else if (!ft_strncmp("env", value, 4))
+		return (1);
+	else if (!ft_strncmp("exit", value, 5))
+		return (1);
+	else if (!ft_strncmp("", value, 1))
+		return (1);
+	else
+		return (check_execv(token, env));
 }
 
 /**
