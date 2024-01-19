@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 00:40:47 by vkatason          #+#    #+#             */
-/*   Updated: 2024/01/19 03:21:13 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/01/19 19:26:52 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,30 +28,66 @@
  * @param str input string
  * @return int number of characters to remove
  */
-// static int	ft_num_chars_to_rm(char *str)
-// {
-// 	int		i;
-// 	char	prev_symbol;
+int	ft_num_chars_to_rm(char *str)
+{
+	int		i;
+	char	prev_symbol;
 
-// 	i = 0;
-// 	prev_symbol = '\0';
-// 	while (*str)
-// 	{
-// 		if (*str == '\\' && prev_symbol != '\\')
-// 			i++;
-// 		else if (*str == '\\' && prev_symbol == '\\')
-// 		{
-// 			prev_symbol = '\0';
-// 			str++;
-// 			continue ;
-// 		}
-// 		else if ((*str == '\'' || *str == '"') && prev_symbol != '\\')
-// 			i++;
-// 		prev_symbol = *str;
-// 		str++;
-// 	}
-// 	return (i);
-// }
+	i = 0;
+	prev_symbol = '\0';
+	while (*str)
+	{
+		if (*str == '\\' && prev_symbol != '\\')
+			i++;
+		else if (*str == '\\' && prev_symbol == '\\')
+		{
+			prev_symbol = '\0';
+			str++;
+			continue ;
+		}
+		else if ((*str == '\'' || *str == '"') && prev_symbol != '\\')
+			i++;
+		prev_symbol = *str;
+		str++;
+	}
+	return (i);
+}
+
+/**
+ * @brief Function removes the characters
+ *  ", ', and \ unless they are preceded 
+ * by a backslash (\).
+ * 
+ * @param str Original user input string
+ * @return str with the characters removed
+ */
+void	ft_rm_quotes(char **str)
+{
+	char	*new;
+	char	*cpy;
+	int		index;
+	char	prev_symbol;
+
+	new = (char *)malloc(sizeof(char) * ((ft_strlen(*str)
+					- ft_num_chars_to_rm(*str)) + 1));
+	cpy = *str;
+	index = 0;
+	prev_symbol = '\0';
+	while (*cpy)
+	{
+		if (prev_symbol == '\\' || (*cpy != '"' && *cpy != '\''
+				&& *cpy != '\\'))
+			new[index++] = *cpy;
+		if (*cpy == '\\' && prev_symbol == '\\')
+			prev_symbol = '\0';
+		else
+			prev_symbol = *cpy;
+		cpy++;
+	}
+	new[index] = '\0';
+	free(*str);
+	*str = new;
+}
 
 /**
  * @brief Retrieves the name of a variable 
@@ -65,7 +101,7 @@
  * @param str The string to search for the variable.
  * @return The name of the variable, or NULL if no variable is found.
  */
-static char	*ft_var_name(char *str)
+char	*ft_var_name(char *str)
 {
 	char	*value;
 	int		i;
@@ -87,87 +123,3 @@ static char	*ft_var_name(char *str)
 	return (NULL);
 }
 
-void	print_var_name(char *str)
-{
-	char	*var_name;
-
-	var_name = ft_var_name(str);
-	if (var_name != NULL)
-	{
-		ft_printf("First variable name: %s\n", var_name);
-		free(var_name);
-	}
-	else
-		ft_printf("No variable found.\n");
-}
-
-typedef struct s_var
-{
-	char			*name;
-	struct s_var	*next;
-}					t_var;
-
-static t_var	*ft_var_name_list(char *str)
-{
-	t_var *head = NULL;
-	t_var *tail = NULL;
-
-	while (*str)
-	{
-		if (*str == '$')
-		{
-			str++;
-			int i = 0;
-			while (ft_isalnum(str[i]) == 1)
-				i++;
-			char *value = (char *)calloc(i + 1, sizeof(char));
-			strncpy(value, str, i);
-
-			t_var *new_var = (t_var *)malloc(sizeof(t_var));
-			new_var->name = value;
-			new_var->next = NULL;
-
-			if (head == NULL)
-			{
-				head = new_var;
-				tail = new_var;
-			}
-			else
-			{
-				tail->next = new_var;
-				tail = new_var;
-			}
-
-			str += i - 1; // Move to the end of the current variable
-		}
-		str++;
-	}
-	return (head);
-}
-
-void	print_var_list(char *input)
-{
-	t_var	*var_list;
-	t_var	*current;
-	t_var	*next;
-	int		i;
-
-	i = 1;
-	var_list = ft_var_name_list(input);
-	current = var_list;
-	while (current != NULL)
-	{
-		ft_printf("Variable %d: ", i);
-		if (current->name != NULL)
-			ft_printf("%s\n", current->name);
-	current = current->next;
-	i++;
-	}
-	while (var_list != NULL)
-	{
-		next = var_list->next;
-		free(var_list->name);
-		free(var_list);
-		var_list = next;
-	}
-}

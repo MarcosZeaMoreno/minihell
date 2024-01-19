@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/19 03:23:37 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/01/19 19:17:54 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ int	get_promp(t_data *data, char **env)
 	char	*usr_input;
 
 	usr_input = readline("\033[1;31mMiniHell: \033[0m");
-	//print_var_name(usr_input);
-	//print_var_list(usr_input);
+	print_var_name(usr_input);
+	print_rm_quotes(usr_input);
 	ft_parse_input(data, usr_input);
 	if (check_builtin(data->token, env) == 0)
 		ft_error(usr_input, CMND_NOT_FOUND);

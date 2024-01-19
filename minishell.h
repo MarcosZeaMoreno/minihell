@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/19 02:56:03 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/01/19 19:31:56 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ typedef struct s_data
 }					t_data;
 
 /*-----  BUILTINS ----*/
+
 void				ft_echo(t_data *data, t_token *token);
 void				ft_cd(t_data *data, t_token *token);
 void				ft_pwd(t_data *data);
@@ -107,15 +108,18 @@ void				ft_unset(t_data *data, t_token *token);
 void				ft_env(t_env *env);
 
 /*-----  PARSING ----*/
+
 void				ft_parse_input(t_data *data, char *usr_input);
 
 /*-----  TOKENIZER ----*/
+
 t_token				*ft_tokenizer(char *usr_input);
 t_token				*ft_token_lst_new(char *value);
 void				ft_token_lst_add_back(t_token *token, char *value);
 t_token				*ft_token_lst_last(t_token *token);
 
 /*-----  ENVIRONMENT VARIABLES ----*/
+
 t_env				*ft_env_lst_add_back(t_data *data, char *env);
 void				ft_env_lst_last(t_data *data, t_env *env_lst);
 t_env				*ft_env_lst_new(t_data *data, char *env);
@@ -126,6 +130,7 @@ void				remove_env_var(t_data *data, char *key);
 void				change_value_env(t_data *data, char *key, char *value);
 
 /*-----  FUNCTIONS ----*/
+
 void				handle_sigint(int sig);
 void				print_exit(void);
 void				print_header(void);
@@ -137,7 +142,12 @@ char				*get_env_value(t_env *env, char *key);
 void				ft_error(char *str, int type_error);
 void				free_split(char **split);
 
-/*-----  UTILS ----*/
+/*-----  INPUT STRING CLEANING ----*/
+
 void				print_var_name(char *str);
-void				print_var_list(char *input);
+void				print_rm_quotes(char *usr_input);
+char				*ft_var_name(char *str);
+void				ft_rm_quotes(char **str);
+int					ft_num_chars_to_rm(char *str);
+
 #endif
