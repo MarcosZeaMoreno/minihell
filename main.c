@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/18 18:18:40 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/19 18:49:43 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,21 @@ int	ft_init(t_data *data, int ac, char **av, char **env)
 	return (0);
 }
 
+/**
+ * @brief Function to get promp
+ * 
+ * @param data 
+ * @param env 
+ * @return int 
+ */
 int	get_promp(t_data *data, char **env)
 {
 	char	*usr_input;
 
 	usr_input = readline("\033[1;31mMiniHell: \033[0m");
 	ft_parse_input(data, usr_input);
-	if (check_builtin(data->token, env) == 0)
-		ft_error(usr_input, CMND_NOT_FOUND);
+	if (check_builtin(data->token) == 0)
+		check_execve(data, env);
 	if (!ft_strncmp("exit", data->token->value, 5))
 		return (1);
 	else

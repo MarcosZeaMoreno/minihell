@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:46:14 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/18 17:33:16 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/19 18:09:01 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,12 @@
  * @param usr_input: a pointer that contain the string of readline.
  * @return int: "1" if ok, "0" if error.
  */
-int	check_execv(t_token *token, char **env)
+void	check_execve(t_data *data, char **env)
 {
-	char	*path;
 	char	**cmds;
 
-	cmds = lst_to_char(token);
-	path = ft_strjoin("/bin/", token->value);
-	if (execve(path, cmds, env) == -1)
-		return (0);
-	else
-		execve(path, cmds, env);
-	return (1);
+	cmds = lst_to_char(data->token);
+	exec_local(cmds, env);
 }
 
 /**
@@ -38,7 +32,7 @@ int	check_execv(t_token *token, char **env)
  * @param usr_input: a pointer that contain the string of readline.
  * @return int: "1" if ok, "0" if error.
  */
-int	check_builtin(t_token *token, char **env)
+int	check_builtin(t_token *token)
 {
 	char	*value;
 
@@ -60,7 +54,7 @@ int	check_builtin(t_token *token, char **env)
 	else if (!ft_strncmp("", value, 1))
 		return (1);
 	else
-		return (check_execv(token, env));
+		return (0);
 }
 
 /**

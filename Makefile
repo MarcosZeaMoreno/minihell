@@ -6,7 +6,7 @@
 #    By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/08 15:13:18 by vkatason          #+#    #+#              #
-#    Updated: 2024/01/18 17:56:20 by mzea-mor         ###   ########.fr        #
+#    Updated: 2024/01/19 17:32:26 by mzea-mor         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ LIBFT = libft
 SRC =  check_comand.c main.c print_entry.c signals.c \
 		env_to_lst.c error.c ./builtin/builtins.c \
 		./builtin/echo.c env_fts.c parse.c tokens.c \
-		utils.c
+		utils.c fork.c
 
 OBJS := $(SRC:.c=.o)
 
