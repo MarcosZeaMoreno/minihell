@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/18 17:37:28 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/19 02:56:03 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,4 +137,7 @@ char				*get_env_value(t_env *env, char *key);
 void				ft_error(char *str, int type_error);
 void				free_split(char **split);
 
+/*-----  UTILS ----*/
+void				print_var_name(char *str);
+void				print_var_list(char *input);
 #endif

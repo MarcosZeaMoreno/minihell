@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 15:10:23 by vkatason          #+#    #+#             */
-/*   Updated: 2024/01/08 14:35:04 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/01/19 01:36:59 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int		ft_wdcounter(char const *str, char c);
 int		ft_strcmp(const char *s1, const char *s2);
+char	*ft_strncpy(char *dest, const char *src, size_t len);
 int		ft_printf(const char *sign, ...);
 int		ft_type(char type, va_list args);
 int		ft_putchar(char c);
