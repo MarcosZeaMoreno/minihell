@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/19 18:11:10 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/22 18:38:55 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,14 @@ void				exec_builtin(t_data *data, t_token *token);
 char				*get_env_value(t_env *env, char *key);
 void				ft_error(char *str, int type_error);
 void				free_split(char **split);
-void			exec_local(char **cmds, char **env);
-void			forkit(char *full_path, char **cmds, char **env);
+void				exec_local(char **cmds, char **env);
+void				forkit(char *full_path, char **cmds, char **env);
+
+
+/* FUNCTIONS */
+void				lst_delone_token(t_token *lst, void (*del)(void *));
+void				lst_delone(t_env *lst, void (*del)(void *));
+void				lst_clear_token(t_token **lst, void (*del)(void *));
+void				lst_clear(t_env **lst, void (*del)(void *));
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_comand.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:46:14 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/19 18:09:01 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/22 18:59:01 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ void	check_execve(t_data *data, char **env)
 int	check_builtin(t_token *token)
 {
 	char	*value;
+
+	if (!token)
+		return (-1);
 
 	value = token->value;
 	if (!ft_strncmp("echo", value, 5))
@@ -67,6 +70,8 @@ void	exec_builtin(t_data *data, t_token *token)
 {
 	char	*value;
 
+	if (!data || !token)
+		return ;
 	value = token->value;
 	if (!ft_strncmp("echo", value, 5))
 		ft_echo(data, token);

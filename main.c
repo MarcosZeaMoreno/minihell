@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/19 18:49:43 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/22 19:01:11 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_leaks(void)
+{
+	system("leaks minishell");
+}
+
 
 /**
  * @brief Function to get pid
@@ -62,21 +68,24 @@ int	ft_init(t_data *data, int ac, char **av, char **env)
  */
 int	get_promp(t_data *data, char **env)
 {
-	char	*usr_input;
+    char	*usr_input;
 
-	usr_input = readline("\033[1;31mMiniHell: \033[0m");
-	ft_parse_input(data, usr_input);
-	if (check_builtin(data->token) == 0)
-		check_execve(data, env);
-	if (!ft_strncmp("exit", data->token->value, 5))
-		return (1);
-	else
-	{
-		add_history(usr_input);
-		exec_builtin(data, data->token);
-	}
-	free(usr_input);
-	return (0);
+    if (!data)
+        return (-1);
+    usr_input = readline("\033[1;31mMiniHell: \033[0m");
+    // suppress_output();
+    ft_parse_input(data, usr_input);
+    if (data->token && check_builtin(data->token) == 0)
+        check_execve(data, env);
+    if (data->token && data->token->value && !ft_strncmp("exit", data->token->value, 5))
+        return (1);
+    else
+    {
+        add_history(usr_input);
+        exec_builtin(data, data->token);
+    }
+    free(usr_input);
+    return (0);
 }
 
 /**
@@ -101,5 +110,6 @@ int	main(int ac, char **av, char **env)
 			break ;
 	}
 	print_exit();
+	ft_leaks();
 	return (0);
 }
