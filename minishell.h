@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/19 19:31:56 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/01/22 17:21:26 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,8 +146,10 @@ void				free_split(char **split);
 
 void				print_var_name(char *str);
 void				print_rm_quotes(char *usr_input);
+void				print_var_check_vars(char *usr_input, t_data *data);
 char				*ft_var_name(char *str);
 void				ft_rm_quotes(char **str);
 int					ft_num_chars_to_rm(char *str);
+int					ft_check_vars(char *usr_input, t_data *data);
 
 #endif
