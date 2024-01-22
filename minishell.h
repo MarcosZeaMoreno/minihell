@@ -53,11 +53,12 @@
 # define CMND_NOT_DIR 3
 # define CMND_NOT_FILE 4
 # define CMND_NOT_PERM 5
-# define CMND_NOT_VALID 6
+# define PERMISION_DENIED 6
 # define CMND_NOT_MEM 7
 # define CMND_NOT_ARG 8
 # define CMND_NOT_PIPE 9
 # define CMND_NOT_FORK 10
+
 
 /*----- STRUCTURES -----*/
 
@@ -134,13 +135,22 @@ void				change_value_env(t_data *data, char *key, char *value);
 void				handle_sigint(int sig);
 void				print_exit(void);
 void				print_header(void);
-int					check_builtin(t_token *token, char **env);
+int					check_builtin(t_token *token);
 int					ft_init(t_data *data, int ac, char **av, char **env);;
-int					check_execv(t_token *token, char **env);
+void				check_execve(t_data *data, char **env);
 void				exec_builtin(t_data *data, t_token *token);
 char				*get_env_value(t_env *env, char *key);
 void				ft_error(char *str, int type_error);
 void				free_split(char **split);
+void				exec_local(char **cmds, char **env);
+void				forkit(char *full_path, char **cmds, char **env);
+
+
+/* FUNCTIONS */
+void				lst_delone_token(t_token *lst, void (*del)(void *));
+void				lst_delone(t_env *lst, void (*del)(void *));
+void				lst_clear_token(t_token **lst, void (*del)(void *));
+void				lst_clear(t_env **lst, void (*del)(void *));
 
 /*-----  INPUT STRING CLEANING ----*/
 

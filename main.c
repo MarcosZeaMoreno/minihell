@@ -12,6 +12,12 @@
 
 #include "minishell.h"
 
+void	ft_leaks(void)
+{
+	system("leaks minishell");
+}
+
+
 /**
  * @brief Function to get pid
  * 
@@ -53,26 +59,35 @@ int	ft_init(t_data *data, int ac, char **av, char **env)
 	return (0);
 }
 
+/**
+ * @brief Function to get promp
+ * 
+ * @param data 
+ * @param env 
+ * @return int 
+ */
 int	get_promp(t_data *data, char **env)
 {
-	char	*usr_input;
+    char	*usr_input;
 
-	usr_input = readline("\033[1;31mMiniHell: \033[0m");
-	print_var_name(usr_input);
-	print_rm_quotes(usr_input);
-	print_var_check_vars(usr_input, data);
-	ft_parse_input(data, usr_input);
-	if (check_builtin(data->token, env) == 0)
-		ft_error(usr_input, CMND_NOT_FOUND);
-	if (!ft_strncmp("exit", data->token->value, 5))
-		return (1);
-	else
-	{
-		add_history(usr_input);
-		exec_builtin(data, data->token);
-	}
-	free(usr_input);
-	return (0);
+    if (!data)
+        return (-1);
+    usr_input = readline("\033[1;31mMiniHell: \033[0m");
+  	//print_var_name(usr_input);
+	  //print_rm_quotes(usr_input);
+	  //print_var_check_vars(usr_input, data);
+    ft_parse_input(data, usr_input);
+    if (data->token && check_builtin(data->token) == 0)
+        check_execve(data, env);
+    if (data->token && data->token->value && !ft_strncmp("exit", data->token->value, 5))
+        return (1);
+    else
+    {
+        add_history(usr_input);
+        exec_builtin(data, data->token);
+    }
+    free(usr_input);
+    return (0);
 }
 
 /**
@@ -97,5 +112,6 @@ int	main(int ac, char **av, char **env)
 			break ;
 	}
 	print_exit();
+	ft_leaks();
 	return (0);
 }
