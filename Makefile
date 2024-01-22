@@ -6,7 +6,7 @@
 #    By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/08 15:13:18 by vkatason          #+#    #+#              #
-#    Updated: 2024/01/22 18:31:58 by vkatason         ###   ########.fr        #
+#    Updated: 2024/01/19 19:30:01 by vkatason         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ LIBFT = libft
 SRC =  check_comand.c main.c print_entry.c signals.c \
 		env_to_lst.c error.c ./builtin/builtins.c \
 		./builtin/echo.c env_fts.c parse.c tokens.c \
-		utils.c fork.c lst_clear.c
+		utils.c input_clean.c print_checks.c fork.c \
+    lst_clear.c
 
 OBJS := $(SRC:.c=.o)
 
