@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/22 18:38:55 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/01/22 17:21:26 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct s_data
 }					t_data;
 
 /*-----  BUILTINS ----*/
+
 void				ft_echo(t_data *data, t_token *token);
 void				ft_cd(t_data *data, t_token *token);
 void				ft_pwd(t_data *data);
@@ -108,15 +109,18 @@ void				ft_unset(t_data *data, t_token *token);
 void				ft_env(t_env *env);
 
 /*-----  PARSING ----*/
+
 void				ft_parse_input(t_data *data, char *usr_input);
 
 /*-----  TOKENIZER ----*/
+
 t_token				*ft_tokenizer(char *usr_input);
 t_token				*ft_token_lst_new(char *value);
 void				ft_token_lst_add_back(t_token *token, char *value);
 t_token				*ft_token_lst_last(t_token *token);
 
 /*-----  ENVIRONMENT VARIABLES ----*/
+
 t_env				*ft_env_lst_add_back(t_data *data, char *env);
 void				ft_env_lst_last(t_data *data, t_env *env_lst);
 t_env				*ft_env_lst_new(t_data *data, char *env);
@@ -127,6 +131,7 @@ void				remove_env_var(t_data *data, char *key);
 void				change_value_env(t_data *data, char *key, char *value);
 
 /*-----  FUNCTIONS ----*/
+
 void				handle_sigint(int sig);
 void				print_exit(void);
 void				print_header(void);
@@ -146,5 +151,15 @@ void				lst_delone_token(t_token *lst, void (*del)(void *));
 void				lst_delone(t_env *lst, void (*del)(void *));
 void				lst_clear_token(t_token **lst, void (*del)(void *));
 void				lst_clear(t_env **lst, void (*del)(void *));
+
+/*-----  INPUT STRING CLEANING ----*/
+
+void				print_var_name(char *str);
+void				print_rm_quotes(char *usr_input);
+void				print_var_check_vars(char *usr_input, t_data *data);
+char				*ft_var_name(char *str);
+void				ft_rm_quotes(char **str);
+int					ft_num_chars_to_rm(char *str);
+int					ft_check_vars(char *usr_input, t_data *data);
 
 #endif
