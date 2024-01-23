@@ -12,37 +12,6 @@
 
 #include "../minishell.h"
 
-/**
- * @brief Function to handle the cd builtin
- * 
- * @param data 
- * @param token
- */
-void	ft_cd(t_data *data, t_token *token)
-{
-	char	*pwd_old;
-	char	*pwd_new;
-
-	pwd_old = getcwd(NULL, 0);
-	if (!pwd_old || chdir(token->next->value) == -1)
-	{
-		ft_error(token->next->value, 4);
-		free(pwd_old);
-		return ;
-	}
-	pwd_new = getcwd(NULL, 0);
-	if (!pwd_new)
-	{
-		ft_printf("cd: error\n");
-		free(pwd_old);
-		return ;
-	}
-	change_value_env(data, "OLDPWD", pwd_old);
-	change_value_env(data, "PWD", pwd_new);
-	free(pwd_old);
-	free(pwd_new);
-}
-
 /*
 ** Function to handle the export builtin
 * @param data
@@ -56,8 +25,8 @@ void	ft_export(t_data *data, t_token *token)
 	token = token->next;
 	while (token != NULL)
 	{
-		key = strtok(token->value, "=");
-		value = strtok(NULL, "=");
+		key = ft_strtok(token->value, "=");
+		value = ft_strtok(NULL, "=");
 		if (key == NULL || value == NULL)
 		{
 			ft_printf("export: %s: Invalid argument\n", token->value);

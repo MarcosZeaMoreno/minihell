@@ -17,7 +17,6 @@ void	ft_leaks(void)
 	system("leaks minishell");
 }
 
-
 /**
  * @brief Function to get pid
  * 
@@ -73,9 +72,14 @@ int	get_promp(t_data *data, char **env)
     if (!data)
         return (-1);
     usr_input = readline("\033[1;31mMiniHell: \033[0m");
+	if (usr_input == NULL)
+	{
+		ft_printf("exit\n");
+		return (1);
+	}
   	//print_var_name(usr_input);
-	  //print_rm_quotes(usr_input);
-	  //print_var_check_vars(usr_input, data);
+	//print_rm_quotes(usr_input);
+	//print_var_check_vars(usr_input, data);
     ft_parse_input(data, usr_input);
     if (data->token && check_builtin(data->token) == 0)
         check_execve(data, env);

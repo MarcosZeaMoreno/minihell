@@ -21,6 +21,25 @@ void	handle_sigint(int sig)
 {
 	if (sig == SIGINT)
 	{
-		ioctl(STDIN_FILENO, TIOCSTI, "\n");
-	}
+        write(1, "\n", 1);
+        rl_on_new_line();  // readline function to update the prompt line
+        rl_replace_line("", 0);  // clear the current line in readline
+        rl_redisplay();  // redisplay the prompt
+    }
+}
+
+/**
+ * @brief Funtion to handle the sigquit
+ * 
+ * @param sig 
+ */
+void	handle_sigquit(int sig)
+{
+	if (sig == SIGQUIT)
+	{
+		write(1, "\n", 1);
+		rl_on_new_line();  // readline function to update the prompt line
+		rl_replace_line("", 0);  // clear the current line in readline
+		rl_redisplay();  // redisplay the prompt
+    }
 }

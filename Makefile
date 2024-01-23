@@ -22,7 +22,7 @@ SRC =  check_comand.c main.c print_entry.c signals.c \
 		env_to_lst.c error.c ./builtin/builtins.c \
 		./builtin/echo.c env_fts.c parse.c tokens.c \
 		utils.c input_clean.c print_checks.c fork.c \
-    lst_clear.c
+    	lst_clear.c ./builtin/cd.c
 
 OBJS := $(SRC:.c=.o)
 

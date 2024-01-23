@@ -27,8 +27,8 @@ t_env	*ft_env_lst_new(t_data *data, char *env)
 	env_lst = (t_env *)malloc(sizeof(t_env));
 	if (!env_lst)
 		return (0);
-	env_lst->key = strtok(env, "=");
-	env_lst->value = strtok(NULL, "=");
+	env_lst->key = ft_strtok(env, "=");
+	env_lst->value = ft_strtok(NULL, "=");
 	env_lst->next = NULL;
 	data->env_copy = env_lst;
 	return (data->env_copy);
@@ -66,8 +66,8 @@ t_env	*ft_env_lst_add_back(t_data *data, char *env)
 	env_lst = (t_env *)malloc(sizeof(t_env));
 	if (!env_lst)
 		return (0);
-	env_lst->key = strtok(env, "=");
-	env_lst->value = strtok(NULL, "=");
+	env_lst->key = ft_strtok(env, "=");
+	env_lst->value = ft_strtok(NULL, "=");
 	env_lst->next = NULL;
 	ft_env_lst_last(data, env_lst);
 	return (data->env_copy);

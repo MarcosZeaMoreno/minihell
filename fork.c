@@ -27,9 +27,7 @@ void	forkit(char *full_path, char **cmds, char **env)
 	env_tab = env;
 	father = fork();
 	if (father > 0)
-	{
 		wait(&status);
-	}
 	else if (father == 0)
 		execve(full_path, cmds, env_tab);
 }
