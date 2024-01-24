@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 00:40:47 by vkatason          #+#    #+#             */
-/*   Updated: 2024/01/22 17:57:28 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/01/24 19:06:08 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	ft_rm_quotes(char **str)
 		cpy++;
 	}
 	new[index] = '\0';
-	free(*str);
+	//free(*str);
 	*str = new;
 }
 
@@ -112,7 +112,7 @@ char	*ft_var_name(char *str)
 		{
 			str++;
 			i = 0;
-			while (ft_isalnum(str[i]) == 1)
+			while (ft_isalnum(str[i]) == 1 || str[i] == '_')
 				i++;
 			value = (char *)calloc(i + 1, sizeof(char));
 			ft_strncpy(value, str, i);
@@ -141,7 +141,7 @@ int	ft_check_vars(char *usr_input, t_data *data)
 		env_value = get_env_value(data->env_copy, value);
 		if (env_value == NULL)
 		{
-			ft_printf_fd(2, "%s: Undefined variable.\n", value);
+			ft_printf_fd(2, "%s: Variable is undefined.\n", value);
 			free(value);
 			return (-1);
 		}
@@ -150,6 +150,32 @@ int	ft_check_vars(char *usr_input, t_data *data)
 			usr_input += 1;
 		free(value);
 		value = ft_var_name(usr_input);
+	}
+	return (1);
+}
+
+int	ft_clean_input(char **usr_input, t_data *data)
+{
+	char	*value;
+	char	*env_value;
+
+	ft_rm_quotes(usr_input);
+	if (ft_strchr(*usr_input, '$') == NULL)
+		return (1);
+	if (ft_check_vars(*usr_input, data) == -1)
+		return (-1);
+	while (ft_strchr(*usr_input, '$') != NULL)
+	{
+		value = ft_var_name(*usr_input);
+		env_value = get_env_value(data->env_copy, value);
+		if (env_value == NULL)
+		{
+			ft_printf_fd(2, "%s: Variable is undefined.\n", value + 1);
+			free(value);
+			return (-1);
+		}
+		ft_replace_input(usr_input, value, env_value);
+		free(value);
 	}
 	return (1);
 }

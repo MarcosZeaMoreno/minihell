@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:24:22 by vkatason          #+#    #+#             */
-/*   Updated: 2024/01/22 17:21:26 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/01/24 18:55:41 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,16 @@ void	print_var_check_vars(char *usr_input, t_data *data)
 		ft_printf("Undefined variable found.\n");
 	else
 		ft_printf("Invalid result.\n");
+}
+
+void	print_replaced_input(char *usr_input, t_data *data)
+{
+	if (usr_input != NULL)
+	{
+		ft_printf("Original input: %s\n", usr_input);
+		ft_clean_input(&usr_input, data);
+		ft_printf("Replaced input: %s\n", usr_input);
+	}
+	else
+		ft_printf("No input.\n");
 }

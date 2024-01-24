@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/22 17:21:26 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/01/24 19:12:23 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	ft_leaks(void)
 {
 	system("leaks minishell");
 }
-
 
 /**
  * @brief Function to get pid
@@ -68,26 +67,28 @@ int	ft_init(t_data *data, int ac, char **av, char **env)
  */
 int	get_promp(t_data *data, char **env)
 {
-    char	*usr_input;
+	char	*usr_input;
 
-    if (!data)
-        return (-1);
-    usr_input = readline("\033[1;31mMiniHell: \033[0m");
-  	//print_var_name(usr_input);
-	  //print_rm_quotes(usr_input);
-	  //print_var_check_vars(usr_input, data);
-    ft_parse_input(data, usr_input);
-    if (data->token && check_builtin(data->token) == 0)
-        check_execve(data, env);
-    if (data->token && data->token->value && !ft_strncmp("exit", data->token->value, 5))
-        return (1);
-    else
-    {
-        add_history(usr_input);
-        exec_builtin(data, data->token);
-    }
-    free(usr_input);
-    return (0);
+	(void)env;
+	if (!data)
+		return (-1);
+	usr_input = readline("\033[1;31mMiniHell: \033[0m");
+	ft_printf("Original input: %s\n", usr_input);
+	ft_clean_input(&usr_input, data);
+	ft_printf("Replaced input: %s\n", usr_input);
+	ft_parse_input(data, usr_input);
+	if (data->token && check_builtin(data->token) == 0)
+		check_execve(data, env);
+	if (data->token && data->token->value && !ft_strncmp("exit",
+			data->token->value, 5))
+		return (1);
+	else
+	{
+		add_history(usr_input);
+		exec_builtin(data, data->token);
+	}
+	free(usr_input);
+	return (0);
 }
 
 /**
