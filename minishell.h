@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/22 17:21:26 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/01/29 18:51:53 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,13 +137,14 @@ void				print_exit(void);
 void				print_header(void);
 int					check_builtin(t_token *token);
 int					ft_init(t_data *data, int ac, char **av, char **env);;
-void				check_execve(t_data *data, char **env);
+void				check_execve(t_data *data, char **env, t_env *enviroment);
 void				exec_builtin(t_data *data, t_token *token);
 char				*get_env_value(t_env *env, char *key);
 void				ft_error(char *str, int type_error);
 void				free_split(char **split);
-void				exec_local(char **cmds, char **env);
+void				exec_local(char **cmds, char **env, t_env *enviroment);
 void				forkit(char *full_path, char **cmds, char **env);
+char				**strdup_2d(char **src);
 
 
 /* FUNCTIONS */
@@ -161,5 +162,7 @@ char				*ft_var_name(char *str);
 void				ft_rm_quotes(char **str);
 int					ft_num_chars_to_rm(char *str);
 int					ft_check_vars(char *usr_input, t_data *data);
+void				rl_replace_line(const char *text, int clear_undo);
+void			suppress_output(void);
 
 #endif
