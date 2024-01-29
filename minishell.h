@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/28 15:58:09 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/01/29 01:55:16 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@
 
 /**
  * @brief Structure to handle the enviroment variables
- * 
+ *
  * @param key The key of the variable
  * @param value The value of the variable
  */
@@ -76,7 +76,7 @@ typedef struct s_env
 
 /**
  * @brief Structure to handle the tokens
- * 
+ *
  * @param token The token
  * @param next The next token
  */
@@ -87,9 +87,67 @@ typedef struct s_token
 }					t_token;
 
 /**
- * @brief Structure to handle the data
+ * @brief Structure representing a token in the minishell program.
  * 
- * @param env The enviroment variables
+ * @param e_type The type of the token
+ * @param TKN_WHITESPACE All the whitespaces
+ * @param TKN_WORD Everything that is not a special characte
+ * @param TKN_STRING All that inside the quotes
+ * @param TKN_SEMICOLON Semicolon symbol (;)
+ * @param TKN_PIPE Pipe symbol (|)
+ * @param TKN_DOUBLE_PIPE Double pipe symbol (||)
+ * @param TKN_REDIR_IN Redirection input symbol (<)
+ * @param TKN_REDIR_OUT Redirection output symbol (>)
+ * @param TKN_REDIR_APPEND Redirection append symbol (>>)
+ * @param TKN_REDIR_HERE_DOC Redirection here doc symbol (<<)
+ * @param TKN_DOLLAR Dollar symbol ($)
+ * @param TKN_AMPER Amper symbol (&)
+ * @param TKN_DOUBLE_AMPER Double amper symbol (&&)
+ * @param TKN_TILDE Tilde symbol (~)
+ * @param value The value of the token
+ */
+typedef struct s_tkn
+{
+	enum
+	{
+		TKN_WHITESPACE,
+		TKN_SEMICOLON,
+		TKN_PIPE,
+		TKN_DOUBLE_PIPE,
+		TKN_REDIR_IN,
+		TKN_REDIR_OUT,
+		TKN_REDIR_APPEND,
+		TKN_REDIR_HERE_DOC,
+		TKN_DOLLAR,
+		TKN_AMPER,
+		TKN_DOUBLE_AMPER,
+		TKN_TILDE,
+		TKN_WORD,
+		TKN_STRING
+	} e_type;
+	char			*value;
+}					t_tkn;
+
+/**
+ * @brief Structure to handle the lexer
+ *
+ * @param c The current character
+ * @param i The index of the current character
+ * @param input The input string
+ */
+typedef struct s_lexer
+{
+	char			c;
+	unsigned int	i;
+	char			*input;
+}					t_lexer;
+
+/**
+ * @brief Structure to handle the data
+ *
+ * @param env_copy The current copy of enviroment variables
+ * @param token The token list
+ * @param pid The process id
  */
 typedef struct s_data
 {
@@ -163,5 +221,19 @@ int					ft_check_vars(char *usr_input, t_data *data);
 void				ft_replace_input(char **str, char *old_value,
 						char *new_alue);
 int					ft_clean_input(char **usr_input, t_data *data);
+
+/*----- LEXER FUNCTIONS -----*/
+t_lexer				*ft_init_lexer(char *input);
+void				ft_lexer_advance(t_lexer *lexer);
+void				ft_lexer_skip_whitespace(t_lexer *lexer);
+t_tkn				*ft_lexer_get_next_token(t_lexer *lexer);
+t_tkn				*ft_lexer_get_string(t_lexer *lexer);
+t_tkn				*ft_lexer_get_word(t_lexer *lexer);
+char				*ft_lexer_get_char(t_lexer *lexer);
+t_tkn				*ft_lexer_advance_with_tkn(t_lexer *lexer, t_tkn *tkn);
+
+/*----- LEXER TOKENS -----*/
+t_tkn				*ft_init_tkn(int type, char *value);
+t_tkn				*ft_init_multi_tkn(int type, char *value);
 
 #endif

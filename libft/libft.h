@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 15:10:23 by vkatason          #+#    #+#             */
-/*   Updated: 2024/01/23 20:29:30 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/01/29 00:13:56 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,8 @@ char	*gnl_strjoin(char *s1, char *s2);
 char	*gnl_strchr(char *s, int c);
 int		hex_to_int(char *hex);
 void	ft_charpp_free(char **charpp);
+void	*ft_allocate_memory(size_t size);
+size_t	get_min_size(size_t old_size, size_t size);
+void	*ft_realloc(void *ptr, size_t size);
 
 #endif

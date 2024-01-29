@@ -6,7 +6,7 @@
 #    By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/27 12:54:50 by vkatason          #+#    #+#              #
-#    Updated: 2024/01/23 20:29:55 by vkatason         ###   ########.fr        #
+#    Updated: 2024/01/29 00:15:02 by vkatason         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC = 	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 		ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c \
 		ft_toupper.c ft_type.c ft_wdcounter.c get_next_line.c get_next_line_utils.c \
 		ft_hex_to_int.c ft_charpp.c ft_atol.c ft_strstr.c ft_strcat.c \
-		ft_strtok.c ft_strncpy.c ft_printf_fd.c ft_strcpy.c 
+		ft_strtok.c ft_strncpy.c ft_printf_fd.c ft_strcpy.c ft_realloc.c
 
 SRC_BONUS = ft_lstnew_bonus.c ft_lstadd_front_bonus.c\
 		ft_lstsize_bonus.c ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c\
