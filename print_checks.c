@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:24:22 by vkatason          #+#    #+#             */
-/*   Updated: 2024/01/24 18:55:41 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/01/30 03:46:50 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,13 @@ void	print_var_name(char *str)
 		ft_printf("No variable found.\n");
 }
 
+/**
+ * @brief Function prints the result of ft_var_value:
+ * the value of the first variable found in the string
+ * is equal to the value of the variable in the environment.
+ * 
+ * @param str user input string
+ */
 void	print_var_check_vars(char *usr_input, t_data *data)
 {
 	int	result;
@@ -61,6 +68,13 @@ void	print_var_check_vars(char *usr_input, t_data *data)
 		ft_printf("Invalid result.\n");
 }
 
+/**
+ * @brief Function prints the original user input
+ * and the result of ft_clean_input: the user input
+ * with replaced variables.
+ * 
+ * @param str user input string
+ */
 void	print_replaced_input(char *usr_input, t_data *data)
 {
 	if (usr_input != NULL)
@@ -72,3 +86,35 @@ void	print_replaced_input(char *usr_input, t_data *data)
 	else
 		ft_printf("No input.\n");
 }
+
+/**
+ * @brief Function prints tokens from the user input
+ * with the type and value of each token
+ * (see enum e_tkn_type in lexer.h)
+ * 
+ * @param str user input string
+ */
+void	print_tkn(t_tkn *tkn)
+{
+	const char	*tkn_types[] = {
+		"TKN_WHITESPACE",
+		"TKN_SEMICOLON",
+		"TKN_PIPE",
+		"TKN_DOUBLE_PIPE",
+		"TKN_REDIR_IN",
+		"TKN_REDIR_OUT",
+		"TKN_REDIR_APPEND",
+		"TKN_REDIR_HERE_DOC",
+		"TKN_DOLLAR",
+		"TKN_AMPER",
+		"TKN_DOUBLE_AMPER",
+		"TKN_TILDE",
+		"TKN_SNGL_QUOTE",
+		"TKN_WORD",
+		"TKN_STRING"};
+
+	ft_printf("TKN#%d\n", tkn->order);
+	ft_printf("TYPE: %s\n", tkn_types[tkn->e_type]);
+	ft_printf("VALUE: %s\n\n", tkn->value);
+}
+

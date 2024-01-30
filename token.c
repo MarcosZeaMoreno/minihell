@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 23:27:36 by vkatason          #+#    #+#             */
-/*   Updated: 2024/01/29 01:52:36 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/01/30 02:20:25 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
  */
 t_tkn	*ft_init_tkn(int type, char *value)
 {
-	t_tkn	*tkn;
+	static int	order;
+	t_tkn		*tkn;
 
 	tkn = ft_calloc(1, sizeof(t_tkn));
 	if (tkn == NULL)
@@ -33,6 +34,7 @@ t_tkn	*ft_init_tkn(int type, char *value)
 	}
 	tkn->e_type = type;
 	tkn->value = value;
+	tkn->order = order++;
 	return (tkn);
 }
 
@@ -48,7 +50,8 @@ t_tkn	*ft_init_tkn(int type, char *value)
  */
 t_tkn	*ft_init_multi_tkn(int type, char *value)
 {
-	t_tkn	*tkn;
+	static int	order;
+	t_tkn		*tkn;
 
 	tkn = ft_calloc(1, sizeof(t_tkn));
 	if (tkn == NULL)
@@ -58,6 +61,7 @@ t_tkn	*ft_init_multi_tkn(int type, char *value)
 	}
 	tkn->e_type = type;
 	tkn->value = ft_strdup(value);
+	tkn->order = order++;
 	return (tkn);
 }
 

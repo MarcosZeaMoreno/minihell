@@ -6,17 +6,19 @@
 #    By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/08 15:13:18 by vkatason          #+#    #+#              #
-#    Updated: 2024/01/29 01:53:25 by vkatason         ###   ########.fr        #
+#    Updated: 2024/01/29 22:27:18 by vkatason         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minishell.a
 USER := $(shell whoami)
-APPNAME = minishell
+NAME = minishell
 CC = gcc -g
 CLEAN = rm -Rf
 CFLAGS = -fsanitize=address -Wall -Werror -Wextra
-LDFLAGS = -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
+#LDFLAGS for home
+LDFLAGS = -L/opt/homebrew/Cellar/readline/8.2.7/lib -lreadline
+#LDFLAGS for school
+#LDFLAGS = -lreadline -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 LIBFT = libft
 SRC =  check_comand.c main.c print_entry.c signals.c \
 		env_to_lst.c error.c ./builtin/builtins.c \
@@ -27,30 +29,25 @@ SRC =  check_comand.c main.c print_entry.c signals.c \
 
 OBJS := $(SRC:.c=.o)
 
-all: libftmake $(APPNAME)
+all: libftmake $(NAME)
 
-$(APPNAME): $(NAME)
-	@$(CC) $(CFLAGS) $(LDFLAGS) $(NAME) $(LIBFT)/libft.a -o $(APPNAME)
-	@echo "$(GREEN)The app $(APPNAME) was successfully compiled. $(DEFAULT)"
+$(NAME): $(OBJS)
+	@$(CC) $(CFLAGS) $(LDFLAGS) -o $(NAME) $(OBJS) $(LIBFT)/libft.a
+	@echo "$(GREEN)The app $(NAME) was successfully compiled. $(DEFAULT)"
 
 .c.o:
 	@$(CC) $(CFLAGS) -c $< -o ${<:.c=.o}
 	@echo "$(GREEN)Compiling:$(DEFAULT) $(notdir $<)"
-	
-$(NAME): $(OBJS)
-	@ar rcs $(NAME) $(OBJS)
-	@echo "$(GREEN)Library $(NAME) was successfully created.$(DEFAULT)"
 
 clean: libftclean
 	@$(CLEAN) ./$(OBJS)
-	@echo "$(RED)Removing:$(DEFAULT) all objects of $(APPNAME)."
+	@echo "$(RED)Removing:$(DEFAULT) all objects of $(NAME)."
 
 fclean: libftfclean
 	@$(CLEAN) ./$(OBJS)
-	@echo "$(RED)Removing:$(DEFAULT) all objects of $(APPNAME)."
-	@$(CLEAN) ./$(NAME) ./$(APPNAME)
-	@echo "$(RED)Removing:$(DEFAULT) $(NAME) library."
-	@echo "$(RED)Removing:$(DEFAULT) $(APPNAME) program."
+	@echo "$(RED)Removing:$(DEFAULT) all objects of $(NAME)."
+	@$(CLEAN) ./$(NAME) ./$(NAME)
+	@echo "$(RED)Removing:$(DEFAULT) $(NAME) program."
 
 re: fclean all
 

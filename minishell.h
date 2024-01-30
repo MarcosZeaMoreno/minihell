@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/29 01:55:16 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/01/30 03:14:21 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,6 @@ typedef struct s_token
  * 
  * @param e_type The type of the token
  * @param TKN_WHITESPACE All the whitespaces
- * @param TKN_WORD Everything that is not a special characte
- * @param TKN_STRING All that inside the quotes
  * @param TKN_SEMICOLON Semicolon symbol (;)
  * @param TKN_PIPE Pipe symbol (|)
  * @param TKN_DOUBLE_PIPE Double pipe symbol (||)
@@ -104,7 +102,11 @@ typedef struct s_token
  * @param TKN_AMPER Amper symbol (&)
  * @param TKN_DOUBLE_AMPER Double amper symbol (&&)
  * @param TKN_TILDE Tilde symbol (~)
+ * @param TKN_SNGL_QUOTE Single quote symbol (')
+ * @param TKN_STRING All that inside the quotes
+ * @param TKN_WORD Everything that is not a special character
  * @param value The value of the token
+ * @param order The order of the token (e.g. 1, 2, 3, ...)
  */
 typedef struct s_tkn
 {
@@ -122,10 +124,12 @@ typedef struct s_tkn
 		TKN_AMPER,
 		TKN_DOUBLE_AMPER,
 		TKN_TILDE,
+		TKN_SNGL_QUOTE,
 		TKN_WORD,
 		TKN_STRING
 	} e_type;
 	char			*value;
+	int				order;
 }					t_tkn;
 
 /**
@@ -231,6 +235,7 @@ t_tkn				*ft_lexer_get_string(t_lexer *lexer);
 t_tkn				*ft_lexer_get_word(t_lexer *lexer);
 char				*ft_lexer_get_char(t_lexer *lexer);
 t_tkn				*ft_lexer_advance_with_tkn(t_lexer *lexer, t_tkn *tkn);
+void				print_tkn(t_tkn *tkn);
 
 /*----- LEXER TOKENS -----*/
 t_tkn				*ft_init_tkn(int type, char *value);
