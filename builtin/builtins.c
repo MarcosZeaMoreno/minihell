@@ -29,7 +29,7 @@ void	ft_export(t_data *data, t_token *token)
 		value = ft_strtok(NULL, "=");
 		if (key == NULL || value == NULL)
 		{
-			ft_printf("export: %s: Invalid argument\n", token->value);
+			ft_printf_fd(1, "export: %s: Invalid argument\n", token->value);
 			return ;
 		}
 		if (get_env_value(data->env_copy, key) != NULL)
@@ -56,7 +56,7 @@ void	ft_unset(t_data *data, t_token *token)
 		key = token->value;
 		if (key == NULL)
 		{
-			ft_printf("unset: %s: Invalid argument\n", token->value);
+			ft_printf_fd(1, "unset: %s: Invalid argument\n", token->value);
 			token = token->next;
 			continue ;
 		}
@@ -75,7 +75,7 @@ void	ft_env(t_env *env)
 {
 	while (env != NULL)
 	{
-		ft_printf("%s=%s\n", env->key, env->value);
+		ft_printf_fd(1, "%s=%s\n", env->key, env->value);
 		env = env->next;
 	}
 }
@@ -88,7 +88,7 @@ void	ft_env(t_env *env)
 void	ft_pwd(t_data *data)
 {
 	if (get_env_value(data->env_copy, "PWD") != NULL)
-		ft_printf("%s\n", get_env_value(data->env_copy, "PWD"));
+		ft_printf_fd(1, "%s\n", get_env_value(data->env_copy, "PWD"));
 	else
-		ft_printf("%s\n", get_env_value(data->env_copy, "HOME"));
+		ft_printf_fd(1, "%s\n", get_env_value(data->env_copy, "HOME"));
 }

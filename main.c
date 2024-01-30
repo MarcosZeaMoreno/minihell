@@ -42,7 +42,7 @@ int	ft_init(t_data *data, int ac, char **av, char **env)
 	char	**env_temp;
 
 	(void)av;
-	env_temp = strdup_2d(env);
+	env_temp = strdup_2d(env); //implementar esto cambia (Ctlr + D), cambiando el output "exit\n" con un salto de línea
 	if (ac > 1)
 	{
 		ft_putstr_fd("The program no needs any argument\n", 2);
@@ -75,16 +75,14 @@ int	get_promp(t_data *data, char **env)
 		ft_printf("exit\n");
 		return (1);
 	}
+	add_history(usr_input);
 	ft_parse_input(data, usr_input);
 	if (data->token && check_builtin(data->token) == 0)
 		check_execve(data, env, data->env_copy);
 	if (data->token && data->token->value && !ft_strncmp("exit", data->token->value, 5))
 		return (1);
 	else
-	{
-		add_history(usr_input);
 		exec_builtin(data, data->token);
-	}
 	free(usr_input);
 	return (0);
 }

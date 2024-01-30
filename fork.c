@@ -53,13 +53,13 @@ void exec_absolute_path(char **cmds, char **env)
         }
         else
         {
-            ft_printf("%s: Permission denied.\n", *cmds);
+            ft_printf_fd(2, "%s: Permission denied.\n", *cmds);
             return;
         }
     }
     else
     {
-        ft_printf("%s: No such file or directory\n", *cmds);
+        ft_printf_fd(2, "%s: No such file or directory\n", *cmds);
         return;
     }
 }
@@ -83,14 +83,14 @@ void exec_command_in_path(char **cmds, char **env, t_env *enviroment)
             }
             else
             {
-                ft_printf("%s: Permission denied.\n", *cmds);
+                ft_printf_fd(2, "%s: Permission denied.\n", *cmds);
                 break;
             }
         }
         i++;
     }
     if (!path[i])
-        ft_printf("%s: Command not found.\n", *cmds);
+        ft_printf_fd(2, "%s: Command not found.\n", *cmds);
 }
 
 void exec_local(char **cmds, char **env, t_env *enviroment)

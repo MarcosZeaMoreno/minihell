@@ -22,7 +22,7 @@ char	*get_current_directory(void)
 	char	*pwd;
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
-		ft_printf("cd: error\n");
+		ft_printf_fd(1, "cd: error\n");
 	return (pwd);
 }
 

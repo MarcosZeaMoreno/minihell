@@ -34,11 +34,11 @@ void	ft_echo(t_data *data, t_token *token)
 	}
 	while (tmp != NULL)
 	{
-		ft_printf("%s", tmp->value);
+		ft_printf_fd(1, "%s", tmp->value);
 		if (tmp->next != NULL)
-			ft_printf(" ");
+			ft_printf_fd(1, " ");
 		tmp = tmp->next;
 	}
 	if (flag == 0)
-		ft_printf("\n");
+		ft_printf_fd(1, "\n");
 }
