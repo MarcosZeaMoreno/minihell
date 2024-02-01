@@ -27,7 +27,7 @@ t_token	*ft_tokenizer(char *usr_input)
 
     i = 0;
     split_input = ft_split(usr_input, ' ');
-    if (!split_input || !split_input[i]) // Check if split_input is NULL or if it has no elements
+    if (!split_input || !split_input[i])
         return (NULL);
 
     token = ft_token_lst_new(split_input[i]);
