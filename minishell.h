@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/02/01 18:44:17 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/01 20:11:19 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,12 @@ typedef struct s_token
  * 	- 	Add more token types
  * 		dot
  * 		slash
+ * 		double dot
  * 		backslash
+ * 		tilde
+ * 		equals
+ * 		minus
+ * 		asterisk
  * 	- 	add quotes to token string
  * 
  */
@@ -208,7 +213,7 @@ t_env				*ft_env_lst_add_back(t_data *data, char *env);
 void				ft_env_lst_last(t_data *data, t_env *env_lst);
 t_env				*ft_env_lst_new(t_data *data, char *env);
 char				**lst_to_char(t_token *token);
-t_data			*ft_get_env_cpy(t_data *data, char **env);
+t_data				*ft_get_env_cpy(t_data *data, char **env);
 void				add_env_var(t_data *data, char *key, char *value);
 void				remove_env_var(t_data *data, char *key);
 void				change_value_env(t_data *data, char *key, char *value);

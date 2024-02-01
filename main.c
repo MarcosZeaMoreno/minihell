@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/02/01 17:45:52 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/01 20:02:39 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,20 +67,20 @@ int	get_promp(t_data *data, char **env)
 {
 	char	*usr_input;
 
-  if (!data)
+	if (!data)
 		return (-1);
-	usr_input = readline("\033[1;31mMiniHell: \033[0m");	
+	usr_input = readline("\033[1;31mMiniHell: \033[0m");
 	if (usr_input == NULL)
 	{
 		ft_printf("exit\n");
 		return (1);
 	}
-  add_history(usr_input);
-  // print_tkn_lst(data);
+	add_history(usr_input);
+	ft_tknize_input(usr_input, data);
+	print_tkn_lst(data);
 	// ft_printf("Original input: %s\n", usr_input);
 	// ft_cleaninput(&usr_input, data);
 	// ft_printf("Replaced input: %s\n", usr_input);
-  ft_tknize_input(usr_input, data);
 	ft_parse_input(data, usr_input);
 	if (data->token && check_builtin(data->token) == 0)
 		check_execve(data, env, data->env_copy);

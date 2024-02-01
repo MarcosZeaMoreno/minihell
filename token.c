@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 23:27:36 by vkatason          #+#    #+#             */
-/*   Updated: 2024/02/01 17:22:56 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/01 20:01:11 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,11 @@ t_tkn_lst	*ft_add_tkn_to_lst(t_tkn_lst *head, t_tkn *tkn)
 	t_tkn_lst	*new_lst_node;
 	t_tkn_lst	*current;
 
+	if (tkn == NULL)
+	{
+		ft_putstr_fd("Error: Null token\n", 2);
+		return (head);
+	}
 	new_lst_node = malloc(sizeof(t_tkn_lst));
 	if (new_lst_node == NULL)
 	{
@@ -85,19 +90,13 @@ t_tkn_lst	*ft_add_tkn_to_lst(t_tkn_lst *head, t_tkn *tkn)
 	}
 	new_lst_node->tkn = tkn;
 	new_lst_node->next = NULL;
-
 	if (head == NULL)
 		return (new_lst_node);
-	else
-	{
-		current = head;
-		while (current->next != NULL)
-		{
-			current = current->next;
-		}
-		current->next = new_lst_node;
-		return (head);
-	}
+	current = head;
+	while (current->next != NULL)
+		current = current->next;
+	current->next = new_lst_node;
+	return (head);
 }
 
 /**
@@ -110,8 +109,8 @@ t_tkn_lst	*ft_add_tkn_to_lst(t_tkn_lst *head, t_tkn *tkn)
  */
 void	ft_tknize_input(char *input, t_data *data)
 {
-	t_lexer		*lexer;
-	t_tkn		*tkn;
+	t_lexer	*lexer;
+	t_tkn	*tkn;
 
 	lexer = ft_init_lexer(input);
 	data->tkns = NULL;
