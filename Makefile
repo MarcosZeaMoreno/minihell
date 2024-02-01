@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+         #
+#    By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/08 15:13:18 by vkatason          #+#    #+#              #
 #    Updated: 2024/02/01 17:25:33 by vkatason         ###   ########.fr        #
@@ -24,8 +24,8 @@ SRC =  check_comand.c main.c print_entry.c signals.c \
 		env_to_lst.c error.c ./builtin/builtins.c \
 		./builtin/echo.c env_fts.c parse.c tokens.c \
 		utils.c input_clean.c print_checks.c fork.c \
-    	lst_clear.c input_replace.c token.c \
-		lexer.c print_tkns.c
+    lst_clear.c input_replace.c token.c \
+		lexer.c print_tkns.c ./builtin/cd.c
 
 OBJS := $(SRC:.c=.o)
 

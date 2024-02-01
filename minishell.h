@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
 /*   Updated: 2024/02/01 18:44:17 by vkatason         ###   ########.fr       */
@@ -208,7 +208,7 @@ t_env				*ft_env_lst_add_back(t_data *data, char *env);
 void				ft_env_lst_last(t_data *data, t_env *env_lst);
 t_env				*ft_env_lst_new(t_data *data, char *env);
 char				**lst_to_char(t_token *token);
-t_data				*ft_get_env_cpy(t_data *data, char **env);
+t_data			*ft_get_env_cpy(t_data *data, char **env);
 void				add_env_var(t_data *data, char *key, char *value);
 void				remove_env_var(t_data *data, char *key);
 void				change_value_env(t_data *data, char *key, char *value);
@@ -220,13 +220,17 @@ void				print_exit(void);
 void				print_header(void);
 int					check_builtin(t_token *token);
 int					ft_init(t_data *data, int ac, char **av, char **env);
-void				check_execve(t_data *data, char **env);
+void				check_execve(t_data *data, char **env, t_env *enviroment);
 void				exec_builtin(t_data *data, t_token *token);
 char				*get_env_value(t_env *env, char *key);
 void				ft_error(char *str, int type_error);
 void				free_split(char **split);
-void				exec_local(char **cmds, char **env);
+void				exec_local(char **cmds, char **env, t_env *enviroment);
 void				forkit(char *full_path, char **cmds, char **env);
+char				**strdup_2d(char **src);
+
+/* FUNCTIONS */
+
 void				lst_delone_token(t_token *lst, void (*del)(void *));
 void				lst_delone(t_env *lst, void (*del)(void *));
 void				lst_clear_token(t_token **lst, void (*del)(void *));
@@ -264,5 +268,11 @@ t_tkn				*ft_init_multi_tkn(int type, char *value);
 void				ft_tknize_input(char *input, t_data *data);
 t_tkn_lst			*ft_add_tkn_to_lst(t_tkn_lst *head, t_tkn *tkn);
 void				ft_free_tkn_lst(t_tkn_lst *head);
+
+/*----- READLINE FUNCTIONS -----*/ 
+void				rl_replace_line(const char *text, int clear_undo);
+
+/*---- TERMIOS FUNCTIONS -----*/
+void			  suppress_output(void);
 
 #endif

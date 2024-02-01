@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 15:10:23 by vkatason          #+#    #+#             */
 /*   Updated: 2024/01/29 00:13:56 by vkatason         ###   ########.fr       */
@@ -62,9 +62,9 @@ char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
 char	*ft_strmapi(const char *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
-char	*ft_strtok(char *input, char d);
 char	*ft_strstr(const char *haystack, const char *needle);
 char	*ft_strcpy(char *dst, const char *src);
+char	*ft_strtok(char *str, const char *delim);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char const *s, int fd);
 int		ft_printf_fd(int fd, const char *sign, ...);
