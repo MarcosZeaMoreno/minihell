@@ -6,37 +6,36 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:32:04 by vkatason          #+#    #+#             */
-/*   Updated: 2024/01/11 16:30:58 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/24 18:14:24 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strtok(char *str, const char delim)
+char	*ft_strtok(char *str, const char *delim)
 {
 	static char	*stock;
 	char		*ptr;
-	int			flg;
 
-	flg = 0;
-	ptr = NULL;
-	stock = NULL;
 	if (str != NULL)
-		stock = ft_strdup(str);
-	while (*stock != '\0')
-	{
-		if (flg == 0 && *stock != delim)
-		{
-			flg = 1;
-			ptr = stock;
-		}
-		else if (flg == 1 && *stock == delim)
-		{
-			*stock = '\0';
-			stock += 1;
-			break ;
-		}
-		stock += 1;
+		stock = str;
+	if (stock == NULL)
+		return NULL;
+	while (ft_strchr(delim, *stock))
+		stock++;
+	if (*stock == '\0') {
+		stock = NULL;
+		return NULL;
 	}
+	ptr = stock;
+	while (*stock != '\0' && !ft_strchr(delim, *stock))
+		stock++;
+    if (*stock != '\0')
+	{
+		*stock = '\0';
+		stock++;
+	}
+	else
+		stock = NULL;
 	return (ptr);
 }

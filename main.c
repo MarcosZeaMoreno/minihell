@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/22 17:21:26 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/01/31 16:45:47 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	ft_leaks(void)
-{
-	system("leaks minishell");
-}
-
 
 /**
  * @brief Function to get pid
@@ -45,7 +39,10 @@ void	ft_getpid(t_data *data)
  */
 int	ft_init(t_data *data, int ac, char **av, char **env)
 {
+	char	**env_temp;
+
 	(void)av;
+	env_temp = strdup_2d(env); //implementar esto cambia (Ctlr + D), cambiando el output "exit\n" con un salto de línea
 	if (ac > 1)
 	{
 		ft_putstr_fd("The program no needs any argument\n", 2);
@@ -55,7 +52,7 @@ int	ft_init(t_data *data, int ac, char **av, char **env)
 	data->env_copy = NULL;
 	data->token = NULL;
 	ft_getpid(data);
-	ft_get_env_cpy(data, env);
+	ft_get_env_cpy(data, env_temp);
 	return (0);
 }
 
@@ -73,21 +70,21 @@ int	get_promp(t_data *data, char **env)
     if (!data)
         return (-1);
     usr_input = readline("\033[1;31mMiniHell: \033[0m");
-  	//print_var_name(usr_input);
-	  //print_rm_quotes(usr_input);
-	  //print_var_check_vars(usr_input, data);
-    ft_parse_input(data, usr_input);
-    if (data->token && check_builtin(data->token) == 0)
-        check_execve(data, env);
-    if (data->token && data->token->value && !ft_strncmp("exit", data->token->value, 5))
-        return (1);
-    else
-    {
-        add_history(usr_input);
-        exec_builtin(data, data->token);
-    }
-    free(usr_input);
-    return (0);
+	if (usr_input == NULL)
+	{
+		ft_printf("exit\n");
+		return (1);
+	}
+	add_history(usr_input);
+	ft_parse_input(data, usr_input);
+	if (data->token && check_builtin(data->token) == 0)
+		check_execve(data, env, data->env_copy);
+	if (data->token && data->token->value && !ft_strncmp("exit", data->token->value, 5))
+		return (1);
+	else
+		exec_builtin(data, data->token);
+	free(usr_input);
+	return (0);
 }
 
 /**
@@ -106,12 +103,12 @@ int	main(int ac, char **av, char **env)
 		return (0);
 	while (1)
 	{
+		suppress_output();
 		signal(SIGINT, handle_sigint);
 		signal(SIGQUIT, SIG_IGN);
 		if (get_promp(&data, env) == 1)
 			break ;
 	}
 	print_exit();
-	ft_leaks();
 	return (0);
 }

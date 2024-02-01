@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_comand.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:46:14 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/22 18:59:01 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/01/29 16:36:27 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@
  * @param usr_input: a pointer that contain the string of readline.
  * @return int: "1" if ok, "0" if error.
  */
-void	check_execve(t_data *data, char **env)
+void	check_execve(t_data *data, char **env, t_env *enviroment)
 {
 	char	**cmds;
 
 	cmds = lst_to_char(data->token);
-	exec_local(cmds, env);
+	exec_local(cmds, env, enviroment);
 }
 
 /**
