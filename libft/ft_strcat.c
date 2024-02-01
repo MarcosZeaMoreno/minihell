@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isspace.c                                       :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/09 15:59:55 by vkatason          #+#    #+#             */
-/*   Updated: 2024/01/28 22:50:15 by vkatason         ###   ########.fr       */
+/*   Created: 2024/01/23 20:27:29 by vkatason          #+#    #+#             */
+/*   Updated: 2024/01/23 20:28:33 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/**
- * @brief Function that checks if the char is space or not
- * 
- * @param c any char
- * @return true 
- * @return false 
- */
-bool	ft_isspace(char c)
+char	*ft_strcat(char *dest, char *src)
 {
-	return ((c >= 9 && c <= 13) || c == 32);
+	int	i;
+	int	j;
+
+	i = 0;
+	while (dest[i] != '\0')
+		i++;
+	j = 0;
+	while (src[j] != '\0')
+	{
+		dest[i + j] = src[j];
+		j++;
+	}
+	dest[i + j] = '\0';
+	return (dest);
 }

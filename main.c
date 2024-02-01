@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/31 16:45:47 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:45:52 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,21 +65,27 @@ int	ft_init(t_data *data, int ac, char **av, char **env)
  */
 int	get_promp(t_data *data, char **env)
 {
-    char	*usr_input;
+	char	*usr_input;
 
-    if (!data)
-        return (-1);
-    usr_input = readline("\033[1;31mMiniHell: \033[0m");
+  if (!data)
+		return (-1);
+	usr_input = readline("\033[1;31mMiniHell: \033[0m");	
 	if (usr_input == NULL)
 	{
 		ft_printf("exit\n");
 		return (1);
 	}
-	add_history(usr_input);
+  add_history(usr_input);
+  // print_tkn_lst(data);
+	// ft_printf("Original input: %s\n", usr_input);
+	// ft_cleaninput(&usr_input, data);
+	// ft_printf("Replaced input: %s\n", usr_input);
+  ft_tknize_input(usr_input, data);
 	ft_parse_input(data, usr_input);
 	if (data->token && check_builtin(data->token) == 0)
 		check_execve(data, env, data->env_copy);
-	if (data->token && data->token->value && !ft_strncmp("exit", data->token->value, 5))
+	if (data->token && data->token->value && !ft_strncmp("exit",
+			data->token->value, 5))
 		return (1);
 	else
 		exec_builtin(data, data->token);

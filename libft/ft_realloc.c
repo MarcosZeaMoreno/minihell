@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isspace.c                                       :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/09 15:59:55 by vkatason          #+#    #+#             */
-/*   Updated: 2024/01/28 22:50:15 by vkatason         ###   ########.fr       */
+/*   Created: 2024/01/28 23:55:14 by vkatason          #+#    #+#             */
+/*   Updated: 2024/01/29 23:25:47 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/**
- * @brief Function that checks if the char is space or not
- * 
- * @param c any char
- * @return true 
- * @return false 
- */
-bool	ft_isspace(char c)
+void	*ft_realloc(void *ptr, size_t size)
 {
-	return ((c >= 9 && c <= 13) || c == 32);
+	void	*new;
+
+	if (!ptr)
+		return (malloc(size));
+	if (!size)
+	{
+		if (ptr)
+		{
+			free(ptr);
+			ptr = NULL;
+		}
+		return (NULL);
+	}
+	new = malloc(size);
+	if (!new)
+		return (NULL);
+	ft_memcpy(new, ptr, size);
+	free(ptr);
+	ptr = NULL;
+	return (new);
 }

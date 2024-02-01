@@ -6,7 +6,7 @@
 #    By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/08 15:13:18 by vkatason          #+#    #+#              #
-#    Updated: 2024/01/25 18:22:07 by mzea-mor         ###   ########.fr        #
+#    Updated: 2024/02/01 17:25:33 by vkatason         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,13 +15,17 @@ NAME = minishell
 CC = gcc -g
 CLEAN = rm -Rf
 CFLAGS = -fsanitize=address -Wall -Werror -Wextra
+#LDFLAGS for home
+#LDFLAGS = -L/opt/homebrew/Cellar/readline/8.2.7/lib -lreadline
+#LDFLAGS for school
 LDFLAGS = -lreadline -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 LIBFT = libft
 SRC =  check_comand.c main.c print_entry.c signals.c \
 		env_to_lst.c error.c ./builtin/builtins.c \
 		./builtin/echo.c env_fts.c parse.c tokens.c \
 		utils.c input_clean.c print_checks.c fork.c \
-    	lst_clear.c ./builtin/cd.c
+    lst_clear.c input_replace.c token.c \
+		lexer.c print_tkns.c ./builtin/cd.c
 
 OBJS := $(SRC:.c=.o)
 

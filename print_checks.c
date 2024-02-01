@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:24:22 by vkatason          #+#    #+#             */
-/*   Updated: 2024/01/22 17:21:26 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:16:43 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,13 @@ void	print_var_name(char *str)
 		ft_printf("No variable found.\n");
 }
 
+/**
+ * @brief Function prints the result of ft_var_value:
+ * the value of the first variable found in the string
+ * is equal to the value of the variable in the environment.
+ * 
+ * @param str user input string
+ */
 void	print_var_check_vars(char *usr_input, t_data *data)
 {
 	int	result;
@@ -59,4 +66,23 @@ void	print_var_check_vars(char *usr_input, t_data *data)
 		ft_printf("Undefined variable found.\n");
 	else
 		ft_printf("Invalid result.\n");
+}
+
+/**
+ * @brief Function prints the original user input
+ * and the result of ft_clean_input: the user input
+ * with replaced variables.
+ * 
+ * @param str user input string
+ */
+void	print_replaced_input(char *usr_input, t_data *data)
+{
+	if (usr_input != NULL)
+	{
+		ft_printf("Original input: %s\n", usr_input);
+		ft_clean_input(&usr_input, data);
+		ft_printf("Replaced input: %s\n", usr_input);
+	}
+	else
+		ft_printf("No input.\n");
 }
