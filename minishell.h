@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/30 03:14:21 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/01 18:44:17 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,18 @@ typedef struct s_token
  * @param TKN_DOUBLE_AMPER Double amper symbol (&&)
  * @param TKN_TILDE Tilde symbol (~)
  * @param TKN_SNGL_QUOTE Single quote symbol (')
- * @param TKN_STRING All that inside the quotes
+ * @param TKN_STRING All that inside the quotes with quotes (TODO)
  * @param TKN_WORD Everything that is not a special character
  * @param value The value of the token
  * @param order The order of the token (e.g. 1, 2, 3, ...)
+ * 
+ * TODO 
+ * 	- 	Add more token types
+ * 		dot
+ * 		slash
+ * 		backslash
+ * 	- 	add quotes to token string
+ * 
  */
 typedef struct s_tkn
 {
@@ -147,6 +155,19 @@ typedef struct s_lexer
 }					t_lexer;
 
 /**
+ * @brief Structure to handle the token list
+ *
+ * @param tkn The token
+ * @param next The next token
+ */
+typedef struct s_tkn_lst
+{
+	t_tkn				*tkn;
+	struct s_tkn_lst	*next;
+}					t_tkn_lst;
+
+
+/**
  * @brief Structure to handle the data
  *
  * @param env_copy The current copy of enviroment variables
@@ -156,6 +177,7 @@ typedef struct s_lexer
 typedef struct s_data
 {
 	t_env			*env_copy;
+	t_tkn_lst		*tkns;
 	t_token			*token;
 	pid_t			pid;
 }					t_data;
@@ -205,8 +227,6 @@ void				ft_error(char *str, int type_error);
 void				free_split(char **split);
 void				exec_local(char **cmds, char **env);
 void				forkit(char *full_path, char **cmds, char **env);
-
-/* FUNCTIONS */
 void				lst_delone_token(t_token *lst, void (*del)(void *));
 void				lst_delone(t_env *lst, void (*del)(void *));
 void				lst_clear_token(t_token **lst, void (*del)(void *));
@@ -236,9 +256,13 @@ t_tkn				*ft_lexer_get_word(t_lexer *lexer);
 char				*ft_lexer_get_char(t_lexer *lexer);
 t_tkn				*ft_lexer_advance_with_tkn(t_lexer *lexer, t_tkn *tkn);
 void				print_tkn(t_tkn *tkn);
+void				print_tkn_lst(t_data *data);
 
 /*----- LEXER TOKENS -----*/
 t_tkn				*ft_init_tkn(int type, char *value);
 t_tkn				*ft_init_multi_tkn(int type, char *value);
+void				ft_tknize_input(char *input, t_data *data);
+t_tkn_lst			*ft_add_tkn_to_lst(t_tkn_lst *head, t_tkn *tkn);
+void				ft_free_tkn_lst(t_tkn_lst *head);
 
 #endif

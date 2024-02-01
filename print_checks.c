@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:24:22 by vkatason          #+#    #+#             */
-/*   Updated: 2024/01/30 03:46:50 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:16:43 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,35 +86,3 @@ void	print_replaced_input(char *usr_input, t_data *data)
 	else
 		ft_printf("No input.\n");
 }
-
-/**
- * @brief Function prints tokens from the user input
- * with the type and value of each token
- * (see enum e_tkn_type in lexer.h)
- * 
- * @param str user input string
- */
-void	print_tkn(t_tkn *tkn)
-{
-	const char	*tkn_types[] = {
-		"TKN_WHITESPACE",
-		"TKN_SEMICOLON",
-		"TKN_PIPE",
-		"TKN_DOUBLE_PIPE",
-		"TKN_REDIR_IN",
-		"TKN_REDIR_OUT",
-		"TKN_REDIR_APPEND",
-		"TKN_REDIR_HERE_DOC",
-		"TKN_DOLLAR",
-		"TKN_AMPER",
-		"TKN_DOUBLE_AMPER",
-		"TKN_TILDE",
-		"TKN_SNGL_QUOTE",
-		"TKN_WORD",
-		"TKN_STRING"};
-
-	ft_printf("TKN#%d\n", tkn->order);
-	ft_printf("TYPE: %s\n", tkn_types[tkn->e_type]);
-	ft_printf("VALUE: %s\n\n", tkn->value);
-}
-

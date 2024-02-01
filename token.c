@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 23:27:36 by vkatason          #+#    #+#             */
-/*   Updated: 2024/01/30 02:20:25 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:22:56 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,3 +65,80 @@ t_tkn	*ft_init_multi_tkn(int type, char *value)
 	return (tkn);
 }
 
+/**
+ * @brief Adds a token to the token list.
+ *
+ * @param head The head of the token list.
+ * @param tkn The token to be added.
+ * @return The updated head of the token list.
+ */
+t_tkn_lst	*ft_add_tkn_to_lst(t_tkn_lst *head, t_tkn *tkn)
+{
+	t_tkn_lst	*new_lst_node;
+	t_tkn_lst	*current;
+
+	new_lst_node = malloc(sizeof(t_tkn_lst));
+	if (new_lst_node == NULL)
+	{
+		ft_putstr_fd("Error: Failed to allocate memory for token_list\n", 2);
+		exit(EXIT_FAILURE);
+	}
+	new_lst_node->tkn = tkn;
+	new_lst_node->next = NULL;
+
+	if (head == NULL)
+		return (new_lst_node);
+	else
+	{
+		current = head;
+		while (current->next != NULL)
+		{
+			current = current->next;
+		}
+		current->next = new_lst_node;
+		return (head);
+	}
+}
+
+/**
+ * @brief Tokenizes the input string.
+ * This function tokenizes the input string and stores 
+ * the tokens in a token list in the data structure.
+ *
+ * @param input The input string.
+ * @param data The main data structure.
+ */
+void	ft_tknize_input(char *input, t_data *data)
+{
+	t_lexer		*lexer;
+	t_tkn		*tkn;
+
+	lexer = ft_init_lexer(input);
+	data->tkns = NULL;
+	while (1)
+	{
+		tkn = ft_lexer_get_next_token(lexer);
+		if (tkn == NULL)
+			break ;
+		data->tkns = ft_add_tkn_to_lst(data->tkns, tkn);
+	}
+}
+
+/**
+ * @brief The function that frees the token list.
+ * 
+ * @param head The head of the token list. 
+ */
+void	ft_free_tkn_lst(t_tkn_lst *head)
+{
+	t_tkn_lst	*current;
+	t_tkn_lst	*next;
+
+	current = head;
+	while (current != NULL)
+	{
+		next = current->next;
+		free(current);
+		current = next;
+	}
+}
