@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 15:01:14 by vkatason          #+#    #+#             */
-/*   Updated: 2024/01/12 17:32:55 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/24 17:50:48 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ t_env	*ft_env_lst_new(t_data *data, char *env)
 	env_lst = (t_env *)malloc(sizeof(t_env));
 	if (!env_lst)
 		return (0);
-	env_lst->key = strtok(env, "=");
-	env_lst->value = strtok(NULL, "=");
+	env_lst->key = ft_strtok(env, "=");
+	env_lst->value = ft_strtok(NULL, "=");
 	env_lst->next = NULL;
 	data->env_copy = env_lst;
 	return (data->env_copy);
@@ -48,6 +48,8 @@ void	ft_env_lst_last(t_data *data, t_env *env_lst)
 	while (tmp->next != NULL)
 		tmp = tmp->next;
 	tmp->next = env_lst;
+	tmp = tmp->next;
+	tmp->next = NULL;
 }
 
 /**
@@ -64,8 +66,8 @@ t_env	*ft_env_lst_add_back(t_data *data, char *env)
 	env_lst = (t_env *)malloc(sizeof(t_env));
 	if (!env_lst)
 		return (0);
-	env_lst->key = strtok(env, "=");
-	env_lst->value = strtok(NULL, "=");
+	env_lst->key = ft_strtok(env, "=");
+	env_lst->value = ft_strtok(NULL, "=");
 	env_lst->next = NULL;
 	ft_env_lst_last(data, env_lst);
 	return (data->env_copy);
@@ -96,4 +98,21 @@ t_data	*ft_get_env_cpy(t_data *data, char **env)
 		env_var = env[i];
 	}
 	return (data);
+}
+
+/**
+ * @brief Function to get a value from an environment variable
+ * 
+ * @param data 
+ * @param usr_input 
+ */
+char	*get_env_value(t_env *env, char *key)
+{
+	while (env != NULL)
+	{
+		if (ft_strcmp(env->key, key) == 0)
+			return (env->value);
+		env = env->next;
+	}
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:46:14 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/11 16:27:23 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/01/29 16:36:27 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,12 @@
  * @param usr_input: a pointer that contain the string of readline.
  * @return int: "1" if ok, "0" if error.
  */
-int	check_execv(char *usr_input)
+void	check_execve(t_data *data, char **env, t_env *enviroment)
 {
-	char	*path;
-	char	**split;
+	char	**cmds;
 
-	split = ft_split(usr_input, ' ');
-	path = ft_strjoin("/bin/", usr_input);
-	if (execve(path, split, NULL) == -1)
-		return (0);
-	else
-		execve(path, split, NULL);
-	return (1);
+	cmds = lst_to_char(data->token);
+	exec_local(cmds, env, enviroment);
 }
 
 /**
@@ -38,28 +32,32 @@ int	check_execv(char *usr_input)
  * @param usr_input: a pointer that contain the string of readline.
  * @return int: "1" if ok, "0" if error.
  */
-int	check_builtin(char *usr_input)
+int	check_builtin(t_token *token)
 {
-	if (!ft_strncmp("echo", usr_input, 5))
+	char	*value;
+
+	if (!token)
+		return (-1);
+
+	value = token->value;
+	if (!ft_strncmp("echo", value, 5))
 		return (1);
-	else if (!ft_strncmp("echo -n", usr_input, 5))
+	else if (!ft_strncmp("cd", value, 3))
 		return (1);
-	else if (!ft_strncmp("cd", usr_input, 3))
+	else if (!ft_strncmp("pwd", value, 4))
 		return (1);
-	else if (!ft_strncmp("pwd", usr_input, 4))
+	else if (!ft_strncmp("export", value, 7))
 		return (1);
-	else if (!ft_strncmp("export", usr_input, 7))
+	else if (!ft_strncmp("unset", value, 6))
 		return (1);
-	else if (!ft_strncmp("unset", usr_input, 6))
+	else if (!ft_strncmp("env", value, 4))
 		return (1);
-	else if (!ft_strncmp("env", usr_input, 4))
+	else if (!ft_strncmp("exit", value, 5))
 		return (1);
-	else if (!ft_strncmp("exit", usr_input, 5))
-		return (1);
-	else if (!ft_strncmp("", usr_input, 1))
+	else if (!ft_strncmp("", value, 1))
 		return (1);
 	else
-		return (check_execv(usr_input));
+		return (0);
 }
 
 /**
@@ -68,20 +66,25 @@ int	check_builtin(char *usr_input)
  * @param data: a pointer that contain the main data structure.
  * @param usr_input: a pointer that contain the string of readline.
  */
-void	exec_builtin(t_data *data, char *usr_input)
+void	exec_builtin(t_data *data, t_token *token)
 {
-	if (!ft_strncmp("echo", usr_input, 5))
-		ft_echo(data, usr_input);
-	else if (!ft_strncmp("cd", usr_input, 3))
-		ft_cd(data, usr_input);
-	else if (!ft_strncmp("pwd", usr_input, 4))
+	char	*value;
+
+	if (!data || !token)
+		return ;
+	value = token->value;
+	if (!ft_strncmp("echo", value, 5))
+		ft_echo(data, token);
+	else if (!ft_strncmp("cd", value, 3))
+		ft_cd(data, token);
+	else if (!ft_strncmp("pwd", value, 4))
 		ft_pwd(data);
-	else if (!ft_strncmp("export", usr_input, 7))
-		ft_export(data, usr_input);
-	else if (!ft_strncmp("unset", usr_input, 6))
-		ft_unset(data, usr_input);
-	else if (!ft_strncmp("env", usr_input, 4))
+	else if (!ft_strncmp("export", value, 7))
+		ft_export(data, token);
+	else if (!ft_strncmp("unset", value, 6))
+		ft_unset(data, token);
+	else if (!ft_strncmp("env", value, 4))
 		ft_env(data->env_copy);
-	else if (!ft_strncmp("", usr_input, 1))
+	else if (!ft_strncmp("", value, 1))
 		return ;
 }
