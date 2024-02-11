@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/02/01 20:11:19 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/11 19:01:12 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,21 @@ typedef struct s_token
  * @brief Structure representing a token in the minishell program.
  * 
  * @param e_type The type of the token
- * @param TKN_WHITESPACE All the whitespaces
+ * @param TKN_WHITESPACE Whitespace symbol ( )
+ * @param TKN_TAB Tab symbol (\t)
+ * @param TKN_NEWLINE Newline symbol (\n)
+ * @param TKN_DOT Dot symbol (.)
+ * @param TKN_COMMA Coma symbol (,)
+ * @param TKN_COLON Colon symbol (:)
  * @param TKN_SEMICOLON Semicolon symbol (;)
+ * @param TKN_EXCLAMATION Exclamation symbol (!)
+ * @param TKN_QUESTION Question mark symbol (?)
+ * @param TKN_SLASH Slash symbol (/)
+ * @param TKN_BACKSLASH Backslash symbol (\)
+ * @param TKN_ASTERISK Asterisk symbol (*)
+ * @param TKN_EQUALS Equals symbol (=)
+ * @param TKN_MINUS Minus symbol (-)
+ * @param TKN_PLUS Plus symbol (+)
  * @param TKN_PIPE Pipe symbol (|)
  * @param TKN_DOUBLE_PIPE Double pipe symbol (||)
  * @param TKN_REDIR_IN Redirection input symbol (<)
@@ -101,23 +114,22 @@ typedef struct s_token
  * @param TKN_DOLLAR Dollar symbol ($)
  * @param TKN_AMPER Amper symbol (&)
  * @param TKN_DOUBLE_AMPER Double amper symbol (&&)
+ * @param TKN_BACKTICK Backtick symbol (`)
  * @param TKN_TILDE Tilde symbol (~)
  * @param TKN_SNGL_QUOTE Single quote symbol (')
- * @param TKN_STRING All that inside the quotes with quotes (TODO)
+ * @param TKN_DOUBLE_QUOTE Double quote symbol (")
+ * @param TKN_LEFT_PAR Left parenthesis symbol (()
+ * @param TKN_RIGHT_PAR Right parenthesis symbol ())
+ * @param TKN_LEFT_BRACKET Left bracket symbol ([)
+ * @param TKN_RIGHT_BRACKET Right bracket symbol (])
+ * @param TKN_LEFT_BRACE Left brace symbol ({)
+ * @param TKN_RIGHT_BRACE Right brace symbol (})
  * @param TKN_WORD Everything that is not a special character
+ * @param TKN_STRING All that inside the quotes with quotes (TODO)
  * @param value The value of the token
  * @param order The order of the token (e.g. 1, 2, 3, ...)
  * 
  * TODO 
- * 	- 	Add more token types
- * 		dot
- * 		slash
- * 		double dot
- * 		backslash
- * 		tilde
- * 		equals
- * 		minus
- * 		asterisk
  * 	- 	add quotes to token string
  * 
  */
@@ -126,7 +138,20 @@ typedef struct s_tkn
 	enum
 	{
 		TKN_WHITESPACE,
+		TKN_TAB,
+		TKN_NEWLINE,
+		TKN_DOT,
+		TKN_COMMA,
+		TKN_COLON,
 		TKN_SEMICOLON,
+		TKN_EXCLAMATION,
+		TKN_QUESTION,
+		TKN_SLASH,
+		TKN_BACKSLASH,
+		TKN_ASTERISK,
+		TKN_EQUALS,
+		TKN_MINUS,
+		TKN_PLUS,
 		TKN_PIPE,
 		TKN_DOUBLE_PIPE,
 		TKN_REDIR_IN,
@@ -137,7 +162,15 @@ typedef struct s_tkn
 		TKN_AMPER,
 		TKN_DOUBLE_AMPER,
 		TKN_TILDE,
+		TKN_BACKTICK,
 		TKN_SNGL_QUOTE,
+		TKN_DOUBLE_QUOTE,
+		TKN_LEFT_PAR,
+		TKN_RIGHT_PAR,
+		TKN_LEFT_BRACKET,
+		TKN_RIGHT_BRACKET,
+		TKN_LEFT_BRACE,
+		TKN_RIGHT_BRACE,
 		TKN_WORD,
 		TKN_STRING
 	} e_type;
@@ -258,11 +291,10 @@ int					ft_clean_input(char **usr_input, t_data *data);
 /*----- LEXER FUNCTIONS -----*/
 t_lexer				*ft_init_lexer(char *input);
 void				ft_lexer_advance(t_lexer *lexer);
-void				ft_lexer_skip_whitespace(t_lexer *lexer);
 t_tkn				*ft_lexer_get_next_token(t_lexer *lexer);
 t_tkn				*ft_lexer_get_string(t_lexer *lexer);
 t_tkn				*ft_lexer_get_word(t_lexer *lexer);
-char				*ft_lexer_get_char(t_lexer *lexer);
+char				*ft_lexer_char_to_str(t_lexer *lexer);
 t_tkn				*ft_lexer_advance_with_tkn(t_lexer *lexer, t_tkn *tkn);
 void				print_tkn(t_tkn *tkn);
 void				print_tkn_lst(t_data *data);

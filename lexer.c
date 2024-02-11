@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 22:34:51 by vkatason          #+#    #+#             */
-/*   Updated: 2024/02/01 20:23:10 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/11 19:03:32 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,6 @@ void	ft_lexer_advance(t_lexer *lexer)
 }
 
 /**
- * @brief The function skips all whitespace characters
- * (space, tab, newline) in the input and advances the lexer
- * saving the current character to the lexer object.
- * 
- * @param lexer The lexer object. 
- */
-void	ft_lexer_skip_whitespace(t_lexer *lexer)
-{
-	while (lexer->c == ' ' || lexer->c == '\t' || lexer->c == '\n')
-		ft_lexer_advance(lexer);
-}
-
-/**
  * @brief The function gets different tokens from the input.
  * It is a finite state machine that returns a token. It checks
  * the current character and returns the corresponding token.
@@ -76,19 +63,19 @@ t_tkn	*ft_lexer_get_next_token(t_lexer *lexer)
 		}
 		if (lexer->c == ' ' || lexer->c == '\t' || lexer->c == '\n')
 		{
-			white_space = ft_lexer_get_char(lexer);
+			white_space = ft_lexer_char_to_str(lexer);
 			ft_lexer_advance(lexer);
 			return (ft_init_tkn(TKN_WHITESPACE, white_space));
 		}
 		if (lexer->c == '\'')
 		{
 			return (ft_lexer_advance_with_tkn(lexer, ft_init_tkn(TKN_SNGL_QUOTE,
-						ft_lexer_get_char(lexer))));
+						ft_lexer_char_to_str(lexer))));
 		}
 		else if (lexer->c == ';')
 		{
 			return (ft_lexer_advance_with_tkn(lexer, ft_init_tkn(TKN_SEMICOLON,
-						ft_lexer_get_char(lexer))));
+						ft_lexer_char_to_str(lexer))));
 		}
 		else if (lexer->c == '|' && lexer->input[lexer->i + 1] == '|')
 		{
@@ -99,7 +86,7 @@ t_tkn	*ft_lexer_get_next_token(t_lexer *lexer)
 		else if (lexer->c == '|')
 		{
 			return (ft_lexer_advance_with_tkn(lexer, ft_init_tkn(TKN_PIPE,
-						ft_lexer_get_char(lexer))));
+						ft_lexer_char_to_str(lexer))));
 		}
 		else if (lexer->c == '<' && lexer->input[lexer->i + 1] == '<')
 		{
@@ -110,7 +97,7 @@ t_tkn	*ft_lexer_get_next_token(t_lexer *lexer)
 		else if (lexer->c == '<')
 		{
 			return (ft_lexer_advance_with_tkn(lexer, ft_init_tkn(TKN_REDIR_IN,
-						ft_lexer_get_char(lexer))));
+						ft_lexer_char_to_str(lexer))));
 		}
 		else if (lexer->c == '>' && lexer->input[lexer->i + 1] == '>')
 		{
@@ -121,12 +108,12 @@ t_tkn	*ft_lexer_get_next_token(t_lexer *lexer)
 		else if (lexer->c == '>')
 		{
 			return (ft_lexer_advance_with_tkn(lexer, ft_init_tkn(TKN_REDIR_OUT,
-						ft_lexer_get_char(lexer))));
+						ft_lexer_char_to_str(lexer))));
 		}
 		else if (lexer->c == '$')
 		{
 			return (ft_lexer_advance_with_tkn(lexer, ft_init_tkn(TKN_DOLLAR,
-						ft_lexer_get_char(lexer))));
+						ft_lexer_char_to_str(lexer))));
 		}
 		else if (lexer->c == '&' && lexer->input[lexer->i + 1] == '&')
 		{
@@ -137,12 +124,12 @@ t_tkn	*ft_lexer_get_next_token(t_lexer *lexer)
 		else if (lexer->c == '&')
 		{
 			return (ft_lexer_advance_with_tkn(lexer, ft_init_tkn(TKN_AMPER,
-						ft_lexer_get_char(lexer))));
+						ft_lexer_char_to_str(lexer))));
 		}
 		else if (lexer->c == '~')
 		{
 			return (ft_lexer_advance_with_tkn(lexer, ft_init_tkn(TKN_TILDE,
-						ft_lexer_get_char(lexer))));
+						ft_lexer_char_to_str(lexer))));
 		}
 		else if (ft_isalnum((int)lexer->c) == 1 || lexer->c == '_'
 			|| lexer->c == '\'')
@@ -171,7 +158,7 @@ t_tkn	*ft_lexer_get_string(t_lexer *lexer)
 	value[0] = '\0';
 	while (lexer->c != '"')
 	{
-		tmp = ft_lexer_get_char(lexer);
+		tmp = ft_lexer_char_to_str(lexer);
 		value = ft_realloc(value, (ft_strlen(value) + ft_strlen(tmp) + 1)
 				* sizeof(char));
 		ft_strcat(value, tmp);
@@ -200,11 +187,11 @@ t_tkn	*ft_lexer_get_word(t_lexer *lexer)
 
 	value = ft_calloc(1, sizeof(char));
 	value[0] = '\0';
-	while (ft_isprint((int)lexer->c))
+	while (ft_isalnum((int)lexer->c))
 	{
-		if (lexer->c == '\'')
+		if (lexer->c == '\'' || lexer->c == ' ')
 			break ;
-		tmp = ft_lexer_get_char(lexer);
+		tmp = ft_lexer_char_to_str(lexer);
 		value = ft_realloc(value, (ft_strlen(value) + ft_strlen(tmp) + 1)
 				* sizeof(char));
 		ft_strcat(value, tmp);
@@ -235,7 +222,7 @@ t_tkn	*ft_lexer_advance_with_tkn(t_lexer *lexer, t_tkn *tkn)
  * @param lexer The lexer object. 
  * @return char* Current character as a string.
  */
-char	*ft_lexer_get_char(t_lexer *lexer)
+char	*ft_lexer_char_to_str(t_lexer *lexer)
 {
 	char	*value;
 
