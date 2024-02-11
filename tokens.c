@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 16:20:22 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/22 18:45:10 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/11 20:52:33 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,24 @@
  */
 t_token	*ft_tokenizer(char *usr_input)
 {
-    t_token	*token;
-    t_token	*tmp;
-    char	**split_input;
-    int		i;
+	t_token	*token;
+	t_token	*tmp;
+	char	**split_input;
+	int		i;
 
-    i = 0;
-    split_input = ft_split(usr_input, ' ');
-    if (!split_input || !split_input[i])
-        return (NULL);
-
-    token = ft_token_lst_new(split_input[i]);
-    tmp = token;
-    while (split_input[++i] != NULL)
-    {
-        tmp->next = ft_token_lst_new(split_input[i]);
-        tmp = tmp->next;
-    }
-    free_split(split_input);
-    return (token);
+	i = 0;
+	split_input = ft_split(usr_input, ' ');
+	if (!split_input || !split_input[i])
+		return (NULL);
+	token = ft_token_lst_new(split_input[i]);
+	tmp = token;
+	while (split_input[++i] != NULL)
+	{
+		tmp->next = ft_token_lst_new(split_input[i]);
+		tmp = tmp->next;
+	}
+	free_split(split_input);
+	return (token);
 }
 
 /**
@@ -49,17 +48,16 @@ t_token	*ft_tokenizer(char *usr_input)
  */
 t_token	*ft_token_lst_new(char *value)
 {
-    t_token	*token;
+	t_token	*token;
 
-    if (!value)
-        return (NULL);
-
-    token = malloc(sizeof(t_token));
-    if (!token)
-        return (NULL);
-    token->value = ft_strdup(value);
-    token->next = NULL;
-    return (token);
+	if (!value)
+		return (NULL);
+	token = malloc(sizeof(t_token));
+	if (!token)
+		return (NULL);
+	token->value = ft_strdup(value);
+	token->next = NULL;
+	return (token);
 }
 
 /**
@@ -86,12 +84,11 @@ void	ft_token_lst_add_back(t_token *token, char *value)
  */
 t_token	*ft_token_lst_last(t_token *token)
 {
-    if (!token)
-        return (NULL);
-
-    while (token->next)
-        token = token->next;
-    return (token);
+	if (!token)
+		return (NULL);
+	while (token->next)
+		token = token->next;
+	return (token);
 }
 
 /**
