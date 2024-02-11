@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/02/11 19:01:12 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/11 21:21:54 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,11 @@ typedef struct s_token
  * @brief Structure representing a token in the minishell program.
  * 
  * @param e_type The type of the token
- * @param TKN_WHITESPACE Whitespace symbol ( )
+ * @param TKN_WHITESPACE Whitespace symbol (" ")
  * @param TKN_TAB Tab symbol (\t)
  * @param TKN_NEWLINE Newline symbol (\n)
  * @param TKN_DOT Dot symbol (.)
- * @param TKN_COMMA Coma symbol (,)
+ * @param TKN_COMMA Comma symbol (,)
  * @param TKN_COLON Colon symbol (:)
  * @param TKN_SEMICOLON Semicolon symbol (;)
  * @param TKN_EXCLAMATION Exclamation symbol (!)
@@ -118,8 +118,8 @@ typedef struct s_token
  * @param TKN_TILDE Tilde symbol (~)
  * @param TKN_SNGL_QUOTE Single quote symbol (')
  * @param TKN_DOUBLE_QUOTE Double quote symbol (")
- * @param TKN_LEFT_PAR Left parenthesis symbol (()
- * @param TKN_RIGHT_PAR Right parenthesis symbol ())
+ * @param TKN_LEFT_PAR Left parenthesis symbol ("(")
+ * @param TKN_RIGHT_PAR Right parenthesis symbol (")")
  * @param TKN_LEFT_BRACKET Left bracket symbol ([)
  * @param TKN_RIGHT_BRACKET Right bracket symbol (])
  * @param TKN_LEFT_BRACE Left brace symbol ({)
