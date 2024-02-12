@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/02/11 21:21:54 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/12 21:21:39 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,12 +118,6 @@ typedef struct s_token
  * @param TKN_TILDE Tilde symbol (~)
  * @param TKN_SNGL_QUOTE Single quote symbol (')
  * @param TKN_DOUBLE_QUOTE Double quote symbol (")
- * @param TKN_LEFT_PAR Left parenthesis symbol ("(")
- * @param TKN_RIGHT_PAR Right parenthesis symbol (")")
- * @param TKN_LEFT_BRACKET Left bracket symbol ([)
- * @param TKN_RIGHT_BRACKET Right bracket symbol (])
- * @param TKN_LEFT_BRACE Left brace symbol ({)
- * @param TKN_RIGHT_BRACE Right brace symbol (})
  * @param TKN_WORD Everything that is not a special character
  * @param TKN_STRING All that inside the quotes with quotes (TODO)
  * @param value The value of the token
@@ -165,12 +159,6 @@ typedef struct s_tkn
 		TKN_BACKTICK,
 		TKN_SNGL_QUOTE,
 		TKN_DOUBLE_QUOTE,
-		TKN_LEFT_PAR,
-		TKN_RIGHT_PAR,
-		TKN_LEFT_BRACKET,
-		TKN_RIGHT_BRACKET,
-		TKN_LEFT_BRACE,
-		TKN_RIGHT_BRACE,
 		TKN_WORD,
 		TKN_STRING
 	} e_type;

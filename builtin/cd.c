@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:55:51 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/23 16:55:51 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/02/12 21:26:19 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 char	*get_current_directory(void)
 {
 	char	*pwd;
+
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
 		ft_printf_fd(1, "cd: error\n");
@@ -65,27 +66,27 @@ void	update_env_variables(t_data *data, char *pwd_old, char *pwd_new)
  */
 void	ft_cd(t_data *data, t_token *token)
 {
-    char	*pwd_old;
-    char	*pwd_new;
-    char	*dir;
+	char	*pwd_old;
+	char	*pwd_new;
+	char	*dir;
 
 	pwd_old = get_current_directory();
-    if (!pwd_old)
-        return ;
-    if (token->next == NULL || token->next->value == NULL)
-        dir = get_env_value(data->env_copy, "HOME");
-    else
-        dir = token->next->value;
-    if (change_directory(dir) == -1)
-    {
-        free(pwd_old);
-        return ;
-    }
-    pwd_new = get_current_directory();
-    if (!pwd_new)
-    {
-        free(pwd_old);
-        return ;
-    }
-    update_env_variables(data, pwd_old, pwd_new);
+	if (!pwd_old)
+		return ;
+	if (token->next == NULL || token->next->value == NULL)
+		dir = get_env_value(data->env_copy, "HOME");
+	else
+		dir = token->next->value;
+	if (change_directory(dir) == -1)
+	{
+		free(pwd_old);
+		return ;
+	}
+	pwd_new = get_current_directory();
+	if (!pwd_new)
+	{
+		free(pwd_old);
+		return ;
+	}
+	update_env_variables(data, pwd_old, pwd_new);
 }

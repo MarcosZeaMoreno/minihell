@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:27:25 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/29 18:56:11 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/02/12 21:29:53 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ void	suppress_output(void)
  */
 void	handle_sigint(int sig)
 {
-    if (sig == SIGINT)
-    {
+	if (sig == SIGINT)
+	{
 		write(1, "\n", 1);
-        rl_on_new_line();  // readline function to update the prompt line
-        rl_replace_line("", 0);  // clear the current line in readline
-        rl_redisplay();  // redisplay the prompt
-    }
+		rl_on_new_line();       // readline function to update the prompt line
+		rl_replace_line("", 0); // clear the current line in readline
+		rl_redisplay();         // redisplay the prompt
+	}
 }
 
 /**
@@ -50,8 +50,8 @@ void	handle_sigquit(int sig)
 	if (sig == SIGQUIT)
 	{
 		write(1, "\n", 1);
-		rl_on_new_line();  // readline function to update the prompt line
-		rl_replace_line("", 0);  // clear the current line in readline
-		rl_redisplay();  // redisplay the prompt
-    }
+		rl_on_new_line();       // readline function to update the prompt line
+		rl_replace_line("", 0); // clear the current line in readline
+		rl_redisplay();         // redisplay the prompt
+	}
 }

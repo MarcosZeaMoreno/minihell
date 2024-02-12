@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_comand.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:46:14 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/29 16:36:27 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/02/12 21:29:13 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	check_builtin(t_token *token)
 
 	if (!token)
 		return (-1);
-
 	value = token->value;
 	if (!ft_strncmp("echo", value, 5))
 		return (1);
