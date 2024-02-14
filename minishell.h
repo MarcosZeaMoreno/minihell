@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/02/12 21:21:39 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/14 11:18:37 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,10 +122,6 @@ typedef struct s_token
  * @param TKN_STRING All that inside the quotes with quotes (TODO)
  * @param value The value of the token
  * @param order The order of the token (e.g. 1, 2, 3, ...)
- * 
- * TODO 
- * 	- 	add quotes to token string
- * 
  */
 typedef struct s_tkn
 {
