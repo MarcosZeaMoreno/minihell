@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/02/14 11:18:37 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/14 13:53:02 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <sys/wait.h>
+# include <sys/types.h>
 # include <termios.h>
 # include <unistd.h>
 
@@ -87,109 +88,6 @@ typedef struct s_token
 }					t_token;
 
 /**
- * @brief Structure representing a token in the minishell program.
- * 
- * @param e_type The type of the token
- * @param TKN_WHITESPACE Whitespace symbol (" ")
- * @param TKN_TAB Tab symbol (\t)
- * @param TKN_NEWLINE Newline symbol (\n)
- * @param TKN_DOT Dot symbol (.)
- * @param TKN_COMMA Comma symbol (,)
- * @param TKN_COLON Colon symbol (:)
- * @param TKN_SEMICOLON Semicolon symbol (;)
- * @param TKN_EXCLAMATION Exclamation symbol (!)
- * @param TKN_QUESTION Question mark symbol (?)
- * @param TKN_SLASH Slash symbol (/)
- * @param TKN_BACKSLASH Backslash symbol (\)
- * @param TKN_ASTERISK Asterisk symbol (*)
- * @param TKN_EQUALS Equals symbol (=)
- * @param TKN_MINUS Minus symbol (-)
- * @param TKN_PLUS Plus symbol (+)
- * @param TKN_PIPE Pipe symbol (|)
- * @param TKN_DOUBLE_PIPE Double pipe symbol (||)
- * @param TKN_REDIR_IN Redirection input symbol (<)
- * @param TKN_REDIR_OUT Redirection output symbol (>)
- * @param TKN_REDIR_APPEND Redirection append symbol (>>)
- * @param TKN_REDIR_HERE_DOC Redirection here doc symbol (<<)
- * @param TKN_DOLLAR Dollar symbol ($)
- * @param TKN_AMPER Amper symbol (&)
- * @param TKN_DOUBLE_AMPER Double amper symbol (&&)
- * @param TKN_BACKTICK Backtick symbol (`)
- * @param TKN_TILDE Tilde symbol (~)
- * @param TKN_SNGL_QUOTE Single quote symbol (')
- * @param TKN_DOUBLE_QUOTE Double quote symbol (")
- * @param TKN_WORD Everything that is not a special character
- * @param TKN_STRING All that inside the quotes with quotes (TODO)
- * @param value The value of the token
- * @param order The order of the token (e.g. 1, 2, 3, ...)
- */
-typedef struct s_tkn
-{
-	enum
-	{
-		TKN_WHITESPACE,
-		TKN_TAB,
-		TKN_NEWLINE,
-		TKN_DOT,
-		TKN_COMMA,
-		TKN_COLON,
-		TKN_SEMICOLON,
-		TKN_EXCLAMATION,
-		TKN_QUESTION,
-		TKN_SLASH,
-		TKN_BACKSLASH,
-		TKN_ASTERISK,
-		TKN_EQUALS,
-		TKN_MINUS,
-		TKN_PLUS,
-		TKN_PIPE,
-		TKN_DOUBLE_PIPE,
-		TKN_REDIR_IN,
-		TKN_REDIR_OUT,
-		TKN_REDIR_APPEND,
-		TKN_REDIR_HERE_DOC,
-		TKN_DOLLAR,
-		TKN_AMPER,
-		TKN_DOUBLE_AMPER,
-		TKN_TILDE,
-		TKN_BACKTICK,
-		TKN_SNGL_QUOTE,
-		TKN_DOUBLE_QUOTE,
-		TKN_WORD,
-		TKN_STRING
-	} e_type;
-	char			*value;
-	int				order;
-}					t_tkn;
-
-/**
- * @brief Structure to handle the lexer
- *
- * @param c The current character
- * @param i The index of the current character
- * @param input The input string
- */
-typedef struct s_lexer
-{
-	char			c;
-	unsigned int	i;
-	char			*input;
-}					t_lexer;
-
-/**
- * @brief Structure to handle the token list
- *
- * @param tkn The token
- * @param next The next token
- */
-typedef struct s_tkn_lst
-{
-	t_tkn				*tkn;
-	struct s_tkn_lst	*next;
-}					t_tkn_lst;
-
-
-/**
  * @brief Structure to handle the data
  *
  * @param env_copy The current copy of enviroment variables
@@ -199,8 +97,7 @@ typedef struct s_tkn_lst
 typedef struct s_data
 {
 	t_env			*env_copy;
-	t_tkn_lst		*tkns;
-	t_token			*token;
+	t_token			*token; // creo que deberias borrar esto
 	pid_t			pid;
 }					t_data;
 
@@ -236,6 +133,7 @@ void				remove_env_var(t_data *data, char *key);
 void				change_value_env(t_data *data, char *key, char *value);
 
 /*-----  FUNCTIONS ----*/
+// PORFAVOR, DEFINE UN PROPOSITO PARA ESTAS FUNCIONES 
 
 void				handle_sigint(int sig);
 void				print_exit(void);
@@ -251,49 +149,24 @@ void				exec_local(char **cmds, char **env, t_env *enviroment);
 void				forkit(char *full_path, char **cmds, char **env);
 char				**strdup_2d(char **src);
 
-/* FUNCTIONS */
+/*----- LEXER & INPUT CHECK ----*/
+
+void				ft_print_check_input_quotes(char *usr_input);
+int					ft_check_input_quotes(char *usr_input);
+
+/*----- LIST MANAGEMENT FUNCTIONS */
 
 void				lst_delone_token(t_token *lst, void (*del)(void *));
 void				lst_delone(t_env *lst, void (*del)(void *));
 void				lst_clear_token(t_token **lst, void (*del)(void *));
 void				lst_clear(t_env **lst, void (*del)(void *));
 
-/*-----  INPUT STRING CLEANING ----*/
+/*----- READLINE FUNCTIONS -----*/
 
-void				print_var_name(char *str);
-void				print_rm_quotes(char *usr_input);
-void				print_var_check_vars(char *usr_input, t_data *data);
-void				print_replaced_input(char *usr_input, t_data *data);
-char				*ft_var_name(char *str);
-void				ft_rm_quotes(char **str);
-int					ft_num_chars_to_rm(char *str);
-int					ft_check_vars(char *usr_input, t_data *data);
-void				ft_replace_input(char **str, char *old_value,
-						char *new_alue);
-int					ft_clean_input(char **usr_input, t_data *data);
-
-/*----- LEXER FUNCTIONS -----*/
-t_lexer				*ft_init_lexer(char *input);
-void				ft_lexer_advance(t_lexer *lexer);
-t_tkn				*ft_lexer_get_next_token(t_lexer *lexer);
-t_tkn				*ft_lexer_get_string(t_lexer *lexer);
-t_tkn				*ft_lexer_get_word(t_lexer *lexer);
-char				*ft_lexer_char_to_str(t_lexer *lexer);
-t_tkn				*ft_lexer_advance_with_tkn(t_lexer *lexer, t_tkn *tkn);
-void				print_tkn(t_tkn *tkn);
-void				print_tkn_lst(t_data *data);
-
-/*----- LEXER TOKENS -----*/
-t_tkn				*ft_init_tkn(int type, char *value);
-t_tkn				*ft_init_multi_tkn(int type, char *value);
-void				ft_tknize_input(char *input, t_data *data);
-t_tkn_lst			*ft_add_tkn_to_lst(t_tkn_lst *head, t_tkn *tkn);
-void				ft_free_tkn_lst(t_tkn_lst *head);
-
-/*----- READLINE FUNCTIONS -----*/ 
 void				rl_replace_line(const char *text, int clear_undo);
 
 /*---- TERMIOS FUNCTIONS -----*/
-void			  suppress_output(void);
+
+void				suppress_output(void);
 
 #endif

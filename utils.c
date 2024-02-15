@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 16:25:15 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/29 18:54:10 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/02/14 12:06:56 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	**strdup_2d(char **src)
 	len = 0;
 	while (src[len])
 		len++;
-	dst = malloc(sizeof(char*) * (len + 1));
+	dst = malloc(sizeof(char *) * (len + 1));
 	if (!dst)
 		return (NULL);
 	while (src[i])
@@ -43,7 +43,7 @@ char	**strdup_2d(char **src)
 		dst[i] = strdup(src[i]);
 		if (!dst[i])
 		{
-			for (int j = 0; j < i; j++)
+			for (int j = 0; j < i; j++) //quidado con el for loops (Norminette)
 				free(dst[j]);
 			free(dst);
 			return (NULL);
