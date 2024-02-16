@@ -6,7 +6,7 @@
 #    By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/08 15:13:18 by vkatason          #+#    #+#              #
-#    Updated: 2024/02/15 13:42:41 by vkatason         ###   ########.fr        #
+#    Updated: 2024/02/16 20:14:28 by vkatason         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,18 +25,19 @@ SRC =  check_comand.c \
 		env_to_lst.c\
 		error.c \
 		fork.c \
+		lexer_utils.c \
 		lst_clear.c \
 		main.c \
 		parse.c \
 		print_entry.c \
+		printed_checks.c \
 		signals.c \
 		tokens.c \
 		utils.c \
+		var_names_extract.c \
 		./builtin/builtins.c \
 		./builtin/echo.c \
 		./builtin/cd.c \
-		printed_checks.c \
-		lexer_utils.c \
 
 OBJS := $(SRC:.c=.o)
 

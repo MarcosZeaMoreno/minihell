@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 13:32:11 by vkatason          #+#    #+#             */
-/*   Updated: 2024/02/14 14:07:13 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/16 20:03:25 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,6 @@
  * Function is used for debugging purposes.
  * @param usr_input Input from the user
  * to be checked for open quotes.
- *
- * TESTS:
- * This is a test OK
- * This is a 'test' OK
- * "This is a \"test\" ERROR
- * "This is a 'test" ERROR
- * "This is a \"test" ERROR
- * "This is a '' test" 
- * "This is a \"\" test"
  */
 void	ft_print_check_input_quotes(char *usr_input)
 {
@@ -43,4 +34,35 @@ void	ft_print_check_input_quotes(char *usr_input)
 	else
 		status = "ERROR";
 	ft_printf("Status: %s\n\n", status);
+}
+
+/**
+ * @brief Function prints the result of ft_all_var_names:
+ * the names of all variables found in the string
+ * of the user input.
+ * 
+ * @param usr_input User input string
+ * @var var_names The array of variable names
+ * @var i The index of the array
+ */
+void	ft_print_all_var_names(char **usr_input)
+{
+	char	**var_names;
+	int		i;
+
+	var_names = ft_all_var_names(usr_input);
+	if (var_names != NULL)
+	{
+		i = 0;
+		while (var_names[i] != NULL)
+		{
+			ft_printf("Variable number: %d\n", i + 1);
+			ft_printf("Variable name: %s\n", var_names[i]);
+			free(var_names[i]);
+			i++;
+		}
+		free(var_names);
+	}
+	else
+		ft_printf("No variables found.\n");
 }

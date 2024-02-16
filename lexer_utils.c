@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:30:41 by vkatason          #+#    #+#             */
-/*   Updated: 2024/02/15 14:39:53 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:50:04 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@
  * 'This is a "test' OK
  * "This is a '' test" OK
  * "This is a \"\" test" OK
- * 'This is a \'\' test' ERROR
+ * 'This is a \'\' test' ERROR 
  * 'This is a "" test' OK
  * "This is a \"test ERROR (need a " to close the quote, 
  * because escape character is not found and " considered as
@@ -87,4 +87,3 @@ int	ft_check_input_quotes(char *usr_input)
 		return (1);
 	return (0);
 }
-
