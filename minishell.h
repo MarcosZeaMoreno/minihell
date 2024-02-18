@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/02/16 20:05:50 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/18 13:34:42 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-# include <sys/wait.h>
 # include <sys/types.h>
+# include <sys/wait.h>
 # include <termios.h>
 # include <unistd.h>
 
@@ -97,7 +97,7 @@ typedef struct s_token
 typedef struct s_data
 {
 	t_env			*env_copy;
-	t_token			*token; // creo que deberias borrar esto
+	t_token			*token;
 	pid_t			pid;
 }					t_data;
 
@@ -133,7 +133,7 @@ void				remove_env_var(t_data *data, char *key);
 void				change_value_env(t_data *data, char *key, char *value);
 
 /*-----  FUNCTIONS ----*/
-// PORFAVOR, DEFINE UN PROPOSITO PARA ESTAS FUNCIONES 
+// PORFAVOR, DEFINE UN PROPOSITO PARA ESTAS FUNCIONES
 
 void				handle_sigint(int sig);
 void				print_exit(void);
@@ -156,8 +156,7 @@ int					ft_check_input_quotes(char *usr_input);
 
 /*----- VARIABLE SEARCH AND EXPANSION ----*/
 
-char				**ft_all_var_names(char **usr_input);
-void				ft_print_all_var_names(char **usr_input);
+
 
 /*----- LIST MANAGEMENT FUNCTIONS */
 

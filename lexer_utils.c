@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:30:41 by vkatason          #+#    #+#             */
-/*   Updated: 2024/02/16 18:50:04 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/18 14:05:25 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@
  * an open quote in the end of the string)
  * "This is a 'test ERROR (need a " to close the quote)
  * 'This is a "test ERROR (need a ' to close the quote)
+ * echo "This is test '$USER '$TERMCOLOR'" OK
  */
 int	ft_check_input_quotes(char *usr_input)
 {
