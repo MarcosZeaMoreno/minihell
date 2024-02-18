@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:28:23 by vkatason          #+#    #+#             */
-/*   Updated: 2024/01/22 18:38:20 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/18 21:06:27 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,3 @@ void	lst_clear_token(t_token **lst, void (*del)(void *))
 		}
 	}
 }
-
-

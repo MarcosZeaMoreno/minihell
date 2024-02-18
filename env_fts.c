@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_fts.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:18:21 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/18 18:15:01 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/02/18 21:05:04 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,32 +85,32 @@ void	add_env_var(t_data *data, char *key, char *value)
 
 int	ft_token_size(t_token *token)
 {
-    int	i;
+	int	i;
 
-    i = 0;
-    while (token != NULL)
-    {
-        token = token->next;
-        i++;
-    }
-    return (i);
+	i = 0;
+	while (token != NULL)
+	{
+		token = token->next;
+		i++;
+	}
+	return (i);
 }
 
 char	**lst_to_char(t_token *token)
 {
-    char	**cmds;
-    int		i;
+	char	**cmds;
+	int		i;
 
-    i = 0;
-    cmds = malloc(sizeof(char *) * (ft_token_size(token) + 1));
-    if (!cmds)
-        return (NULL);
-    while (token != NULL)
-    {
-        cmds[i] = ft_strdup(token->value);
-        token = token->next;
-        i++;
-    }
-    cmds[i] = NULL;
-    return (cmds);
+	i = 0;
+	cmds = malloc(sizeof(char *) * (ft_token_size(token) + 1));
+	if (!cmds)
+		return (NULL);
+	while (token != NULL)
+	{
+		cmds[i] = ft_strdup(token->value);
+		token = token->next;
+		i++;
+	}
+	cmds[i] = NULL;
+	return (cmds);
 }
