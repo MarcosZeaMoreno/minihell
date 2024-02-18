@@ -6,23 +6,18 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:25:58 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/02/18 15:34:37 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/18 18:23:13 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_quotes_error(char *input)
-{
-	int	check_result;
-
-	check_result = ft_check_input_quotes(input);
-	if (check_result == 1)
-	{
-		ft_error(input, 11);
-	}
-}
-
+/**
+ * @brief Function to send error message to the user
+ * 
+ * @param usr_input The user input string.
+ * @param type_error The type of error.
+ */
 void	ft_error(char *usr_input, int type_error)
 {
 	ft_printf_fd(2, "%sMiniHell:%s", RED, RST);

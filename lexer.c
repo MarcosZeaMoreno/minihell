@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   var_names_extract.c                                :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/08 16:37:36 by vkatason          #+#    #+#             */
-/*   Updated: 2024/02/18 13:22:21 by vkatason         ###   ########.fr       */
+/*   Created: 2024/01/17 10:53:04 by vkatason          #+#    #+#             */
+/*   Updated: 2024/02/18 18:55:07 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// static int	ft_is_valid_var(char *str)
+// char	**lexer(char *usr_input)
 // {
-// 	if (ft_isalpha(*str) || *str == '_')
-// 	{
-// 		while (ft_isalnum(*str) || *str == '_')
-// 			str++;
-// 		return (1);
-// 	}
-// 	return (0);
-// }
+// 	char	**splited_input;
 
+// 	if ((ft_is_input_error(usr_input)))
+// 		return (NULL);
+// 	splited_input = ft_split_input(usr_input);
+// 	return (splited_input);
+// }

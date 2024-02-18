@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/02/18 15:33:55 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/18 18:57:41 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@
 # define CMND_NOT_FORK 10
 # define INPUT_QUOTES_ERROR 11
 # define SYNTAX_ERROR 12
+# define EMPTY_INPUT 13
 
 
 /*----- STRUCTURES -----*/
@@ -153,8 +154,7 @@ char				**strdup_2d(char **src);
 
 /*----- LEXER & INPUT CHECK ----*/
 
-void				ft_print_check_input_quotes(char *usr_input);
-int					ft_check_input_quotes(char *usr_input);
+int					ft_is_input_error(char *usr_input);
 
 /*----- VARIABLE SEARCH AND EXPANSION ----*/
 

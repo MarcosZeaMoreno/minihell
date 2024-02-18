@@ -6,32 +6,10 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 13:32:11 by vkatason          #+#    #+#             */
-/*   Updated: 2024/02/18 14:07:09 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/18 18:55:50 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/**
- * @brief Function to print the result 
- * of the check_input_quotes function
- * that checks if there is an open quote
- * in the user input (single or double).
- * Function is used for debugging purposes.
- * @param usr_input Input from the user
- * to be checked for open quotes.
- */
-void	ft_print_check_input_quotes(char *usr_input)
-{
-	int		result;
-	char	*status;
 
-	result = ft_check_input_quotes(usr_input);
-	ft_printf("Test case: %s\n", usr_input);
-	ft_printf("Result: %d\n", result);
-	if (result == 0)
-		status = "OK";
-	else
-		status = "ERROR";
-	ft_printf("Status: %s\n\n", status);
-}
