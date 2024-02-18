@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/02/18 14:25:40 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/18 15:33:55 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@
 # define CMND_NOT_PIPE 9
 # define CMND_NOT_FORK 10
 # define INPUT_QUOTES_ERROR 11
+# define SYNTAX_ERROR 12
+
 
 /*----- STRUCTURES -----*/
 

@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:25:58 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/02/18 14:48:51 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/18 15:34:37 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,7 @@ void	ft_error(char *usr_input, int type_error)
 	else if (type_error == 4)
 		ft_printf_fd(2, " %s: is not a directory\n", usr_input);
 	else if (type_error == 11)
-		ft_printf_fd(2, " ERROR: Wrong quotes usage\n");
+		ft_printf_fd(2, " Wrong quotes usage\n");
+	else if (type_error == 12)
+		ft_printf_fd(2, " Syntax error\n");
 }
