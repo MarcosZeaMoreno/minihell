@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/02/18 13:34:42 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/18 14:25:40 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@
 # define CMND_NOT_ARG 8
 # define CMND_NOT_PIPE 9
 # define CMND_NOT_FORK 10
+# define INPUT_QUOTES_ERROR 11
 
 /*----- STRUCTURES -----*/
 
@@ -143,7 +144,6 @@ int					ft_init(t_data *data, int ac, char **av, char **env);
 void				check_execve(t_data *data, char **env, t_env *enviroment);
 void				exec_builtin(t_data *data, t_token *token);
 char				*get_env_value(t_env *env, char *key);
-void				ft_error(char *str, int type_error);
 void				free_split(char **split);
 void				exec_local(char **cmds, char **env, t_env *enviroment);
 void				forkit(char *full_path, char **cmds, char **env);
@@ -172,5 +172,9 @@ void				rl_replace_line(const char *text, int clear_undo);
 /*---- TERMIOS FUNCTIONS -----*/
 
 void				suppress_output(void);
+
+/*----- ERROR FUNCTIONS -----*/
+void				ft_quotes_error(char *input);
+void				ft_error(char *str, int type_error);
 
 #endif
