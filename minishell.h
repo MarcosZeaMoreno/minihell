@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/02/19 19:39:46 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/19 19:53:29 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,23 +173,29 @@ void				rl_replace_line(const char *text, int clear_undo);
 void				suppress_output(void);
 
 /*----- ERROR FUNCTIONS -----*/
-void				ft_quotes_error(char *input);
 void				ft_error(char *str, int type_error);
 
 #endif
 
-typedef cmd
-{
-	char		**argv; // --> argv[0] - comando a ejecutar, argv [1], [2], ... - argumentos 
-	int			is_pipe;
-	int			is_redir;
-	int 		infile;
-	int			outfile;
-	struct cmd 	*next;
-}				cmd;
+// typedef cmd
+// {
+// 	char		**argv; // --> argv[0] - comando a ejecutar, argv [1], [2], ... - argumentos 
+// 	int			is_pipe;
+// 	int			is_redir;
+// 	int 		infile;
+// 	int			outfile;
+// 	struct cmd 	*next;
+// }				cmd;
 
-/*
-input_copy -> $USER = "vkatason" 
-input_copy -> | if (is_pipe == 1) cmd->is_pipe = 1 -> cmd->next = cmd
-*/
+// /*
+// input_copy -> $USER = "vkatason" 
+// input_copy -> | if (is_pipe == 1) cmd->is_pipe = 1 -> cmd->next = cmd
+// */
+// this is | the inpit
 
+// cmd->argv[0] = "this"
+// cmd->argv[1] = "is"
+// cmd->pipe = 1 
+// cmd-next->argv[0] = "the"
+// cmd->next->argv[1] = "input"
+// cmd->next->next = NULL
