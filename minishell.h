@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/02/18 18:57:41 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/19 19:39:46 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@
 # define CMND_NOT_FORK 10
 # define INPUT_QUOTES_ERROR 11
 # define SYNTAX_ERROR 12
-# define EMPTY_INPUT 13
 
 
 /*----- STRUCTURES -----*/
@@ -158,8 +157,6 @@ int					ft_is_input_error(char *usr_input);
 
 /*----- VARIABLE SEARCH AND EXPANSION ----*/
 
-
-
 /*----- LIST MANAGEMENT FUNCTIONS */
 
 void				lst_delone_token(t_token *lst, void (*del)(void *));
@@ -180,3 +177,19 @@ void				ft_quotes_error(char *input);
 void				ft_error(char *str, int type_error);
 
 #endif
+
+typedef cmd
+{
+	char		**argv; // --> argv[0] - comando a ejecutar, argv [1], [2], ... - argumentos 
+	int			is_pipe;
+	int			is_redir;
+	int 		infile;
+	int			outfile;
+	struct cmd 	*next;
+}				cmd;
+
+/*
+input_copy -> $USER = "vkatason" 
+input_copy -> | if (is_pipe == 1) cmd->is_pipe = 1 -> cmd->next = cmd
+*/
+

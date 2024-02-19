@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/02/18 18:59:27 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/19 18:38:03 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ft_init(t_data *data, int ac, char **av, char **env)
 	char	**env_temp;
 
 	(void)av;
-	env_temp = strdup_2d(env); //implementar esto cambia (Ctlr + D), cambiando el output "exit\n" con un salto de línea
+	env_temp = strdup_2d(env);
 	if (ac > 1)
 	{
 		ft_putstr_fd("The program no needs any argument\n", 2);
@@ -76,8 +76,6 @@ int	get_promp(t_data *data, char **env)
 		return (1);
 	}
 	add_history(usr_input);
-	if (!(ft_is_input_error(usr_input)))
-		ft_printf("Input is correct\n");
 	ft_parse_input(data, usr_input);
 	if (data->token && check_builtin(data->token) == 0)
 		check_execve(data, env, data->env_copy);
