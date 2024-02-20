@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/02/19 19:53:29 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:45:04 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@
 # define INPUT_QUOTES_ERROR 11
 # define SYNTAX_ERROR 12
 
-
 /*----- STRUCTURES -----*/
 
 /**
@@ -91,15 +90,53 @@ typedef struct s_token
 }					t_token;
 
 /**
+ * @brief Struct to handle the redirections
+ * @param file The file to redirect
+ * @param redir_type The type of redirection:
+ * ">>" to append,
+ * ">" to overwrite,
+ * "<" to read from file
+ * "<<" to read from a heredoc
+ * @param next The next redirection 
+ */
+typedef struct s_redir
+{
+	char			*file;
+	char			*redir_type;
+	struct s_redir	*next;
+}					t_redir;
+
+/**
+ * @brief Struct to handle the commands
+ * @param argv The comand itself and its arguments
+ * @param is_redir A flag to indicate if the command has redirections
+ * @param fd_in The file descriptor to read from
+ * @param fd_out The file descriptor to write to
+ * @param redir The redirections list (if the command has redirections)
+ * @param next The next command
+ */
+typedef struct s_cmd
+{
+	char			**argv;
+	int				is_redir;
+	int				fd_in;
+	int				fd_out;
+	struct s_redir	*redir;
+	struct s_cmd	*next;
+}					t_cmd;
+
+/**
  * @brief Structure to handle the data
  *
  * @param env_copy The current copy of enviroment variables
+ * @param cmd The list of parsed commands
  * @param token The token list
  * @param pid The process id
  */
 typedef struct s_data
 {
 	t_env			*env_copy;
+	t_cmd			*cmd;
 	t_token			*token;
 	pid_t			pid;
 }					t_data;
@@ -176,26 +213,3 @@ void				suppress_output(void);
 void				ft_error(char *str, int type_error);
 
 #endif
-
-// typedef cmd
-// {
-// 	char		**argv; // --> argv[0] - comando a ejecutar, argv [1], [2], ... - argumentos 
-// 	int			is_pipe;
-// 	int			is_redir;
-// 	int 		infile;
-// 	int			outfile;
-// 	struct cmd 	*next;
-// }				cmd;
-
-// /*
-// input_copy -> $USER = "vkatason" 
-// input_copy -> | if (is_pipe == 1) cmd->is_pipe = 1 -> cmd->next = cmd
-// */
-// this is | the inpit
-
-// cmd->argv[0] = "this"
-// cmd->argv[1] = "is"
-// cmd->pipe = 1 
-// cmd-next->argv[0] = "the"
-// cmd->next->argv[1] = "input"
-// cmd->next->next = NULL
