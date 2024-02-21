@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:30:41 by vkatason          #+#    #+#             */
-/*   Updated: 2024/02/19 19:06:01 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/21 17:33:34 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@
  * "This is a \"\" test" OK
  * 'This is a \'\' test' ERROR 
  * 'This is a "" test' OK
- * > ERROR (need a " to close
+ * "This is a \"test ERROR (need a " to close
  * the quote, because escape character is 
  * not found and " considered as an open 
  * quote in the end of the string)
