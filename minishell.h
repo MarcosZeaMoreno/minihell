@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/02/20 15:45:04 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:26:17 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ typedef struct s_token
  */
 typedef struct s_redir
 {
-	char			*file;
-	char			*redir_type;
+	char			*file; //simpre a la derecha
+	char			*redir_type; //<, >, >>, <<
 	struct s_redir	*next;
 }					t_redir;
 
