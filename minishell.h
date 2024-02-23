@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/02/22 15:26:17 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/23 13:43:38 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,6 +193,13 @@ char				**strdup_2d(char **src);
 int					ft_is_input_error(char *usr_input);
 
 /*----- VARIABLE SEARCH AND EXPANSION ----*/
+
+void				print_replaced_input(char *usr_input, t_data *data);
+int					ft_clean_input(char **usr_input, t_data *data);
+char				*ft_var_name(char *usr_input);
+int					ft_check_vars(char *usr_input, t_data *data);
+void				ft_replace_input(char **str,
+						char *old_value, char *new_value);
 
 /*----- LIST MANAGEMENT FUNCTIONS */
 
