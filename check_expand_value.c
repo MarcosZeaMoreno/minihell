@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:05:16 by vkatason          #+#    #+#             */
-/*   Updated: 2024/02/24 18:33:10 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/24 21:37:51 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,24 @@
  */
 int	ft_check_vars(char *usr_input, t_data *data)
 {
-	char	*value;
-	char	*env_value;
+	t_var_name	*var_name;
+	char		*env_value;
 
-	value = ft_var_name(usr_input);
-	while (value != NULL)
+	var_name = ft_var_name(usr_input);
+	while (var_name != NULL)
 	{
-		env_value = get_env_value(data->env_copy, value);
+		env_value = get_env_value(data->env_copy, var_name->name);
 		if (env_value == NULL)
 		{
-			ft_printf_fd(2, "%s: Variable is undefined.\n", value);
-			free(value);
+			ft_printf_fd(2, "%s: Variable is undefined.\n", var_name->name);
+			free(var_name->name);
+			free(var_name);
 			return (-1);
 		}
-		usr_input = ft_strchr(usr_input, '$');
-		if (usr_input != NULL)
-			usr_input += 1;
-		free(value);
-		value = ft_var_name(usr_input);
+		usr_input += var_name->pos;
+		free(var_name->name);
+		free(var_name);
+		var_name = ft_var_name(usr_input);
 	}
 	return (1);
 }

@@ -6,48 +6,62 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 13:32:11 by vkatason          #+#    #+#             */
-/*   Updated: 2024/02/24 18:37:03 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/24 22:11:43 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /**
- * @brief Function prints the result of ft_var_value:
- * the value of the first variable found in the string
- * is equal to the value of the variable in the environment.
+ * @brief Function to print the result of the 
+ * variable check ft_check_vars. 
  * 
- * @param str user input string
+ * @param usr_input User input string
+ * @param data Main data structure
  */
 void	print_var_check_vars(char *usr_input, t_data *data)
 {
-	int	result;
-
-	result = ft_check_vars(usr_input, data);
-	if (result == 1)
-		ft_printf("Variable check passed.\n");
-	else if (result == -1)
-		ft_printf("Undefined variable found.\n");
-	else
-		ft_printf("Invalid result.\n");
-}
-
-/**
- * @brief Function prints the result of all
- * the expandable variable names found in the user input. 
- * @param str user input string
- */
-void	print_var_names(char *usr_input)
-{
-	char	*var_name;
+	t_var_name	*var_name;
+	int			result;
 
 	var_name = ft_var_name(usr_input);
 	while (var_name != NULL)
 	{
-		if (getenv(var_name) != NULL)
+		result = ft_check_vars(var_name->name, data);
+		if (result == 1)
+			ft_printf("Variable check passed.\n");
+		else if (result == -1)
+			ft_printf("Undefined variable found.\n");
+		else
+			ft_printf("Invalid result.\n");
+		usr_input += var_name->pos;
+		free(var_name->name);
+		free(var_name);
+		var_name = ft_var_name(usr_input);
+	}
+}
+
+/**
+ * @brief Function to print the names 
+ * of the expandable variables in the user input.
+ * 
+ * @param usr_input User input string
+ * @param data Main data structure
+ */
+void	print_var_names(char *usr_input)
+{
+	t_var_name	*var_name;
+
+	var_name = ft_var_name(usr_input);
+	while (var_name != NULL)
+	{
+		if (getenv(var_name->name) != NULL)
 		{
-			printf("Expandable and existing variable name: %s\n", var_name);
+			ft_printf("Expandable and existing variable name: %s\n",
+				var_name->name);
 		}
+		usr_input += var_name->pos;
+		free(var_name->name);
 		free(var_name);
 		var_name = ft_var_name(usr_input);
 	}

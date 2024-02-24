@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/02/24 18:37:13 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/24 22:12:14 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ typedef struct s_token
  */
 typedef struct s_redir
 {
-	char			*file; //simpre a la derecha
-	char			*redir_type; //<, >, >>, <<
+	char			*file;
+	char			*redir_type;
 	struct s_redir	*next;
 }					t_redir;
 
@@ -143,6 +143,19 @@ typedef struct s_data
 	t_token			*token;
 	pid_t			pid;
 }					t_data;
+
+/**
+ * @brief The structure to handle the variable names
+ * during the input scanning
+ * @param name The name of the variable
+ * @param pos The position of the variable in the input
+ * 
+ */
+typedef struct s_var_name
+{
+	char			*name;
+	int				pos;
+}					t_var_name;
 
 /*-----  BUILTINS ----*/
 
@@ -196,7 +209,7 @@ char				**strdup_2d(char **src);
 int					ft_is_input_error(char *usr_input);
 
 /*----- VARIABLE SEARCH AND EXPANSION ----*/
-char				*ft_var_name(char *usr_input);
+t_var_name			*ft_var_name(char *usr_input);
 int					ft_check_vars(char *usr_input, t_data *data);
 void				print_var_names(char *usr_input);
 void				print_var_check_vars(char *usr_input, t_data *data);

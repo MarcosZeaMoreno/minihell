@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 14:21:48 by vkatason          #+#    #+#             */
-/*   Updated: 2024/02/24 19:02:00 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/24 22:15:23 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static int	ft_is_expandable(char c, int status[2])
  * from the user input.
  * @param usr_input User input string
  * @param i Index of the character to start from
+ * @var start Start index of the expandable variable
  * @return char* Name of the expandable variable
  */
 static char	*ft_get_expandable_name(char *usr_input, int *i)
@@ -63,35 +64,43 @@ static char	*ft_get_expandable_name(char *usr_input, int *i)
 }
 
 /**
- * @brief Function to extract the expandable variable 
- * name from the user input.
+ * @brief Function to get the name 
+ * of the expandable variable from 
+ * the user input.
  * 
  * @param usr_input User input string
- * @param data Main data structure
- * @return char* The name of the expandable variable
+ * @var status Integer array of size 2
+ * (0) - double quotes
+ * (1) - single quotes
+ * @var i Index of the character to start from
+ * @return t_var_name* Structure containing the 
+ * name and position of the expandable variable 
+ * in the user input.
  */
-char	*ft_var_name(char *usr_input)
+t_var_name	*ft_var_name(char *usr_input)
 {
 	int				i;
 	int				status[2];
-	char			*var_name;
-	static int		pos;
+	t_var_name		*result;
+
+	result = malloc(sizeof(t_var_name));
+	if (!result)
+		return (NULL);
 
 	status[0] = 0;
 	status[1] = 0;
-	i = pos;
+	i = 0;
 	while (usr_input[i])
 	{
 		ft_toggle_status(usr_input, i, status);
 		if (ft_is_expandable(usr_input[i], status))
 		{
-			pos = i;
-			var_name = ft_get_expandable_name(usr_input, &i);
-			pos = i;
-			return (var_name);
+			result->name = ft_get_expandable_name(usr_input, &i);
+			result->pos = i;
+			return (result);
 		}
 		i++;
 	}
-	pos = 0;
-	return ((void *)0);
+	free(result);
+	return (NULL);
 }
