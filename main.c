@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/02/23 13:48:31 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/24 16:24:16 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ int	get_promp(t_data *data, char **env)
 		return (1);
 	}
 	add_history(usr_input);
-	print_replaced_input(usr_input, data);
 	ft_parse_input(data, usr_input);
 	if (data->token && check_builtin(data->token) == 0)
 		check_execve(data, env, data->env_copy);
