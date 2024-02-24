@@ -6,7 +6,7 @@
 #    By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/08 15:13:18 by vkatason          #+#    #+#              #
-#    Updated: 2024/02/23 13:45:45 by vkatason         ###   ########.fr        #
+#    Updated: 2024/02/24 18:36:00 by vkatason         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,13 +21,13 @@ LDFLAGS = -L/opt/homebrew/Cellar/readline/8.2.7/lib -lreadline
 #LDFLAGS = -lreadline -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 LIBFT = libft
 SRC =  check_comand.c \
+		check_expand_value.c \
 		env_fts.c \
 		env_to_lst.c\
 		error.c \
+		expand_value_utils.c \
 		fork.c \
-		input_clean.c \
 		input_errors.c \
-		input_replace.c \
 		lst_clear.c \
 		main.c \
 		parse.c \

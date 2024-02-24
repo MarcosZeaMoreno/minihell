@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/02/23 13:43:38 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/24 18:37:13 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,8 @@ typedef struct s_cmd
  * @brief Structure to handle the data
  *
  * @param env_copy The current copy of enviroment variables
+ * @param input_copy The clean copy of the user input with
+ * the enviroment variables expanded
  * @param cmd The list of parsed commands
  * @param token The token list
  * @param pid The process id
@@ -136,6 +138,7 @@ typedef struct s_cmd
 typedef struct s_data
 {
 	t_env			*env_copy;
+	char			*input_copy;
 	t_cmd			*cmd;
 	t_token			*token;
 	pid_t			pid;
@@ -193,13 +196,10 @@ char				**strdup_2d(char **src);
 int					ft_is_input_error(char *usr_input);
 
 /*----- VARIABLE SEARCH AND EXPANSION ----*/
-
-void				print_replaced_input(char *usr_input, t_data *data);
-int					ft_clean_input(char **usr_input, t_data *data);
 char				*ft_var_name(char *usr_input);
 int					ft_check_vars(char *usr_input, t_data *data);
-void				ft_replace_input(char **str,
-						char *old_value, char *new_value);
+void				print_var_names(char *usr_input);
+void				print_var_check_vars(char *usr_input, t_data *data);
 
 /*----- LIST MANAGEMENT FUNCTIONS */
 

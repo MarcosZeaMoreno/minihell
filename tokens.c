@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 16:20:22 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/02/19 18:35:50 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/24 17:11:31 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ t_token	*ft_tokenizer(char *usr_input)
 	int		i;
 
 	i = 0;
-	if (ft_is_input_error(usr_input))
-		return (NULL);
 	split_input = ft_split(usr_input, ' ');
 	if (!split_input || !split_input[i])
 		return (NULL);
