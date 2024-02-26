@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 14:21:48 by vkatason          #+#    #+#             */
-/*   Updated: 2024/02/24 22:15:23 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:12:11 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ t_var_name	*ft_var_name(char *usr_input)
 	result = malloc(sizeof(t_var_name));
 	if (!result)
 		return (NULL);
-
 	status[0] = 0;
 	status[1] = 0;
 	i = 0;
