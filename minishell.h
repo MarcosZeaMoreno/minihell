@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/02/28 21:14:02 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/28 21:38:10 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,7 @@ t_data				*ft_get_env_cpy(t_data *data, char **env);
 void				add_env_var(t_data *data, char *key, char *value);
 void				remove_env_var(t_data *data, char *key);
 void				change_value_env(t_data *data, char *key, char *value);
+void				print_env_vars(t_data *data);
 
 /*-----  FUNCTIONS ----*/
 // PORFAVOR, DEFINE UN PROPOSITO PARA ESTAS FUNCIONES

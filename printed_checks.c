@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 13:32:11 by vkatason          #+#    #+#             */
-/*   Updated: 2024/02/28 21:13:11 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/28 21:41:32 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,22 @@ void	ft_print_vars(t_list *vars)
 		current = current->next;
 	}
 	ft_free_var_list(vars);
+}
+
+/**
+ * @brief Function to print the variables from the env_copy list
+ * 
+ * @param data Main data structure
+ */
+void	print_env_vars(t_data *data)
+{
+	t_env	*tmp;
+
+	tmp = data->env_copy;
+	while (tmp != NULL)
+	{
+		ft_printf("Key: %s, Value: %s\n", tmp->key, tmp->value);
+		tmp = tmp->next;
+	}
 }
 
