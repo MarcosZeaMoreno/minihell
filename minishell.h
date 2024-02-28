@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/02/28 20:51:00 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/28 21:14:02 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,9 +216,8 @@ int					ft_is_input_error(char *usr_input);
 /*----- VARIABLE SEARCH AND EXPANSION ----*/
 t_list				*ft_var_name(char *usr_input);
 t_var_name			*ft_create_var(char *usr_input, int *i);
-// int				ft_check_vars(char *usr_input, t_data *data);
-// void				print_var_names(char *usr_input);
-// void				print_var_check_vars(char *usr_input, t_data *data);
+int					ft_check_vars(char *usr_input, t_data *data);
+void				print_var_check_vars(char *usr_input, t_data *data);
 void				ft_free_var_list(t_list *vars);
 void				ft_print_vars(t_list *vars);
 
