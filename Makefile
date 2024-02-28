@@ -6,7 +6,7 @@
 #    By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/08 15:13:18 by vkatason          #+#    #+#              #
-#    Updated: 2024/02/24 18:36:00 by vkatason         ###   ########.fr        #
+#    Updated: 2024/02/28 20:31:42 by vkatason         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRC =  check_comand.c \
 		signals.c \
 		tokens.c \
 		utils.c \
+		var_cleaning.c \
 		./builtin/builtins.c \
 		./builtin/echo.c \
 		./builtin/cd.c \

@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/02/24 19:02:12 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/28 20:38:04 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,9 @@ int	get_promp(t_data *data, char **env)
 	}
 	add_history(usr_input);
 	ft_is_input_error(usr_input);
-	print_var_names(usr_input);
-	print_var_check_vars(usr_input, data);
+	// print_var_names(usr_input);
+	// print_var_check_vars(usr_input, data);
+	ft_print_vars(ft_var_name(usr_input));
 	ft_parse_input(data, usr_input);
 	if (data->token && check_builtin(data->token) == 0)
 		check_execve(data, env, data->env_copy);

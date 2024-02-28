@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/22 14:21:48 by vkatason          #+#    #+#             */
-/*   Updated: 2024/02/26 14:12:11 by vkatason         ###   ########.fr       */
+/*   Created: 2024/01/13 14:21:48 by vkatason          #+#    #+#             */
+/*   Updated: 2024/02/28 20:48:36 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ static void	ft_toggle_status(char *usr_input, int i, int *status)
 static int	ft_is_expandable(char c, int status[2])
 {
 	return (((c == '$' && (status[0] == 0 && status[1] == 0))
-			|| (c == '$' && (status[0] == 1 && status[1] == 1))));
+			|| (c == '$' && (status[0] == 1 && status[1] == 1))
+			|| (c == '$' && (status[0] == 1 && status[1] == 0))));
 }
 
 /**
@@ -64,42 +65,69 @@ static char	*ft_get_expandable_name(char *usr_input, int *i)
 }
 
 /**
- * @brief Function to get the name 
- * of the expandable variable from 
- * the user input.
+ * @brief Function to create a structure to handle the 
+ * variable names and their positions.
  * 
  * @param usr_input User input string
- * @var status Integer array of size 2
+ * @param i Index of the character to start from
+ * @var var Structure to handle the variable names
+ * and their positions
+ * 
+ * @return t_var_name* Structure to handle the variable names
+ * and their positions
+ */
+t_var_name	*ft_create_var(char *usr_input, int *i)
+{
+	t_var_name	*var;
+
+	var = malloc(sizeof(t_var_name));
+	if (!var)
+		return (NULL);
+	var->start = *i;
+	var->name = ft_get_expandable_name(usr_input, i);
+	var->end = *i - 1;
+	var->pos = *i;
+	return (var);
+}
+
+/**
+ * @brief Function to get the list of expandable 
+ * variable names from the user input.
+ * 
+ * @param usr_input User input string
+ * @var i Index of the character to start from
+ * @var status Flag to check the status of the 
+ * double and single quotes:
  * (0) - double quotes
  * (1) - single quotes
- * @var i Index of the character to start from
- * @return t_var_name* Structure containing the 
- * name and position of the expandable variable 
- * in the user input.
+ * @var vars List of expandable variable names
+ * @var var Structure to handle the variable names
+ * and their positions
+ * @return t_list* List of expandable variable names
  */
-t_var_name	*ft_var_name(char *usr_input)
+t_list	*ft_var_name(char *usr_input)
 {
-	int				i;
-	int				status[2];
-	t_var_name		*result;
+	int			i;
+	int			status[2];
+	t_list		*vars;
+	t_var_name	*var;
 
-	result = malloc(sizeof(t_var_name));
-	if (!result)
-		return (NULL);
+	i = 0;
 	status[0] = 0;
 	status[1] = 0;
-	i = 0;
+	vars = NULL;
 	while (usr_input[i])
 	{
 		ft_toggle_status(usr_input, i, status);
 		if (ft_is_expandable(usr_input[i], status))
 		{
-			result->name = ft_get_expandable_name(usr_input, &i);
-			result->pos = i;
-			return (result);
+			var = ft_create_var(usr_input, &i);
+			if (!var)
+				return (NULL);
+			ft_lstadd_back(&vars, ft_lstnew(var));
 		}
-		i++;
+		else
+			i++;
 	}
-	free(result);
-	return (NULL);
+	return (vars);
 }
