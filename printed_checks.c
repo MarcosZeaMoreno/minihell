@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 13:32:11 by vkatason          #+#    #+#             */
-/*   Updated: 2024/02/28 21:41:32 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/29 16:34:58 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,15 @@ void	print_var_check_vars(char *usr_input, t_data *data)
 	while (tmp != NULL)
 	{
 		var_name = (t_var_name *)tmp->content;
-		result = ft_check_vars(var_name->name, data);
+		result = ft_check_vars(tmp, data);
 		if (result == 1)
 			ft_printf("Variable check passed for %s.\n", var_name->name);
 		else if (result == -1)
 			ft_printf("Undefined variable found: %s.\n", var_name->name);
-		else
-			ft_printf("Invalid result for %s.\n", var_name->name);
 		tmp = tmp->next;
 	}
-	ft_free_var_list(var_list);
+	if (var_list != NULL)
+		ft_free_var_list(var_list);
 }
 
 /**
@@ -59,11 +58,12 @@ void	ft_print_vars(t_list *vars)
 	while (current != NULL)
 	{
 		var = (t_var_name *)current->content;
-		printf("Variable: %.*s\n", var->end - var->start + 1, var->name);
-		printf("Start: %d\n", var->start);
-		printf("End: %d\n", var->end);
+		ft_printf("Variable: %s\n", var->name);
+		ft_printf("Start: %d\n", var->start);
+		ft_printf("End: %d\n", var->end);
 		current = current->next;
 	}
+	ft_printf("-------- End of variable list --------\n");
 	ft_free_var_list(vars);
 }
 
