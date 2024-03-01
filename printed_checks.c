@@ -6,49 +6,11 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 13:32:11 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/01 14:24:39 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/01 14:56:41 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/**
- * @brief Debug helping function to print the result
- * of variable check for the user input string.
- * 
- * @param usr_input
- * @param data
- * @var var_list The list of variables found in the user input string
- * @var tmp The pointer to the current node in the list
- * @var var_name The structure that holds the variable name
- * and its position in the string
- */
-void	print_var_check_vars(char *usr_input, t_data *data)
-{
-	t_list		*var_list;
-	t_list		*tmp;
-	t_var_name	*var_name;
-	char		*result;
-
-	var_list = ft_var_name(usr_input);
-	tmp = var_list;
-	while (tmp != NULL)
-	{
-		var_name = (t_var_name *)tmp->content;
-		result = ft_check_vars(tmp, data);
-		if (result != NULL)
-		{
-			ft_printf("Variable check passed for %s.\n", var_name->name);
-			ft_printf("Value: %s\n", var_name->value);
-		}
-		else
-		{
-			ft_printf("Undefined variable found: %s.\n", var_name->name);
-			ft_printf("Value: %s\n", var_name->value);
-		}
-		tmp = tmp->next;
-	}
-}
 
 /**
  * @brief This function prints the variables from the list
@@ -69,6 +31,7 @@ void	ft_print_vars(t_list *vars)
 	{
 		var = (t_var_name *)current->content;
 		ft_printf("Variable: %s\n", var->name);
+		ft_printf("Value: %s\n", var->value);
 		ft_printf("Start: %d\n", var->start);
 		ft_printf("End: %d\n", var->end);
 		current = current->next;

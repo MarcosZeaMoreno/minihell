@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:05:16 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/01 14:13:11 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/01 14:58:13 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,3 +28,31 @@ char	*ft_check_vars(t_list *node, t_data *data)
 	return (var->value);
 }
 
+/**
+ * @brief Function to fill the values of the variables in the list
+ * 
+ * @param usr_input The user input string
+ * @param data The main data structure
+ * @var var_list The list of variables
+ * @var tmp The pointer to the current node in the list
+ * @var var_name The structure that holds the variable name, 
+ * it's position in the string and value
+ * @return t_list* The list of variables
+ */
+t_list	*ft_fill_values(char *usr_input, t_data *data)
+{
+	t_list		*var_list;
+	t_list		*tmp;
+	t_var_name	*var_name;
+	char		*result;
+
+	var_list = ft_var_name(usr_input);
+	tmp = var_list;
+	while (tmp != NULL)
+	{
+		var_name = (t_var_name *)tmp->content;
+		result = ft_check_vars(tmp, data);
+		tmp = tmp->next;
+	}
+	return (var_list);
+}
