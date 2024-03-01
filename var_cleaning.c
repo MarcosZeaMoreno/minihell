@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 20:31:17 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/01 14:42:10 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/01 16:07:17 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_free_var_list(t_list *vars)
 		if (var->name != NULL)
 			free(var->name);
 		if (var->value != NULL)
-			free(var->value);
+			free(var->value); // value is not malloced
 		next = current->next;
 		free(current->content);
 		free(current);

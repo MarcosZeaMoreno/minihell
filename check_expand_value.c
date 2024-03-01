@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:05:16 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/01 14:58:13 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/01 16:06:40 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_check_vars(t_list *node, t_data *data)
 	t_var_name	*var;
 
 	var = (t_var_name *)node->content;
-	var->value = get_env_value(data->env_copy, var->name);
+	var->value = ft_strdup(get_env_value(data->env_copy, var->name));
 	return (var->value);
 }
 
@@ -43,15 +43,12 @@ t_list	*ft_fill_values(char *usr_input, t_data *data)
 {
 	t_list		*var_list;
 	t_list		*tmp;
-	t_var_name	*var_name;
-	char		*result;
 
 	var_list = ft_var_name(usr_input);
 	tmp = var_list;
 	while (tmp != NULL)
 	{
-		var_name = (t_var_name *)tmp->content;
-		result = ft_check_vars(tmp, data);
+		ft_check_vars(tmp, data);
 		tmp = tmp->next;
 	}
 	return (var_list);
