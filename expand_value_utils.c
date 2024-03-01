@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 14:21:48 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/01 12:01:48 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/01 14:09:33 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ t_var_name	*ft_create_var(char *usr_input, int *i)
 	var->name = ft_get_expandable_name(usr_input, i);
 	var->end = *i - 1;
 	var->pos = *i;
+	var->value = NULL;
 	return (var);
 }
 

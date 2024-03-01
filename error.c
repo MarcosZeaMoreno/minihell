@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:25:58 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/01 12:37:24 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/01 13:56:19 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,4 @@ void	ft_error(char *usr_input, int type_error)
 		ft_printf_fd(2, RED" Wrong quotes usage\n" RST);
 	else if (type_error == 12)
 		ft_printf_fd(2, RED" Syntax error\n" RST);
-	else if (type_error == 13)
-		ft_printf_fd(2, RED" Undefined variable found\n" RST);
 }

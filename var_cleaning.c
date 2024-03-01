@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 20:31:17 by vkatason          #+#    #+#             */
-/*   Updated: 2024/02/28 20:37:43 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/01 14:10:19 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	ft_free_var_list(t_list *vars)
 	{
 		var = (t_var_name *)current->content;
 		free(var->name);
+		free(var->value);
 		next = current->next;
 		free(current->content);
 		free(current);

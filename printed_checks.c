@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 13:32:11 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/01 12:31:37 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/01 14:24:39 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_var_check_vars(char *usr_input, t_data *data)
 	t_list		*var_list;
 	t_list		*tmp;
 	t_var_name	*var_name;
-	int			result;
+	char		*result;
 
 	var_list = ft_var_name(usr_input);
 	tmp = var_list;
@@ -36,14 +36,18 @@ void	print_var_check_vars(char *usr_input, t_data *data)
 	{
 		var_name = (t_var_name *)tmp->content;
 		result = ft_check_vars(tmp, data);
-		if (result == 1)
+		if (result != NULL)
+		{
 			ft_printf("Variable check passed for %s.\n", var_name->name);
-		else if (result == -1)
+			ft_printf("Value: %s\n", var_name->value);
+		}
+		else
+		{
 			ft_printf("Undefined variable found: %s.\n", var_name->name);
+			ft_printf("Value: %s\n", var_name->value);
+		}
 		tmp = tmp->next;
 	}
-	if (var_list != NULL)
-		ft_free_var_list(var_list);
 }
 
 /**
