@@ -6,18 +6,22 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 13:32:11 by vkatason          #+#    #+#             */
-/*   Updated: 2024/02/29 16:34:58 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/01 12:31:37 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /**
- * @brief Function to print the result of the 
- * variable check ft_check_vars. 
+ * @brief Debug helping function to print the result
+ * of variable check for the user input string.
  * 
- * @param usr_input User input string
- * @param data Main data structure
+ * @param usr_input
+ * @param data
+ * @var var_list The list of variables found in the user input string
+ * @var tmp The pointer to the current node in the list
+ * @var var_name The structure that holds the variable name
+ * and its position in the string
  */
 void	print_var_check_vars(char *usr_input, t_data *data)
 {
@@ -43,11 +47,13 @@ void	print_var_check_vars(char *usr_input, t_data *data)
 }
 
 /**
- * @brief Function to print the list of variables and their members.
+ * @brief This function prints the variables from the list
+ * of expandable variables found in the user input string.
  * 
- * @param vars List of variables
- * @var current Current node of the list
- * @var var Structure containing the name and position of the variable
+ * @param vars 
+ * @var current The pointer to the list that tracks
+ * current node in the list
+ * @var var The structure that holds the variable name
  */
 void	ft_print_vars(t_list *vars)
 {
@@ -69,7 +75,7 @@ void	ft_print_vars(t_list *vars)
 
 /**
  * @brief Function to print the variables from the env_copy list
- * 
+ * @var tmp The pointer to the current node in the list
  * @param data Main data structure
  */
 void	print_env_vars(t_data *data)
@@ -83,4 +89,3 @@ void	print_env_vars(t_data *data)
 		tmp = tmp->next;
 	}
 }
-

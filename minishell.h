@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/02/29 14:16:40 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/01 12:43:15 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,6 +221,7 @@ int					ft_check_vars(t_list *var_list, t_data *data);
 void				print_var_check_vars(char *usr_input, t_data *data);
 void				ft_free_var_list(t_list *vars);
 void				ft_print_vars(t_list *vars);
+int					ft_is_env_error(char *usr_input, t_data *data);
 
 /*----- LIST MANAGEMENT FUNCTIONS */
 

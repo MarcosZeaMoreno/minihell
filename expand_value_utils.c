@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 14:21:48 by vkatason          #+#    #+#             */
-/*   Updated: 2024/02/28 20:48:36 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/01 12:01:48 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,11 @@ static char	*ft_get_expandable_name(char *usr_input, int *i)
 }
 
 /**
- * @brief Function to create a structure to handle the 
- * variable names and their positions.
+ * @brief Function to create a new variable name
  * 
- * @param usr_input User input string
+ * @param usr_input The user input string
  * @param i Index of the character to start from
- * @var var Structure to handle the variable names
- * and their positions
- * 
  * @return t_var_name* Structure to handle the variable names
- * and their positions
  */
 t_var_name	*ft_create_var(char *usr_input, int *i)
 {
