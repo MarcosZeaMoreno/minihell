@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 10:41:44 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/04 02:24:44 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:36:59 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,22 +64,27 @@ void	ft_get_new_input(char *usr_input, t_data *data)
 	while (tmp != NULL && usr_input[i] != '\0')
 	{
 		var = (t_var_name *)tmp->content;
-		if (i == var->start)
-		{
-			data->input_copy = ft_strjoin(data->input_copy, var->value);
-			i = var->end + 1;
-		}
-		else
+		if (i != var->start)
 		{
 			input_chunk = ft_get_input_chunck(usr_input, i, var->start);
 			data->input_copy = ft_strjoin(data->input_copy, input_chunk);
 			i = var->start;
 			free(input_chunk);
 		}
-		if (tmp->next == NULL)
+		if (i == var->start || tmp->next == NULL)
 		{
-			data->input_copy = ft_strjoin(data->input_copy, var->value);
-			i = var->end + 1;
+			if (var->value != NULL)
+			{
+				data->input_copy = ft_strjoin(data->input_copy, var->value);
+				i = var->end + 1;
+			}
+			else
+			{
+				input_chunk = ft_strdup("");
+				data->input_copy = ft_strjoin(data->input_copy, input_chunk);
+				i = var->end + 1;
+				free(input_chunk);
+			}
 		}
 		tmp = tmp->next;
 	}
@@ -91,4 +96,3 @@ void	ft_get_new_input(char *usr_input, t_data *data)
 	}
 	ft_free_var_list(var_list);
 }
-
