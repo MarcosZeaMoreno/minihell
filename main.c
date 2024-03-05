@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/05 16:06:29 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:19:56 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	ft_init(t_data *data, int ac, char **av, char **env)
 	data->env_copy = NULL;
 	data->token = NULL;
 	data->input_copy = NULL;
-	data->exit_status = 127;
+	data->exit_status = 0;
 	ft_getpid(data);
 	ft_get_env_cpy(data, env_temp);
 	return (0);
