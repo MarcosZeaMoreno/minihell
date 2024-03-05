@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/04 01:03:41 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/05 14:53:45 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ typedef struct s_cmd
  */
 typedef struct s_data
 {
+	int				exit_status;
 	t_env			*env_copy;
 	char			*input_copy;
 	t_cmd			*cmd;

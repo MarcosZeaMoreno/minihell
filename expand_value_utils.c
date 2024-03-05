@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 14:21:48 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/01 14:09:33 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:57:25 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ static void	ft_toggle_status(char *usr_input, int i, int *status)
  */
 static int	ft_is_expandable(char c, int status[2])
 {
-	return (((c == '$' && (status[0] == 0 && status[1] == 0))
-			|| (c == '$' && (status[0] == 1 && status[1] == 1))
-			|| (c == '$' && (status[0] == 1 && status[1] == 0))));
+	return (((c == '$' && (status[0] == 0 && status[1] == 0)) || (c == '$'
+				&& (status[0] == 1 && status[1] == 1)) || (c == '$'
+				&& (status[0] == 1 && status[1] == 0))));
 }
 
 /**
@@ -57,10 +57,20 @@ static int	ft_is_expandable(char c, int status[2])
 static char	*ft_get_expandable_name(char *usr_input, int *i)
 {
 	int	start;
+	int	second_pos;
 
+	second_pos = *i + 1;
 	start = (*i)++;
-	while (usr_input[*i] && (ft_isalnum(usr_input[*i]) || usr_input[*i] == '_'))
+	while (usr_input[*i] && (ft_isalnum(usr_input[*i]) || usr_input[*i] == '_'
+			|| usr_input[second_pos] == '?'))
+	{
+		if (usr_input[second_pos] == '?')
+		{
+			(*i)++;
+			break ;
+		}
 		(*i)++;
+	}
 	return (ft_substr(usr_input, start + 1, *i - start - 1));
 }
 

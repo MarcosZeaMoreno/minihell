@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:05:16 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/04 00:36:09 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:58:14 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,16 @@ char	*ft_check_vars(t_list *node, t_data *data)
 	t_var_name	*var;
 
 	var = (t_var_name *)node->content;
-	var->value = ft_strdup(get_env_value(data->env_copy, var->name));
-	return (var->value);
+	if (ft_strcmp(var->name, "?") == 0)
+	{
+		var->value = ft_itoa(data->exit_status);
+		return (var->value);
+	}
+	else
+	{
+		var->value = ft_strdup(get_env_value(data->env_copy, var->name));
+		return (var->value);
+	}
 }
 
 /**

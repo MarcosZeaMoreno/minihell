@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/04 01:37:22 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:06:29 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	ft_init(t_data *data, int ac, char **av, char **env)
 	data->env_copy = NULL;
 	data->token = NULL;
 	data->input_copy = NULL;
+	data->exit_status = 127;
 	ft_getpid(data);
 	ft_get_env_cpy(data, env_temp);
 	return (0);
@@ -78,10 +79,9 @@ int	get_promp(t_data *data, char **env)
 	}
 	add_history(usr_input);
 	ft_is_input_error(usr_input);
-	ft_print_vars(ft_fill_values(usr_input, data));
 	ft_get_new_input(usr_input, data);
 	ft_printf("REPLACED INPUT: %s\n", data->input_copy);
-	ft_parse_input(data, usr_input);
+	ft_parse_input(data, data->input_copy);
 	if (data->token && check_builtin(data->token) == 0)
 		check_execve(data, env, data->env_copy);
 	if (data->token && data->token->value && !ft_strncmp("exit",
