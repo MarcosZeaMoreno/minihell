@@ -6,7 +6,7 @@
 #    By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/08 15:13:18 by vkatason          #+#    #+#              #
-#    Updated: 2024/03/04 13:47:17 by vkatason         ###   ########.fr        #
+#    Updated: 2024/03/08 18:33:07 by vkatason         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,9 @@ CC = gcc -g
 CLEAN = rm -Rf
 CFLAGS = -fsanitize=address -Wall -Werror -Wextra
 #LDFLAGS for home
-#LDFLAGS = -L/opt/homebrew/Cellar/readline/8.2.7/lib -lreadline
+LDFLAGS = -L/opt/homebrew/Cellar/readline/8.2.7/lib -lreadline
 #LDFLAGS for school
-LDFLAGS = -lreadline -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
+#LDFLAGS = -lreadline -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 LIBFT = libft
 SRC =  check_comand.c \
 		check_expand_value.c \

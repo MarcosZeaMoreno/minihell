@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:30:41 by vkatason          #+#    #+#             */
-/*   Updated: 2024/02/21 17:33:34 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/08 18:52:56 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,16 +158,18 @@ static int	ft_is_standalone_symbols(char *usr_input)
  * @param usr_input The user input string.
  * @return int 1 if the input contains an error, 0 otherwise.
  */
-int	ft_is_input_error(char *usr_input)
+int	ft_is_input_error(char *usr_input, t_data *data)
 {
 	if (ft_is_standalone_symbols(usr_input) == 1)
 	{
 		ft_error(usr_input, 12);
+		data->exit_status = EXIT_SYNTAX_ERROR;
 		return (1);
 	}
 	if (ft_check_input_quotes(usr_input) == 1)
 	{
 		ft_error(usr_input, 11);
+		data->exit_status = EXIT_SYNTAX_ERROR;
 		return (1);
 	}
 	return (0);

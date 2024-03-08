@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/05 16:19:56 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/08 18:49:55 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	get_promp(t_data *data, char **env)
 		return (1);
 	}
 	add_history(usr_input);
-	ft_is_input_error(usr_input);
+	ft_is_input_error(usr_input, data);
 	ft_get_new_input(usr_input, data);
 	ft_printf("REPLACED INPUT: %s\n", data->input_copy);
 	ft_parse_input(data, data->input_copy);

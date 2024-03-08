@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/05 14:53:45 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/08 18:52:39 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,10 @@
 # define CYAN "\033[1;36m"    /* Bold Cyan */
 # define WHITE "\033[1;37m"   /* Bold White */
 
-/*
- * The following defines are used to identify the type of error
+/**
+ * @brief The following defines are used to identify the type of redirection
  */
+
 # define CMND_NOT_FOUND 1
 # define CMND_NOT_EXEC 2
 # define CMND_NOT_DIR 3
@@ -61,6 +62,19 @@
 # define CMND_NOT_FORK 10
 # define INPUT_QUOTES_ERROR 11
 # define SYNTAX_ERROR 12
+
+/**
+ * @brief The following defines are used
+ * to identify the type of exit status
+ */
+
+# define EXIT_SUCCESS 0
+# define EXIT_FAILURE 1
+# define EXIT_NOT_FOUND 127
+# define EXIT_SYNTAX_ERROR 258
+
+
+
 
 /*----- STRUCTURES -----*/
 
@@ -214,7 +228,7 @@ char				**strdup_2d(char **src);
 
 /*----- LEXER & INPUT CHECK ----*/
 
-int					ft_is_input_error(char *usr_input);
+int					ft_is_input_error(char *usr_input, t_data *data);
 
 /*----- VARIABLE SEARCH AND EXPANSION ----*/
 t_list				*ft_var_name(char *usr_input);
