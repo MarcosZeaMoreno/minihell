@@ -6,7 +6,7 @@
 #    By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/08 15:13:18 by vkatason          #+#    #+#              #
-#    Updated: 2024/03/08 18:33:07 by vkatason         ###   ########.fr        #
+#    Updated: 2024/03/09 21:26:59 by vkatason         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,10 @@ SRC =  check_comand.c \
 		expand_value_utils.c \
 		fork.c \
 		input_errors.c \
+		lexer_print_tkns.c\
+		lexer_tkns_utils.c \
+		lexer_tkns.c \
+		lexer.c \
 		lst_clear.c \
 		main.c \
 		new_input.c \

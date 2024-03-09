@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/08 18:52:39 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/09 21:26:32 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,66 @@ typedef struct s_token
 }					t_token;
 
 /**
+ * @brief Structure representing a token in the minishell program.
+ * 
+ * @param e_type The type of the token
+ * @param TKN_PIPE Pipe symbol (|)
+ * @param TKN_REDIR_IN Redirection input symbol (<)
+ * @param TKN_REDIR_OUT Redirection output symbol (>)
+ * @param TKN_REDIR_APPEND Redirection append symbol (>>)
+ * @param TKN_REDIR_HERE_DOC Redirection here doc symbol (<<)
+ * @param TKN_AMPER Amper symbol (&)
+ * @param TKN_WORD Everything that is not a special character
+ * @param TKN_STRING All that inside the quotes with quotes
+ * @param value The value of the token
+ * @param order The order of the token (e.g. 1, 2, 3, ...)
+ */
+typedef struct s_tkn
+{
+	enum
+	{
+		TKN_PIPE,
+		TKN_REDIR_IN,
+		TKN_REDIR_OUT,
+		TKN_REDIR_APPEND,
+		TKN_REDIR_HERE_DOC,
+		TKN_AMPER,
+		TKN_DOUBLE_QUOTE,
+		TKN_WORD,
+		TKN_STRING
+	} e_type;
+	char			*value;
+	int				order;
+}					t_tkn;
+
+/**
+ * @brief Structure to handle the lexer
+ *
+ * @param c The current character
+ * @param i The index of the current character
+ * @param input The input string
+ */
+typedef struct s_lexer
+{
+	char			c;
+	unsigned int	i;
+	char			*input;
+}					t_lexer;
+
+/**
+ * @brief Structure to handle the token list
+ *
+ * @param tkn The token
+ * @param next The next token
+ */
+typedef struct s_tkn_lst
+{
+	t_tkn				*tkn;
+	struct s_tkn_lst	*next;
+	struct s_tkn_lst	*prev;
+}					t_tkn_lst;
+
+/**
  * @brief Struct to handle the redirections
  * @param file The file to redirect
  * @param redir_type The type of redirection:
@@ -155,6 +215,7 @@ typedef struct s_data
 	t_env			*env_copy;
 	char			*input_copy;
 	t_cmd			*cmd;
+	t_tkn_lst		*tkns;
 	t_token			*token;
 	pid_t			pid;
 }					t_data;
@@ -226,7 +287,7 @@ void				exec_local(char **cmds, char **env, t_env *enviroment);
 void				forkit(char *full_path, char **cmds, char **env);
 char				**strdup_2d(char **src);
 
-/*----- LEXER & INPUT CHECK ----*/
+/*----- INPUT CHECK ----*/
 
 int					ft_is_input_error(char *usr_input, t_data *data);
 
@@ -238,6 +299,24 @@ t_list				*ft_fill_values(char *usr_input, t_data *data);
 void				ft_free_var_list(t_list *vars);
 void				ft_print_vars(t_list *vars);
 void				ft_get_new_input(char *usr_input, t_data *data);
+
+/*----- LEXER FUNCTIONS -----*/
+t_lexer				*ft_init_lexer(char *input);
+void				ft_lexer_advance(t_lexer *lexer);
+t_tkn				*ft_lexer_advance_with_tkn(t_lexer *lexer, t_tkn *tkn);
+char				*ft_lexer_char_to_str(t_lexer *lexer);
+t_tkn				*ft_lexer_get_next_token(t_lexer *lexer);
+t_tkn				*ft_lexer_get_string(t_lexer *lexer);
+t_tkn				*ft_lexer_get_word(t_lexer *lexer);
+t_tkn				*ft_init_tkn(int type, char *value);
+int					ft_reset_tkn_order(int reset);
+t_tkn				*ft_init_multi_tkn(int type, char *value);
+t_tkn_lst			*ft_add_tkn_to_lst(t_tkn_lst *head, t_tkn *tkn);
+void				ft_tknize_input(t_data *data);
+void				ft_free_tkn_lst(t_tkn_lst *head);
+void				ft_print_tkn(t_tkn *tkn);
+void				ft_print_tkn_lst(t_data *data);
+
 
 /*----- LIST MANAGEMENT FUNCTIONS */
 
