@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:16:12 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/09 20:32:19 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/10 15:31:27 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_print_tkn(t_tkn *tkn)
 		"TKN_STRING"};
 
 	ft_printf("TKN#%d\t |", tkn->order);
-	ft_printf("TYPE: %s\t\t |", tkn_types[tkn->e_type]);
+	ft_printf("TYPE: %s\t\t\t |", tkn_types[tkn->e_type]);
 	ft_printf("VALUE: %s\n", tkn->value);
 }
 

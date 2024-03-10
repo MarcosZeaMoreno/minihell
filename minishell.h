@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/09 21:26:32 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/10 16:35:50 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -309,6 +309,8 @@ t_tkn				*ft_lexer_get_next_token(t_lexer *lexer);
 t_tkn				*ft_lexer_get_string(t_lexer *lexer);
 t_tkn				*ft_lexer_get_word(t_lexer *lexer);
 t_tkn				*ft_init_tkn(int type, char *value);
+int					ft_count_the_same(t_lexer *lexer, char symbol);
+char				*ft_str_repeat(char c, int count);
 int					ft_reset_tkn_order(int reset);
 t_tkn				*ft_init_multi_tkn(int type, char *value);
 t_tkn_lst			*ft_add_tkn_to_lst(t_tkn_lst *head, t_tkn *tkn);
