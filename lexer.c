@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 22:34:51 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/11 19:57:12 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/11 20:09:39 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,9 @@ void	ft_lexer_advance(t_lexer *lexer)
  */
 t_tkn	*ft_lexer_get_next_token(t_lexer *lexer)
 {
-	char	*value;
+	t_tkn	*tkn;
 
+	tkn = NULL;
 	while (lexer->c != '\0' && lexer->i < ft_strlen(lexer->input))
 	{
 		if (lexer->c == '"' || lexer->c == '\'')
@@ -180,36 +181,4 @@ t_tkn	*ft_lexer_get_word(t_lexer *lexer)
 		ft_lexer_advance(lexer);
 	}
 	return (ft_init_tkn(TKN_WORD, value));
-}
-
-/**
- * @brief Basically, it's a helper function 
- * for ft_lexer_get_next_token that advances
- *  the lexer to the next character 
- * and returns the given token.
- * 
- * @param lexer The lexer object.
- * @param tkn The token to be returned.
- * @return The given token.
- */
-t_tkn	*ft_lexer_advance_with_tkn(t_lexer *lexer, t_tkn *tkn)
-{
-	ft_lexer_advance(lexer);
-	return (tkn);
-}
-
-/**
- * @brief The gets current character as a string
- * 
- * @param lexer The lexer object. 
- * @return char* Current character as a string.
- */
-char	*ft_lexer_char_to_str(t_lexer *lexer)
-{
-	char	*value;
-
-	value = ft_calloc(2, sizeof(char));
-	value[0] = lexer->c;
-	value[1] = '\0';
-	return (value);
 }
