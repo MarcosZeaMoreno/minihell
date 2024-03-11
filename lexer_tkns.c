@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 23:27:36 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/09 21:26:32 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/11 13:01:06 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,9 +142,17 @@ void	ft_free_tkn_lst(t_tkn_lst *head)
 	while (current != NULL)
 	{
 		next = current->next;
-		free(current->tkn->value);
-		free(current->tkn);
-		free(current);
+		if (current->tkn != NULL)
+		{
+			if (current->tkn->value != NULL)
+			{
+				free(current->tkn->value);
+				current->tkn->value = NULL;
+			}
+			free(current->tkn);
+			current->tkn = NULL;
+		}
+		//free(current);
 		current = next;
 		if (current != NULL)
 			current->prev = NULL;

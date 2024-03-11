@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/10 16:35:50 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:57:13 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -318,7 +318,6 @@ void				ft_tknize_input(t_data *data);
 void				ft_free_tkn_lst(t_tkn_lst *head);
 void				ft_print_tkn(t_tkn *tkn);
 void				ft_print_tkn_lst(t_data *data);
-
 
 /*----- LIST MANAGEMENT FUNCTIONS */
 

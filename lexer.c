@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 22:34:51 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/10 23:34:34 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:21:33 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_tkn	*ft_lexer_get_next_token(t_lexer *lexer)
 			value = ft_str_repeat('>', ft_count_the_same(lexer, '>'));
 			lexer->i += ft_count_the_same(lexer, '>');
 			lexer->c = lexer->input[lexer->i];
-			return (ft_init_multi_tkn(TKN_WORD, value));
+			return (ft_init_tkn(TKN_WORD, value));
 		}
 		else if (lexer->c == '<' && ft_count_the_same(lexer, '<') == 2)
 		{
