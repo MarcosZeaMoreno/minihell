@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 22:34:51 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/11 14:19:39 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/11 19:57:12 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ t_tkn	*ft_lexer_get_next_token(t_lexer *lexer)
 			return (ft_lexer_advance_with_tkn(lexer, ft_init_tkn(TKN_REDIR_OUT,
 						ft_lexer_char_to_str(lexer))));
 		}
-		else if (ft_isprint((int)lexer->c) == 1)
+		else if (ft_isprint((int)lexer->c))
 			return (ft_lexer_get_word(lexer));
 		else
 			ft_lexer_advance(lexer);

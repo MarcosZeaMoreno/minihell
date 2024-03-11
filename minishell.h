@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/11 14:22:51 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/11 19:56:52 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ typedef struct s_tkn
  */
 typedef struct s_lexer
 {
-	char			c;
+	unsigned char	c;
 	unsigned int	i;
 	char			*input;
 }					t_lexer;
