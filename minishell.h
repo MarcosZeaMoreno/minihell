@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/11 12:57:13 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/11 14:22:51 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,9 @@ typedef struct s_token
  * @param TKN_REDIR_OUT Redirection output symbol (>)
  * @param TKN_REDIR_APPEND Redirection append symbol (>>)
  * @param TKN_REDIR_HERE_DOC Redirection here doc symbol (<<)
- * @param TKN_AMPER Amper symbol (&)
  * @param TKN_WORD Everything that is not a special character
  * @param TKN_STRING All that inside the quotes with quotes
+ * @param TKN_ERROR 3 and more consecutive >, < and more than 2 |
  * @param value The value of the token
  * @param order The order of the token (e.g. 1, 2, 3, ...)
  */
@@ -127,10 +127,9 @@ typedef struct s_tkn
 		TKN_REDIR_OUT,
 		TKN_REDIR_APPEND,
 		TKN_REDIR_HERE_DOC,
-		TKN_AMPER,
-		TKN_DOUBLE_QUOTE,
 		TKN_WORD,
-		TKN_STRING
+		TKN_STRING,
+		TKN_ERROR
 	} e_type;
 	char			*value;
 	int				order;
@@ -312,7 +311,6 @@ t_tkn				*ft_init_tkn(int type, char *value);
 int					ft_count_the_same(t_lexer *lexer, char symbol);
 char				*ft_str_repeat(char c, int count);
 int					ft_reset_tkn_order(int reset);
-t_tkn				*ft_init_multi_tkn(int type, char *value);
 t_tkn_lst			*ft_add_tkn_to_lst(t_tkn_lst *head, t_tkn *tkn);
 void				ft_tknize_input(t_data *data);
 void				ft_free_tkn_lst(t_tkn_lst *head);

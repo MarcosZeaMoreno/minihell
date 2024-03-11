@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 23:27:36 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/11 13:01:06 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/11 13:33:27 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,32 +24,6 @@
 t_tkn	*ft_init_tkn(int type, char *value)
 {
 	t_tkn	*tkn;
-
-	tkn = ft_calloc(1, sizeof(t_tkn));
-	if (tkn == NULL)
-	{
-		ft_putstr_fd("Error: Failed to allocate memory for token\n", 2);
-		exit(EXIT_FAILURE);
-	}
-	tkn->e_type = type;
-	tkn->value = value;
-	tkn->order = ft_reset_tkn_order(0);
-	return (tkn);
-}
-
-/**
- * @brief Initializes a token with the given type and value.
- * The difference between this function and ft_init_tkn is that
- * this function duplicates the value that let us make double symbols
- * like >>, <<, &&, ||, etc using ft_strdup function.  
- * 
- * @param type The type of the token.
- * @param value The value of the token.
- * @return A pointer to the created token.
- */
-t_tkn	*ft_init_multi_tkn(int type, char *value)
-{
-	t_tkn		*tkn;
 
 	tkn = ft_calloc(1, sizeof(t_tkn));
 	if (tkn == NULL)

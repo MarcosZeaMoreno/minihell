@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 21:21:08 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/10 22:43:24 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/11 14:20:09 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,3 +55,4 @@ char	*ft_str_repeat(char c, int count)
 	str[count] = '\0';
 	return (str);
 }
+

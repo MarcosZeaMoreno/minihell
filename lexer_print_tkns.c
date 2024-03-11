@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:16:12 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/10 15:31:27 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/11 14:22:14 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,9 @@ void	ft_print_tkn(t_tkn *tkn)
 		"TKN_REDIR_OUT",
 		"TKN_REDIR_APPEND",
 		"TKN_REDIR_HERE_DOC",
-		"TKN_AMPER",
-		"TKN_DOUBLE_QUOTE",
 		"TKN_WORD",
-		"TKN_STRING"};
+		"TKN_STRING",
+		"TKN_ERROR"};
 
 	ft_printf("TKN#%d\t |", tkn->order);
 	ft_printf("TYPE: %s\t\t\t |", tkn_types[tkn->e_type]);

@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 22:34:51 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/11 12:21:33 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/11 14:19:39 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,12 @@ t_tkn	*ft_lexer_get_next_token(t_lexer *lexer)
 		}
 		if (lexer->c == ' ' || lexer->c == '\t' || lexer->c == '\n')
 			ft_lexer_advance(lexer);
-		else if (lexer->c == '|' && ft_count_the_same(lexer, '|') == 2)
+		else if (lexer->c == '|' && ft_count_the_same(lexer, '|') >= 2)
 		{
-			lexer->i++;
-			return (ft_lexer_advance_with_tkn(lexer,
-					ft_init_multi_tkn(TKN_WORD, "||")));
+			value = ft_str_repeat('|', ft_count_the_same(lexer, '|'));
+			lexer->i += ft_count_the_same(lexer, '|');
+			lexer->c = lexer->input[lexer->i];
+			return (ft_init_tkn(TKN_ERROR, value));
 		}
 		else if (lexer->c == '|' && ft_count_the_same(lexer, '|') == 1)
 			return (ft_lexer_advance_with_tkn(lexer, ft_init_tkn(TKN_PIPE,
@@ -77,20 +78,20 @@ t_tkn	*ft_lexer_get_next_token(t_lexer *lexer)
 			value = ft_str_repeat('<', ft_count_the_same(lexer, '<'));
 			lexer->i += ft_count_the_same(lexer, '<');
 			lexer->c = lexer->input[lexer->i];
-			return (ft_init_multi_tkn(TKN_WORD, value));
+			return (ft_init_tkn(TKN_ERROR, value));
 		}
 		else if (lexer->c == '>' && ft_count_the_same(lexer, '>') >= 3)
 		{
 			value = ft_str_repeat('>', ft_count_the_same(lexer, '>'));
 			lexer->i += ft_count_the_same(lexer, '>');
 			lexer->c = lexer->input[lexer->i];
-			return (ft_init_tkn(TKN_WORD, value));
+			return (ft_init_tkn(TKN_ERROR, value));
 		}
 		else if (lexer->c == '<' && ft_count_the_same(lexer, '<') == 2)
 		{
 			lexer->i++;
 			return (ft_lexer_advance_with_tkn(lexer,
-					ft_init_multi_tkn(TKN_REDIR_HERE_DOC, "<<")));
+					ft_init_tkn(TKN_REDIR_HERE_DOC, "<<")));
 		}
 		else if (lexer->c == '<' && ft_count_the_same(lexer, '<') == 1)
 		{
@@ -101,16 +102,13 @@ t_tkn	*ft_lexer_get_next_token(t_lexer *lexer)
 		{
 			lexer->i++;
 			return (ft_lexer_advance_with_tkn(lexer,
-					ft_init_multi_tkn(TKN_REDIR_APPEND, ">>")));
+					ft_init_tkn(TKN_REDIR_APPEND, ">>")));
 		}
 		else if (lexer->c == '>' && ft_count_the_same(lexer, '>') == 1)
 		{
 			return (ft_lexer_advance_with_tkn(lexer, ft_init_tkn(TKN_REDIR_OUT,
 						ft_lexer_char_to_str(lexer))));
 		}
-		else if (lexer->c == '&' && ft_count_the_same(lexer, '&') == 1)
-			return (ft_lexer_advance_with_tkn(lexer, ft_init_tkn(TKN_AMPER,
-						ft_lexer_char_to_str(lexer))));
 		else if (ft_isprint((int)lexer->c) == 1)
 			return (ft_lexer_get_word(lexer));
 		else
@@ -170,7 +168,10 @@ t_tkn	*ft_lexer_get_word(t_lexer *lexer)
 	value[0] = '\0';
 	while (ft_isprint((int)lexer->c))
 	{
-		if (lexer->c == ' ')
+		if (lexer->c == ' '
+			|| lexer->c == '|'
+			|| lexer->c == '>'
+			|| lexer->c == '<')
 			break ;
 		tmp = ft_lexer_char_to_str(lexer);
 		value = ft_realloc(value, (ft_strlen(value) + ft_strlen(tmp) + 1)
