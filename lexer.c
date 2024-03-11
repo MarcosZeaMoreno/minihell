@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 22:34:51 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/11 14:19:39 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/11 16:48:27 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,66 +53,27 @@ void	ft_lexer_advance(t_lexer *lexer)
  */
 t_tkn	*ft_lexer_get_next_token(t_lexer *lexer)
 {
-	char	*value;
+	t_tkn	*tkn;
 
+	tkn = NULL;
 	while (lexer->c != '\0' && lexer->i < ft_strlen(lexer->input))
 	{
-		if (lexer->c == '"' || lexer->c == '\'')
-		{
-			return (ft_lexer_get_string(lexer));
-		}
-		if (lexer->c == ' ' || lexer->c == '\t' || lexer->c == '\n')
-			ft_lexer_advance(lexer);
-		else if (lexer->c == '|' && ft_count_the_same(lexer, '|') >= 2)
-		{
-			value = ft_str_repeat('|', ft_count_the_same(lexer, '|'));
-			lexer->i += ft_count_the_same(lexer, '|');
-			lexer->c = lexer->input[lexer->i];
-			return (ft_init_tkn(TKN_ERROR, value));
-		}
-		else if (lexer->c == '|' && ft_count_the_same(lexer, '|') == 1)
-			return (ft_lexer_advance_with_tkn(lexer, ft_init_tkn(TKN_PIPE,
-						ft_lexer_char_to_str(lexer))));
-		else if (lexer->c == '<' && ft_count_the_same(lexer, '<') >= 3)
-		{
-			value = ft_str_repeat('<', ft_count_the_same(lexer, '<'));
-			lexer->i += ft_count_the_same(lexer, '<');
-			lexer->c = lexer->input[lexer->i];
-			return (ft_init_tkn(TKN_ERROR, value));
-		}
-		else if (lexer->c == '>' && ft_count_the_same(lexer, '>') >= 3)
-		{
-			value = ft_str_repeat('>', ft_count_the_same(lexer, '>'));
-			lexer->i += ft_count_the_same(lexer, '>');
-			lexer->c = lexer->input[lexer->i];
-			return (ft_init_tkn(TKN_ERROR, value));
-		}
-		else if (lexer->c == '<' && ft_count_the_same(lexer, '<') == 2)
-		{
-			lexer->i++;
-			return (ft_lexer_advance_with_tkn(lexer,
-					ft_init_tkn(TKN_REDIR_HERE_DOC, "<<")));
-		}
-		else if (lexer->c == '<' && ft_count_the_same(lexer, '<') == 1)
-		{
-			return (ft_lexer_advance_with_tkn(lexer, ft_init_tkn(TKN_REDIR_IN,
-						ft_lexer_char_to_str(lexer))));
-		}
-		else if (lexer->c == '>' && ft_count_the_same(lexer, '>') == 2)
-		{
-			lexer->i++;
-			return (ft_lexer_advance_with_tkn(lexer,
-					ft_init_tkn(TKN_REDIR_APPEND, ">>")));
-		}
-		else if (lexer->c == '>' && ft_count_the_same(lexer, '>') == 1)
-		{
-			return (ft_lexer_advance_with_tkn(lexer, ft_init_tkn(TKN_REDIR_OUT,
-						ft_lexer_char_to_str(lexer))));
-		}
-		else if (ft_isprint((int)lexer->c) == 1)
-			return (ft_lexer_get_word(lexer));
-		else
-			ft_lexer_advance(lexer);
+		tkn = ft_handle_quotes(lexer);
+		if (tkn != NULL)
+			return (tkn);
+		tkn = ft_handle_whitespace(lexer);
+		if (tkn != NULL)
+			return (tkn);
+		tkn = ft_handle_pipe(lexer);
+		if (tkn != NULL)
+			return (tkn);
+		tkn = ft_handle_less_than(lexer);
+		if (tkn != NULL)
+			return (tkn);
+		tkn = ft_handle_greater_than(lexer);
+		if (tkn != NULL)
+			return (tkn);
+		ft_lexer_advance(lexer);
 	}
 	return (NULL);
 }
@@ -180,36 +141,4 @@ t_tkn	*ft_lexer_get_word(t_lexer *lexer)
 		ft_lexer_advance(lexer);
 	}
 	return (ft_init_tkn(TKN_WORD, value));
-}
-
-/**
- * @brief Basically, it's a helper function 
- * for ft_lexer_get_next_token that advances
- *  the lexer to the next character 
- * and returns the given token.
- * 
- * @param lexer The lexer object.
- * @param tkn The token to be returned.
- * @return The given token.
- */
-t_tkn	*ft_lexer_advance_with_tkn(t_lexer *lexer, t_tkn *tkn)
-{
-	ft_lexer_advance(lexer);
-	return (tkn);
-}
-
-/**
- * @brief The gets current character as a string
- * 
- * @param lexer The lexer object. 
- * @return char* Current character as a string.
- */
-char	*ft_lexer_char_to_str(t_lexer *lexer)
-{
-	char	*value;
-
-	value = ft_calloc(2, sizeof(char));
-	value[0] = lexer->c;
-	value[1] = '\0';
-	return (value);
 }
