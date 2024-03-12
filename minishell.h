@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/11 20:10:59 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/12 17:54:06 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -320,7 +320,7 @@ t_tkn				*ft_handle_quotes(t_lexer *lexer);
 t_tkn				*ft_handle_greater_than(t_lexer *lexer);
 t_tkn				*ft_handle_less_than(t_lexer *lexer);
 t_tkn				*ft_handle_pipe(t_lexer *lexer);
-t_tkn				*ft_handle_whitespace(t_lexer *lexer);
+void				ft_handle_whitespace(t_lexer *lexer);
 
 /*----- LIST MANAGEMENT FUNCTIONS */
 

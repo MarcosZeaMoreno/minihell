@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 15:10:23 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/03 22:37:22 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/12 19:00:41 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_list
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
 int					ft_isprint(int c);
+int					ft_is_extended(int c);
 int					ft_isascii(int c);
 int					ft_isalnum(int c);
 bool				ft_isspace(char c);

@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:21:51 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/11 16:48:27 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/12 17:53:45 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,14 @@
 t_tkn	*ft_handle_quotes(t_lexer *lexer)
 {
 	if (lexer->c == '"' || lexer->c == '\'')
-	{
 		return (ft_lexer_get_string(lexer));
-	}
 	return (NULL);
 }
 
-t_tkn	*ft_handle_whitespace(t_lexer *lexer)
+void	ft_handle_whitespace(t_lexer *lexer)
 {
 	if (lexer->c == ' ' || lexer->c == '\t' || lexer->c == '\n')
-	{
 		ft_lexer_advance(lexer);
-	}
-	return (NULL);
 }
 
 t_tkn	*ft_handle_pipe(t_lexer *lexer)
