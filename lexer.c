@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 22:34:51 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/11 20:09:39 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:30:54 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,8 @@ void	ft_lexer_advance(t_lexer *lexer)
  */
 t_tkn	*ft_lexer_get_next_token(t_lexer *lexer)
 {
-	t_tkn	*tkn;
+	char	*value;
 
-	tkn = NULL;
 	while (lexer->c != '\0' && lexer->i < ft_strlen(lexer->input))
 	{
 		if (lexer->c == '"' || lexer->c == '\'')
