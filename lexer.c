@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 22:34:51 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/14 16:12:52 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:22:08 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ void	ft_lexer_advance(t_lexer *lexer)
  * It is a finite state machine that returns a token. It checks
  * the current character and returns the corresponding token.
  * 
+ * @attention Very important to use ft_is_ext_no_quotes 
+ * in the end of the while loop to check special characters
+ * like $, ~, ©, ¥, ñ, etc. They need to form part of the word.
  * @var t_tkn* Pointer to the token.
  * @param lexer The lexer object. 
  * @return t_tkn* Pointer to the token.
