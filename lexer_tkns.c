@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 23:27:36 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/11 13:33:27 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:01:00 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,6 @@ void	ft_free_tkn_lst(t_tkn_lst *head)
 			free(current->tkn);
 			current->tkn = NULL;
 		}
-		//free(current);
 		current = next;
 		if (current != NULL)
 			current->prev = NULL;

@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 15:10:23 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/12 19:00:41 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/14 15:43:03 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int					ft_isalpha(int c);
 int					ft_isdigit(int c);
 int					ft_isprint(int c);
 int					ft_is_extended(int c);
+int					ft_is_ext_no_quotes(int c);
 int					ft_isascii(int c);
 int					ft_isalnum(int c);
 bool				ft_isspace(char c);
@@ -105,8 +106,6 @@ char				*gnl_strjoin(char *s1, char *s2);
 char				*gnl_strchr(char *s, int c);
 int					hex_to_int(char *hex);
 void				ft_charpp_free(char **charpp);
-void				*ft_allocate_memory(size_t size);
-size_t				get_min_size(size_t old_size, size_t size);
 void				*ft_realloc(void *ptr, size_t size);
 int					ft_match_symbol(char c, char *str);
 

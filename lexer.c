@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 22:34:51 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/13 13:06:45 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:12:52 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,76 +44,41 @@ void	ft_lexer_advance(t_lexer *lexer)
 }
 
 /**
- * @brief The function gets different tokens from the input.
+ * @brief The function gets different tokens from the input
+ * with it's helper functions (see lexer_tkns_handlers.c)
  * It is a finite state machine that returns a token. It checks
  * the current character and returns the corresponding token.
  * 
+ * @var t_tkn* Pointer to the token.
  * @param lexer The lexer object. 
  * @return t_tkn* Pointer to the token.
  */
 t_tkn	*ft_lexer_get_next_token(t_lexer *lexer)
 {
-	char	*value;
+	t_tkn	*tkn;
 
+	tkn = NULL;
 	while (lexer->c != '\0' && lexer->i < ft_strlen(lexer->input))
 	{
 		if (lexer->c == '"' || lexer->c == '\'')
-		{
 			return (ft_lexer_get_string(lexer));
-		}
-		if (lexer->c == ' ' || lexer->c == '\t' || lexer->c == '\n')
-			ft_lexer_advance(lexer);
-		else if (lexer->c == '|' && ft_count_the_same(lexer, '|') >= 2)
-		{
-			value = ft_str_repeat('|', ft_count_the_same(lexer, '|'));
-			lexer->i += ft_count_the_same(lexer, '|');
-			lexer->c = lexer->input[lexer->i];
-			return (ft_init_tkn(TKN_ERROR, value));
-		}
-		else if (lexer->c == '|' && ft_count_the_same(lexer, '|') == 1)
-			return (ft_lexer_advance_with_tkn(lexer, ft_init_tkn(TKN_PIPE,
-						ft_lexer_char_to_str(lexer))));
-		else if (lexer->c == '<' && ft_count_the_same(lexer, '<') >= 3)
-		{
-			value = ft_str_repeat('<', ft_count_the_same(lexer, '<'));
-			lexer->i += ft_count_the_same(lexer, '<');
-			lexer->c = lexer->input[lexer->i];
-			return (ft_init_tkn(TKN_ERROR, value));
-		}
-		else if (lexer->c == '>' && ft_count_the_same(lexer, '>') >= 3)
-		{
-			value = ft_str_repeat('>', ft_count_the_same(lexer, '>'));
-			lexer->i += ft_count_the_same(lexer, '>');
-			lexer->c = lexer->input[lexer->i];
-			return (ft_init_tkn(TKN_ERROR, value));
-		}
-		else if (lexer->c == '<' && ft_count_the_same(lexer, '<') == 2)
-		{
-			lexer->i++;
-			return (ft_lexer_advance_with_tkn(lexer,
-					ft_init_tkn(TKN_REDIR_HERE_DOC, "<<")));
-		}
-		else if (lexer->c == '<' && ft_count_the_same(lexer, '<') == 1)
-		{
-			return (ft_lexer_advance_with_tkn(lexer, ft_init_tkn(TKN_REDIR_IN,
-						ft_lexer_char_to_str(lexer))));
-		}
-		else if (lexer->c == '>' && ft_count_the_same(lexer, '>') == 2)
-		{
-			lexer->i++;
-			return (ft_lexer_advance_with_tkn(lexer,
-					ft_init_tkn(TKN_REDIR_APPEND, ">>")));
-		}
-		else if (lexer->c == '>' && ft_count_the_same(lexer, '>') == 1)
-		{
-			return (ft_lexer_advance_with_tkn(lexer, ft_init_tkn(TKN_REDIR_OUT,
-						ft_lexer_char_to_str(lexer))));
-		}
-		else if (ft_is_extended((int)lexer->c) && lexer->c != '\'' && lexer->c != '"')
+		ft_handle_whitespace(lexer);
+		tkn = ft_handle_pipe(lexer);
+		if (tkn != NULL)
+			return (tkn);
+		tkn = ft_handle_less_than(lexer);
+		if (tkn != NULL)
+			return (tkn);
+		tkn = ft_handle_greater_than(lexer);
+		if (tkn != NULL)
+			return (tkn);
+		tkn = ft_handle_less_than(lexer);
+		if (tkn != NULL)
+			return (tkn);
+		if (ft_is_ext_no_quotes((int)lexer->c))
 			return (ft_lexer_get_word(lexer));
-		else
-			ft_lexer_advance(lexer);
 	}
+	ft_lexer_advance(lexer);
 	return (NULL);
 }
 
