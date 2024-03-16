@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/14 15:45:08 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/16 20:41:12 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,29 +172,37 @@ typedef struct s_tkn_lst
  * "<<" to read from a heredoc
  * @param next The next redirection 
  */
-typedef struct s_redir
+typedef struct s_redirect
 {
 	char			*file;
 	char			*redir_type;
 	struct s_redir	*next;
-}					t_redir;
+}					t_redirect;
 
 /**
- * @brief Struct to handle the commands
- * @param argv The comand itself and its arguments
- * @param is_redir A flag to indicate if the command has redirections
- * @param fd_in The file descriptor to read from
- * @param fd_out The file descriptor to write to
- * @param redir The redirections list (if the command has redirections)
- * @param next The next command
+ * @brief Structure to handle the commands
+ * @param args The arguments of the command
+ * where the very first argument is the command itself
+ * and the rest are the arguments 
+ * @param flag_redir The flag to check if 
+ * the command has a redirection
+ * @param fd The file descriptor for the pipe 
+ * that will be used to pass the output of the
+ * previous command to the input of the next command
+ * @param redir The redirection
+ * @param redir_count The redirection count
+ * @param save The save dup. It duplicates stdin
+ * and saves it's value.
+ * @param next The next cmd structure
  */
 typedef struct s_cmd
 {
-	char			**argv;
-	int				is_redir;
-	int				fd_in;
-	int				fd_out;
-	struct s_redir	*redir;
+	char			**args;
+	int				flag_redir;
+	int				fd[2];
+	t_redirect		*redir;
+	int				redir_count[2];
+	int				save;
 	struct s_cmd	*next;
 }					t_cmd;
 
