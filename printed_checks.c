@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 13:32:11 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/17 12:57:16 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/17 18:07:55 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /**
  * @brief This function prints the variables from the list
  * of expandable variables found in the user input string.
+ * Used in the debugging process.
  * 
  * @param vars 
  * @var current The pointer to the list that tracks
@@ -41,7 +42,8 @@ void	ft_print_vars(t_list *vars)
 }
 
 /**
- * @brief Function to print the variables from the env_copy list
+ * @brief Function to print the variables from the env_copy list.
+ * Used in the debugging process.
  * @var tmp The pointer to the current node in the list
  * @param data Main data structure
  */
@@ -54,33 +56,5 @@ void	print_env_vars(t_data *data)
 	{
 		ft_printf("Key: %s, Value: %s\n", tmp->key, tmp->value);
 		tmp = tmp->next;
-	}
-}
-
-void	ft_print_cmds(t_data *data)
-{
-	t_cmd	*cmd;
-	int		i;
-
-	cmd = data->cmd;
-	while (cmd != NULL)
-	{
-		ft_printf("Command:\n");
-		if (cmd->args != NULL)
-		{
-			i = 0;
-			while (cmd->args[i] != NULL)
-			{
-				ft_printf("Arg[%d]: %s\n", i, cmd->args[i]);
-				i++;
-			}
-		}
-		if (cmd->redir != NULL)
-		{
-			ft_printf("Redirection: %s\n", cmd->redir->redir_type);
-			ft_printf("File: %s\n", cmd->redir->file);
-		}
-		ft_printf("Redirection flag: %d\n", cmd->flag_redir);
-		cmd = cmd->next;
 	}
 }

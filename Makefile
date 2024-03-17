@@ -6,7 +6,7 @@
 #    By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/08 15:13:18 by vkatason          #+#    #+#              #
-#    Updated: 2024/03/16 20:56:35 by vkatason         ###   ########.fr        #
+#    Updated: 2024/03/17 17:51:08 by vkatason         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRC =  check_comand.c \
 		main.c \
 		new_input.c \
 		parse.c \
+		print_cmds_list.c \
 		print_entry.c \
 		printed_checks.c \
 		signals.c \

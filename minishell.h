@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/17 13:56:44 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/17 18:06:49 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -335,6 +335,8 @@ void				ft_free_cmd(t_cmd *cmd);
 t_cmd				*ft_init_cmd(void);
 int					ft_tkn_lst_last(t_tkn_lst *tkn_lst);
 void				ft_print_cmds(t_data *data);
+void				ft_print_single_cmd(t_cmd *cmd, int i);
+void				ft_print_redirections(t_redirect *redir);
 
 /*----- LIST MANAGEMENT FUNCTIONS */
 
@@ -353,6 +355,8 @@ void				suppress_output(void);
 
 /*----- ERROR FUNCTIONS -----*/
 void				ft_error(char *str, int type_error);
+
+
 
 
 
