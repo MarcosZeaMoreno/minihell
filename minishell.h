@@ -102,7 +102,7 @@ typedef struct s_token
 
 /**
  * @brief Structure representing a token in the minishell program.
- * 
+ *
  * @param e_type The type of the token
  * @param TKN_PIPE Pipe symbol (|)
  * @param TKN_REDIR_IN Redirection input symbol (<)
@@ -167,7 +167,7 @@ typedef struct s_tkn_lst
  * ">" to overwrite,
  * "<" to read from file
  * "<<" to read from a heredoc
- * @param next The next redirection 
+ * @param next The next redirection
  */
 typedef struct s_redirect
 {
@@ -180,10 +180,10 @@ typedef struct s_redirect
  * @brief Structure to handle the commands
  * @param args The arguments of the command
  * where the very first argument is the command itself
- * and the rest are the arguments 
- * @param flag_redir The flag to check if 
+ * and the rest are the arguments
+ * @param flag_redir The flag to check if
  * the command has a redirection
- * @param fd The file descriptor for the pipe 
+ * @param fd The file descriptor for the pipe
  * that will be used to pass the output of the
  * previous command to the input of the next command
  * @param redir The redirection
@@ -337,6 +337,7 @@ int					ft_tkn_lst_last(t_tkn_lst *tkn_lst);
 void				ft_print_cmds(t_data *data);
 void				ft_print_single_cmd(t_cmd *cmd, int i);
 void				ft_print_redirections(t_redirect *redir);
+void				ft_tkns_error_exit(t_data *data);
 
 /*----- LIST MANAGEMENT FUNCTIONS */
 
