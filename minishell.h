@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/16 20:41:12 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/17 13:56:44 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,6 @@
 # define EXIT_FAILURE 1
 # define EXIT_NOT_FOUND 127
 # define EXIT_SYNTAX_ERROR 258
-
-
-
 
 /*----- STRUCTURES -----*/
 
@@ -174,10 +171,10 @@ typedef struct s_tkn_lst
  */
 typedef struct s_redirect
 {
-	char			*file;
-	char			*redir_type;
-	struct s_redir	*next;
-}					t_redirect;
+	char				*file;
+	char				*redir_type;
+	struct s_redirect	*next;
+}						t_redirect;
 
 /**
  * @brief Structure to handle the commands
@@ -190,7 +187,8 @@ typedef struct s_redirect
  * that will be used to pass the output of the
  * previous command to the input of the next command
  * @param redir The redirection
- * @param redir_count The redirection count
+ * @param redir_count The redirection direction
+ * where 0 is input and 1 is output
  * @param save The save dup. It duplicates stdin
  * and saves it's value.
  * @param next The next cmd structure
@@ -330,6 +328,14 @@ t_tkn				*ft_handle_less_than(t_lexer *lexer);
 t_tkn				*ft_handle_pipe(t_lexer *lexer);
 void				ft_handle_whitespace(t_lexer *lexer);
 
+/*---- CMD MANAGEMENT FUNCTTIONS -----*/
+
+void				ft_free_redir(t_redirect *redir);
+void				ft_free_cmd(t_cmd *cmd);
+t_cmd				*ft_init_cmd(void);
+int					ft_tkn_lst_last(t_tkn_lst *tkn_lst);
+void				ft_print_cmds(t_data *data);
+
 /*----- LIST MANAGEMENT FUNCTIONS */
 
 void				lst_delone_token(t_token *lst, void (*del)(void *));
@@ -347,5 +353,7 @@ void				suppress_output(void);
 
 /*----- ERROR FUNCTIONS -----*/
 void				ft_error(char *str, int type_error);
+
+
 
 #endif
