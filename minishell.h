@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/17 18:06:49 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/19 17:25:30 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,6 +220,7 @@ typedef struct s_data
 	t_env			*env_copy;
 	char			*input_copy;
 	t_cmd			*cmd;
+	t_cmd			*cmd_head;
 	t_tkn_lst		*tkns;
 	t_token			*token;
 	pid_t			pid;
@@ -355,6 +356,7 @@ void				rl_replace_line(const char *text, int clear_undo);
 void				suppress_output(void);
 
 /*----- ERROR FUNCTIONS -----*/
+
 void				ft_error(char *str, int type_error);
 
 
