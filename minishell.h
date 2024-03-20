@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/19 17:25:30 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/20 14:50:51 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,7 +220,6 @@ typedef struct s_data
 	t_env			*env_copy;
 	char			*input_copy;
 	t_cmd			*cmd;
-	t_cmd			*cmd_head;
 	t_tkn_lst		*tkns;
 	t_token			*token;
 	pid_t			pid;
@@ -331,14 +330,17 @@ void				ft_handle_whitespace(t_lexer *lexer);
 
 /*---- CMD MANAGEMENT FUNCTTIONS -----*/
 
+t_redirect			*ft_init_redir(void);
 void				ft_free_redir(t_redirect *redir);
 void				ft_free_cmd(t_cmd *cmd);
 t_cmd				*ft_init_cmd(void);
+t_cmd				*ft_tkns_to_cmd(t_data *data);
 int					ft_tkn_lst_last(t_tkn_lst *tkn_lst);
 void				ft_print_cmds(t_data *data);
 void				ft_print_single_cmd(t_cmd *cmd, int i);
 void				ft_print_redirections(t_redirect *redir);
-void				ft_tkns_error_exit(t_data *data);
+int					ft_tkns_error_exit(t_data *data);
+int					ft_valid_pipe(t_tkn_lst *tkns, t_data *data);
 
 /*----- LIST MANAGEMENT FUNCTIONS */
 

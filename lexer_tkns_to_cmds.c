@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 13:56:09 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/19 18:57:07 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:22:04 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,74 @@
 void	ft_tkns_to_cmd(t_data *data)
 {
 	t_tkn_lst	*tkns;
-	t_cmd		*tmp;
+	t_cmd		*new_command;
+	t_redirect	*new_redir;
 
-	ft_tkns_error_exit(data);
 	tkns = data->tkns;
-	tmp = ft_init_cmd();
-	while (tkns != NULL)
+	new_command = ft_init_cmd();
+	if (ft_tkns_error_exit(data) != 1)
 	{
-		if (tkns->tkn->e_type == TKN_PIPE)
+		while (tkns != NULL)
 		{
-			ft_cmd_pipe(tkns, data);
-			tmp = ft_fill_cmd(tmp, tkns, tkns->tkn->order);
-			ft_lstadd_back_cmd(&data->cmd, tmp);
-			tmp = ft_init_cmd();
-		}
-		tkns = tkns->next;
-	}
-}
+			new_command = ft_init_cmd();
+			while (tkns->tkn->e_type != TKN_PIPE)
+			{
+				while (tkns->tkn->e_type != TKN_REDIR_APPEND
+					|| tkns->tkn->e_type != TKN_REDIR_OUT
+					|| tkns->tkn->e_type != TKN_REDIR_IN
+					|| tkns->tkn->e_type != TKN_REDIR_HERE_DOC)
+				{
 
-void	ft_tkns_error_exit(t_data *data)
+					
+					new_command->redir = ft_init_redir();
+					
+					new_command->flag_redir = 1;
+					data->cmd->redir = ft_fill_redir(data->cmd->redir, tkns);
+				}
+	tkns = tkns->next;
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+// 			}
+// 			{
+// 				while (tkns->tkn->e_type == TKN_REDIR_APPEND
+// 					|| tkns->tkn->e_type == TKN_REDIR_OUT
+// 					|| tkns->tkn->e_type == TKN_REDIR_IN
+// 					|| tkns->tkn->e_type == TKN_REDIR_HERE_DOC)
+// 				{
+// 					new_comma
+					
+// 					data->cmd->flag_redir = 1;
+// 					data->cmd->redir = ft_fill_redir(data->cmd->redir, tkns);
+// 				}
+// 			}
+// 			}
+// 			if (tkns->tkn->e_type != TKN_PIPE && ft_valid_pipe(tkns, data))
+// 			{
+// 				new_command = ft_fill_cmd(new_command, tkns);
+// 				ft_lstadd_back_cmd(&data->cmd, new_command);
+// 				new_command = ft_init_cmd();
+// 			}
+// 			tkns = tkns->next;
+// 		}
+// 	}
+// }
+
+
+int	ft_tkns_error_exit(t_data *data)
 {
 	t_tkn_lst	*tkns;
 
@@ -44,33 +93,31 @@ void	ft_tkns_error_exit(t_data *data)
 		{
 			ft_error(tkns->tkn->value, 14);
 			data->exit_status = 258;
-			return ;
+			return (1);
 		}
 		tkns = tkns->next;
 	}
+	return (0);
 }
 
-void	ft_cmd_pipe(t_tkn_lst *tkns, t_data *data)
+int	ft_valid_pipe(t_tkn_lst *tkns, t_data *data)
 {
-	if (tkns->tkn->e_type == TKN_PIPE)
+	if (tkns->prev == NULL || tkns->next == NULL)
 	{
-		if (tkns->prev == NULL || tkns->next == NULL)
-		{
-			ft_error(tkns->tkn->value, 13);
-			data->exit_status = 258;
-			return ;
-		}
+		ft_error(tkns->tkn->value, 13);
+		data->exit_status = 258;
+		return (0);
 	}
+	else if (tkns->prev->tkn->e_type == TKN_WORD
+		|| tkns->prev->tkn->e_type == TKN_STRING 
+		|| tkns->next->tkn->e_type == TKN_WORD
+		|| tkns->next->tkn->e_type == TKN_STRING)
+	{
+	
+	}
+	else
+		return (1);
 }
 
-t_cmd	*ft_fill_cmd(t_cmd *cmd, t_tkn_lst *tkns, int pos)
-{
-	int			i;
-	int			arg_count;
-	t_tkn_lst	*tmp;
 
-	tmp = tkns;
-	i = 1;
-	while
-	return (cmd);
-}
+

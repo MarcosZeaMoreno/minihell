@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 20:56:18 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/16 23:09:20 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/20 14:49:49 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,22 @@ void	ft_free_cmd(t_cmd *cmd)
 		free(current);
 		current = next;
 	}
+}
+
+/**
+ * @brief Function that initializes a redirect structure.
+ * 
+ * @return t_redirect* Redirect structure.
+ */
+t_redirect	*ft_init_redir(void)
+{
+	t_redirect	*redir;
+
+	redir = ft_calloc(1, sizeof(t_redirect));
+	redir->file = NULL;
+	redir->redir_type = NULL;
+	redir->next = NULL;
+	return (redir);
 }
 
 /**
