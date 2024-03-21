@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 22:34:51 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/21 16:55:53 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/21 18:03:32 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,28 +88,21 @@ t_tkn	*ft_lexer_get_next_token(t_lexer *lexer)
 /**
  * @brief The function gets a string from the input.
  * As a string, we consider a sequence of characters
- * between two double quotes.
+ * between two double quotes and two single quotes
+ * and also checks if the string is followed by a space
+ * or the end of the string. If not it keeps iterating
+ * until it finds a space or the end of the string.
+ * That implementation is needed to handle cases like
+ * > "file".txt.
  * 
  * @param lexer The lexer object. 
  * @return t_tkn* Pointer to the token with a TKN_STRING type.
+ * @var char quote The quote character.
+ * @var char* value The string value that we need to add to the token.
  */
-
-static char	*process_char_and_advance(t_lexer *lexer, char *value)
-{
-	char	*tmp;
-
-	tmp = ft_lexer_char_to_str(lexer);
-	value = ft_realloc(value,
-			(ft_strlen(value) + ft_strlen(tmp) + 1) * sizeof(char));
-	ft_strcat(value, tmp);
-	ft_lexer_advance(lexer);
-	return (value);
-}
-
 t_tkn	*ft_lexer_get_string(t_lexer *lexer)
 {
 	char	*value;
-	//char	*tmp;
 	char	quote;
 
 	quote = lexer->c;
@@ -117,56 +110,15 @@ t_tkn	*ft_lexer_get_string(t_lexer *lexer)
 	value = ft_calloc(1, sizeof(char));
 	value[0] = '\0';
 	while (lexer->c != quote)
-	{
-		value = process_char_and_advance(lexer, value);
-		// tmp = ft_lexer_char_to_str(lexer);
-		// value = ft_realloc(value, (ft_strlen(value) + ft_strlen(tmp) + 1)
-		// 		* sizeof(char));
-		// ft_strcat(value, tmp);
-		// ft_lexer_advance(lexer);
-	}
+		value = ft_lexer_process_chars(lexer, value);
 	ft_lexer_advance(lexer);
 	if (lexer->c != ' ' && lexer->c != '\0')
 	{
 		while (lexer->c != ' ' && lexer->c != '\0')
-		{
-			
-			value = process_char_and_advance(lexer, value);
-			// tmp = ft_lexer_char_to_str(lexer);
-			// value = ft_realloc(value, (ft_strlen(value) + ft_strlen(tmp) + 1)
-			// 		* sizeof(char));
-			// ft_strcat(value, tmp);
-			// ft_lexer_advance(lexer);
-		}
+			value = ft_lexer_process_chars(lexer, value);
 	}
 	return (ft_init_tkn(TKN_STRING, value));
 }
-
-// t_tkn	*ft_lexer_get_string(t_lexer *lexer)
-// {
-// 	char	*value;
-// 	char	*tmp;
-// 	char	quote;
-
-// 	quote = lexer->c;
-// 	ft_lexer_advance(lexer);
-// 	value = ft_calloc(1, sizeof(char));
-// 	value[0] = '\0';
-// 	while (lexer->c != quote)
-// 	{
-// 		tmp = ft_lexer_char_to_str(lexer);
-// 		value = ft_realloc(value, (ft_strlen(value) + ft_strlen(tmp) + 1)
-// 				* sizeof(char));
-// 		ft_strcat(value, tmp);
-// 		ft_lexer_advance(lexer);
-// 	}
-// 	ft_lexer_advance(lexer);
-// 	if (lexer->c == quote)
-// 	{
-// 		return (ft_lexer_get_string(lexer));
-// 	}
-// 	return (ft_init_tkn(TKN_STRING, value));
-// }
 
 /**
  * @brief The function gets a word from the input.

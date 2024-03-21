@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/20 14:50:51 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/21 18:18:19 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -311,6 +311,7 @@ void				ft_lexer_advance(t_lexer *lexer);
 t_tkn				*ft_lexer_advance_with_tkn(t_lexer *lexer, t_tkn *tkn);
 char				*ft_lexer_char_to_str(t_lexer *lexer);
 t_tkn				*ft_lexer_get_next_token(t_lexer *lexer);
+char				*ft_lexer_process_chars(t_lexer *lexer, char *value);
 t_tkn				*ft_lexer_get_string(t_lexer *lexer);
 t_tkn				*ft_lexer_get_word(t_lexer *lexer);
 t_tkn				*ft_init_tkn(int type, char *value);
