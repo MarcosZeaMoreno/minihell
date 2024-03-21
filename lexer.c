@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 22:34:51 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/16 20:25:51 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/21 16:55:53 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,23 @@ t_tkn	*ft_lexer_get_next_token(t_lexer *lexer)
  * @param lexer The lexer object. 
  * @return t_tkn* Pointer to the token with a TKN_STRING type.
  */
+
+static char	*process_char_and_advance(t_lexer *lexer, char *value)
+{
+	char	*tmp;
+
+	tmp = ft_lexer_char_to_str(lexer);
+	value = ft_realloc(value,
+			(ft_strlen(value) + ft_strlen(tmp) + 1) * sizeof(char));
+	ft_strcat(value, tmp);
+	ft_lexer_advance(lexer);
+	return (value);
+}
+
 t_tkn	*ft_lexer_get_string(t_lexer *lexer)
 {
 	char	*value;
-	char	*tmp;
+	//char	*tmp;
 	char	quote;
 
 	quote = lexer->c;
@@ -105,19 +118,55 @@ t_tkn	*ft_lexer_get_string(t_lexer *lexer)
 	value[0] = '\0';
 	while (lexer->c != quote)
 	{
-		tmp = ft_lexer_char_to_str(lexer);
-		value = ft_realloc(value, (ft_strlen(value) + ft_strlen(tmp) + 1)
-				* sizeof(char));
-		ft_strcat(value, tmp);
-		ft_lexer_advance(lexer);
+		value = process_char_and_advance(lexer, value);
+		// tmp = ft_lexer_char_to_str(lexer);
+		// value = ft_realloc(value, (ft_strlen(value) + ft_strlen(tmp) + 1)
+		// 		* sizeof(char));
+		// ft_strcat(value, tmp);
+		// ft_lexer_advance(lexer);
 	}
 	ft_lexer_advance(lexer);
-	if (lexer->c == quote)
+	if (lexer->c != ' ' && lexer->c != '\0')
 	{
-		return (ft_lexer_get_string(lexer));
+		while (lexer->c != ' ' && lexer->c != '\0')
+		{
+			
+			value = process_char_and_advance(lexer, value);
+			// tmp = ft_lexer_char_to_str(lexer);
+			// value = ft_realloc(value, (ft_strlen(value) + ft_strlen(tmp) + 1)
+			// 		* sizeof(char));
+			// ft_strcat(value, tmp);
+			// ft_lexer_advance(lexer);
+		}
 	}
 	return (ft_init_tkn(TKN_STRING, value));
 }
+
+// t_tkn	*ft_lexer_get_string(t_lexer *lexer)
+// {
+// 	char	*value;
+// 	char	*tmp;
+// 	char	quote;
+
+// 	quote = lexer->c;
+// 	ft_lexer_advance(lexer);
+// 	value = ft_calloc(1, sizeof(char));
+// 	value[0] = '\0';
+// 	while (lexer->c != quote)
+// 	{
+// 		tmp = ft_lexer_char_to_str(lexer);
+// 		value = ft_realloc(value, (ft_strlen(value) + ft_strlen(tmp) + 1)
+// 				* sizeof(char));
+// 		ft_strcat(value, tmp);
+// 		ft_lexer_advance(lexer);
+// 	}
+// 	ft_lexer_advance(lexer);
+// 	if (lexer->c == quote)
+// 	{
+// 		return (ft_lexer_get_string(lexer));
+// 	}
+// 	return (ft_init_tkn(TKN_STRING, value));
+// }
 
 /**
  * @brief The function gets a word from the input.

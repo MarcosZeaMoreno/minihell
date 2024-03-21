@@ -6,40 +6,40 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 13:56:09 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/20 17:22:04 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/21 11:39:07 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_tkns_to_cmd(t_data *data)
-{
-	t_tkn_lst	*tkns;
-	t_cmd		*new_command;
-	t_redirect	*new_redir;
+// void	ft_tkns_to_cmd(t_data *data)
+// {
+// 	t_tkn_lst	*tkns;
+// 	t_cmd		*new_command;
+// 	t_redirect	*new_redir;
 
-	tkns = data->tkns;
-	new_command = ft_init_cmd();
-	if (ft_tkns_error_exit(data) != 1)
-	{
-		while (tkns != NULL)
-		{
-			new_command = ft_init_cmd();
-			while (tkns->tkn->e_type != TKN_PIPE)
-			{
-				while (tkns->tkn->e_type != TKN_REDIR_APPEND
-					|| tkns->tkn->e_type != TKN_REDIR_OUT
-					|| tkns->tkn->e_type != TKN_REDIR_IN
-					|| tkns->tkn->e_type != TKN_REDIR_HERE_DOC)
-				{
+// 	tkns = data->tkns;
+// 	new_command = ft_init_cmd();
+// 	if (ft_tkns_error_exit(data) != 1)
+// 	{
+// 		while (tkns != NULL)
+// 		{
+// 			new_command = ft_init_cmd();
+// 			while (tkns->tkn->e_type != TKN_PIPE)
+// 			{
+// 				while (tkns->tkn->e_type != TKN_REDIR_APPEND
+// 					|| tkns->tkn->e_type != TKN_REDIR_OUT
+// 					|| tkns->tkn->e_type != TKN_REDIR_IN
+// 					|| tkns->tkn->e_type != TKN_REDIR_HERE_DOC)
+// 				{
 
 					
-					new_command->redir = ft_init_redir();
+// 					new_command->redir = ft_init_redir();
 					
-					new_command->flag_redir = 1;
-					data->cmd->redir = ft_fill_redir(data->cmd->redir, tkns);
-				}
-	tkns = tkns->next;
+// 					new_command->flag_redir = 1;
+// 					data->cmd->redir = ft_fill_redir(data->cmd->redir, tkns);
+// 				}
+// 	tkns = tkns->next;
 			
 			
 			
@@ -107,13 +107,6 @@ int	ft_valid_pipe(t_tkn_lst *tkns, t_data *data)
 		ft_error(tkns->tkn->value, 13);
 		data->exit_status = 258;
 		return (0);
-	}
-	else if (tkns->prev->tkn->e_type == TKN_WORD
-		|| tkns->prev->tkn->e_type == TKN_STRING 
-		|| tkns->next->tkn->e_type == TKN_WORD
-		|| tkns->next->tkn->e_type == TKN_STRING)
-	{
-	
 	}
 	else
 		return (1);
