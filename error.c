@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:25:58 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/19 16:38:40 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/22 15:38:36 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,3 +49,4 @@ void	ft_error(char *usr_input, int type_error)
 		ft_printf_fd(2, RED " Unexpected token in input '%s'\n" RST,
 			usr_input);
 }
+

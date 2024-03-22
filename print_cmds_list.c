@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:49:48 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/17 18:07:29 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/22 18:49:04 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,15 @@ void	ft_print_single_cmd(t_cmd *cmd, int i)
 	j = 0;
 	ft_printf(YELLOW"\n----------- Command %d -----------\n"RST, i);
 	ft_printf("ARGUMENTS:\n");
-	while (cmd->args[j] != NULL)
+	if (cmd->args == NULL)
+		ft_printf("No arguments\n");
+	else
 	{
-		ft_printf("Arg[%d] = %s\n", j, cmd->args[j]);
-		j++;
+		while (cmd->args[j] != NULL)
+		{
+			ft_printf("Arg[%d] = %s\n", j, cmd->args[j]);
+			j++;
+		}
 	}
 	ft_printf("***** END OF ARGS *****\n");
 	if (cmd->redir != NULL)
