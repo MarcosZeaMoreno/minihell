@@ -6,7 +6,7 @@
 #    By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/08 15:13:18 by vkatason          #+#    #+#              #
-#    Updated: 2024/03/22 17:07:56 by vkatason         ###   ########.fr        #
+#    Updated: 2024/03/23 18:43:34 by vkatason         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ LDFLAGS = -lreadline -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.b
 LIBFT = libft
 SRC =  check_comand.c \
 		check_expand_value.c \
+		cmd_errors_utils.c \
 		env_fts.c \
 		env_to_lst.c\
 		error.c \
@@ -41,6 +42,7 @@ SRC =  check_comand.c \
 		main.c \
 		new_input.c \
 		parse.c \
+		parser.c \
 		print_cmds_list.c \
 		print_entry.c \
 		printed_checks.c \

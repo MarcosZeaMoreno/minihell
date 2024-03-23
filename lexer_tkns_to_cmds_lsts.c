@@ -6,39 +6,22 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 16:44:43 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/22 19:08:07 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/23 18:30:01 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_cmd_add_back(t_cmd **lst, t_cmd *new)
-{
-	t_cmd	*last;
-
-	if (!lst || !new)
-		return ;
-	if (!*lst)
-	{
-		*lst = new;
-		return ;
-	}
-	last = ft_cmd_last(*lst);
-	last->next = new;
-}
-
-t_cmd	*ft_cmd_last(t_cmd *lst)
-{
-	t_cmd	*last;
-
-	if (!lst)
-		return (NULL);
-	last = lst;
-	while (last->next)
-		last = last->next;
-	return (last);
-}
-
+/**
+ * @brief Function to reallocate memory 
+ * for args in the command list
+ * 
+ * @param cmd The command structure.
+ * @param new_arg The new argument to be added.
+ * @var new_args The new arguments list.
+ * @var i The index of the current argument.
+ * @var j The index of the new argument.
+ */
 void	ft_realloc_args(t_cmd *cmd, char *new_arg)
 {
 	char	**new_args;

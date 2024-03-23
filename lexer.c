@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   lexer_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/28 22:34:51 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/21 18:03:32 by vkatason         ###   ########.fr       */
+/*   Created: 2024/03/23 18:30:52 by vkatason          #+#    #+#             */
+/*   Updated: 2024/03/23 18:32:10 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,5 +148,7 @@ t_tkn	*ft_lexer_get_word(t_lexer *lexer)
 		ft_strcat(value, tmp);
 		ft_lexer_advance(lexer);
 	}
+	while (lexer->c == ' ')
+		ft_lexer_advance(lexer);
 	return (ft_init_tkn(TKN_WORD, value));
 }

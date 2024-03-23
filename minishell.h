@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/22 19:08:30 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/23 18:51:24 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@
 /*
 ** ASCII colors escape sequences for printf
 ** Usage:
-** 		printf(RED "Red bold text" RST);
-**		printf(B "Bold text goes here" RST);
+** 		ft_printf(RED "Red bold text" RST);
+**		ft_printf(B "Bold text goes here" RST);
 */
 # define RST "\033[0m"        /* Reset to default color */
 # define BU "\033[1;4;0m"     /* Bold and underlined text*/
@@ -330,12 +330,15 @@ t_tkn					*ft_handle_less_than(t_lexer *lexer);
 t_tkn					*ft_handle_pipe(t_lexer *lexer);
 void					ft_handle_whitespace(t_lexer *lexer);
 
-/*---- CMD MANAGEMENT FUNCTTIONS -----*/
+/*---- PARSING /CMD CREATION FUNCTTIONS/ -----*/
 
+void					ft_parser(char *usr_input, t_data *data);
 t_redirect				*ft_init_redir(void);
 void					ft_free_redir(t_redirect *redir);
 void					ft_free_cmd(t_cmd *cmd);
 t_cmd					*ft_init_cmd(void);
+void					ft_handle_tkn_type(t_tkn *tkn, t_tkn_lst **tkn_lst,
+							t_cmd **tmp, t_data *data);
 void					ft_tkns_to_cmds(t_data *data);
 int						ft_tkn_lst_last(t_tkn_lst *tkn_lst);
 void					ft_print_cmds(t_data *data);
@@ -343,11 +346,11 @@ void					ft_print_single_cmd(t_cmd *cmd, int i);
 void					ft_print_redirections(t_redirect *redir);
 int						ft_tkns_error_exit(t_data *data);
 int						ft_valid_pipe(t_tkn_lst *tkns, t_data *data);
+int						ft_valid_redir(t_tkn_lst *tkns, t_data *data);
 void					ft_add_arg_to_cmd(t_cmd *cmd, t_tkn_lst **tkn_lst);
-void					ft_add_redir_to_cmd(t_data *data, t_cmd *cmd,
+t_redirect				*ft_make_new_redir(t_cmd *cmd);
+int						ft_add_redir_to_cmd(t_data *data, t_cmd *cmd,
 							t_tkn_lst **tkns_lst);
-t_cmd					*ft_cmd_last(t_cmd *lst);
-void					ft_cmd_add_back(t_cmd **lst, t_cmd *new);
 void					ft_realloc_args(t_cmd *cmd, char *new_arg);
 
 /*----- LIST MANAGEMENT FUNCTIONS */
