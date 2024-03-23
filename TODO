@@ -3,3 +3,5 @@
 [ ] FREE tkns ?¿?¿?¿
 [ ] FIX memory leaks
 [ ] FIX History bug
+[ ] FIX exit_status
+[ ] FIX $? value
