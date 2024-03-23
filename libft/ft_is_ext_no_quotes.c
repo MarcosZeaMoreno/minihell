@@ -1,42 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtok.c                                        :+:      :+:    :+:   */
+/*   ft_is_ext_no_quotes.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/08 14:32:04 by vkatason          #+#    #+#             */
-/*   Updated: 2024/02/12 21:27:47 by vkatason         ###   ########.fr       */
+/*   Created: 2024/03/12 18:11:04 by vkatason          #+#    #+#             */
+/*   Updated: 2024/03/14 15:46:36 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strtok(char *str, const char *delim)
+int	ft_is_ext_no_quotes(int c)
 {
-	static char	*stock;
-	char		*ptr;
-
-	if (str != NULL)
-		stock = str;
-	if (stock == NULL)
-		return (NULL);
-	while (ft_strchr(delim, *stock))
-		stock++;
-	if (*stock == '\0')
-	{
-		stock = NULL;
-		return (NULL);
-	}
-	ptr = stock;
-	while (*stock != '\0' && !ft_strchr(delim, *stock))
-		stock++;
-	if (*stock != '\0')
-	{
-		*stock = '\0';
-		stock++;
-	}
-	else
-		stock = NULL;
-	return (ptr);
+	return ((c >= 32 && c <= 255) && c != 127 && c != 129 && c != 141
+		&& c != 143 && c != 144 && c != 157 && c != 160
+		&& c != 173 && c != '\'' && c != '"');
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkatason <vkatason@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 20:50:51 by vkatason          #+#    #+#             */
-/*   Updated: 2022/10/16 21:35:49 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/01 16:09:17 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	*ft_strdup(char *s1)
 	char	*new;
 	int		i;
 
+	if (s1 == NULL)
+		return (NULL);
 	i = 0;
 	new = (char *)malloc(sizeof(char) * ft_strlen(s1) + 1);
 	if (!new)

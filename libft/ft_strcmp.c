@@ -6,9 +6,11 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:05:26 by vkatason          #+#    #+#             */
-/*   Updated: 2023/08/08 18:05:46 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/02/23 15:00:56 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_strcmp(const char *s1, const char *s2)
 {

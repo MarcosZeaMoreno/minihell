@@ -1,42 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtok.c                                        :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/08 14:32:04 by vkatason          #+#    #+#             */
-/*   Updated: 2024/02/12 21:27:47 by vkatason         ###   ########.fr       */
+/*   Created: 2024/02/29 10:35:46 by vkatason          #+#    #+#             */
+/*   Updated: 2024/03/03 22:36:47 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strtok(char *str, const char *delim)
+char	*ft_strncat(char *s1, const char *s2, size_t n)
 {
-	static char	*stock;
-	char		*ptr;
+	size_t	i;
+	size_t	j;
 
-	if (str != NULL)
-		stock = str;
-	if (stock == NULL)
-		return (NULL);
-	while (ft_strchr(delim, *stock))
-		stock++;
-	if (*stock == '\0')
+	i = 0;
+	j = 0;
+	while (s1[i] != '\0')
+		i++;
+	while (s2[j] != '\0' && j < n)
 	{
-		stock = NULL;
-		return (NULL);
+		s1[i + j] = s2[j];
+		j++;
 	}
-	ptr = stock;
-	while (*stock != '\0' && !ft_strchr(delim, *stock))
-		stock++;
-	if (*stock != '\0')
-	{
-		*stock = '\0';
-		stock++;
-	}
-	else
-		stock = NULL;
-	return (ptr);
+	s1[i + j] = '\0';
+	return (s1);
 }

@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:55:51 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/23 16:55:51 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/03/23 19:15:18 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 /**
  * @brief Function to get current directory
- * 
- * @return char* 
+ *
+ * @return char*
  */
 char	*get_current_directory(void)
 {
 	char	*pwd;
+
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
 		ft_printf_fd(1, "cd: error\n");
@@ -28,9 +29,9 @@ char	*get_current_directory(void)
 
 /**
  * @brief Function to change directory
- * 
- * @param dir 
- * @return int 
+ *
+ * @param dir
+ * @return int
  */
 int	change_directory(char *dir)
 {
@@ -44,10 +45,10 @@ int	change_directory(char *dir)
 
 /**
  * @brief Function to update env variables
- * 
- * @param data 
- * @param pwd_old 
- * @param pwd_new 
+ *
+ * @param data
+ * @param pwd_old
+ * @param pwd_new
  */
 void	update_env_variables(t_data *data, char *pwd_old, char *pwd_new)
 {
@@ -59,33 +60,35 @@ void	update_env_variables(t_data *data, char *pwd_old, char *pwd_new)
 
 /**
  * @brief Function to handle the cd builtin
- * 
- * @param data 
- * @param token
+ *
+ * @param data
+ * @param cmds
  */
-void	ft_cd(t_data *data, t_token *token)
+void	ft_cd(t_data *data, char **cmds)
 {
-    char	*pwd_old;
-    char	*pwd_new;
-    char	*dir;
+	char	*pwd_old;
+	char	*pwd_new;
+	char	*dir;
+	int		i;
 
+	i = 1;
 	pwd_old = get_current_directory();
-    if (!pwd_old)
-        return ;
-    if (token->next == NULL || token->next->value == NULL)
-        dir = get_env_value(data->env_copy, "HOME");
-    else
-        dir = token->next->value;
-    if (change_directory(dir) == -1)
-    {
-        free(pwd_old);
-        return ;
-    }
-    pwd_new = get_current_directory();
-    if (!pwd_new)
-    {
-        free(pwd_old);
-        return ;
-    }
-    update_env_variables(data, pwd_old, pwd_new);
+	if (!pwd_old)
+		return ;
+	if (cmds[i] == NULL)
+		dir = get_env_value(data->env_copy, "HOME");
+	else
+		dir = cmds[i];
+	if (change_directory(dir) == -1)
+	{
+		free(pwd_old);
+		return ;
+	}
+	pwd_new = get_current_directory();
+	if (!pwd_new)
+	{
+		free(pwd_old);
+		return ;
+	}
+	update_env_variables(data, pwd_old, pwd_new);
 }

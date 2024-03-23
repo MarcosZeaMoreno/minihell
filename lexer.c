@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/28 22:34:51 by vkatason          #+#    #+#             */
-/*   Updated: 2024/02/01 20:23:10 by vkatason         ###   ########.fr       */
+/*   Created: 2024/03/23 18:30:52 by vkatason          #+#    #+#             */
+/*   Updated: 2024/03/23 19:31:29 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,143 +44,78 @@ void	ft_lexer_advance(t_lexer *lexer)
 }
 
 /**
- * @brief The function skips all whitespace characters
- * (space, tab, newline) in the input and advances the lexer
- * saving the current character to the lexer object.
- * 
- * @param lexer The lexer object. 
- */
-void	ft_lexer_skip_whitespace(t_lexer *lexer)
-{
-	while (lexer->c == ' ' || lexer->c == '\t' || lexer->c == '\n')
-		ft_lexer_advance(lexer);
-}
-
-/**
- * @brief The function gets different tokens from the input.
+ * @brief The function gets different tokens from the input
+ * with it's helper functions (see lexer_tkns_handlers.c)
  * It is a finite state machine that returns a token. It checks
  * the current character and returns the corresponding token.
  * 
+ * @attention Very important to use ft_is_ext_no_quotes 
+ * in the end of the while loop to check special characters
+ * like $, ~, ©, ¥, ñ, etc. They need to form part of the word.
+ * @var t_tkn* Pointer to the token.
  * @param lexer The lexer object. 
  * @return t_tkn* Pointer to the token.
  */
 t_tkn	*ft_lexer_get_next_token(t_lexer *lexer)
 {
-	char	*white_space;
+	t_tkn	*tkn;
 
+	tkn = NULL;
 	while (lexer->c != '\0' && lexer->i < ft_strlen(lexer->input))
 	{
-		if (lexer->c == '"')
-		{
+		if (lexer->c == '"' || lexer->c == '\'')
 			return (ft_lexer_get_string(lexer));
-		}
-		if (lexer->c == ' ' || lexer->c == '\t' || lexer->c == '\n')
-		{
-			white_space = ft_lexer_get_char(lexer);
-			ft_lexer_advance(lexer);
-			return (ft_init_tkn(TKN_WHITESPACE, white_space));
-		}
-		if (lexer->c == '\'')
-		{
-			return (ft_lexer_advance_with_tkn(lexer, ft_init_tkn(TKN_SNGL_QUOTE,
-						ft_lexer_get_char(lexer))));
-		}
-		else if (lexer->c == ';')
-		{
-			return (ft_lexer_advance_with_tkn(lexer, ft_init_tkn(TKN_SEMICOLON,
-						ft_lexer_get_char(lexer))));
-		}
-		else if (lexer->c == '|' && lexer->input[lexer->i + 1] == '|')
-		{
-			lexer->i++;
-			return (ft_lexer_advance_with_tkn(lexer,
-					ft_init_multi_tkn(TKN_DOUBLE_PIPE, "||")));
-		}
-		else if (lexer->c == '|')
-		{
-			return (ft_lexer_advance_with_tkn(lexer, ft_init_tkn(TKN_PIPE,
-						ft_lexer_get_char(lexer))));
-		}
-		else if (lexer->c == '<' && lexer->input[lexer->i + 1] == '<')
-		{
-			lexer->i++;
-			return (ft_lexer_advance_with_tkn(lexer,
-					ft_init_multi_tkn(TKN_REDIR_HERE_DOC, "<<")));
-		}
-		else if (lexer->c == '<')
-		{
-			return (ft_lexer_advance_with_tkn(lexer, ft_init_tkn(TKN_REDIR_IN,
-						ft_lexer_get_char(lexer))));
-		}
-		else if (lexer->c == '>' && lexer->input[lexer->i + 1] == '>')
-		{
-			lexer->i++;
-			return (ft_lexer_advance_with_tkn(lexer,
-					ft_init_multi_tkn(TKN_REDIR_APPEND, ">>")));
-		}
-		else if (lexer->c == '>')
-		{
-			return (ft_lexer_advance_with_tkn(lexer, ft_init_tkn(TKN_REDIR_OUT,
-						ft_lexer_get_char(lexer))));
-		}
-		else if (lexer->c == '$')
-		{
-			return (ft_lexer_advance_with_tkn(lexer, ft_init_tkn(TKN_DOLLAR,
-						ft_lexer_get_char(lexer))));
-		}
-		else if (lexer->c == '&' && lexer->input[lexer->i + 1] == '&')
-		{
-			lexer->i++;
-			return (ft_lexer_advance_with_tkn(lexer,
-					ft_init_multi_tkn(TKN_DOUBLE_AMPER, "&&")));
-		}
-		else if (lexer->c == '&')
-		{
-			return (ft_lexer_advance_with_tkn(lexer, ft_init_tkn(TKN_AMPER,
-						ft_lexer_get_char(lexer))));
-		}
-		else if (lexer->c == '~')
-		{
-			return (ft_lexer_advance_with_tkn(lexer, ft_init_tkn(TKN_TILDE,
-						ft_lexer_get_char(lexer))));
-		}
-		else if (ft_isalnum((int)lexer->c) == 1 || lexer->c == '_'
-			|| lexer->c == '\'')
+		ft_handle_whitespace(lexer);
+		tkn = ft_handle_pipe(lexer);
+		if (tkn != NULL)
+			return (tkn);
+		tkn = ft_handle_less_than(lexer);
+		if (tkn != NULL)
+			return (tkn);
+		tkn = ft_handle_greater_than(lexer);
+		if (tkn != NULL)
+			return (tkn);
+		tkn = ft_handle_less_than(lexer);
+		if (tkn != NULL)
+			return (tkn);
+		if (ft_is_ext_no_quotes((int)lexer->c))
 			return (ft_lexer_get_word(lexer));
-		else
-			ft_lexer_advance(lexer);
 	}
+	ft_lexer_advance(lexer);
 	return (NULL);
 }
 
 /**
  * @brief The function gets a string from the input.
  * As a string, we consider a sequence of characters
- * between two double quotes.
+ * between two double quotes and two single quotes
+ * and also checks if the string is followed by a space
+ * or the end of the string. If not it keeps iterating
+ * until it finds a space or the end of the string.
+ * That implementation is needed to handle cases like
+ * > "file".txt.
  * 
  * @param lexer The lexer object. 
  * @return t_tkn* Pointer to the token with a TKN_STRING type.
+ * @var char quote The quote character.
+ * @var char* value The string value that we need to add to the token.
  */
 t_tkn	*ft_lexer_get_string(t_lexer *lexer)
 {
 	char	*value;
-	char	*tmp;
+	char	quote;
 
+	quote = lexer->c;
 	ft_lexer_advance(lexer);
 	value = ft_calloc(1, sizeof(char));
 	value[0] = '\0';
-	while (lexer->c != '"')
-	{
-		tmp = ft_lexer_get_char(lexer);
-		value = ft_realloc(value, (ft_strlen(value) + ft_strlen(tmp) + 1)
-				* sizeof(char));
-		ft_strcat(value, tmp);
-		ft_lexer_advance(lexer);
-	}
+	while (lexer->c != quote)
+		value = ft_lexer_process_chars(lexer, value);
 	ft_lexer_advance(lexer);
-	if (lexer->c == '"')
+	if (lexer->c != ' ' && lexer->c != '\0')
 	{
-		return (ft_lexer_get_string(lexer));
+		while (lexer->c != ' ' && lexer->c != '\0')
+			value = ft_lexer_process_chars(lexer, value);
 	}
 	return (ft_init_tkn(TKN_STRING, value));
 }
@@ -200,47 +135,20 @@ t_tkn	*ft_lexer_get_word(t_lexer *lexer)
 
 	value = ft_calloc(1, sizeof(char));
 	value[0] = '\0';
-	while (ft_isprint((int)lexer->c))
+	while (ft_is_extended((int)lexer->c))
 	{
-		if (lexer->c == '\'')
+		if (lexer->c == ' '
+			|| lexer->c == '|'
+			|| lexer->c == '>'
+			|| lexer->c == '<')
 			break ;
-		tmp = ft_lexer_get_char(lexer);
+		tmp = ft_lexer_char_to_str(lexer);
 		value = ft_realloc(value, (ft_strlen(value) + ft_strlen(tmp) + 1)
 				* sizeof(char));
 		ft_strcat(value, tmp);
 		ft_lexer_advance(lexer);
 	}
+	while (lexer->c == ' ')
+		ft_lexer_advance(lexer);
 	return (ft_init_tkn(TKN_WORD, value));
-}
-
-/**
- * @brief Basically, it's a helper function 
- * for ft_lexer_get_next_token that advances
- *  the lexer to the next character 
- * and returns the given token.
- * 
- * @param lexer The lexer object.
- * @param tkn The token to be returned.
- * @return The given token.
- */
-t_tkn	*ft_lexer_advance_with_tkn(t_lexer *lexer, t_tkn *tkn)
-{
-	ft_lexer_advance(lexer);
-	return (tkn);
-}
-
-/**
- * @brief The gets current character as a string
- * 
- * @param lexer The lexer object. 
- * @return char* Current character as a string.
- */
-char	*ft_lexer_get_char(t_lexer *lexer)
-{
-	char	*value;
-
-	value = ft_calloc(2, sizeof(char));
-	value[0] = lexer->c;
-	value[1] = '\0';
-	return (value);
 }

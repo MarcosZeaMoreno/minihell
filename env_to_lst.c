@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 15:01:14 by vkatason          #+#    #+#             */
-/*   Updated: 2024/01/24 17:50:48 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/03/23 19:16:57 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,10 @@ t_data	*ft_get_env_cpy(t_data *data, char **env)
 /**
  * @brief Function to get a value from an environment variable
  * 
- * @param data 
- * @param usr_input 
+ * @param env: a pointer to the enviromental variables.
+ * @param key: a pointer to the key.
+ *
+ * @return char*: a pointer to the value.
  */
 char	*get_env_value(t_env *env, char *key)
 {

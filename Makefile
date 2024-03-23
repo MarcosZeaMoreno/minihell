@@ -6,7 +6,7 @@
 #    By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/08 15:13:18 by vkatason          #+#    #+#              #
-#    Updated: 2024/02/01 17:25:33 by vkatason         ###   ########.fr        #
+#    Updated: 2024/03/23 19:37:38 by mzea-mor         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,18 +20,45 @@ CFLAGS = -fsanitize=address -Wall -Werror -Wextra
 #LDFLAGS for school
 LDFLAGS = -lreadline -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 LIBFT = libft
-SRC =  check_comand.c main.c print_entry.c signals.c \
-		env_to_lst.c error.c ./builtin/builtins.c \
-		./builtin/echo.c env_fts.c parse.c tokens.c \
-		utils.c input_clean.c print_checks.c fork.c \
-    lst_clear.c input_replace.c token.c \
-		lexer.c print_tkns.c ./builtin/cd.c
+SRC =  check_comand.c \
+		check_expand_value.c \
+		cmd_errors_utils.c \
+		env_fts.c \
+		env_to_lst.c\
+		error.c \
+		expand_value_utils.c \
+		fork.c \
+		input_errors.c \
+		lexer_print_tkns.c \
+		lexer_string_utils.c \
+		lexer_tkns_handlers.c \
+		lexer_tkns_to_cmds_lsts.c \
+		lexer_tkns_to_cmds_utils.c \
+		lexer_tkns_to_cmds.c \
+		lexer_tkns_utils.c \
+		lexer_tkns.c \
+		lexer.c \
+		lst_clear.c \
+		main.c \
+		new_input.c \
+		parser.c \
+		print_cmds_list.c \
+		print_entry.c \
+		printed_checks.c \
+		signals.c \
+		utils.c \
+		var_cleaning.c \
+		pipes.c \
+		redir.c \
+		./builtin/builtins.c \
+		./builtin/echo.c \
+		./builtin/cd.c \
 
 OBJS := $(SRC:.c=.o)
 
 all: libftmake $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) minishell.h
 	@$(CC) $(CFLAGS) $(LDFLAGS) -o $(NAME) $(OBJS) $(LIBFT)/libft.a
 	@echo "$(GREEN)The app $(NAME) was successfully compiled. $(DEFAULT)"
 

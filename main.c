@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/02/01 20:02:39 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/23 20:30:44 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /**
- * @brief Function to get pid
+ * @brief Function to get enviroment copy
  * 
- * @param sig 
+ * @param data: a pointer to the data structure.
  */
 void	ft_getpid(t_data *data)
 {
@@ -42,7 +42,7 @@ int	ft_init(t_data *data, int ac, char **av, char **env)
 	char	**env_temp;
 
 	(void)av;
-	env_temp = strdup_2d(env); //implementar esto cambia (Ctlr + D), cambiando el output "exit\n" con un salto de línea
+	env_temp = strdup_2d(env);
 	if (ac > 1)
 	{
 		ft_putstr_fd("The program no needs any argument\n", 2);
@@ -50,7 +50,12 @@ int	ft_init(t_data *data, int ac, char **av, char **env)
 	}
 	print_header();
 	data->env_copy = NULL;
-	data->token = NULL;
+	data->input_copy = NULL;
+	data->exit_status = 0;
+	data->tkns = NULL;
+	data->cmd = NULL;
+	data->fd[1] = dup(1);
+	data->fd[0] = dup(0);
 	ft_getpid(data);
 	ft_get_env_cpy(data, env_temp);
 	return (0);
@@ -63,7 +68,7 @@ int	ft_init(t_data *data, int ac, char **av, char **env)
  * @param env 
  * @return int 
  */
-int	get_promp(t_data *data, char **env)
+int	get_prompt(t_data *data)
 {
 	char	*usr_input;
 
@@ -76,19 +81,13 @@ int	get_promp(t_data *data, char **env)
 		return (1);
 	}
 	add_history(usr_input);
-	ft_tknize_input(usr_input, data);
-	print_tkn_lst(data);
-	// ft_printf("Original input: %s\n", usr_input);
-	// ft_cleaninput(&usr_input, data);
-	// ft_printf("Replaced input: %s\n", usr_input);
-	ft_parse_input(data, usr_input);
-	if (data->token && check_builtin(data->token) == 0)
-		check_execve(data, env, data->env_copy);
-	if (data->token && data->token->value && !ft_strncmp("exit",
-			data->token->value, 5))
+	ft_parser(usr_input, data);
+	ft_print_cmds(data);
+	if (data->cmd)
+		execute_pipeline(data);
+	if (data->cmd && data->cmd->args && !ft_strncmp("exit",
+			data->cmd->args[0], 5) && data->cmd->args[1] == NULL)
 		return (1);
-	else
-		exec_builtin(data, data->token);
 	free(usr_input);
 	return (0);
 }
@@ -112,7 +111,7 @@ int	main(int ac, char **av, char **env)
 		suppress_output();
 		signal(SIGINT, handle_sigint);
 		signal(SIGQUIT, SIG_IGN);
-		if (get_promp(&data, env) == 1)
+		if (get_prompt(&data) == 1)
 			break ;
 	}
 	print_exit();

@@ -1,42 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtok.c                                        :+:      :+:    :+:   */
+/*   ft_match_symbol.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/08 14:32:04 by vkatason          #+#    #+#             */
-/*   Updated: 2024/02/12 21:27:47 by vkatason         ###   ########.fr       */
+/*   Created: 2024/02/11 15:34:07 by vkatason          #+#    #+#             */
+/*   Updated: 2024/02/11 15:38:01 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strtok(char *str, const char *delim)
+/**
+ * @brief Function searches for a character in a string.
+ * 
+ * @param c character to search for.
+ * @param str String to search in.
+ * @return int 1 if the character is found, 0 otherwise.
+ */
+int	ft_match_symbol(char c, char *str)
 {
-	static char	*stock;
-	char		*ptr;
-
-	if (str != NULL)
-		stock = str;
-	if (stock == NULL)
-		return (NULL);
-	while (ft_strchr(delim, *stock))
-		stock++;
-	if (*stock == '\0')
+	while (*str)
 	{
-		stock = NULL;
-		return (NULL);
+		if (c == *str)
+			return (1);
+		str++;
 	}
-	ptr = stock;
-	while (*stock != '\0' && !ft_strchr(delim, *stock))
-		stock++;
-	if (*stock != '\0')
-	{
-		*stock = '\0';
-		stock++;
-	}
-	else
-		stock = NULL;
-	return (ptr);
+	return (0);
 }

@@ -6,37 +6,39 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 18:23:45 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/24 17:50:35 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/03/23 19:15:09 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-/*
-** Function to handle the export builtin
-* @param data
-* @param token
-*/
-void	ft_export(t_data *data, t_token *token)
+/**
+ * @brief Function to handle the echo builtin
+ * 
+ * @param data 
+ * @param cmds 
+ */
+void	ft_export(t_data *data, char **cmds)
 {
 	char	*key;
 	char	*value;
+	int		i;
 
-	token = token->next;
-	while (token != NULL)
+	i = 1;
+	while (cmds[i] != NULL)
 	{
-		key = ft_strtok(token->value, "=");
+		key = ft_strtok(cmds[i], "=");
 		value = ft_strtok(NULL, "=");
 		if (key == NULL || value == NULL)
 		{
-			ft_printf_fd(1, "export: %s: Invalid argument\n", token->value);
+			ft_printf_fd(1, "export: %s: Invalid argument\n", cmds[i]);
 			return ;
 		}
 		if (get_env_value(data->env_copy, key) != NULL)
 			change_value_env(data, key, value);
 		else
 			add_env_var(data, key, value);
-		token = token->next;
+		i++;
 	}
 }
 
@@ -44,25 +46,27 @@ void	ft_export(t_data *data, t_token *token)
  * @brief Function to handle the unset builtin
  * 
  * @param data 
- * @param token 
+ * @param cmds 
  */
-void	ft_unset(t_data *data, t_token *token)
+void	ft_unset(t_data *data, char **cmds)
 {
 	char	*key;
+	int		i;
 
-	token = token->next;
-	while (token != NULL)
+	i = 0;
+	while (cmds[i] != NULL)
 	{
-		key = token->value;
+		key = cmds[i];
 		if (key == NULL)
 		{
-			ft_printf_fd(1, "unset: %s: Invalid argument\n", token->value);
-			token = token->next;
+			ft_printf_fd(1, "unset: %s: Invalid argument\n", cmds[i]);
+			i++;
 			continue ;
 		}
 		if (get_env_value(data->env_copy, key) != NULL)
 			remove_env_var(data, key);
-		token = token->next;
+		if (cmds[i] != NULL)
+			i++;
 	}
 }
 
