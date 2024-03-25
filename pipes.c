@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 18:54:25 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/23 20:35:37 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/03/25 19:32:59 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	execute_child_process(t_exec_cmd *args, t_data *data, int save)
 		ft_redir(args->cmd, save, args->pipefd);
 	if (args->cmd->args != NULL)
 		exec_local(args->cmd->args, data->env_copy, data);
-	exit(0);
+	exit(WEXITSTATUS(data->exit_status)); // antes era exit(0)
 }
 
 /**

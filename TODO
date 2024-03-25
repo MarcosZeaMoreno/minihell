@@ -5,3 +5,4 @@
 [ ] FIX History bug
 [ ] FIX exit_status
 [ ] FIX $? value
+[ ] FIX the exit status in execute_child_process.c:38 that always gives bad exit status
