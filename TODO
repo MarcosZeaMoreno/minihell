@@ -5,3 +5,4 @@
 [ ] FIX $? value
 [X] add ft_leaks
 [X] EXPORT t= -> garbage data
+[ ] FIX the exit status in execute_child_process.c:38 that always gives bad exit status

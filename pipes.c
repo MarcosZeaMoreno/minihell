@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/06 18:54:25 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/26 21:03:51 by mzea-mor         ###   ########.fr       */
+/*   Created: 2024/03/26 21:19:39 by mzea-mor          #+#    #+#             */
+/*   Updated: 2024/03/26 21:19:41 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	execute_child_process(t_exec_cmd *args, t_data *data, int save)
 		ft_redir(args->cmd, save, args->pipefd);
 	if (args->cmd->args != NULL)
 		exec_local(args->cmd->args, data->env_copy, data);
-	exit(0);
+	exit(WEXITSTATUS(data->exit_status)); // antes era exit(0)
 }
 
 /**
