@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/23 19:32:29 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/03/26 20:19:47 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,26 @@ typedef struct s_tkn_lst
 }						t_tkn_lst;
 
 /**
+ * @brief Structure to handle the export arguments
+ *
+ * @param cmds The commands
+ * @param cmd_copy The copy of the command
+ * @param equal_sign The equal sign
+ * @param i The index
+ * @param key The key
+ * @param value The value
+ */
+typedef struct s_export_args
+{
+	char				**cmds;
+	char				*cmd_copy;
+	char				*equal_sign;
+	int					i;
+	char				*key;
+	char				*value;
+}						t_export_args;
+
+/**
  * @brief Struct to handle the redirections
  * @param file The file to redirect
  * @param redir_type The type of redirection:
@@ -277,7 +297,7 @@ void					ft_cd(t_data *data, char **cmds);
 void					ft_pwd(t_data *data);
 void					ft_export(t_data *data, char **cmds);
 void					ft_unset(t_data *data, char **cmds);
-void					ft_env(t_env *env);
+void					ft_env(t_env *env, int flag);
 
 /*-----  ENVIRONMENT VARIABLES ----*/
 
@@ -304,9 +324,11 @@ void					print_header(void);
 /*-----  EXECUTOR FUNCTIONS ----*/
 
 int						check_builtin(char **cmds);
+int						check_builtin_rare(char **cmds);
 void					exec_builtin(t_data *data, char **cmds);
 void					exec_local(char **cmds, t_env *enviroment,
 							t_data *data);
+void					ft_do_builtin_rare(t_data *data, char **cmds);
 
 /*-----  PIPES & REDIR FUNCTIONS ----*/
 
@@ -320,6 +342,12 @@ void					ft_case_heredoc(t_cmd *cmd, int save);
 void					ft_error(char *str, int type_error);
 void					free_split(char **split);
 char					**strdup_2d(char **src);
+char					*ft_strdup_const(const char *s);
+char					*ft_strndup(const char *s, size_t n);
+void					free_data(t_data *data);
+void					free_env(t_env *env);
+void					free_cmd(t_cmd *cmd);
+void					free_redir(t_redirect *redir);
 
 /*-----  EXECUTOR FUNCTIONS ----*/
 
@@ -388,6 +416,7 @@ void					ft_realloc_args(t_cmd *cmd, char *new_arg);
 /*----- READLINE FUNCTIONS -----*/
 
 void					rl_replace_line(const char *text, int clear_undo);
+void					rl_clear_history(void);
 
 /*---- TERMIOS FUNCTIONS -----*/
 

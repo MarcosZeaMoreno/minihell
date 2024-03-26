@@ -1,7 +1,7 @@
 [ ] FREE &data after exit
 [ ] FREE cmd after execute_command
-[ ] FREE tkns ?¿?¿?¿
 [ ] FIX memory leaks
-[ ] FIX History bug
 [ ] FIX exit_status
 [ ] FIX $? value
+[X] add ft_leaks
+[X] EXPORT t= -> garbage data

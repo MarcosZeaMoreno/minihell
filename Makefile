@@ -6,7 +6,7 @@
 #    By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/08 15:13:18 by vkatason          #+#    #+#              #
-#    Updated: 2024/03/23 19:37:38 by mzea-mor         ###   ########.fr        #
+#    Updated: 2024/03/26 20:14:44 by mzea-mor         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ USER := $(shell whoami)
 NAME = minishell
 CC = gcc -g
 CLEAN = rm -Rf
-CFLAGS = -fsanitize=address -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra
 #LDFLAGS for home
 #LDFLAGS = -L/opt/homebrew/Cellar/readline/8.2.7/lib -lreadline
 #LDFLAGS for school
@@ -47,10 +47,12 @@ SRC =  check_comand.c \
 		printed_checks.c \
 		signals.c \
 		utils.c \
+		utils2.c \
 		var_cleaning.c \
 		pipes.c \
 		redir.c \
 		./builtin/builtins.c \
+		./builtin/builtins2.c \
 		./builtin/echo.c \
 		./builtin/cd.c \
 

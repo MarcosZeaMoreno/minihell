@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/23 20:30:44 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/03/26 21:09:12 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	ft_init(t_data *data, int ac, char **av, char **env)
 	data->fd[0] = dup(0);
 	ft_getpid(data);
 	ft_get_env_cpy(data, env_temp);
+	free_split(env_temp);
 	return (0);
 }
 
@@ -82,9 +83,10 @@ int	get_prompt(t_data *data)
 	}
 	add_history(usr_input);
 	ft_parser(usr_input, data);
-	ft_print_cmds(data);
 	if (data->cmd)
+	{
 		execute_pipeline(data);
+	}
 	if (data->cmd && data->cmd->args && !ft_strncmp("exit",
 			data->cmd->args[0], 5) && data->cmd->args[1] == NULL)
 		return (1);
@@ -114,6 +116,9 @@ int	main(int ac, char **av, char **env)
 		if (get_prompt(&data) == 1)
 			break ;
 	}
+	free_data(&data);
+	rl_clear_history();
+	system("leaks -q minishell");
 	print_exit();
 	return (0);
 }

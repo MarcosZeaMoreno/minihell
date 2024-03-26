@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:18:21 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/23 19:16:22 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/03/26 20:03:50 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	change_value_env(t_data *data, char *key, char *value)
 	{
 		if (!ft_strncmp(temp->key, key, ft_strlen(key) + 1))
 		{
+			if (!value)
+				temp->value = "";
 			temp->value = ft_strdup(value);
 			return ;
 		}
@@ -74,12 +76,11 @@ void	remove_env_var(t_data *data, char *key)
 void	add_env_var(t_data *data, char *key, char *value)
 {
 	char	*env_v;
-	char	*temp;
 
+	if (!value)
+		value = "";
 	env_v = ft_strjoin(key, "=");
-	temp = env_v;
 	env_v = ft_strjoin(env_v, value);
-	free(temp);
 	data->env_copy = ft_env_lst_add_back(data, env_v);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:13:40 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/23 20:12:35 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/03/26 20:23:41 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void	ft_check_counts(t_cmd *cmd)
 	{
 		if (ft_strncmp(tmp->redir_type, ">", 2) == 0
 			|| ft_strncmp(tmp->redir_type, ">>", 3) == 0)
-			count[0]++;
+			count[1]++;
 		else if (ft_strncmp(tmp->redir_type, "<", 2) == 0
 			|| ft_strncmp(tmp->redir_type, "<<", 3) == 0)
-			count[1]++;
+			count[0]++;
 		tmp = tmp->next;
 	}
 	cmd->redir_count[0] = count[0];
@@ -115,8 +115,7 @@ void	ft_case_heredoc(t_cmd *cmd, int save)
 	while (1)
 	{
 		line = readline("> ");
-		if (!line || ft_strncmp(line, cmd->redir->file,
-				ft_strlen(cmd->redir->file)) == 0)
+		if (!line || ft_strcmp(line, cmd->redir->file) == 0)
 		{
 			free(line);
 			break ;
@@ -135,7 +134,8 @@ void	ft_case_heredoc(t_cmd *cmd, int save)
  * 
  * @param cmd: a pointer to the command structure.
  * @param save: an integer that contain the save value.
- * @param pipefd: an integer double pointer that contain the pipe file descriptor.
+ * @param pipefd: an integer double pointer that
+ * 		contain the pipe file descriptor.
  */
 void	ft_redir(t_cmd *cmd, int save, int pipefd[2])
 {
@@ -145,7 +145,7 @@ void	ft_redir(t_cmd *cmd, int save, int pipefd[2])
 	while (cmd->redir != NULL)
 	{
 		ft_input(cmd, 0, save);
-		if (cmd->redir_count[1] == 0)
+		if (cmd->redir_count[0] == 0)
 		{
 			dup2(pipefd[0], STDIN_FILENO);
 			close(pipefd[0]);
@@ -156,10 +156,11 @@ void	ft_redir(t_cmd *cmd, int save, int pipefd[2])
 	while (cmd->redir != NULL)
 	{
 		ft_output(cmd, 0);
-		if (cmd->redir_count[0] == 0)
+		if (cmd->redir_count[1] == 0)
 		{
 			dup2(pipefd[1], STDOUT_FILENO);
-			close(pipefd[1]);
+			if (pipefd[1] != 1)
+				close(pipefd[1]);
 		}
 		cmd->redir = cmd->redir->next;
 	}

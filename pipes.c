@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 18:54:25 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/23 20:35:37 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/03/26 21:03:51 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	execute_child_process(t_exec_cmd *args, t_data *data, int save)
 		dup2(args->input, 0);
 		close(args->input);
 	}
-	if (args->output != 1 && args->cmd->redir_count[1] == 0)
+	if (args->output != 1 && args->cmd->redir_count[0] == 0)
 	{
 		dup2(args->output, 1);
 		close(args->output);
@@ -50,6 +50,8 @@ void	execute_parent_process(t_exec_cmd *args, pid_t pid, t_data *data)
 	int	status;
 
 	waitpid(pid, &status, 0);
+	if (check_builtin_rare(args->cmd->args) == 1)
+		ft_do_builtin_rare(data, args->cmd->args);
 	if (WIFEXITED(status))
 		data->exit_status = WEXITSTATUS(status);
 	if (args->input != 0)

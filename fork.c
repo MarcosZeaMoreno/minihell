@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:23:25 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/23 19:50:38 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/03/26 21:10:36 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,9 @@ void	exec_command_in_path(char **cmds, char **env,
 	char	*command;
 	char	**path;
 	int		i;
-	int		found = 0;
+	int		found;
 
+	found = 0;
 	i = 0;
 	path = ft_split(get_env_value(enviroment, "PATH"), ':');
 	while (path[i])
@@ -120,6 +121,7 @@ void	exec_command_in_path(char **cmds, char **env,
 		data->exit_status = 1;
 		ft_printf_fd(2, "%s: Command not found.\n", *cmds);
 	}
+	free_split(path);
 }
 
 /**
@@ -134,6 +136,8 @@ void	exec_local(char **cmds, t_env *enviroment, t_data *data)
 	char	**env;
 
 	env = ft_env_to_char(enviroment);
+	if (check_builtin_rare(cmds))
+		exit(0);
 	if (check_builtin(cmds))
 		exec_builtin(data, cmds);
 	else

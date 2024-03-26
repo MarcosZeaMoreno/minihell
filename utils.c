@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 16:25:15 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/23 19:28:27 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/03/26 20:21:24 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,40 +79,11 @@ char	**strdup_2d(char **src)
 	return (dst);
 }
 
-// CHECKEAR ESTAS FUNCIONES -*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-// CHECKEAR ESTAS FUNCIONES -*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-// CHECKEAR ESTAS FUNCIONES -*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-// CHECKEAR ESTAS FUNCIONES -*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-// CHECKEAR ESTAS FUNCIONES -*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-// CHECKEAR ESTAS FUNCIONES -*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-// CHECKEAR ESTAS FUNCIONES -*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-/*
-void	free_data(t_data *data)
-{
-	if (data->cmd)
-		free_cmd(data->cmd);
-	if (data->env_copy)
-		free_env(data->env_copy);
-	if (data->token)
-		free_token(data->token);
-}
-
-void	free_cmd(t_cmd *cmd)
-{
-	int	i;
-
-	i = 0;
-	if (cmd->args)
-	{
-		while (cmd->args[i])
-			free(cmd->args[i++]);
-		free(cmd->args);
-	}
-	if (cmd->redir)
-		free_redir(cmd->redir);
-	free(cmd);
-}
-
+/**
+ * @brief Function to free a redirect structure
+ * 
+ * @param redir: a pointer to the redirect structure.
+ */
 void	free_redir(t_redirect *redir)
 {
 	t_redirect	*tmp;
@@ -127,13 +98,21 @@ void	free_redir(t_redirect *redir)
 	}
 }
 
-void	free_env(char **env)
+/**
+ * @brief Function to free a env structure
+ * 
+ * @param env: a pointer to the env structure.
+ */
+void	free_env(t_env *env)
 {
-	int	i;
+	t_env	*tmp;
 
-	i = 0;
-	while (env[i])
-		free(env[i++]);
-	free(env);
+	while (env)
+	{
+		tmp = env;
+		env = env->next;
+		free(tmp->key);
+		free(tmp->value);
+		free(tmp);
+	}
 }
-*/
