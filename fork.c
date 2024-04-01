@@ -6,35 +6,11 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 21:19:10 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/26 21:19:13 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/01 17:23:06 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/**
- * @brief Function to fork and execute a command.
- *
- * @param full_path: a pointer that contain the string of the full path.
- * @param cmds: a double char pointer that contain the string of readline.
- * @param env: a double char pointer that contain the enviromental variables.
- */
-void	forkit(char *full_path, char **cmds, char **env)
-{
-	int		status;
-	pid_t	father;
-
-	father = fork();
-	if (father < 0)
-	{
-		perror("fork");
-		exit(EXIT_FAILURE);
-	}
-	else if (father > 0)
-		wait(&status);
-	else if (father == 0)
-		execve(full_path, cmds, env);
-}
 
 /**
  * @brief Function to execute a command with absolute path.
@@ -49,7 +25,7 @@ void	exec_absolute_path(char **cmds, char **env, t_data *data)
 	{
 		if (access(cmds[0], X_OK) == 0)
 		{
-			forkit(cmds[0], cmds, env);
+			execve(cmds[0], cmds, env);
 			return ;
 		}
 		else
@@ -81,7 +57,7 @@ int	execute_command_handler(char *command, char **cmds, char **env)
 	{
 		if (access(command, X_OK) == 0)
 		{
-			forkit(command, cmds, env);
+			execve(command, cmds, env);
 			return (2);
 		}
 		else
@@ -118,7 +94,7 @@ void	exec_command_in_path(char **cmds, char **env,
 	}
 	if (!found)
 	{
-		data->exit_status = 1;
+		data->exit_status = 127;
 		ft_printf_fd(2, "%s: Command not found.\n", *cmds);
 	}
 	free_split(path);
@@ -146,5 +122,6 @@ void	exec_local(char **cmds, t_env *enviroment, t_data *data)
 			exec_absolute_path(cmds, env, data);
 		else
 			exec_command_in_path(cmds, env, enviroment, data);
+		exit(127);
 	}
 }

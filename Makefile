@@ -6,7 +6,7 @@
 #    By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/08 15:13:18 by vkatason          #+#    #+#              #
-#    Updated: 2024/03/26 20:14:44 by mzea-mor         ###   ########.fr        #
+#    Updated: 2024/04/01 19:04:44 by mzea-mor         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,9 @@ NAME = minishell
 CC = gcc -g
 CLEAN = rm -Rf
 CFLAGS = -Wall -Werror -Wextra
+#-fsanitize=address
 #LDFLAGS for home
-#LDFLAGS = -L/opt/homebrew/Cellar/readline/8.2.7/lib -lreadline
+#LDFLAGS = -L/opt/homebrew/Cellar/readline/8.2.10/lib -lreadline
 #LDFLAGS for school
 LDFLAGS = -lreadline -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 LIBFT = libft
@@ -31,6 +32,7 @@ SRC =  check_comand.c \
 		input_errors.c \
 		lexer_print_tkns.c \
 		lexer_string_utils.c \
+		lexer_tkn_hander_helpers.c \
 		lexer_tkns_handlers.c \
 		lexer_tkns_to_cmds_lsts.c \
 		lexer_tkns_to_cmds_utils.c \
@@ -48,6 +50,7 @@ SRC =  check_comand.c \
 		signals.c \
 		utils.c \
 		utils2.c \
+		utils3.c \
 		var_cleaning.c \
 		pipes.c \
 		redir.c \

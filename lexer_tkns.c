@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_tkns.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 23:27:36 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/14 16:01:00 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/04/01 18:30:07 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,13 @@ t_tkn	*ft_init_tkn(int type, char *value)
 		exit(EXIT_FAILURE);
 	}
 	tkn->e_type = type;
-	tkn->value = ft_strdup(value);
+	if (value && value[strlen(value)] == '\0')
+		tkn->value = ft_strdup(value);
+	else
+	{
+		ft_putstr_fd("Error: Value is not null-terminated\n", 2);
+		exit(EXIT_FAILURE);
+	}
 	tkn->order = ft_reset_tkn_order(0);
 	return (tkn);
 }
@@ -100,6 +106,7 @@ void	ft_tknize_input(t_data *data)
 			break ;
 		data->tkns = ft_add_tkn_to_lst(data->tkns, tkn);
 	}
+	ft_free_lexer(lexer);
 }
 
 /**
@@ -126,9 +133,26 @@ void	ft_free_tkn_lst(t_tkn_lst *head)
 			free(current->tkn);
 			current->tkn = NULL;
 		}
+		free(current);
 		current = next;
 		if (current != NULL)
 			current->prev = NULL;
 	}
 	ft_reset_tkn_order(1);
+}
+
+/**
+ * @brief Function to free the lexer structure.
+ * 
+ * @param lexer 
+ */
+void	ft_free_lexer(t_lexer *lexer)
+{
+	if (lexer->input != NULL)
+	{
+		free(lexer->input);
+		lexer->input = NULL;
+	}
+	free(lexer);
+	lexer = NULL;
 }

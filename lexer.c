@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 18:30:52 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/23 19:31:29 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/01 18:29:46 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,6 @@ t_tkn	*ft_lexer_get_next_token(t_lexer *lexer)
 		tkn = ft_handle_greater_than(lexer);
 		if (tkn != NULL)
 			return (tkn);
-		tkn = ft_handle_less_than(lexer);
-		if (tkn != NULL)
-			return (tkn);
 		if (ft_is_ext_no_quotes((int)lexer->c))
 			return (ft_lexer_get_word(lexer));
 	}
@@ -99,11 +96,13 @@ t_tkn	*ft_lexer_get_next_token(t_lexer *lexer)
  * @return t_tkn* Pointer to the token with a TKN_STRING type.
  * @var char quote The quote character.
  * @var char* value The string value that we need to add to the token.
+ * @var t_tkn* tkn The token with the TKN_STRING type.
  */
 t_tkn	*ft_lexer_get_string(t_lexer *lexer)
 {
 	char	*value;
 	char	quote;
+	t_tkn	*tkn;
 
 	quote = lexer->c;
 	ft_lexer_advance(lexer);
@@ -114,41 +113,30 @@ t_tkn	*ft_lexer_get_string(t_lexer *lexer)
 	ft_lexer_advance(lexer);
 	if (lexer->c != ' ' && lexer->c != '\0')
 	{
-		while (lexer->c != ' ' && lexer->c != '\0')
+		while (lexer->c != ' ' && lexer->c != '\0' && lexer->c != '|'
+			&& lexer->c != '>' && lexer->c != '<')
 			value = ft_lexer_process_chars(lexer, value);
 	}
-	return (ft_init_tkn(TKN_STRING, value));
+	tkn = ft_init_tkn(TKN_STRING, value);
+	free(value);
+	return (tkn);
 }
 
-/**
- * @brief The function gets a word from the input.
- * As a word, we consider a sequence of alphanumeric
- * characters.
- * 
- * @param lexer The lexer object. 
- * @return t_tkn* Pointer to the token with a TKN_WORD type.
- */
 t_tkn	*ft_lexer_get_word(t_lexer *lexer)
 {
 	char	*value;
 	char	*tmp;
+	t_tkn	*tkn;
+	char	prev_c;
 
+	tmp = NULL;
+	prev_c = ' ';
 	value = ft_calloc(1, sizeof(char));
 	value[0] = '\0';
-	while (ft_is_extended((int)lexer->c))
-	{
-		if (lexer->c == ' '
-			|| lexer->c == '|'
-			|| lexer->c == '>'
-			|| lexer->c == '<')
-			break ;
-		tmp = ft_lexer_char_to_str(lexer);
-		value = ft_realloc(value, (ft_strlen(value) + ft_strlen(tmp) + 1)
-				* sizeof(char));
-		ft_strcat(value, tmp);
-		ft_lexer_advance(lexer);
-	}
+	value = ft_get_value(lexer, value, tmp, prev_c);
 	while (lexer->c == ' ')
 		ft_lexer_advance(lexer);
-	return (ft_init_tkn(TKN_WORD, value));
+	tkn = ft_init_tkn(TKN_WORD, value);
+	free(value);
+	return (tkn);
 }

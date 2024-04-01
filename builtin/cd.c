@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:55:51 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/23 19:15:18 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/01 20:01:37 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,17 @@
  *
  * @return char*
  */
-char	*get_current_directory(void)
+char	*get_current_directory(t_data *data)
 {
 	char	*pwd;
 
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
+	{
 		ft_printf_fd(1, "cd: error\n");
+		data->exit_status = 1;
+		return (NULL);
+	}
 	return (pwd);
 }
 
@@ -33,11 +37,12 @@ char	*get_current_directory(void)
  * @param dir
  * @return int
  */
-int	change_directory(char *dir)
+int	change_directory(char *dir, t_data *data)
 {
 	if (chdir(dir) == -1)
 	{
 		ft_error(dir, 3);
+		data->exit_status = 1;
 		return (-1);
 	}
 	return (0);
@@ -54,6 +59,11 @@ void	update_env_variables(t_data *data, char *pwd_old, char *pwd_new)
 {
 	change_value_env(data, "OLDPWD", pwd_old);
 	change_value_env(data, "PWD", pwd_new);
+	free_cd(pwd_old, pwd_new);
+}
+
+void	free_cd(char *pwd_old, char *pwd_new)
+{
 	free(pwd_old);
 	free(pwd_new);
 }
@@ -72,22 +82,22 @@ void	ft_cd(t_data *data, char **cmds)
 	int		i;
 
 	i = 1;
-	pwd_old = get_current_directory();
+	pwd_old = get_current_directory(data);
 	if (!pwd_old)
 		return ;
 	if (cmds[i] == NULL)
 		dir = get_env_value(data->env_copy, "HOME");
 	else
 		dir = cmds[i];
-	if (change_directory(dir) == -1)
+	if (change_directory(dir, data) == -1)
 	{
-		free(pwd_old);
+		free_cd(pwd_old, NULL);
 		return ;
 	}
-	pwd_new = get_current_directory();
+	pwd_new = get_current_directory(data);
 	if (!pwd_new)
 	{
-		free(pwd_old);
+		free_cd(pwd_old, NULL);
 		return ;
 	}
 	update_env_variables(data, pwd_old, pwd_new);

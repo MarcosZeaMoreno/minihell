@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/26 20:19:47 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/01 19:03:26 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -344,10 +344,7 @@ void					free_split(char **split);
 char					**strdup_2d(char **src);
 char					*ft_strdup_const(const char *s);
 char					*ft_strndup(const char *s, size_t n);
-void					free_data(t_data *data);
-void					free_env(t_env *env);
-void					free_cmd(t_cmd *cmd);
-void					free_redir(t_redirect *redir);
+int						ft_isnumber(char *str);
 
 /*-----  EXECUTOR FUNCTIONS ----*/
 
@@ -374,23 +371,29 @@ char					*ft_lexer_char_to_str(t_lexer *lexer);
 t_tkn					*ft_lexer_get_next_token(t_lexer *lexer);
 char					*ft_lexer_process_chars(t_lexer *lexer, char *value);
 t_tkn					*ft_lexer_get_string(t_lexer *lexer);
+char					*ft_get_string_without_order(t_lexer *lexer);
 t_tkn					*ft_lexer_get_word(t_lexer *lexer);
+char					*ft_get_value(t_lexer *lexer, char *value, char *tmp,
+							char prev_c);
 t_tkn					*ft_init_tkn(int type, char *value);
 int						ft_count_the_same(t_lexer *lexer, char symbol);
 char					*ft_str_repeat(char c, int count);
 int						ft_reset_tkn_order(int reset);
 t_tkn_lst				*ft_add_tkn_to_lst(t_tkn_lst *head, t_tkn *tkn);
 void					ft_tknize_input(t_data *data);
-void					ft_free_tkn_lst(t_tkn_lst *head);
 void					ft_print_tkn(t_tkn *tkn);
 void					ft_print_tkn_lst(t_data *data);
 t_tkn					*ft_handle_quotes(t_lexer *lexer);
+void					ft_handle_greater_than_helper(t_lexer *lexer,
+							char *value, t_tkn **tkn);
 t_tkn					*ft_handle_greater_than(t_lexer *lexer);
+void					ft_handle_less_than_helper(t_lexer	*lexer,
+							char *value, t_tkn **tkn);
 t_tkn					*ft_handle_less_than(t_lexer *lexer);
 t_tkn					*ft_handle_pipe(t_lexer *lexer);
 void					ft_handle_whitespace(t_lexer *lexer);
 
-/*---- PARSING /CMD CREATION FUNCTTIONS/ -----*/
+/*---- PARSING & CMD CREATION FUNCTIONS/ -----*/
 
 void					ft_parser(char *usr_input, t_data *data);
 t_redirect				*ft_init_redir(void);
@@ -412,6 +415,18 @@ t_redirect				*ft_make_new_redir(t_cmd *cmd);
 int						ft_add_redir_to_cmd(t_data *data, t_cmd *cmd,
 							t_tkn_lst **tkns_lst);
 void					ft_realloc_args(t_cmd *cmd, char *new_arg);
+
+/*----- CLEANING FUNCTIONS ----*/
+void					ft_free_var_list(t_list *vars);
+void					ft_free_lexer(t_lexer *lexer);
+void					ft_free_tkn_lst(t_tkn_lst *head);
+void					free_data(t_data *data);
+void					free_env(t_env *env);
+void					free_cmd(t_cmd *cmd);
+void					ft_free_cmd(t_cmd *cmd);
+void					free_redir(t_redirect *redir);
+void					ft_free_redir(t_redirect *redir);
+void					free_cd(char *pwd_old, char *pwd_new);
 
 /*----- READLINE FUNCTIONS -----*/
 

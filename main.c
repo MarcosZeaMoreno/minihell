@@ -6,11 +6,37 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/26 21:09:12 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/01 21:26:40 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/**
+ * @brief Function to check exit status and return value
+ * 
+ * @param data: a pointer to the data structure.
+ * @return int
+ */
+int	check_exit(t_data *data)
+{
+	if (data->cmd == NULL)
+		return (0);
+	if (data->cmd->args[1] != NULL)
+	{
+		if (ft_isnumber(data->cmd->args[1]) == 0)
+		{
+			ft_putstr_fd("exit: ", 2);
+			ft_putstr_fd(data->cmd->args[1], 2);
+			ft_putstr_fd(": numeric argument required\n", 2);
+			return (255);
+		}
+		else
+			return (ft_atoi(data->cmd->args[1]));
+	}
+	else
+		return (data->exit_status);
+}
 
 /**
  * @brief Function to get enviroment copy
@@ -83,14 +109,13 @@ int	get_prompt(t_data *data)
 	}
 	add_history(usr_input);
 	ft_parser(usr_input, data);
-	if (data->cmd)
-	{
-		execute_pipeline(data);
-	}
-	if (data->cmd && data->cmd->args && !ft_strncmp("exit",
-			data->cmd->args[0], 5) && data->cmd->args[1] == NULL)
-		return (1);
 	free(usr_input);
+	if (data->cmd)
+		execute_pipeline(data);
+	if (data->cmd && data->cmd->args && !ft_strncmp("exit",
+			data->cmd->args[0], 5))
+		return (1);
+	ft_free_cmd(data->cmd);
 	return (0);
 }
 
@@ -105,6 +130,7 @@ int	get_prompt(t_data *data)
 int	main(int ac, char **av, char **env)
 {
 	t_data	data;
+	int		exit_status;
 
 	if (ft_init(&data, ac, av, env) == 1)
 		return (0);
@@ -116,9 +142,10 @@ int	main(int ac, char **av, char **env)
 		if (get_prompt(&data) == 1)
 			break ;
 	}
+	exit_status = check_exit(&data);
 	free_data(&data);
 	rl_clear_history();
 	system("leaks -q minishell");
 	print_exit();
-	return (0);
+	exit(exit_status);
 }

@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 20:12:22 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/26 20:21:10 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/01 20:37:26 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@ void	free_cmd(t_cmd *cmd)
  */
 void	free_data(t_data *data)
 {
+	if (data->tkns)
+	{
+		ft_free_tkn_lst(data->tkns);
+		data->tkns = NULL;
+	}
 	if (data->cmd)
 	{
 		free_cmd(data->cmd);
@@ -95,4 +100,24 @@ char	*ft_strndup(const char *s, size_t n)
 		dup[n] = '\0';
 	}
 	return (dup);
+}
+
+int	ft_isnumber(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		i++;
+		if (!str[i])
+			return (0);
+	}
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
 }

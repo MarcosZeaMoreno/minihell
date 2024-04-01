@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_tkns_to_cmds_utils.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 20:56:18 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/20 14:49:49 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/04/01 18:30:39 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,15 @@ void	ft_free_cmd(t_cmd *cmd)
 	{
 		next = current->next;
 		if (current->args)
+		{
 			ft_charpp_free(current->args);
+			current->args = NULL;
+		}
 		if (current->redir)
+		{
 			ft_free_redir(current->redir);
+			current->redir = NULL;
+		}
 		free(current);
 		current = next;
 	}

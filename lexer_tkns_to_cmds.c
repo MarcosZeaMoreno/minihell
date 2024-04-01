@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 13:56:09 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/23 20:27:38 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/01 18:30:29 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,21 +86,12 @@ void	ft_tkns_to_cmds(t_data *data)
 
 /**
  * @brief Function to add arguments to the command structure.
- * 
  * @param cmd The command structure
  * @param tkn_lst The token list from data structure
  * (for structure types see minishell.h)
- * @var i The index of the argument
- * @var tkns The temporary pointer to the token list
- * from data structure
  */
 void	ft_add_arg_to_cmd(t_cmd *cmd, t_tkn_lst **tkn_lst)
 {
-	t_tkn_lst	*tkns;
-	int			i;
-
-	tkns = *tkn_lst;
-	i = 0;
 	while (*tkn_lst != NULL && (*tkn_lst)->tkn->e_type != TKN_PIPE
 		&& (*tkn_lst)->tkn->e_type != TKN_REDIR_IN
 		&& (*tkn_lst)->tkn->e_type != TKN_REDIR_OUT
@@ -108,7 +99,6 @@ void	ft_add_arg_to_cmd(t_cmd *cmd, t_tkn_lst **tkn_lst)
 		&& (*tkn_lst)->tkn->e_type != TKN_REDIR_HERE_DOC)
 	{
 		ft_realloc_args(cmd, ft_strdup((*tkn_lst)->tkn->value));
-		i++;
 		*tkn_lst = (*tkn_lst)->next;
 	}
 }

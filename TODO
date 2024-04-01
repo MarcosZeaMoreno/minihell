@@ -1,8 +1,10 @@
-[ ] FREE &data after exit
-[ ] FREE cmd after execute_command
-[ ] FIX memory leaks
-[ ] FIX exit_status
-[ ] FIX $? value
+[X] FREE &data after exit
+[X] FREE cmd after execute_command
+[X] FIX memory leaks
 [X] add ft_leaks
 [X] EXPORT t= -> garbage data
-[ ] FIX the exit status in execute_child_process.c:38 that always gives bad exit status
+[X] FIX the exit status in execute_child_process.c:38 that always gives bad exit status
+[X] Fix export memory leak
+[X] norminette
+[ ] fix ctrl+d
+[ ] Remove TODO file from github

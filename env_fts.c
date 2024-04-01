@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:18:21 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/26 20:03:50 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/01 21:09:42 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,20 @@
 void	change_value_env(t_data *data, char *key, char *value)
 {
 	t_env	*temp;
+	char	*to_free;
 
+	to_free = NULL;
 	temp = data->env_copy;
 	while (temp != NULL)
 	{
 		if (!ft_strncmp(temp->key, key, ft_strlen(key) + 1))
 		{
 			if (!value)
-				temp->value = "";
-			temp->value = ft_strdup(value);
+				to_free = ft_strdup("");
+			to_free = ft_strdup(value);
+			if (temp->value)
+				free(temp->value);
+			temp->value = to_free;
 			return ;
 		}
 		temp = temp->next;
@@ -58,6 +63,8 @@ void	remove_env_var(t_data *data, char *key)
 				data->env_copy = current->next;
 			else
 				prev->next = current->next;
+			free(current->key);
+			free(current->value);
 			free(current);
 			return ;
 		}
@@ -79,8 +86,8 @@ void	add_env_var(t_data *data, char *key, char *value)
 
 	if (!value)
 		value = "";
-	env_v = ft_strjoin(key, "=");
-	env_v = ft_strjoin(env_v, value);
+	env_v = ft_strjoin_free(key, ft_strdup("="));
+	env_v = ft_strjoin_free(env_v, ft_strdup(value));
 	data->env_copy = ft_env_lst_add_back(data, env_v);
 }
 
@@ -112,7 +119,7 @@ char	**ft_env_to_char(t_env *env)
 	while (temp != NULL)
 	{
 		env_cpy[i] = ft_strjoin(temp->key, "=");
-		env_cpy[i] = ft_strjoin(env_cpy[i], temp->value);
+		env_cpy[i] = ft_strjoin_free(env_cpy[i], ft_strdup(temp->value));
 		i++;
 		temp = temp->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 18:23:45 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/26 19:32:41 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/01 17:54:57 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,6 @@ void	ft_unset(t_data *data, char **cmds)
 	while (cmds[i] != NULL)
 	{
 		key = cmds[i];
-		if (key == NULL)
-		{
-			ft_printf_fd(1, "unset: %s: Invalid argument\n", cmds[i]);
-			i++;
-			continue ;
-		}
 		if (get_env_value(data->env_copy, key) != NULL)
 			remove_env_var(data, key);
 		if (cmds[i] != NULL)

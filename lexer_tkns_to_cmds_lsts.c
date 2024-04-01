@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_tkns_to_cmds_lsts.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 16:44:43 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/23 18:30:01 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/04/01 18:31:00 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

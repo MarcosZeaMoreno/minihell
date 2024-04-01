@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 21:19:39 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/26 21:19:41 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/01 20:38:07 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	execute_child_process(t_exec_cmd *args, t_data *data, int save)
 		ft_redir(args->cmd, save, args->pipefd);
 	if (args->cmd->args != NULL)
 		exec_local(args->cmd->args, data->env_copy, data);
-	exit(WEXITSTATUS(data->exit_status)); // antes era exit(0)
+	exit(0);
 }
 
 /**
@@ -47,12 +47,13 @@ void	execute_child_process(t_exec_cmd *args, t_data *data, int save)
  */
 void	execute_parent_process(t_exec_cmd *args, pid_t pid, t_data *data)
 {
-	int	status;
+	int		status;
+	pid_t	wpid;
 
-	waitpid(pid, &status, 0);
+	wpid = waitpid(pid, &status, 0);
 	if (check_builtin_rare(args->cmd->args) == 1)
 		ft_do_builtin_rare(data, args->cmd->args);
-	if (WIFEXITED(status))
+	else
 		data->exit_status = WEXITSTATUS(status);
 	if (args->input != 0)
 		close(args->input);

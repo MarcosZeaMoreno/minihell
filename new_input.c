@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 10:41:44 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/05 14:57:05 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/04/01 18:24:30 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,14 +115,13 @@ static void	ft_copy_var_value(int *i, t_var_name *var, t_data *data,
  * 
  * @param usr_input The user input string
  * @param data The main data structure that
- * contains the new input string and the copy 
+ * contains the new input string and the copy
  * of the environment variables.
  * @var i Input string position counter
- * @var var_list The list of variables
+ * @var var_list The list of variables.
  * @var tmp The pointer to the current node in the list
- * @var var The structure that holds the variable name, 
- * it's position in the string and value
- * @var input_chunk The chunk of the string
+ * @var var The structure that holds the variable name,
+ * it's position in the string and value.
  */
 void	ft_get_new_input(char *usr_input, t_data *data)
 {
@@ -130,12 +129,11 @@ void	ft_get_new_input(char *usr_input, t_data *data)
 	t_list		*var_list;
 	t_list		*tmp;
 	t_var_name	*var;
-	char		*input_chunk;
 
 	i = ft_skip_first_spaces(usr_input);
 	var_list = ft_fill_values(usr_input, data);
-	tmp = var_list;
 	data->input_copy = ft_strdup("");
+	tmp = var_list;
 	while (tmp != NULL && usr_input[i] != '\0')
 	{
 		var = (t_var_name *)tmp->content;
@@ -144,10 +142,7 @@ void	ft_get_new_input(char *usr_input, t_data *data)
 		tmp = tmp->next;
 	}
 	if (usr_input[i] != '\0')
-	{
-		input_chunk = ft_get_input_chunck(usr_input, i, ft_strlen(usr_input));
-		data->input_copy = ft_strjoin(data->input_copy, input_chunk);
-		free(input_chunk);
-	}
+		data->input_copy = ft_strjoin_free(data->input_copy,
+				ft_get_input_chunck(usr_input, i, ft_strlen(usr_input)));
 	ft_free_var_list(var_list);
 }
