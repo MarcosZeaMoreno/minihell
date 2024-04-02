@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/04/02 19:06:07 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/02 22:31:13 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,9 +144,9 @@ int	main(int ac, char **av, char **env)
 			break ;
 	}
 	exit_status = check_exit(&data);
-	system("leaks -q minishell");
 	free_data(&data);
 	rl_clear_history();
+	system("leaks -q minishell");
 	print_exit();
 	exit(exit_status);
 }

@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 21:19:39 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/04/02 18:15:45 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/02 22:34:48 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,8 @@ void	execute_pipeline(t_data *data)
 	int				save;
 	t_pipeline_args	args;
 
+	if (data->cmd == NULL)
+		return ;
 	save = dup(0);
 	cmd = data->cmd;
 	in = 0;

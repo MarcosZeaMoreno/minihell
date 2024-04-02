@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 20:56:18 by vkatason          #+#    #+#             */
-/*   Updated: 2024/04/01 18:30:39 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/02 22:09:15 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	ft_free_cmd(t_cmd *cmd)
 		free(current);
 		current = next;
 	}
+	cmd = NULL;
 }
 
 /**

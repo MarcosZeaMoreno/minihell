@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 22:34:51 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/23 20:25:47 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/02 22:38:05 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@ void	ft_parser(char *usr_input, t_data *data)
 		ft_tknize_input(data);
 		ft_tkns_to_cmds(data);
 	}
+	else
+		data->cmd = NULL;
 	return ;
 }

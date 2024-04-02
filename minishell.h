@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/04/01 19:03:26 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/02 22:08:26 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -398,7 +398,6 @@ void					ft_handle_whitespace(t_lexer *lexer);
 void					ft_parser(char *usr_input, t_data *data);
 t_redirect				*ft_init_redir(void);
 void					ft_free_redir(t_redirect *redir);
-void					ft_free_cmd(t_cmd *cmd);
 t_cmd					*ft_init_cmd(void);
 void					ft_handle_tkn_type(t_tkn *tkn, t_tkn_lst **tkn_lst,
 							t_cmd **tmp, t_data *data);

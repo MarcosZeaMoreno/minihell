@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 21:19:10 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/04/01 17:23:06 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/02 22:35:19 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,7 @@ void	exec_command_in_path(char **cmds, char **env,
 		i++;
 	}
 	if (!found)
-	{
-		data->exit_status = 127;
 		ft_printf_fd(2, "%s: Command not found.\n", *cmds);
-	}
 	free_split(path);
 }
 

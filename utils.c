@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 16:25:15 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/26 20:21:24 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/02 19:49:25 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	**strdup_2d(char **src)
 		return (NULL);
 	while (src[i])
 	{
-		dst[i] = strdup(src[i]);
+		dst[i] = ft_strdup(src[i]);
 		if (!dst[i])
 		{
 			free_dest(dst, i);

@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 19:31:30 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/04/02 19:39:21 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/02 19:41:43 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	handle_export_null_equal_sign(t_export_args *args)
 		*args->equal_sign = '\0';
 		args->key = trim_spaces(args->cmds[args->i]);
 		args->value = trim_spaces(args->equal_sign + 1);
-		printf("handle_export-> key: %s, value: %s\n", args->key, args->value);
 	}
 	else
 	{
@@ -70,7 +69,6 @@ int	handle_export(t_data *data, t_export_args *args)
 	handle_export_null_equal_sign(args);
 	if (args->key == NULL || check_name(args->key))
 	{
-		ft_printf_fd(1, "export: %s: Invalid argument\n", args->cmd_copy);
 		free(args->key);
 		free(args->value);
 		free(args->cmd_copy);
