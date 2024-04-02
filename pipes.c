@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 21:19:39 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/04/01 20:38:07 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/02 18:15:45 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,8 @@ void	execute_child_process(t_exec_cmd *args, t_data *data, int save)
 void	execute_parent_process(t_exec_cmd *args, pid_t pid, t_data *data)
 {
 	int		status;
-	pid_t	wpid;
 
-	wpid = waitpid(pid, &status, 0);
+	waitpid(pid, &status, 0);
 	if (check_builtin_rare(args->cmd->args) == 1)
 		ft_do_builtin_rare(data, args->cmd->args);
 	else

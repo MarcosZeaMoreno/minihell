@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/04/01 21:26:40 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/02 19:06:07 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ int	get_prompt(t_data *data)
 	usr_input = readline("\033[1;31mMiniHell: \033[0m");
 	if (usr_input == NULL)
 	{
+		data->cmd = NULL;
 		ft_printf("exit\n");
 		return (1);
 	}
@@ -143,9 +144,9 @@ int	main(int ac, char **av, char **env)
 			break ;
 	}
 	exit_status = check_exit(&data);
+	system("leaks -q minishell");
 	free_data(&data);
 	rl_clear_history();
-	system("leaks -q minishell");
 	print_exit();
 	exit(exit_status);
 }

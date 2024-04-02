@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:18:21 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/04/01 21:09:42 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/02 19:34:22 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,20 @@ void	remove_env_var(t_data *data, char *key)
 void	add_env_var(t_data *data, char *key, char *value)
 {
 	char	*env_v;
+	char	*key_copy;
+	char	*value_copy;
+	char	*aux;
+	char	*temp;
 
+	temp = ft_strdup("=");
 	if (!value)
 		value = "";
-	env_v = ft_strjoin_free(key, ft_strdup("="));
-	env_v = ft_strjoin_free(env_v, ft_strdup(value));
-	data->env_copy = ft_env_lst_add_back(data, env_v);
+	key_copy = ft_strdup(key);
+	value_copy = ft_strdup(value);
+	env_v = ft_strjoin_free(key_copy, temp);
+	aux = ft_strjoin_free(env_v, value_copy);
+	data->env_copy = ft_env_lst_add_back(data, aux);
+	free(aux);
 }
 
 /**

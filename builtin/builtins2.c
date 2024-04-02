@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 19:31:30 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/04/01 21:14:25 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/02 19:39:21 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ int	check_name(char *name)
 
 char	*trim_spaces(const char *str)
 {
-	const char	*end = str + ft_strlen(str) - 1;
+	const char	*end;
 
+	end = str + ft_strlen(str) - 1;
 	while (ft_isspace((unsigned char)*str))
 		str++;
 	if (*str == 0)
@@ -54,6 +55,7 @@ void	handle_export_null_equal_sign(t_export_args *args)
 		*args->equal_sign = '\0';
 		args->key = trim_spaces(args->cmds[args->i]);
 		args->value = trim_spaces(args->equal_sign + 1);
+		printf("handle_export-> key: %s, value: %s\n", args->key, args->value);
 	}
 	else
 	{
@@ -79,8 +81,10 @@ int	handle_export(t_data *data, t_export_args *args)
 		change_value_env(data, args->key, args->value);
 	else
 		add_env_var(data, args->key, args->value);
-	free(args->key);
-	free(args->value);
+	if (args->value != NULL)
+		free(args->value);
+	if (args->key != NULL)
+		free(args->key);
 	free(args->cmd_copy);
 	return (0);
 }

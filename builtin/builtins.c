@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 18:23:45 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/04/01 17:54:57 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/02 19:37:57 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,9 @@ void	ft_env(t_env *env, int flag)
 	while (env != NULL)
 	{
 		if (flag == 1)
-			ft_printf_fd(1, "declare -x ");
-		ft_printf_fd(1, "%s=%s\n", env->key, env->value);
+			ft_printf_fd(1, "declare -x %s=\"%s\"\n", env->key, env->value);
+		else
+			ft_printf_fd(1, "%s=%s\n", env->key, env->value);
 		env = env->next;
 	}
 }
