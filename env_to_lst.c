@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 15:01:14 by vkatason          #+#    #+#             */
-/*   Updated: 2024/01/24 17:50:48 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/02 16:36:59 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ t_env	*ft_env_lst_new(t_data *data, char *env)
 	env_lst = (t_env *)malloc(sizeof(t_env));
 	if (!env_lst)
 		return (0);
-	env_lst->key = ft_strtok(env, "=");
-	env_lst->value = ft_strtok(NULL, "=");
+	env_lst->key = ft_strdup(ft_strtok(env, "="));
+	env_lst->value = ft_strdup(ft_strtok(NULL, "="));
 	env_lst->next = NULL;
 	data->env_copy = env_lst;
 	return (data->env_copy);
@@ -44,12 +44,15 @@ void	ft_env_lst_last(t_data *data, t_env *env_lst)
 {
 	t_env	*tmp;
 
-	tmp = data->env_copy;
-	while (tmp->next != NULL)
-		tmp = tmp->next;
-	tmp->next = env_lst;
-	tmp = tmp->next;
-	tmp->next = NULL;
+	if (data->env_copy == NULL)
+		data->env_copy = env_lst;
+	else
+	{
+		tmp = data->env_copy;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = env_lst;
+	}
 }
 
 /**
@@ -62,12 +65,19 @@ void	ft_env_lst_last(t_data *data, t_env *env_lst)
 t_env	*ft_env_lst_add_back(t_data *data, char *env)
 {
 	t_env	*env_lst;
+	char	*equal_sign;
 
 	env_lst = (t_env *)malloc(sizeof(t_env));
 	if (!env_lst)
 		return (0);
-	env_lst->key = ft_strtok(env, "=");
-	env_lst->value = ft_strtok(NULL, "=");
+	equal_sign = ft_strchr(env, '=');
+	if (equal_sign != NULL)
+		*equal_sign = '\0';
+	env_lst->key = ft_strdup(env);
+	if (equal_sign)
+		env_lst->value = ft_strdup(equal_sign + 1);
+	else
+		env_lst->value = ft_strdup("");
 	env_lst->next = NULL;
 	ft_env_lst_last(data, env_lst);
 	return (data->env_copy);
@@ -103,8 +113,10 @@ t_data	*ft_get_env_cpy(t_data *data, char **env)
 /**
  * @brief Function to get a value from an environment variable
  * 
- * @param data 
- * @param usr_input 
+ * @param env: a pointer to the enviromental variables.
+ * @param key: a pointer to the key.
+ *
+ * @return char*: a pointer to the value.
  */
 char	*get_env_value(t_env *env, char *key)
 {

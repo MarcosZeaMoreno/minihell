@@ -1,18 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/28 15:55:28 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/12 18:17:47 by vkatason         ###   ########.fr       */
+/*   Created: 2024/02/29 10:35:46 by vkatason          #+#    #+#             */
+/*   Updated: 2024/03/03 22:36:47 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h" 
+#include "libft.h"
 
-int	ft_isprint(int c)
+char	*ft_strncat(char *s1, const char *s2, size_t n)
 {
-	return (c >= 32 && c <= 126);
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	while (s1[i] != '\0')
+		i++;
+	while (s2[j] != '\0' && j < n)
+	{
+		s1[i + j] = s2[j];
+		j++;
+	}
+	s1[i + j] = '\0';
+	return (s1);
 }

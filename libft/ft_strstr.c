@@ -1,25 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/08 18:05:26 by vkatason          #+#    #+#             */
-/*   Updated: 2024/02/23 15:00:56 by vkatason         ###   ########.fr       */
+/*   Created: 2024/01/23 19:08:43 by vkatason          #+#    #+#             */
+/*   Updated: 2024/01/23 19:10:03 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+char	*ft_strstr(const char *haystack, const char *needle)
 {
-	while (*s1 || *s2)
+	size_t	i;
+	size_t	j;
+	size_t	k;
+	int		found;
+
+	if (needle[0] == '\0')
+		return ((char *)haystack);
+	i = 0;
+	while (haystack[i] != '\0')
 	{
-		if (*s1 != *s2)
-			return ((unsigned char)*s1 - (unsigned char)*s2);
-		s1++;
-		s2++;
+		k = 0;
+		j = i;
+		found = j;
+		while (haystack[j] != '\0' && needle[k] != '\0')
+		{
+			if (haystack[j] != needle[k])
+				found = -1;
+			k++;
+			j++;
+		}
+		if (found != -1)
+			return ((char *)haystack + found);
+		i++;
 	}
-	return (0);
+	return (NULL);
 }

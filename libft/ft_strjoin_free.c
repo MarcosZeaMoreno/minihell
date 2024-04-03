@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin_free.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/28 15:55:28 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/12 18:17:47 by vkatason         ###   ########.fr       */
+/*   Created: 2024/03/30 21:01:57 by vkatason          #+#    #+#             */
+/*   Updated: 2024/03/30 21:03:41 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h" 
+#include "libft.h"
 
-int	ft_isprint(int c)
+char	*ft_strjoin_free(char *s1, char *s2)
 {
-	return (c >= 32 && c <= 126);
+	char	*joined;
+
+	if (!s1 || !s2)
+		return (NULL);
+	joined = ft_strjoin(s1, s2);
+	free(s1);
+	free(s2);
+	return (joined);
 }

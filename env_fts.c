@@ -6,7 +6,7 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:18:21 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/18 18:15:01 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/02 19:34:22 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,27 @@
 /**
  * @brief Function to change the value of an enviroment variable
  * 
- * @param data 
- * @param key 
- * @param value 
+ * @param data: a pointer to the data structure.
+ * @param key: a pointer to the key.
+ * @param value: a pointer to the value.
  */
 void	change_value_env(t_data *data, char *key, char *value)
 {
 	t_env	*temp;
+	char	*to_free;
 
+	to_free = NULL;
 	temp = data->env_copy;
 	while (temp != NULL)
 	{
 		if (!ft_strncmp(temp->key, key, ft_strlen(key) + 1))
 		{
-			temp->value = ft_strdup(value);
+			if (!value)
+				to_free = ft_strdup("");
+			to_free = ft_strdup(value);
+			if (temp->value)
+				free(temp->value);
+			temp->value = to_free;
 			return ;
 		}
 		temp = temp->next;
@@ -38,8 +45,8 @@ void	change_value_env(t_data *data, char *key, char *value)
 /**
  * @brief Function to remove a enviromental variable
  * 
- * @param env_lst 
- * @param key 
+ * @param data: a pointer to the data structure.
+ * @param key: a pointer to the key.
  */
 void	remove_env_var(t_data *data, char *key)
 {
@@ -56,6 +63,8 @@ void	remove_env_var(t_data *data, char *key)
 				data->env_copy = current->next;
 			else
 				prev->next = current->next;
+			free(current->key);
+			free(current->value);
 			free(current);
 			return ;
 		}
@@ -67,50 +76,61 @@ void	remove_env_var(t_data *data, char *key)
 /**
  * @brief Function to add a enviromental variable
  * 
- * @param data 
- * @param key 
- * @param value 
+ * @param data: a pointer to the data structure.
+ * @param key: a pointer to the key.
+ * @param value: a pointer to the value.
  */
 void	add_env_var(t_data *data, char *key, char *value)
 {
 	char	*env_v;
+	char	*key_copy;
+	char	*value_copy;
+	char	*aux;
 	char	*temp;
 
-	env_v = ft_strjoin(key, "=");
-	temp = env_v;
-	env_v = ft_strjoin(env_v, value);
-	free(temp);
-	data->env_copy = ft_env_lst_add_back(data, env_v);
+	temp = ft_strdup("=");
+	if (!value)
+		value = "";
+	key_copy = ft_strdup(key);
+	value_copy = ft_strdup(value);
+	env_v = ft_strjoin_free(key_copy, temp);
+	aux = ft_strjoin_free(env_v, value_copy);
+	data->env_copy = ft_env_lst_add_back(data, aux);
+	free(aux);
 }
 
-int	ft_token_size(t_token *token)
+/**
+ * @brief Function to convert the enviromental variables
+ * 		into a double char pointer.
+ * 
+ * @param env: a pointer to the enviromental variables.
+ * 
+ * @return char**: a double char pointer that contain
+ * 		the enviromental variables.
+ */
+char	**ft_env_to_char(t_env *env)
 {
-    int	i;
+	char	**env_cpy;
+	t_env	*temp;
+	int		i;
 
-    i = 0;
-    while (token != NULL)
-    {
-        token = token->next;
-        i++;
-    }
-    return (i);
-}
-
-char	**lst_to_char(t_token *token)
-{
-    char	**cmds;
-    int		i;
-
-    i = 0;
-    cmds = malloc(sizeof(char *) * (ft_token_size(token) + 1));
-    if (!cmds)
-        return (NULL);
-    while (token != NULL)
-    {
-        cmds[i] = ft_strdup(token->value);
-        token = token->next;
-        i++;
-    }
-    cmds[i] = NULL;
-    return (cmds);
+	i = 0;
+	temp = env;
+	while (temp != NULL)
+	{
+		i++;
+		temp = temp->next;
+	}
+	env_cpy = (char **)malloc(sizeof(char *) * (i + 1));
+	i = 0;
+	temp = env;
+	while (temp != NULL)
+	{
+		env_cpy[i] = ft_strjoin(temp->key, "=");
+		env_cpy[i] = ft_strjoin_free(env_cpy[i], ft_strdup(temp->value));
+		i++;
+		temp = temp->next;
+	}
+	env_cpy[i] = NULL;
+	return (env_cpy);
 }

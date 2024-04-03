@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   var_cleaning.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/18 16:08:57 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/18 16:20:40 by mzea-mor         ###   ########.fr       */
+/*   Created: 2024/01/14 20:31:17 by vkatason          #+#    #+#             */
+/*   Updated: 2024/03/23 19:28:57 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/**
- * @brief Function to handle the parse input
- * 
- * @param data 
- * @param usr_input 
- */
-void	ft_parse_input(t_data *data, char *usr_input)
+void	ft_free_var_list(t_list *vars)
 {
-	t_token	*token;
+	t_list		*current;
+	t_list		*next;
+	t_var_name	*var;
 
-	token = NULL;
-	token = ft_tokenizer(usr_input);
-	ft_token_lst_last(token);
-	data->token = token;
+	current = vars;
+	while (current != NULL)
+	{
+		var = (t_var_name *)current->content;
+		if (var->name != NULL)
+			free(var->name);
+		if (var->value != NULL)
+			free(var->value);
+		next = current->next;
+		free(current->content);
+		free(current);
+		current = next;
+	}
 }

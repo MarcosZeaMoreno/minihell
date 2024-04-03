@@ -6,84 +6,55 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 18:23:45 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/24 17:50:35 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/02 19:37:57 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-/*
-** Function to handle the export builtin
-* @param data
-* @param token
-*/
-void	ft_export(t_data *data, t_token *token)
-{
-	char	*key;
-	char	*value;
-
-	token = token->next;
-	while (token != NULL)
-	{
-		key = ft_strtok(token->value, "=");
-		value = ft_strtok(NULL, "=");
-		if (key == NULL || value == NULL)
-		{
-			ft_printf_fd(1, "export: %s: Invalid argument\n", token->value);
-			return ;
-		}
-		if (get_env_value(data->env_copy, key) != NULL)
-			change_value_env(data, key, value);
-		else
-			add_env_var(data, key, value);
-		token = token->next;
-	}
-}
-
 /**
  * @brief Function to handle the unset builtin
- * 
- * @param data 
- * @param token 
+ *
+ * @param data
+ * @param cmds
  */
-void	ft_unset(t_data *data, t_token *token)
+void	ft_unset(t_data *data, char **cmds)
 {
 	char	*key;
+	int		i;
 
-	token = token->next;
-	while (token != NULL)
+	i = 0;
+	while (cmds[i] != NULL)
 	{
-		key = token->value;
-		if (key == NULL)
-		{
-			ft_printf_fd(1, "unset: %s: Invalid argument\n", token->value);
-			token = token->next;
-			continue ;
-		}
+		key = cmds[i];
 		if (get_env_value(data->env_copy, key) != NULL)
 			remove_env_var(data, key);
-		token = token->next;
+		if (cmds[i] != NULL)
+			i++;
 	}
 }
 
 /**
  * @brief Function to handle the env builtin
- * 
+ *
  * @param env
  */
-void	ft_env(t_env *env)
+void	ft_env(t_env *env, int flag)
 {
 	while (env != NULL)
 	{
-		ft_printf_fd(1, "%s=%s\n", env->key, env->value);
+		if (flag == 1)
+			ft_printf_fd(1, "declare -x %s=\"%s\"\n", env->key, env->value);
+		else
+			ft_printf_fd(1, "%s=%s\n", env->key, env->value);
 		env = env->next;
 	}
 }
 
 /**
  * @brief Function to handle the pwd builtin
- * 
- * @param data 
+ *
+ * @param data
  */
 void	ft_pwd(t_data *data)
 {

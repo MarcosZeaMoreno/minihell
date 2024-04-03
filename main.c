@@ -6,16 +6,42 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/31 16:45:47 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/03 19:05:33 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /**
- * @brief Function to get pid
+ * @brief Function to check exit status and return value
  * 
- * @param sig 
+ * @param data: a pointer to the data structure.
+ * @return int
+ */
+int	check_exit(t_data *data)
+{
+	if (data->cmd == NULL)
+		return (0);
+	if (data->cmd->args[1] != NULL)
+	{
+		if (ft_isnumber(data->cmd->args[1]) == 0)
+		{
+			ft_putstr_fd("exit: ", 2);
+			ft_putstr_fd(data->cmd->args[1], 2);
+			ft_putstr_fd(": numeric argument required\n", 2);
+			return (255);
+		}
+		else
+			return (ft_atoi(data->cmd->args[1]));
+	}
+	else
+		return (data->exit_status);
+}
+
+/**
+ * @brief Function to get enviroment copy
+ * 
+ * @param data: a pointer to the data structure.
  */
 void	ft_getpid(t_data *data)
 {
@@ -42,7 +68,7 @@ int	ft_init(t_data *data, int ac, char **av, char **env)
 	char	**env_temp;
 
 	(void)av;
-	env_temp = strdup_2d(env); //implementar esto cambia (Ctlr + D), cambiando el output "exit\n" con un salto de línea
+	env_temp = strdup_2d(env);
 	if (ac > 1)
 	{
 		ft_putstr_fd("The program no needs any argument\n", 2);
@@ -50,9 +76,15 @@ int	ft_init(t_data *data, int ac, char **av, char **env)
 	}
 	print_header();
 	data->env_copy = NULL;
-	data->token = NULL;
+	data->input_copy = NULL;
+	data->exit_status = 0;
+	data->tkns = NULL;
+	data->cmd = NULL;
+	data->fd[1] = dup(1);
+	data->fd[0] = dup(0);
 	ft_getpid(data);
 	ft_get_env_cpy(data, env_temp);
+	free_split(env_temp);
 	return (0);
 }
 
@@ -63,27 +95,28 @@ int	ft_init(t_data *data, int ac, char **av, char **env)
  * @param env 
  * @return int 
  */
-int	get_promp(t_data *data, char **env)
+int	get_prompt(t_data *data)
 {
-    char	*usr_input;
+	char	*usr_input;
 
-    if (!data)
-        return (-1);
-    usr_input = readline("\033[1;31mMiniHell: \033[0m");
+	if (!data)
+		return (-1);
+	usr_input = readline("\033[1;31mMiniHell: \033[0m");
 	if (usr_input == NULL)
 	{
+		data->cmd = NULL;
 		ft_printf("exit\n");
 		return (1);
 	}
 	add_history(usr_input);
-	ft_parse_input(data, usr_input);
-	if (data->token && check_builtin(data->token) == 0)
-		check_execve(data, env, data->env_copy);
-	if (data->token && data->token->value && !ft_strncmp("exit", data->token->value, 5))
-		return (1);
-	else
-		exec_builtin(data, data->token);
+	ft_parser(usr_input, data);
 	free(usr_input);
+	if (data->cmd)
+		execute_pipeline(data);
+	if (data->cmd && data->cmd->args && !ft_strncmp("exit",
+			data->cmd->args[0], 5))
+		return (1);
+	ft_free_cmd(data->cmd);
 	return (0);
 }
 
@@ -98,6 +131,7 @@ int	get_promp(t_data *data, char **env)
 int	main(int ac, char **av, char **env)
 {
 	t_data	data;
+	int		exit_status;
 
 	if (ft_init(&data, ac, av, env) == 1)
 		return (0);
@@ -106,9 +140,12 @@ int	main(int ac, char **av, char **env)
 		suppress_output();
 		signal(SIGINT, handle_sigint);
 		signal(SIGQUIT, SIG_IGN);
-		if (get_promp(&data, env) == 1)
+		if (get_prompt(&data) == 1)
 			break ;
 	}
+	exit_status = check_exit(&data);
+	free_data(&data);
+	rl_clear_history();
 	print_exit();
-	return (0);
+	exit(exit_status);
 }

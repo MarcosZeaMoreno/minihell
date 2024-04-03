@@ -1,18 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/28 15:55:28 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/12 18:17:47 by vkatason         ###   ########.fr       */
+/*   Created: 2024/01/28 23:55:14 by vkatason          #+#    #+#             */
+/*   Updated: 2024/01/29 23:25:47 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h" 
+#include "libft.h"
 
-int	ft_isprint(int c)
+void	*ft_realloc(void *ptr, size_t size)
 {
-	return (c >= 32 && c <= 126);
+	void	*new;
+
+	if (!ptr)
+		return (malloc(size));
+	if (!size)
+	{
+		if (ptr)
+		{
+			free(ptr);
+			ptr = NULL;
+		}
+		return (NULL);
+	}
+	new = malloc(size);
+	if (!new)
+		return (NULL);
+	ft_memcpy(new, ptr, size);
+	free(ptr);
+	ptr = NULL;
+	return (new);
 }

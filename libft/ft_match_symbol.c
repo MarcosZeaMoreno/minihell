@@ -1,18 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_match_symbol.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/28 15:55:28 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/12 18:17:47 by vkatason         ###   ########.fr       */
+/*   Created: 2024/02/11 15:34:07 by vkatason          #+#    #+#             */
+/*   Updated: 2024/02/11 15:38:01 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h" 
+#include "libft.h"
 
-int	ft_isprint(int c)
+/**
+ * @brief Function searches for a character in a string.
+ * 
+ * @param c character to search for.
+ * @param str String to search in.
+ * @return int 1 if the character is found, 0 otherwise.
+ */
+int	ft_match_symbol(char c, char *str)
 {
-	return (c >= 32 && c <= 126);
+	while (*str)
+	{
+		if (c == *str)
+			return (1);
+		str++;
+	}
+	return (0);
 }

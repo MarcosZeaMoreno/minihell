@@ -6,38 +6,31 @@
 /*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:32:25 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/18 16:29:20 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/03/23 20:03:40 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-/**
- * @brief Function to handle the echo builtin
- * 
- * @param data 
- * @param usr_input 
- */
-void	ft_echo(t_data *data, t_token *token)
+void	ft_echo(t_data *data, char **cmds)
 {
 	int		flag;
-	t_token	*tmp;
+	int		i;
 
 	(void)data;
-	tmp = token;
-	tmp = tmp->next;
 	flag = 0;
-	if (!ft_strncmp("-n", token->next->value, 3))
+	i = 1;
+	if (cmds[i] != NULL && !ft_strncmp("-n", cmds[i], 3))
 	{
-		tmp = tmp->next;
 		flag = 1;
+		i++;
 	}
-	while (tmp != NULL)
+	while (cmds[i] != NULL)
 	{
-		ft_printf_fd(1, "%s", tmp->value);
-		if (tmp->next != NULL)
+		ft_printf_fd(1, "%s", cmds[i]);
+		if (cmds[i + 1] != NULL)
 			ft_printf_fd(1, " ");
-		tmp = tmp->next;
+		i++;
 	}
 	if (flag == 0)
 		ft_printf_fd(1, "\n");
