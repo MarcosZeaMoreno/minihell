@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:30:41 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/08 18:52:56 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/04/03 13:26:47 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,13 +162,13 @@ int	ft_is_input_error(char *usr_input, t_data *data)
 {
 	if (ft_is_standalone_symbols(usr_input) == 1)
 	{
-		ft_error(usr_input, 12);
+		ft_error(usr_input, SYNTAX_ERROR);
 		data->exit_status = EXIT_SYNTAX_ERROR;
 		return (1);
 	}
 	if (ft_check_input_quotes(usr_input) == 1)
 	{
-		ft_error(usr_input, 11);
+		ft_error(usr_input, INPUT_QUOTES_ERROR);
 		data->exit_status = EXIT_SYNTAX_ERROR;
 		return (1);
 	}

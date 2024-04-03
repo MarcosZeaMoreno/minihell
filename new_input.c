@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 10:41:44 by vkatason          #+#    #+#             */
-/*   Updated: 2024/04/02 23:01:14 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/03 13:18:16 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,14 @@ static void	ft_copy_text_chunk(int *i, t_var_name *var, char *usr_input,
 		t_data *data)
 {
 	char	*input_chunk;
+	char	*temp;
 
 	if (*i != var->start)
 	{
 		input_chunk = ft_get_input_chunck(usr_input, *i, var->start);
-		data->input_copy = ft_strjoin(data->input_copy, input_chunk);
+		temp = ft_strjoin(data->input_copy, input_chunk);
+		free(data->input_copy);
+		data->input_copy = temp;
 		*i = var->start;
 		free(input_chunk);
 	}
@@ -92,18 +95,23 @@ static void	ft_copy_var_value(int *i, t_var_name *var, t_data *data,
 		t_list *tmp)
 {
 	char	*input_chunk;
+	char	*temp;
 
 	if (*i == var->start || tmp->next == NULL)
 	{
 		if (var->value != NULL)
 		{
-			data->input_copy = ft_strjoin(data->input_copy, var->value);
+			temp = ft_strjoin(data->input_copy, var->value);
+			free(data->input_copy);
+			data->input_copy = temp;
 			*i = var->end + 1;
 		}
 		else
 		{
 			input_chunk = ft_strdup("");
-			data->input_copy = ft_strjoin(data->input_copy, input_chunk);
+			temp = ft_strjoin(data->input_copy, input_chunk);
+			free(data->input_copy);
+			data->input_copy = temp;
 			*i = var->end + 1;
 			free(input_chunk);
 		}

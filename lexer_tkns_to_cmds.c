@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_tkns_to_cmds.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 13:56:09 by vkatason          #+#    #+#             */
-/*   Updated: 2024/04/02 21:07:21 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/03 13:27:06 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ int	ft_add_redir_to_cmd(t_data *data, t_cmd *cmd, t_tkn_lst **tkns_lst)
 	redir->redir_type = ft_strdup(tkns->tkn->value);
 	if (tkns->next == NULL)
 	{
-		ft_error("newline", 13);
+		ft_error("newline", SYNTAX_ERROR_UNEXPECTED);
 		data->exit_status = 258;
 		return (1);
 	}

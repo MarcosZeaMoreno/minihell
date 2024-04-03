@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:45:41 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/04/02 22:31:13 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/03 12:46:49 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 
 /**
  * @brief Function to check exit status and return value
@@ -146,7 +147,7 @@ int	main(int ac, char **av, char **env)
 	exit_status = check_exit(&data);
 	free_data(&data);
 	rl_clear_history();
-	system("leaks -q minishell");
 	print_exit();
+	system("leaks -q minishell");
 	exit(exit_status);
 }

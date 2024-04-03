@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:25:58 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/25 19:31:41 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/04/03 13:26:41 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ void	ft_error(char *usr_input, int type_error)
 		ft_printf_fd(2, RED " %s: no such file or directory\n" RST, usr_input);
 	else if (type_error == 4)
 		ft_printf_fd(2, RED " %s: is not a directory\n" RST, usr_input);
-	else if (type_error == 11)
+	else if (type_error == INPUT_QUOTES_ERROR)
 		ft_printf_fd(2, RED " Wrong quotes usage\n" RST);
-	else if (type_error == 12)
+	else if (type_error == SYNTAX_ERROR)
 		ft_printf_fd(2, RED " Syntax error\n" RST);
-	else if (type_error == 13)
+	else if (type_error == SYNTAX_ERROR_UNEXPECTED)
 		ft_printf_fd(2, RED " Syntax error near unexpected token '%s'\n" RST,
 			usr_input);
-	else if (type_error == 14)
+	else if (type_error == UNEXPECTED_TOKEN)
 		ft_printf_fd(2, RED " Unexpected token in input '%s'\n" RST,
 			usr_input);
 }

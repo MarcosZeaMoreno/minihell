@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/04/02 22:08:26 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/03 13:24:09 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@
 # define CMND_NOT_FORK 10
 # define INPUT_QUOTES_ERROR 11
 # define SYNTAX_ERROR 12
+# define SYNTAX_ERROR_UNEXPECTED 13
+# define UNEXPECTED_TOKEN 14
 
 /*
  * The following defines are used to identify the type of error

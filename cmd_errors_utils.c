@@ -28,7 +28,7 @@ int	ft_tkns_error_exit(t_data *data)
 	{
 		if (tkns->tkn->e_type == TKN_ERROR)
 		{
-			ft_error(tkns->tkn->value, 14);
+			ft_error(tkns->tkn->value, UNEXPECTED_TOKEN);
 			data->exit_status = 258;
 			return (1);
 		}
@@ -54,7 +54,7 @@ int	ft_valid_pipe(t_tkn_lst *tkns, t_data *data)
 		if (tmp->tkn->e_type == TKN_PIPE && (tmp->prev == NULL
 				|| tmp->next == NULL))
 		{
-			ft_error("|", 13);
+			ft_error("|", SYNTAX_ERROR_UNEXPECTED);
 			data->exit_status = 258;
 			return (0);
 		}
@@ -84,7 +84,7 @@ int	ft_valid_redir(t_tkn_lst *tkns, t_data *data)
 			&& ((tmp->next == NULL) || (tmp->next->tkn->e_type != TKN_WORD
 					&& tmp->next->tkn->e_type != TKN_STRING)))
 		{
-			ft_error(tmp->tkn->value, 13);
+			ft_error(tmp->tkn->value, SYNTAX_ERROR_UNEXPECTED);
 			data->exit_status = 258;
 			return (0);
 		}
