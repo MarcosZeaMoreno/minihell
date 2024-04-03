@@ -1,3 +1,0 @@
-[ ] ctrl+c in EOF
-[ ] cat double print Minishell:, with ctl+c
-[ ] free $? and before of $? (ej. 'echo ')

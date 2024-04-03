@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_tkns_to_cmds.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 13:56:09 by vkatason          #+#    #+#             */
-/*   Updated: 2024/04/03 13:27:06 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/04/03 16:17:47 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,7 @@ void	ft_tkns_to_cmds(t_data *data)
 	tkn_lst = data->tkns;
 	tmp = ft_init_cmd();
 	data->cmd = tmp;
-	if (ft_tkns_error_exit(data) == 1)
-		return ;
-	if (!ft_valid_pipe(tkn_lst, data))
-		return ;
-	if (!ft_valid_redir(tkn_lst, data))
+	if (ft_check_tkn_errors(data, tkn_lst) == 1)
 		return ;
 	while (tkn_lst)
 	{

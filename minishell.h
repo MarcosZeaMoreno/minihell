@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/04/03 13:24:09 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/04/03 18:59:31 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -394,6 +394,7 @@ void					ft_handle_less_than_helper(t_lexer	*lexer,
 t_tkn					*ft_handle_less_than(t_lexer *lexer);
 t_tkn					*ft_handle_pipe(t_lexer *lexer);
 void					ft_handle_whitespace(t_lexer *lexer);
+int						ft_check_tkn_errors(t_data *data, t_tkn_lst *tkn_lst);
 
 /*---- PARSING & CMD CREATION FUNCTIONS/ -----*/
 
