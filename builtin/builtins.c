@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzea-mor <mzea-mor@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 18:23:45 by mzea-mor          #+#    #+#             */
 /*   Updated: 2024/04/22 18:28:56 by vkatason         ###   ########.fr       */
@@ -39,6 +39,7 @@ void	ft_unset(t_data *data, char **cmds)
 /**
  * @brief Function to handle the env builtin: prints 
  * the environment variables stored in the linked list.
+ * If there are no arguments, flag == 1 print env like bash.
  * 
  * @param env The linked list of environment variables.
  * @param flag The flag indicating the format of the output.
