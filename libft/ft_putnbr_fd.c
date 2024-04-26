@@ -3,16 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkatason <vkatason@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 20:25:36 by vkatason          #+#    #+#             */
-/*   Updated: 2022/10/19 20:31:56 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/04/23 12:49:09 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/* Puts number to the file descriptor */
+/**
+ * @brief 		Puts number to the file descriptor
+ * 
+ * @param n 	The number to be written.
+ * @param fd 	The file descriptor to write to.
+ * 
+ * @note 		Handles the case of `INT_MIN` by writing "-2147483648".
+ * @compilation	gcc -Wextra -Wall -Werror ft_putnbr_fd.c 
+ * 				ft_putstr_fd.c ft_putchar_fd.c ft_strlen.c
+ */
+
 void	ft_putnbr_fd(int n, int fd)
 {
 	if (n == -2147483648)
@@ -39,6 +49,3 @@ void	ft_putnbr_fd(int n, int fd)
 	ft_putnbr_fd(num, 1);
 	return (0);
 } */
-
-// Compile with gcc -Wextra -Wall -Werror ft_putnbr_fd.c 
-// ft_putstr_fd.c ft_putchar_fd.c ft_strlen.c

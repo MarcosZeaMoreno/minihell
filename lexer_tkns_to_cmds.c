@@ -6,22 +6,22 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 13:56:09 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/23 18:57:27 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/04/24 11:39:15 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /**
- * @brief Helper function to handle the token types
- * in the process of converting tokens to commands
- * (in ft_tkns_to_cmds function).
+ * @brief 			Helper function to handle the token types
+ * 					in the process of converting tokens to commands
+ * 					(in ft_tkns_to_cmds function).
  * 
- * @param tkn The token structure
- * @param tkn_lst Token list from data structure
- * @param tmp Temporary command structure
- * @param data Main data structure
- * (for structure types see minishell.h)
+ * @param tkn 		The token structure
+ * @param tkn_lst 	Token list from data structure
+ * @param tmp 		Temporary command structure
+ * @param data 		Main data structure
+ * 					(for structure types see minishell.h)
  */
 void	ft_handle_tkn_type(t_tkn *tkn,
 						t_tkn_lst **tkn_lst,
@@ -46,21 +46,21 @@ void	ft_handle_tkn_type(t_tkn *tkn,
 }
 
 /**
- * @brief Function checks correct usage 
- * of the symbols in the token list with 
- * helper functions (see cmd_errors_utils.c).
- * For e.g., after and before pipes we need
- * to have valid arguments (not NULL) or 
- * after redirection should go other token
- * that has word or string type. Then this function 
- * converts tokens to commands which are stored in
- * the main data structure (data->cmd).
+ * @brief 			Function checks correct usage 
+ * 					of the symbols in the token list with 
+ * 					helper functions (see cmd_errors_utils.c).
+ * 					For e.g., after and before pipes we need
+ * 					to have valid arguments (not NULL) or 
+ * 					after redirection should go other token
+ * 					that has word or string type. Then this function 
+ * 					converts tokens to commands which are stored in
+ * 					the main data structure (data->cmd).
  * 
- * @param data Main data structure
- * @var tmp Temporary command structure
- * @var tkn_lst Token list from data structure
- * @var tkn Token structure
- * (for structure types see minishell.h)
+ * @param data 		Main data structure
+ * @var tmp 		Temporary command structure
+ * @var tkn_lst 	Token list from data structure
+ * @var tkn 		Token structure
+ * 					(for structure types see minishell.h)
  */
 void	ft_tkns_to_cmds(t_data *data)
 {
@@ -71,11 +71,7 @@ void	ft_tkns_to_cmds(t_data *data)
 	tkn_lst = data->tkns;
 	tmp = ft_init_cmd();
 	data->cmd = tmp;
-	if (ft_tkns_error_exit(data) == 1)
-		return ;
-	if (!ft_valid_pipe(tkn_lst, data))
-		return ;
-	if (!ft_valid_redir(tkn_lst, data))
+	if (ft_check_tkn_errors(data, tkn_lst) == 1)
 		return ;
 	while (tkn_lst)
 	{
@@ -85,22 +81,13 @@ void	ft_tkns_to_cmds(t_data *data)
 }
 
 /**
- * @brief Function to add arguments to the command structure.
- * 
- * @param cmd The command structure
- * @param tkn_lst The token list from data structure
- * (for structure types see minishell.h)
- * @var i The index of the argument
- * @var tkns The temporary pointer to the token list
- * from data structure
+ * @brief 			Function to add arguments to the command structure.
+ * @param cmd 		The command structure
+ * @param tkn_lst 	The token list from data structure
+ * 					(for structure types see minishell.h)
  */
 void	ft_add_arg_to_cmd(t_cmd *cmd, t_tkn_lst **tkn_lst)
 {
-	t_tkn_lst	*tkns;
-	int			i;
-
-	tkns = *tkn_lst;
-	i = 0;
 	while (*tkn_lst != NULL && (*tkn_lst)->tkn->e_type != TKN_PIPE
 		&& (*tkn_lst)->tkn->e_type != TKN_REDIR_IN
 		&& (*tkn_lst)->tkn->e_type != TKN_REDIR_OUT
@@ -108,19 +95,18 @@ void	ft_add_arg_to_cmd(t_cmd *cmd, t_tkn_lst **tkn_lst)
 		&& (*tkn_lst)->tkn->e_type != TKN_REDIR_HERE_DOC)
 	{
 		ft_realloc_args(cmd, ft_strdup((*tkn_lst)->tkn->value));
-		i++;
 		*tkn_lst = (*tkn_lst)->next;
 	}
 }
 
 /**
- * @brief Function to create a new redirection structure
- * and add it to the command structure.
+ * @brief 				Function to create a new redirection structure
+ * 						and add it to the command structure.
  * 
- * @param cmd The command structure
- * @return t_redirect* The redirection structure
- * (for structure types see minishell.h)
- * @var redir The redirection list from the command structure
+ * @param cmd 			The command structure
+ * @return t_redirect* 	The redirection structure
+ * 						(for structure types see minishell.h)
+ * @var redir 			The redirection list from the command structure
  */
 t_redirect	*ft_make_new_redir(t_cmd *cmd)
 {
@@ -143,13 +129,13 @@ t_redirect	*ft_make_new_redir(t_cmd *cmd)
 }
 
 /**
- * @brief Function to add redirection to each command.
+ * @brief 			Function to add redirection to each command.
  * 
- * @param data Main data structure
- * @param cmd The command structure
- * @param tkns_lst The token list from data structure
- * (for structure types see minishell.h)
- * @return int 1 if there is an error, 0 if not
+ * @param data 		Main data structure
+ * @param cmd 		The command structure
+ * @param tkns_lst 	The token list from data structure
+ * 					(for structure types see minishell.h)
+ * @return int 		1 if there is an error, 0 if not
  */
 int	ft_add_redir_to_cmd(t_data *data, t_cmd *cmd, t_tkn_lst **tkns_lst)
 {
@@ -161,7 +147,7 @@ int	ft_add_redir_to_cmd(t_data *data, t_cmd *cmd, t_tkn_lst **tkns_lst)
 	redir->redir_type = ft_strdup(tkns->tkn->value);
 	if (tkns->next == NULL)
 	{
-		ft_error("newline", 13);
+		ft_error("newline", SYNTAX_ERROR_UNEXPECTED);
 		data->exit_status = 258;
 		return (1);
 	}

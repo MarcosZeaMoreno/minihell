@@ -6,13 +6,31 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 00:23:41 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/03 23:29:00 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/04/23 19:01:09 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 // #include <stdio.h>
 
+/**
+ * @brief 			Function that concatenates two strings 
+ * 					`s1` and `s2` into one. The resulting 
+ * 					string `dest` is allocated dynamically 
+ * 					using `malloc`, and it is terminated 
+ * 					with a null `\\0` character.
+ *
+ * @param s1 		The first string to be concatenated.
+ * @param s2 		The second string to be concatenated.
+ * @var dest 		The new string created by concatenating `s1` and `s2`.
+ * @var i 			An index to iterate over the strings.
+ * @var len1 		The length of the first string `s1`.
+ * @var len2 		The length of the second string `s2`.
+ * @return 			The concatenated string, or NULL if either 
+ * 					`s1` or `s2` is NULL or if memory allocation fails.
+ * @note 			The resulting string must be freed with `free(3)`.
+ * 					Original strings are not modified and not freed.
+ */
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	int		i;
@@ -49,8 +67,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 // 	char	*str3;
 
 // 	str1 = "";
-// 	str2 = "";
-// 	str3 = "Jaime";
+// 	str2 = "Hello, ";
+// 	str3 = "World!";
 // 	printf("%s\n", ft_strjoin(str1, str2));
 // 	printf("%s\n", ft_strjoin(str1, str3));
 // 	return (0);

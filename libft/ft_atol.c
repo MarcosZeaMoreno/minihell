@@ -6,12 +6,27 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 19:51:15 by vkatason          #+#    #+#             */
-/*   Updated: 2023/10/22 15:45:46 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/04/22 19:01:29 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/**
+ * @brief Function that converts the initial 
+ * portion of the string pointed to by `str`
+ * to its equivalent long representation. 
+ * It skips leading white space characters 
+ * and then interprets the optional sign 
+ * and numeric digits.
+ * 42 implementation of the standard `atol` function.
+ *
+ * @param str The string to be converted.
+ * @return The converted integer value.
+ * @var i The index of the current character in the string.
+ * @var res The converted integer value.
+ * @var sign The sign of the integer value.
+ */
 long	ft_atol(const char *str)
 {
 	int		i;

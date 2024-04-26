@@ -6,21 +6,21 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 16:44:43 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/23 18:30:01 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/04/24 11:35:42 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /**
- * @brief Function to reallocate memory 
- * for args in the command list
+ * @brief 			Function to reallocate memory 
+ * 					for args in the command list
  * 
- * @param cmd The command structure.
- * @param new_arg The new argument to be added.
- * @var new_args The new arguments list.
- * @var i The index of the current argument.
- * @var j The index of the new argument.
+ * @param cmd 		The command structure.
+ * @param new_arg 	The new argument to be added.
+ * @var new_args 	The new arguments list.
+ * @var i 			The index of the current argument.
+ * @var j 			The index of the new argument.
  */
 void	ft_realloc_args(t_cmd *cmd, char *new_arg)
 {

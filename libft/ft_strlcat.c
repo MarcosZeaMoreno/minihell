@@ -6,18 +6,32 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:06:48 by vkatason          #+#    #+#             */
-/*   Updated: 2022/10/08 18:54:21 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/04/23 19:04:45 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
 // #include <string.h>
 // #include <stdio.h>                       /* to use printf() */
 
+/**
+ * @brief 			Function that concatenates the string pointed to by `src`
+ * 					to the end of the string pointed to by `dst`. 
+ * 					It will append at most `dstsize - strlen(dst) - 1`
+ * 					characters from `src` and null-terminate `\\0` the result.
+ *
+ * @param dst 		The destination string.
+ * @param src 		The source string.
+ * @param dstsize 	The size of the destination buffer.
+ * @return 			The total length of the string that 
+ * 					would have been created if
+ *         			`dstsize` had been sufficiently large without `\\0`.
+ */
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	size_t		i;
-	size_t		maxlen;
+	size_t	i;
+	size_t	maxlen;
 
 	maxlen = ft_strlen(dst) + ft_strlen(src);
 	if (dstsize <= ft_strlen(dst))

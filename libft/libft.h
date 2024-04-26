@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 15:10:23 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/14 15:43:03 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/04/01 18:49:10 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ char				*ft_strcat(char *dest, char *src);
 char				*ft_strncat(char *s1, const char *s2, size_t n);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
+char				*ft_strjoin_free(char *s1, char *s2);
 char				*ft_strtrim(char const *s1, char const *set);
 char				**ft_split(char const *s, char c);
 char				*ft_itoa(int n);

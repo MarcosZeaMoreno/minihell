@@ -3,15 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:52:22 by vkatason          #+#    #+#             */
-/*   Updated: 2024/01/11 16:29:19 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/23 13:58:01 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/**
+ * @brief 		Helper function for ft_split that counts
+ * 				the number of words in a string based on 
+ * 				a given delimiter.
+ *
+ * @param s 	The string to count the words in.
+ * @param c 	The delimiter character.
+ * @return 		The number of words in the string.
+ */
 static int	ft_wordcount(char const *s, char c)
 
 {
@@ -34,6 +43,19 @@ static int	ft_wordcount(char const *s, char c)
 	return (word);
 }
 
+/**
+ * @brief 		Helper function for ft_split that
+ * 				calculates the size of a word in a string.
+ * 				Function takes a string `s`, a delimiter `c`, 
+ * 				and an index `i` as input. It counts the number
+ * 				of characters in the word starting from index `i` 
+ * 				until it reaches the delimiter `c` or the end of the string.
+ *
+ * @param s The string to calculate the word size from.
+ * @param c The delimiter character.
+ * @param i The starting index of the word.
+ * @return The size of the word.
+ */
 static int	ft_wordsize(char const *s, char c, int i)
 
 {
@@ -48,6 +70,13 @@ static int	ft_wordsize(char const *s, char c, int i)
 	return (size);
 }
 
+/**
+ * @brief 		Frees the memory allocated for an array of strings.
+ * 				Helper function for ft_split.
+ *
+ * @param strs 	The array of strings to be freed.
+ * @param j 	The number of strings in the array.
+ */
 static void	ft_free(char **strs, int j)
 {
 	while (j-- > 0)
@@ -55,11 +84,11 @@ static void	ft_free(char **strs, int j)
 	free(strs);
 }
 
-/** @brief Function that separates one string 
- *  to various depending on separator
- *  @param s string of chars
- *  @param c any char separator
- *  @return char** array of separated string
+/** @brief 		Function that separates one string 
+ *  			to various depending on separator
+ *  @param s 	string of chars
+ *  @param c 	any char separator
+ *  @return 	char** array of separated string
  */
 char	**ft_split(char const *s, char c)
 {

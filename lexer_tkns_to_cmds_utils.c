@@ -6,16 +6,16 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 20:56:18 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/20 14:49:49 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/04/24 11:37:00 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /**
- * @brief Function that initializes a command structure.
- * @var cmd The command structure.
- * @return t_cmd* The command structure.
+ * @brief 			Function that initializes a command structure.
+ * @var cmd 		The command structure.
+ * @return t_cmd* 	The command structure.
  */
 t_cmd	*ft_init_cmd(void)
 {
@@ -40,11 +40,11 @@ t_cmd	*ft_init_cmd(void)
 }
 
 /**
- * @brief Function that frees the command structure.
+ * @brief 			Function that frees the command structure.
  * 
- * @var current Pointer to the current command structure.
- * @var next Pointer to the next command structure.
- * @param cmd The command list from data structure.
+ * @var current 	Pointer to the current command structure.
+ * @var next 		Pointer to the next command structure.
+ * @param cmd 		The command list from data structure.
  */
 void	ft_free_cmd(t_cmd *cmd)
 {
@@ -56,18 +56,25 @@ void	ft_free_cmd(t_cmd *cmd)
 	{
 		next = current->next;
 		if (current->args)
+		{
 			ft_charpp_free(current->args);
+			current->args = NULL;
+		}
 		if (current->redir)
+		{
 			ft_free_redir(current->redir);
+			current->redir = NULL;
+		}
 		free(current);
 		current = next;
 	}
+	cmd = NULL;
 }
 
 /**
- * @brief Function that initializes a redirect structure.
+ * @brief 				Function that initializes a redirect structure.
  * 
- * @return t_redirect* Redirect structure.
+ * @return t_redirect* 	Redirect structure.
  */
 t_redirect	*ft_init_redir(void)
 {
@@ -81,11 +88,11 @@ t_redirect	*ft_init_redir(void)
 }
 
 /**
- * @brief Function that free a redirect list
- * inside a command structure.
+ * @brief 			Function that free a redirect list
+ * 					inside a command structure.
  * 
- * @var current Pointer to the current redirect structure.
- * @var next Pointer to the next redirect structure.
+ * @var current 	Pointer to the current redirect structure.
+ * @var next 		Pointer to the next redirect structure.
  */
 void	ft_free_redir(t_redirect *redir)
 {
@@ -106,11 +113,11 @@ void	ft_free_redir(t_redirect *redir)
 }
 
 /**
- * @brief Function that takes the order (node number)
- * of the last token in the token list.
+ * @brief 			Function that takes the order (node number)
+ * 					of the last token in the token list.
  * 
- * @param tkn_list The head of the token list.
- * @return int The order number.
+ * @param tkn_list 	The head of the token list.
+ * @return int 		The order number.
  */
 int	ft_tkn_lst_last(t_tkn_lst *tkn_list)
 {

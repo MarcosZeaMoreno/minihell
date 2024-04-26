@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 14:49:24 by vkatason          #+#    #+#             */
-/*   Updated: 2022/10/06 16:46:28 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:38:14 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 // #include <string.h>
 // #include <stddef.h>
 
+/**
+ * @brief 		Function locates the first occurrence of the character `c`
+ * 				(converted to a char) in the string `s`.  
+ * @param s 	The string to search in.
+ * @param c 	The character to be located.
+ * @return 		A pointer to the located character, 
+ * 				or NULL if the character is not found.
+ */
 char	*ft_strchr(const char *s, int c)
 {
 	size_t	count;

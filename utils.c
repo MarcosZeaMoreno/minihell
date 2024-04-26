@@ -3,15 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 16:25:15 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/02/14 12:06:56 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/04/02 19:49:25 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/**
+ * @brief Function to free a 2d array
+ * 
+ * @param split: a pointer to the 2d array.
+ */
 void	free_split(char **split)
 {
 	int	i;
@@ -25,6 +30,28 @@ void	free_split(char **split)
 	free(split);
 }
 
+/**
+ * @brief Function to free a 2d array
+ * 
+ * @param dest: a pointer to the 2d array.
+ * @param i: an integer that represent the number of elements.
+ */
+void	free_dest(char **dest, int i)
+{
+	int	j;
+
+	j = 0;
+	while (j < i)
+		free(dest[j++]);
+	free(dest);
+}
+
+/**
+ * @brief Function to duplicate a 2d array
+ * 
+ * @param src: a pointer to the 2d array.
+ * @return char** 
+ */
 char	**strdup_2d(char **src)
 {
 	int		i;
@@ -40,16 +67,52 @@ char	**strdup_2d(char **src)
 		return (NULL);
 	while (src[i])
 	{
-		dst[i] = strdup(src[i]);
+		dst[i] = ft_strdup(src[i]);
 		if (!dst[i])
 		{
-			for (int j = 0; j < i; j++) //quidado con el for loops (Norminette)
-				free(dst[j]);
-			free(dst);
+			free_dest(dst, i);
 			return (NULL);
 		}
 		i++;
 	}
-	dst[i] = (NULL);
+	dst[i] = NULL;
 	return (dst);
+}
+
+/**
+ * @brief Function to free a redirect structure
+ * 
+ * @param redir: a pointer to the redirect structure.
+ */
+void	free_redir(t_redirect *redir)
+{
+	t_redirect	*tmp;
+
+	while (redir)
+	{
+		tmp = redir;
+		redir = redir->next;
+		free(tmp->file);
+		free(tmp->redir_type);
+		free(tmp);
+	}
+}
+
+/**
+ * @brief Function to free a env structure
+ * 
+ * @param env: a pointer to the env structure.
+ */
+void	free_env(t_env *env)
+{
+	t_env	*tmp;
+
+	while (env)
+	{
+		tmp = env;
+		env = env->next;
+		free(tmp->key);
+		free(tmp->value);
+		free(tmp);
+	}
 }

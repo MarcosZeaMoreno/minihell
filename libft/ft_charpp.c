@@ -6,12 +6,23 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:10:04 by vkatason          #+#    #+#             */
-/*   Updated: 2023/09/24 12:38:16 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/04/22 19:51:15 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/**
+ * @brief Function frees the memory allocated 
+ * for a null-terminated array of strings (double array
+ * or martrix).
+ * First it frees the memory allocated for each string 
+ * and then the array itself. The array must be terminated 
+ * with a NULL pointer.
+ *
+ * @param charpp The double pointer to the array of strings.
+ * @var i The index of the current string in the array.
+ */
 void	ft_charpp_free(char **charpp)
 {
 	int	i;

@@ -6,20 +6,21 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 23:27:36 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/14 16:01:00 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/04/24 11:44:54 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /**
- * @brief Initializes a token with the given type and value.
- * This function allocates memory for a new token, sets its type and value,
- * and returns a pointer to the created token.
+ * @brief 			Initializes a token with the given type and value.
+ * 					This function allocates memory for a new token, 
+ * 					sets its type and value,
+ * 					and returns a pointer to the created token.
  *
- * @param type The type of the token.
- * @param value The value of the token.
- * @return A pointer to the created token.
+ * @param type 		The type of the token.
+ * @param value 	The value of the token.
+ * @return 			A pointer to the created token.
  */
 t_tkn	*ft_init_tkn(int type, char *value)
 {
@@ -32,17 +33,23 @@ t_tkn	*ft_init_tkn(int type, char *value)
 		exit(EXIT_FAILURE);
 	}
 	tkn->e_type = type;
-	tkn->value = ft_strdup(value);
+	if (value && value[strlen(value)] == '\0')
+		tkn->value = ft_strdup(value);
+	else
+	{
+		ft_putstr_fd("Error: Value is not null-terminated\n", 2);
+		exit(EXIT_FAILURE);
+	}
 	tkn->order = ft_reset_tkn_order(0);
 	return (tkn);
 }
 
 /**
- * @brief Adds a token to the token list.
- *
- * @param head The head of the token list.
- * @param tkn The token to be added.
- * @return The updated head of the token list.
+ * @brief 			Adds a token to the token list.
+ *	
+ * @param head 		The head of the token list.
+ * @param tkn 		The token to be added.
+ * @return 			The updated head of the token list.
  */
 t_tkn_lst	*ft_add_tkn_to_lst(t_tkn_lst *head, t_tkn *tkn)
 {
@@ -74,12 +81,11 @@ t_tkn_lst	*ft_add_tkn_to_lst(t_tkn_lst *head, t_tkn *tkn)
 }
 
 /**
- * @brief Tokenizes the input string.
- * This function tokenizes the input string and stores 
- * the tokens in a token list in the data structure.
+ * @brief 			Tokenizes the input string and stores 
+ * 					the tokens in a token list in the data structure.
  *
- * @param input The input string.
- * @param data The main data structure.
+ * @param input 	The input string.
+ * @param data 		The main data structure.
  */
 void	ft_tknize_input(t_data *data)
 {
@@ -100,12 +106,13 @@ void	ft_tknize_input(t_data *data)
 			break ;
 		data->tkns = ft_add_tkn_to_lst(data->tkns, tkn);
 	}
+	ft_free_lexer(lexer);
 }
 
 /**
- * @brief The function that frees the token list.
+ * @brief 		The function that frees the token list.
  * 
- * @param head The head of the token list. 
+ * @param head 	The head of the token list. 
  */
 void	ft_free_tkn_lst(t_tkn_lst *head)
 {
@@ -126,9 +133,26 @@ void	ft_free_tkn_lst(t_tkn_lst *head)
 			free(current->tkn);
 			current->tkn = NULL;
 		}
+		free(current);
 		current = next;
 		if (current != NULL)
 			current->prev = NULL;
 	}
 	ft_reset_tkn_order(1);
+}
+
+/**
+ * @brief			Frees the memory allocated for a lexer object.
+ * 
+ * @param lexer 	The lexer object to be freed.
+ */
+void	ft_free_lexer(t_lexer *lexer)
+{
+	if (lexer->input != NULL)
+	{
+		free(lexer->input);
+		lexer->input = NULL;
+	}
+	free(lexer);
+	lexer = NULL;
 }

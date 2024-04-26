@@ -6,18 +6,21 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:16:12 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/14 16:15:52 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/04/24 11:32:03 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /**
- * @brief Function prints tokens from the user input
- * with the type and value of each token
- * (see enum e_tkn_type in lexer.h)
+ * @brief 			Function prints tokens from the user input
+ * 					with the type and value of each token
+ * 					(see enum e_tkn_type in lexer.h)
  * 
- * @param str user input string
+ * @param str 		user input string
+ * @param tkns 		list of tokens
+ * @var const char	*tkn_types[] array of token types
+ * 					(see enum in s_tkn struct in lexer.h) 
  */
 void	ft_print_tkn(t_tkn *tkn)
 {
@@ -37,10 +40,10 @@ void	ft_print_tkn(t_tkn *tkn)
 }
 
 /**
- * @brief Function prints the list of tokens
- * saved in the data->tkns
+ * @brief 			Function prints the list of tokens
+ * 					saved in the data->tkns
  * 
- * @param data The main data structure
+ * @param data 		The main data structure
  */
 void	ft_print_tkn_lst(t_data *data)
 {

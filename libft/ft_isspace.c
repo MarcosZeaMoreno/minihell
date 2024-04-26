@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 15:59:55 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/03 21:19:48 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/04/22 20:51:50 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 /**
  * @brief Function that checks if the char is space or not
  * 
- * @param c any char
- * @return true 
- * @return false 
+ * @param c any char in ASCII table
+ * @return true if the char is space and false if it's not
  */
 bool	ft_isspace(char c)
 {

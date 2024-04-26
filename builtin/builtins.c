@@ -3,87 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 18:23:45 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/01/24 17:50:35 by mzea-mor         ###   ########.fr       */
+/*   Updated: 2024/04/22 18:28:56 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-/*
-** Function to handle the export builtin
-* @param data
-* @param token
-*/
-void	ft_export(t_data *data, t_token *token)
-{
-	char	*key;
-	char	*value;
-
-	token = token->next;
-	while (token != NULL)
-	{
-		key = ft_strtok(token->value, "=");
-		value = ft_strtok(NULL, "=");
-		if (key == NULL || value == NULL)
-		{
-			ft_printf_fd(1, "export: %s: Invalid argument\n", token->value);
-			return ;
-		}
-		if (get_env_value(data->env_copy, key) != NULL)
-			change_value_env(data, key, value);
-		else
-			add_env_var(data, key, value);
-		token = token->next;
-	}
-}
-
 /**
- * @brief Function to handle the unset builtin
- * 
- * @param data 
- * @param token 
+ * @brief Function to handle the unset builtins. 
+ * It unsets environment variables based on 
+ * the given command arguments.
+ *
+ * @param data The data structure containing the environment variables.
+ * @param cmds An array of strings representing the command arguments.
  */
-void	ft_unset(t_data *data, t_token *token)
+void	ft_unset(t_data *data, char **cmds)
 {
 	char	*key;
+	int		i;
 
-	token = token->next;
-	while (token != NULL)
+	i = 0;
+	while (cmds[i] != NULL)
 	{
-		key = token->value;
-		if (key == NULL)
-		{
-			ft_printf_fd(1, "unset: %s: Invalid argument\n", token->value);
-			token = token->next;
-			continue ;
-		}
+		key = cmds[i];
 		if (get_env_value(data->env_copy, key) != NULL)
 			remove_env_var(data, key);
-		token = token->next;
+		if (cmds[i] != NULL)
+			i++;
 	}
 }
 
 /**
- * @brief Function to handle the env builtin
+ * @brief Function to handle the env builtin: prints 
+ * the environment variables stored in the linked list.
  * 
- * @param env
+ * @param env The linked list of environment variables.
+ * @param flag The flag indicating the format of the output.
+ * If flag is 1, the output will be in the format "declare -x key="value"".
+ * If flag is 0, the output will be in the format "key=value".
  */
-void	ft_env(t_env *env)
+void	ft_env(t_env *env, int flag)
 {
 	while (env != NULL)
 	{
-		ft_printf_fd(1, "%s=%s\n", env->key, env->value);
+		if (flag == 1)
+			ft_printf_fd(1, "declare -x %s=\"%s\"\n", env->key, env->value);
+		else
+			ft_printf_fd(1, "%s=%s\n", env->key, env->value);
 		env = env->next;
 	}
 }
 
 /**
- * @brief Function to handle the pwd builtin
- * 
- * @param data 
+ * @brief Function to handle the pwd builtin: prints the current 
+ * working directory to the standard output. If the environment 
+ * variable "PWD" is set, it prints its value. Otherwise, it prints 
+ * the value of the "HOME" environment variable.
+ *
+ * @param data A pointer to the main data structure that contains 
+ * the environment variables.
  */
 void	ft_pwd(t_data *data)
 {

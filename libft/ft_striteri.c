@@ -6,28 +6,26 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:07:05 by vkatason          #+#    #+#             */
-/*   Updated: 2024/01/08 14:31:06 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:53:23 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-** EN: This function applies function f to each character of the string passed
-** as an argument. It's also passing its index as first argument. Each
-** character is passed by address to f to be modified if necessary.
-** Param. #1 The string to iterate.
-** Param. #2 The function to apply to each character of s and its index.
-** Return value None.
-** Libc functions None.
-**
-** ES A cada carácter de la string ’s’, aplica la función
-** ’f’ dando como parámetros el índice de cada
-** carácter dentro de ’s’ y la dirección del propio
-** carácter, que podrá modificarse si es necesario.
-** s: La string que iterar.
-** f: La función a aplicar sobre cada carácter.
-*/
 #include "libft.h"
+//#include <stdio.h>
 
+/**
+ * @brief		Function applies function `f` to each character 
+ * 				of the string passed as an argument.
+ * 
+ * @param s 	The string to iterate.
+ * @param f  	The function to apply to each character of s and its index.
+ * @note		Each character is passed by address to `f` to be modified.
+ * @example		ft_striteri("Hello.", my_func);
+ * 				my_func(0, "H"), my_func(1, "o"), my_func(2, "r"), my_func(3, "r"), my_func(4, "o"), 
+ * 				my_func(5, "r")
+ * Result:		"Horror"
+ * @compilation	gcc -Wall -Wextra -Werror ft_striteri.c -o striteri
+ */
 void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
 	unsigned int	i;

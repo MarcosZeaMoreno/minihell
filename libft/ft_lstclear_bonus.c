@@ -6,7 +6,7 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 16:47:52 by vkatason          #+#    #+#             */
-/*   Updated: 2023/10/04 14:42:38 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/04/22 21:03:09 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 /**
  * @brief function that clears the list
- * void (*del)(void *) is the pointer to the function
- * that receives void and returns nothing
  * @param lst current list (or stack in our case)
- * @param del is the variablee which takes the address of the function.  
+ * @param del is the variablee which takes the 
+ * address of the function.  
+ * @note void (*del)(void *) is the pointer to the function
+ * that receives void and returns nothing
  */
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {

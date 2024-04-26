@@ -6,12 +6,25 @@
 /*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 19:41:37 by vkatason          #+#    #+#             */
-/*   Updated: 2024/01/29 00:01:10 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/04/22 21:41:51 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/**
+ * @brief 	Copies an `n` size block of memory from a `src` address 
+ * 			to a `dest` address.
+ *
+ * @param dst 	The destination address where data will be copied to.
+ * @param src 	The source address from where data will be copied.
+ * @param n 	The number of bytes to be copied.
+ * @return 		A pointer to the destination address.
+ * @note 		If `dst` and `src` are `NULL`, the function returns `dst`.
+ * @note 		The behavior is undefined if the source and destination overlap.
+ * @var d 		Pointer to the destination address.
+ * @var s 		Pointer to the source address.
+ */
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	unsigned char	*d;
@@ -49,3 +62,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 // 	}
 // 	return (0);
 // }
+
+// Result:
+// Copied string is Too many stuff to copy
+// Copied array is 10 20 30 40 50

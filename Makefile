@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/08 15:13:18 by vkatason          #+#    #+#              #
-#    Updated: 2024/03/23 18:43:34 by vkatason         ###   ########.fr        #
+#    Updated: 2024/04/18 11:52:03 by vkatason         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,10 @@ USER := $(shell whoami)
 NAME = minishell
 CC = gcc -g
 CLEAN = rm -Rf
-CFLAGS = -fsanitize=address -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra
+#-fsanitize=address
 #LDFLAGS for home
-#LDFLAGS = -L/opt/homebrew/Cellar/readline/8.2.7/lib -lreadline
+#LDFLAGS = -L/opt/homebrew/Cellar/readline/8.2.10/lib -lreadline
 #LDFLAGS for school
 LDFLAGS = -lreadline -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 LIBFT = libft
@@ -31,6 +32,7 @@ SRC =  check_comand.c \
 		input_errors.c \
 		lexer_print_tkns.c \
 		lexer_string_utils.c \
+		lexer_tkn_hander_helpers.c \
 		lexer_tkns_handlers.c \
 		lexer_tkns_to_cmds_lsts.c \
 		lexer_tkns_to_cmds_utils.c \
@@ -41,18 +43,36 @@ SRC =  check_comand.c \
 		lst_clear.c \
 		main.c \
 		new_input.c \
-		parse.c \
 		parser.c \
 		print_cmds_list.c \
 		print_entry.c \
 		printed_checks.c \
 		signals.c \
-		tokens.c \
 		utils.c \
+		utils2.c \
+		utils3.c \
 		var_cleaning.c \
+		pipes.c \
+		redir.c \
 		./builtin/builtins.c \
+		./builtin/builtins2.c \
 		./builtin/echo.c \
 		./builtin/cd.c \
+
+#COLORS
+BOLD	:= \033[1m
+BLACK	:= \033[30;1m
+RED		:= \033[31;1m
+GREEN	:= \033[32;1m
+YELLOW	:= \033[33;1m
+BLUE	:= \033[34;1m
+MAGENTA	:= \033[35;1m
+CYAN	:= \033[36;1m
+WHITE	:= \033[37;1m
+DEFAULT := \x1b[0m
+NORM_OK := \x1b[32;1m
+NORM_WARN := \x1b[33;1m
+NORM_ERR := \x1b[31;1m
 
 OBJS := $(SRC:.c=.o)
 
@@ -79,11 +99,11 @@ fclean: libftfclean
 re: fclean all
 
 norma: libftnorma
-	@norminette $(SRC) philo.h
+	@norminette $(SRC) minishell.h
 libftnorma:
 	@make norma -C $(LIBFT)
 norma_color: libftnorma_color
-	@norminette $(SRC) philo.h 2>&1 | sed -e "s/Warning/\x1b[1;33m&\x1b[0m/" -e "s/Error/\x1b[1;31m&\x1b[0m/" -e "s/OK/\x1b[1;32m&\x1b[0m/"
+	@norminette $(SRC) minishell.h 2>&1 | sed -e "s/Warning/\x1b[1;33m&\x1b[0m/" -e "s/Error/\x1b[1;31m&\x1b[0m/" -e "s/OK/\x1b[1;32m&\x1b[0m/"
 libftnorma_color:
 	@make norma_color -C $(LIBFT)
 libftmake:
@@ -93,18 +113,6 @@ libftclean:
 libftfclean:
 	@make fclean -C $(LIBFT)
 libftre: libftclean libftmake
-
-#COLORS
-BOLD	:= \033[1m
-BLACK	:= \033[30;1m
-RED		:= \033[31;1m
-GREEN	:= \033[32;1m
-YELLOW	:= \033[33;1m
-BLUE	:= \033[34;1m
-MAGENTA	:= \033[35;1m
-CYAN	:= \033[36;1m
-WHITE	:= \033[37;1m
-DEFAULT	:= \033[0m
 
 .PHONY : all clean fclean re \
 libftmake libftclean libftfclean libftre

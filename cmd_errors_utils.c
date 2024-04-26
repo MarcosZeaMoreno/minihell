@@ -13,11 +13,11 @@
 #include "minishell.h"
 
 /**
- * @brief Function to check if there is 
- * a tkn with the TKN_ERROR type in the list.
- * If so it prints the error message and returns 1.
- * @param data Main	data structure
- * @return int 1 if there is an error, 0 if not
+ * @brief 		Function to check if there is 
+ * 				a tkn with the TKN_ERROR type in the list.
+ * 				If so it prints the error message and returns 1.
+ * @param data 	Main data structure
+ * @return 		1 if there is an error, 0 if not
  */
 int	ft_tkns_error_exit(t_data *data)
 {
@@ -28,7 +28,7 @@ int	ft_tkns_error_exit(t_data *data)
 	{
 		if (tkns->tkn->e_type == TKN_ERROR)
 		{
-			ft_error(tkns->tkn->value, 14);
+			ft_error(tkns->tkn->value, UNEXPECTED_TOKEN);
 			data->exit_status = 258;
 			return (1);
 		}
@@ -36,12 +36,13 @@ int	ft_tkns_error_exit(t_data *data)
 	}
 	return (0);
 }
+
 /**
- * @brief Function to check if there are
- * valid tokens on the both sides of the pipe.
- * @param data Main data structure
- * @param tkns The list of tokens
- * @return int 1 if there is an error, 0 if not
+ * @brief 		Function to check if there are
+ * 				valid tokens on the both sides of the pipe.
+ * @param data 	Main data structure
+ * @param tkns 	The list of tokens
+ * @return 		int 1 if there is an error, 0 if not
  */
 int	ft_valid_pipe(t_tkn_lst *tkns, t_data *data)
 {
@@ -53,7 +54,7 @@ int	ft_valid_pipe(t_tkn_lst *tkns, t_data *data)
 		if (tmp->tkn->e_type == TKN_PIPE && (tmp->prev == NULL
 				|| tmp->next == NULL))
 		{
-			ft_error("|", 13);
+			ft_error("|", SYNTAX_ERROR_UNEXPECTED);
 			data->exit_status = 258;
 			return (0);
 		}
@@ -63,11 +64,11 @@ int	ft_valid_pipe(t_tkn_lst *tkns, t_data *data)
 }
 
 /**
- * @brief Function to check if there is 
- * valid tokens right next to redirection.
- * @param data Main data structure
- * @param tkns The list of tokens
- * @return int 1 if there is an error, 0 if not
+ * @brief 		Function to check if there is 
+ * 				valid tokens right next to redirection.
+ * @param data 	Main data structure
+ * @param tkns 	The list of tokens
+ * @return 		1 if there is an error, 0 if not
  */
 int	ft_valid_redir(t_tkn_lst *tkns, t_data *data)
 {
@@ -83,7 +84,7 @@ int	ft_valid_redir(t_tkn_lst *tkns, t_data *data)
 			&& ((tmp->next == NULL) || (tmp->next->tkn->e_type != TKN_WORD
 					&& tmp->next->tkn->e_type != TKN_STRING)))
 		{
-			ft_error(tmp->tkn->value, 13);
+			ft_error(tmp->tkn->value, SYNTAX_ERROR_UNEXPECTED);
 			data->exit_status = 258;
 			return (0);
 		}

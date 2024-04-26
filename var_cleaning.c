@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_cleaning.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 20:31:17 by vkatason          #+#    #+#             */
-/*   Updated: 2024/03/01 16:07:17 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/03/23 19:28:57 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_free_var_list(t_list *vars)
 		if (var->name != NULL)
 			free(var->name);
 		if (var->value != NULL)
-			free(var->value); // value is not malloced
+			free(var->value);
 		next = current->next;
 		free(current->content);
 		free(current);

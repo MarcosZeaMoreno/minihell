@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzea-mor <mzea-mor@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:39:42 by mzea-mor          #+#    #+#             */
-/*   Updated: 2024/03/23 18:51:24 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/04/03 18:59:31 by mzea-mor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define MINISHELL_H
 
 # include "libft/libft.h"
-// # include <dirent.h>
 # include <errno.h>
 # include <fcntl.h>
 # include <readline/history.h>
@@ -62,6 +61,16 @@
 # define CMND_NOT_FORK 10
 # define INPUT_QUOTES_ERROR 11
 # define SYNTAX_ERROR 12
+# define SYNTAX_ERROR_UNEXPECTED 13
+# define UNEXPECTED_TOKEN 14
+
+/*
+ * The following defines are used to identify the type of error
+ */
+
+# define STDIN 0
+# define STDOUT 1
+# define STDERR 2
 
 /**
  * @brief The following defines are used
@@ -87,18 +96,6 @@ typedef struct s_env
 	char				*value;
 	struct s_env		*next;
 }						t_env;
-
-/**
- * @brief Structure to handle the tokens
- *
- * @param token The token
- * @param next The next token
- */
-typedef struct s_token
-{
-	char				*value;
-	struct s_token		*next;
-}						t_token;
 
 /**
  * @brief Structure representing a token in the minishell program.
@@ -160,6 +157,26 @@ typedef struct s_tkn_lst
 }						t_tkn_lst;
 
 /**
+ * @brief Structure to handle the export arguments
+ *
+ * @param cmds The commands
+ * @param cmd_copy The copy of the command
+ * @param equal_sign The equal sign
+ * @param i The index
+ * @param key The key
+ * @param value The value
+ */
+typedef struct s_export_args
+{
+	char				**cmds;
+	char				*cmd_copy;
+	char				*equal_sign;
+	int					i;
+	char				*key;
+	char				*value;
+}						t_export_args;
+
+/**
  * @brief Struct to handle the redirections
  * @param file The file to redirect
  * @param redir_type The type of redirection:
@@ -205,6 +222,37 @@ typedef struct s_cmd
 }						t_cmd;
 
 /**
+ * @brief Structure to handle the execution of commands
+ *
+ * @param input The input file descriptor
+ * @param output The output file descriptor
+ * @param cmd The command to execute
+ * @param save The save dup
+ * @param pipefd The pipe file descriptors
+ */
+typedef struct s_exec_cmd
+{
+	int					input;
+	int					output;
+	t_cmd				*cmd;
+	int					pipefd[2];
+}						t_exec_cmd;
+
+/**
+ * @brief Structure to handle the pipeline arguments
+ *
+ * @param in The input file descriptor
+ * @param pipefd The pipe file descriptors
+ * @param cmd The command to execute
+ */
+typedef struct s_pipeline_args
+{
+	int					*in;
+	int					pipefd[2];
+	t_cmd				**cmd;
+}						t_pipeline_args;
+
+/**
  * @brief Structure to handle the data
  *
  * @param env_copy The current copy of enviroment variables
@@ -221,8 +269,8 @@ typedef struct s_data
 	char				*input_copy;
 	t_cmd				*cmd;
 	t_tkn_lst			*tkns;
-	t_token				*token;
 	pid_t				pid;
+	int					fd[2];
 }						t_data;
 
 /**
@@ -244,54 +292,65 @@ typedef struct s_var_name
 	int					end;
 }						t_var_name;
 
-/*-----  BUILTINS ----*/
+/*----- BUILTINS ----*/
 
-void					ft_echo(t_data *data, t_token *token);
-void					ft_cd(t_data *data, t_token *token);
+void					ft_echo(t_data *data, char **cmds);
+void					ft_cd(t_data *data, char **cmds);
 void					ft_pwd(t_data *data);
-void					ft_export(t_data *data, t_token *token);
-void					ft_unset(t_data *data, t_token *token);
-void					ft_env(t_env *env);
-
-/*-----  PARSING ----*/
-
-void					ft_parse_input(t_data *data, char *usr_input);
-
-/*-----  TOKENIZER ----*/
-
-t_token					*ft_tokenizer(char *usr_input);
-t_token					*ft_token_lst_new(char *value);
-void					ft_token_lst_add_back(t_token *token, char *value);
-t_token					*ft_token_lst_last(t_token *token);
+void					ft_export(t_data *data, char **cmds);
+void					ft_unset(t_data *data, char **cmds);
+void					ft_env(t_env *env, int flag);
 
 /*-----  ENVIRONMENT VARIABLES ----*/
 
 t_env					*ft_env_lst_add_back(t_data *data, char *env);
 void					ft_env_lst_last(t_data *data, t_env *env_lst);
 t_env					*ft_env_lst_new(t_data *data, char *env);
-char					**lst_to_char(t_token *token);
 t_data					*ft_get_env_cpy(t_data *data, char **env);
 void					add_env_var(t_data *data, char *key, char *value);
 void					remove_env_var(t_data *data, char *key);
 void					change_value_env(t_data *data, char *key, char *value);
+char					*get_env_value(t_env *env, char *key);
+char					**ft_env_to_char(t_env *env);
 void					print_env_vars(t_data *data);
 
-/*-----  FUNCTIONS ----*/
-// PORFAVOR, DEFINE UN PROPOSITO PARA ESTAS FUNCIONES
+/*-----  SIGNALS FUNCTIONS ----*/
 
 void					handle_sigint(int sig);
+
+/*-----  PRINT FUNCTIONS ----*/
+
 void					print_exit(void);
 void					print_header(void);
-int						check_builtin(t_token *token);
-int						ft_init(t_data *data, int ac, char **av, char **env);
-void					check_execve(t_data *data, char **env,
-							t_env *enviroment);
-void					exec_builtin(t_data *data, t_token *token);
-char					*get_env_value(t_env *env, char *key);
+
+/*-----  EXECUTOR FUNCTIONS ----*/
+
+int						check_builtin(char **cmds);
+int						check_builtin_rare(char **cmds);
+void					exec_builtin(t_data *data, char **cmds);
+void					exec_local(char **cmds, t_env *enviroment,
+							t_data *data);
+void					ft_do_builtin_rare(t_data *data, char **cmds);
+
+/*-----  PIPES & REDIR FUNCTIONS ----*/
+
+void					execute_pipeline(t_data *data);
+void					ft_redir(t_cmd *cmd, int save, int pipefd[2]);
+void					ft_check_counts(t_cmd *cmd);
+void					ft_case_heredoc(t_cmd *cmd, int save);
+
+/*-----  UTILS FUNCTIONS ----*/
+
+void					ft_error(char *str, int type_error);
 void					free_split(char **split);
-void					exec_local(char **cmds, char **env, t_env *enviroment);
-void					forkit(char *full_path, char **cmds, char **env);
 char					**strdup_2d(char **src);
+char					*ft_strdup_const(const char *s);
+char					*ft_strndup(const char *s, size_t n);
+int						ft_isnumber(char *str);
+
+/*-----  EXECUTOR FUNCTIONS ----*/
+
+int						ft_init(t_data *data, int ac, char **av, char **env);
 
 /*----- INPUT CHECK ----*/
 
@@ -314,28 +373,34 @@ char					*ft_lexer_char_to_str(t_lexer *lexer);
 t_tkn					*ft_lexer_get_next_token(t_lexer *lexer);
 char					*ft_lexer_process_chars(t_lexer *lexer, char *value);
 t_tkn					*ft_lexer_get_string(t_lexer *lexer);
+char					*ft_get_string_without_order(t_lexer *lexer);
 t_tkn					*ft_lexer_get_word(t_lexer *lexer);
+char					*ft_get_value(t_lexer *lexer, char *value, char *tmp,
+							char prev_c);
 t_tkn					*ft_init_tkn(int type, char *value);
 int						ft_count_the_same(t_lexer *lexer, char symbol);
 char					*ft_str_repeat(char c, int count);
 int						ft_reset_tkn_order(int reset);
 t_tkn_lst				*ft_add_tkn_to_lst(t_tkn_lst *head, t_tkn *tkn);
 void					ft_tknize_input(t_data *data);
-void					ft_free_tkn_lst(t_tkn_lst *head);
 void					ft_print_tkn(t_tkn *tkn);
 void					ft_print_tkn_lst(t_data *data);
 t_tkn					*ft_handle_quotes(t_lexer *lexer);
+void					ft_handle_greater_than_helper(t_lexer *lexer,
+							char *value, t_tkn **tkn);
 t_tkn					*ft_handle_greater_than(t_lexer *lexer);
+void					ft_handle_less_than_helper(t_lexer	*lexer,
+							char *value, t_tkn **tkn);
 t_tkn					*ft_handle_less_than(t_lexer *lexer);
 t_tkn					*ft_handle_pipe(t_lexer *lexer);
 void					ft_handle_whitespace(t_lexer *lexer);
+int						ft_check_tkn_errors(t_data *data, t_tkn_lst *tkn_lst);
 
-/*---- PARSING /CMD CREATION FUNCTTIONS/ -----*/
+/*---- PARSING & CMD CREATION FUNCTIONS/ -----*/
 
 void					ft_parser(char *usr_input, t_data *data);
 t_redirect				*ft_init_redir(void);
 void					ft_free_redir(t_redirect *redir);
-void					ft_free_cmd(t_cmd *cmd);
 t_cmd					*ft_init_cmd(void);
 void					ft_handle_tkn_type(t_tkn *tkn, t_tkn_lst **tkn_lst,
 							t_cmd **tmp, t_data *data);
@@ -353,23 +418,25 @@ int						ft_add_redir_to_cmd(t_data *data, t_cmd *cmd,
 							t_tkn_lst **tkns_lst);
 void					ft_realloc_args(t_cmd *cmd, char *new_arg);
 
-/*----- LIST MANAGEMENT FUNCTIONS */
-
-void					lst_delone_token(t_token *lst, void (*del)(void *));
-void					lst_delone(t_env *lst, void (*del)(void *));
-void					lst_clear_token(t_token **lst, void (*del)(void *));
-void					lst_clear(t_env **lst, void (*del)(void *));
+/*----- CLEANING FUNCTIONS ----*/
+void					ft_free_var_list(t_list *vars);
+void					ft_free_lexer(t_lexer *lexer);
+void					ft_free_tkn_lst(t_tkn_lst *head);
+void					free_data(t_data *data);
+void					free_env(t_env *env);
+void					free_cmd(t_cmd *cmd);
+void					ft_free_cmd(t_cmd *cmd);
+void					free_redir(t_redirect *redir);
+void					ft_free_redir(t_redirect *redir);
+void					free_cd(char *pwd_old, char *pwd_new);
 
 /*----- READLINE FUNCTIONS -----*/
 
 void					rl_replace_line(const char *text, int clear_undo);
+void					rl_clear_history(void);
 
 /*---- TERMIOS FUNCTIONS -----*/
 
 void					suppress_output(void);
-
-/*----- ERROR FUNCTIONS -----*/
-
-void					ft_error(char *str, int type_error);
 
 #endif

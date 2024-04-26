@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkatason <vkatason@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: vkatason <vkatason@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 20:10:47 by vkatason          #+#    #+#             */
-/*   Updated: 2022/10/19 20:16:05 by vkatason         ###   ########.fr       */
+/*   Updated: 2024/04/23 12:46:50 by vkatason         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/**
+ * @brief 		Function to put `\\n` after the string `s` to the file descriptor `fd`.
+ *
+ * @param s 	The string to be written.
+ * @param fd 	The file descriptor to write to.
+ */
 void	ft_putendl_fd(char const *s, int fd)
 {
 	ft_putstr_fd(s, fd);
