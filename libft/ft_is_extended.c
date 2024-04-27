@@ -12,6 +12,18 @@
 
 #include "libft.h"
 
+/**
+ * @brief Function checks if a character is an extended 
+ * ASCII character. Used in `minishell` (e.g. to check if 
+ * a character is a valid character for a variable name 
+ * and in tokens parsing).
+ *
+ * @param c The character to check.
+ * @return 1 if the character is an extended 
+ * ASCII character, 0 otherwise.
+ * @note The function checks if the character is in the range of 32 to 255,
+ * and takes as a parameter int instead of char. 
+ */
 int	ft_is_extended(int c)
 {
 	return ((c >= 32 && c <= 255) && c != 127 && c != 129 && c != 141

@@ -13,14 +13,14 @@
 #include "minishell.h"
 
 /**
- * @brief Function to handle the greater than symbol
- * and the logic of the redirections. 
- * Helper function for ft_handle_greater_than function
- * to manage memory leaks.
+ * @brief 			Function to handle the greater than symbol
+ * 					and the logic of the redirections. 
+ * 					Helper function for ft_handle_greater_than function
+ * 					to manage memory leaks.
  * 
- * @param lexer lexer object
- * @param value value of the token
- * @param tkn pointer to the token we need to proceed
+ * @param lexer 	lexer object
+ * @param value 	value of the token
+ * @param tkn 		pointer to the token we need to proceed
  */
 void	ft_handle_greater_than_helper(t_lexer *lexer, char *value, t_tkn **tkn)
 {
@@ -48,14 +48,14 @@ void	ft_handle_greater_than_helper(t_lexer *lexer, char *value, t_tkn **tkn)
 }
 
 /**
- * @brief Function to handle the less than symbol
- * and the logic of the redirections. 
- * Helper function for ft_handle_less_than function
- * to manage memory leaks.
+ * @brief 			Function to handle the less than symbol
+ * 					and the logic of the redirections. 
+ * 					Helper function for ft_handle_less_than function
+ * 					to manage memory leaks.
  * 
- * @param lexer lexer object
- * @param value value of the token
- * @param tkn pointer to the token we need to proceed
+ * @param lexer 	lexer object
+ * @param value 	value of the token
+ * @param tkn 		pointer to the token we need to proceed
  */
 void	ft_handle_less_than_helper(t_lexer	*lexer, char *value, t_tkn **tkn)
 {

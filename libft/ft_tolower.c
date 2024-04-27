@@ -12,6 +12,16 @@
 
 #include "libft.h"
 
+/**
+ * @brief 		Converts an uppercase letter to lowercase
+ * 				within the ASCII character set (A-Z).
+ *
+ * @param c 	The character to be converted.
+ * @return 		The lowercase equivalent of the input character, 
+ * 				if it is an uppercase letter.
+ *         		Otherwise, it returns the input character unchanged.
+ * @note 		The function takes an integer as an argument, not a character.
+ */
 int	ft_tolower(int c)
 {
 	if (c >= 'A' && c <= 'Z')

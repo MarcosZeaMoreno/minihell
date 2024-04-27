@@ -12,6 +12,16 @@
 
 #include "libft.h"
 
+/**
+ * @brief			Function to put number to the standard output (1).
+ * 
+ * @param num 		The number to be written.
+ * @return int 		The number of characters written.
+ * 
+ * @note			Uses `ft_itoa` to convert the number to a string 
+ * 					and `ft_putstr` to write the string to the standard output.
+ * 					Frees memory used by `ft_itoa`.
+ */
 int	ft_putnbr(int num)
 {
 	char	*digit;

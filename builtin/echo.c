@@ -12,6 +12,20 @@
 
 #include "../minishell.h"
 
+
+/**
+ * @brief Function to handle `echo` command that 
+ * prints given arguments to the standard output.
+ * Takes arguments passed in the `cmds` array to print
+ * to the standard output.
+ * If the first argument is "-n", the newline 
+ * character at the end of the output is omitted.
+ * 
+ * @param data A pointer to the main data structure.
+ * @param cmds An array of strings representing the arguments to be printed.
+ * @var flag A flag to indicate whether the newline character should be omitted.
+ * @var i The index of the current argument in the `cmds` array.
+ */
 void	ft_echo(t_data *data, char **cmds)
 {
 	int		flag;

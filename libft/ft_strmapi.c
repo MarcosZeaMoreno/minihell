@@ -13,6 +13,23 @@
 #include "libft.h"
 // #include <stdio.h>
 
+/**
+ * @brief 		Function that iterates through the `s` string 
+ * 				applying the function `f` to each character. 
+ * 				Changed string is saved as a new one. 
+ * 				The function `f` takes an index and a character 
+ * 				as parameters and returns a new character.
+ *
+ * @param s 	The string to change.
+ * @param f 	The function to apply to each character.
+ * @return 		The new string created by applying 
+ * 				the function `f` to each character of `s`.
+ *         		Returns NULL if `s` or `f` is NULL, 
+ * 				or if memory allocation fails.
+ * @compilation	gcc -Wall -Wextra -Werror ft_strmapi.c ft_strlen.c libft.h
+ * @note		Remember to include stdio.h to use printf() function 
+ * 				and stdlib.h for malloc() function.
+ */
 char	*ft_strmapi(const char *s, char (*f)(unsigned int, char))
 {
 	char	*out;
@@ -47,4 +64,3 @@ char	*ft_strmapi(const char *s, char (*f)(unsigned int, char))
 // 	printf("The result is %s\n", result);
 // 	return (0);
 // }
-// Compile with  gcc -Wextra -Werror -Wall ft_strmapi.c libft.h ft_strlen.c

@@ -14,7 +14,6 @@
 
 /**
  * @brief Function used to print an exit.
- * 
  */
 void	print_exit(void)
 {
@@ -23,7 +22,6 @@ void	print_exit(void)
 
 /**
  * @brief Function to print a minishell header.
- * 
  */
 void	print_header(void)
 {

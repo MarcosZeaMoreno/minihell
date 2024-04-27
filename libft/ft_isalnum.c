@@ -12,10 +12,18 @@
 
 #include "libft.h"
 
+/**
+ * @brief Function that checks if the given 
+ * character is alphanumeric.
+ *
+ * @param c The character to be checked. 
+ * NOTE: that the argument is of type int, not a char.
+ * @return 1 if the character is alphanumeric, 0 otherwise.
+ */
 int	ft_isalnum(int c)
 {
-	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')
-		|| (c >= '0' && c <= '9'))
+	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0'
+			&& c <= '9'))
 		return (1);
 	return (0);
 }

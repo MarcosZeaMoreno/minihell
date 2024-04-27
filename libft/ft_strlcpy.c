@@ -14,7 +14,18 @@
 // #include <string.h>
 // #include <stdio.h>                       /* to use printf() */
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t	dstsize)
+/**
+ * @brief 			Function that copies a string from `src` to `dest`
+ * 					with a specified size limit `dstsize`.
+ *
+ * @param dst 		The destination string where 
+ * 					the copied string will be stored.
+ * @param src 		The source string to be copied.
+ * @param dstsize 	The maximum number of characters 
+ * 					that can be copied to the destination string.
+ * @return 			The total length of the source string.
+ */
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	i;
 

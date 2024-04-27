@@ -25,6 +25,14 @@ void	ft_free_tkn(t_tkn *tkn)
 	free(tkn);
 }
 
+/**
+ * @brief Function to free a token list structure
+ * 
+ * @param data: a pointer to the token list structure.
+ * @param tkn_lst: a pointer to the token list structure.
+ * 
+ * @return int: 1 if the token has an error, 0 otherwise.
+ */
 int	ft_check_tkn_errors(t_data *data, t_tkn_lst *tkn_lst)
 {
 	if (ft_tkns_error_exit(data) == 1)

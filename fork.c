@@ -13,11 +13,11 @@
 #include "minishell.h"
 
 /**
- * @brief Function to execute a command with absolute path.
+ * @brief 		Function to execute a command with absolute path.
  *
- * @param cmds: a double char pointer that contain the arguments.
- * @param env: a double char pointer that contain the enviromental variables.
- * @param data: a pointer to the data structure.
+ * @param cmds	a double char pointer that contain the arguments.
+ * @param env	a double char pointer that contain the enviromental variables.
+ * @param data	a pointer to the data structure.
  */
 void	exec_absolute_path(char **cmds, char **env, t_data *data)
 {
@@ -44,12 +44,15 @@ void	exec_absolute_path(char **cmds, char **env, t_data *data)
 }
 
 /**
- * @brief Function to execute a command handler.
- *
- * @param command: a pointer that contain the string of the command.
- * @param cmds: a double char pointer that contain the string of readline.
- * @param env: a double char pointer that contain the enviromental variables.
- * @return int: return 1 if the command is not found, 2 if the command is found.
+ * @brief 			Function to execute a command handler.
+ * @param command	a pointer that contain the string of the command.
+ * @param cmds		a double char pointer that contain the string of readline.
+ * @param env		a double char pointer that 
+ * 					contain the enviromental variables.
+ * @return			1 if the command is not found,
+					2 if the command is found (in case of return 2, maybe dont need
+					to be returned, because execve should exit the proccess, but was
+					added just in case).
  */
 int	execute_command_handler(char *command, char **cmds, char **env)
 {
@@ -70,6 +73,20 @@ int	execute_command_handler(char *command, char **cmds, char **env)
 		return (1);
 }
 
+/**
+ * @brief 				Function that executes a command 
+ * 						by searching for it in the directories 
+ * 						specified in the PATH environment variable.
+ * 
+ * @param cmds 			An array of strings with command and its arguments.
+ * @param env 			An array of strings with environment variables.
+ * @param enviroment 	Pointer to the enviromental variables.
+ * @param data 			Main data structure.
+ * @var command 		Pointer to the command.
+ * @var path 			Pointer to the path.
+ * @var i 				Counter.
+ * @var found 			Flag to check if the command is found.
+ */
 void	exec_command_in_path(char **cmds, char **env,
 	t_env *enviroment, t_data *data)
 {
@@ -98,11 +115,13 @@ void	exec_command_in_path(char **cmds, char **env,
 }
 
 /**
- * @brief Function to execute a command.
+ * @brief 				Function to execute a command.
  *
- * @param cmds: a double char pointer that contain the arguments.
- * @param enviroment: a pointer to the enviromental variables.
- * @param data: a pointer to the data structure.
+ * @param cmds 			a double char pointer that contain the arguments.
+ * @param enviroment 	a pointer to the enviromental variables.
+ * @param data 			main data structure.
+ * @var env 			a double char pointer 
+ * 						that contain the enviromental variables.
  */
 void	exec_local(char **cmds, t_env *enviroment, t_data *data)
 {

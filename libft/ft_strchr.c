@@ -11,10 +11,19 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+
 // #include <stdio.h>
 // #include <string.h>
 // #include <stddef.h>
 
+/**
+ * @brief 		Function locates the first occurrence of the character `c`
+ * 				(converted to a char) in the string `s`.  
+ * @param s 	The string to search in.
+ * @param c 	The character to be located.
+ * @return 		A pointer to the located character, 
+ * 				or NULL if the character is not found.
+ */
 char	*ft_strchr(const char *s, int c)
 {
 	size_t	count;

@@ -12,6 +12,11 @@
 
 #include "minishell.h"
 
+/**
+ * @brief Function to free the var_name structure
+ * 
+ * @param var: a pointer to the var_name structure.
+ */
 void	ft_free_var_list(t_list *vars)
 {
 	t_list		*current;

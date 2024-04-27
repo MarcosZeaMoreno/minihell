@@ -10,16 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-** Outputs the char c to the file descriptor fd.
-** Param. #1 The character to output.
-** Param. #2 The file descriptor.
-** Return value None.
-** Libc functions write(2).
-*/
-
 #include "libft.h"
 
+/**
+ * @brief 		Outputs the char `c` to the file descriptor `fd`. 
+ * 
+ * @param c 	The character to output.
+ * @param fd 	The file descriptor.
+ * 
+ * @note 		Uses libc function write(2)
+ */
 void	ft_putchar_fd(char c, int fd)
 {
 	write(fd, &c, 1);

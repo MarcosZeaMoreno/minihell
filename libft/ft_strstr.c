@@ -12,6 +12,18 @@
 
 #include "libft.h"
 
+/**
+ * @brief 			Function to find first occurrence of a substring in a string.
+ *
+ * @param haystack 	The string to search in.
+ * @param needle 	The substring to search for.
+ * @var i 			An unsigned integer to iterate through the string `haystack`.
+ * @var j 			An unsigned integer to iterate through the string `needle`.
+ * @var k 			An unsigned integer to iterate through the string `needle`.
+ * @var found 		An integer to store the first occurrence of the substring.
+ * @return 			A pointer to the first occurrence of the substring in the string,
+ * 					or NULL if the substring is not found.
+ */
 char	*ft_strstr(const char *haystack, const char *needle)
 {
 	size_t	i;

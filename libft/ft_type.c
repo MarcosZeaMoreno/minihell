@@ -12,6 +12,25 @@
 
 #include "libft.h"
 
+/**
+ * @brief 			Helper function to `ft_printf` that handles 
+ * 					the formatting and printing of different types of data.
+ * 					It checks the type and performs the appropriate 
+ * 					action to print the data.
+ *
+ * @param type 		The format specifier character indicating the type of data to be printed.
+ * @param args 		The variable argument list containing the data to be printed.
+ * @return 			The number of characters printed.
+ * @note 			Supported format specifiers:
+ * 					`c` - character
+ * 					`s` - string
+ * 					`p` - pointer
+ * 					`d` - decimal integer
+ * 					`i` - integer
+ * 					`u` - unsigned integer
+ *					`x` - hexadecimal integer (lowercase)
+ *					`X` - hexadecimal integer (uppercase).
+ */
 int	ft_type(char type, va_list args)
 {
 	if (type == 'c')

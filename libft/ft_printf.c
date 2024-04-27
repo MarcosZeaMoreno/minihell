@@ -12,6 +12,24 @@
 
 #include "libft.h"
 
+/**
+ * @brief		Function is a simpified implementation of the printf function
+ * 				from the standard C library. The function supports the following
+ * 				format specifiers:
+ * 				%c: character,
+ * 				%s: string,
+ * 				%p: pointer,
+ * 				%d: decimal integer,
+ * 				%i: integer,
+ * 				%u: unsigned integer,
+ * 				%x: hexadecimal integer.
+ * 				For example, ft_printf("Hello, %s!\n", "world");
+ * 
+ * @param sign  The string we want to print with format specifiers.
+ * @param ... 	The variable number of arguments to be formatted and printed.
+ * 
+ * @return int  The total number of characters written to the standard output.
+ */
 int	ft_printf(const char *sign, ...)
 {
 	va_list	args;

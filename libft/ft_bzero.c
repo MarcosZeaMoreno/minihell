@@ -14,6 +14,13 @@
 // #include <stdio.h>
 // #include <unistd.h>
 
+/**
+ * @brief Function sets the first `n` bytes 
+ * of the memory pointed to by `s` to zero.
+ *
+ * @param s Pointer to the memory (string) to be set to 0.
+ * @param n Number of bytes to be set to 0.
+ */
 void	ft_bzero(void *s, size_t n)
 {
 	unsigned char	*str;

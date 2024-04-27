@@ -13,11 +13,13 @@
 #include "minishell.h"
 
 /**
- * @brief Function to change the value of an enviroment variable
- * 
- * @param data: a pointer to the data structure.
- * @param key: a pointer to the key.
- * @param value: a pointer to the value.
+ * @brief 			Function to change the value of an enviroment variable
+ * 	
+ * @param data 		The pointer to the data structure.
+ * @param key 		The pointer to the key.
+ * @param value 	The pointer to the value.
+ * @var temp 		The pointer to the enviroment variable.
+ * @var to_free 	The pointer to the value to free.
  */
 void	change_value_env(t_data *data, char *key, char *value)
 {
@@ -43,10 +45,14 @@ void	change_value_env(t_data *data, char *key, char *value)
 }
 
 /**
- * @brief Function to remove a enviromental variable
- * 
- * @param data: a pointer to the data structure.
- * @param key: a pointer to the key.
+ * @brief 			Function to remove a enviromental variable
+ * 	
+ * @param data 		The pointer to the data structure.
+ * @param key		The pointer to the key.
+ * @var current		The pointer to the current enviromental variable.
+ * @var prev		The pointer to the previous enviromental variable.
+ * @note			The function will remove the enviromental variable
+ * 					from the copy of the enviromental variables.
  */
 void	remove_env_var(t_data *data, char *key)
 {
@@ -74,11 +80,25 @@ void	remove_env_var(t_data *data, char *key)
 }
 
 /**
- * @brief Function to add a enviromental variable
+ * @brief 			Function to add a enviromental variable
+ * 	
+ * @param data 		The pointer to the data structure.
+ * @param key 		The pointer to the key.
+ * @param value 	The pointer to the value.
+ * @var env_v		An auxiliar pointer that will get
+ * 					join the key + '=' + value.
+ * @var key_copy	An auxiliar pointer that get
+ * 					the copy of the key.
+ * @var value_copy	An auxiliar pointer that get
+ * 					the copy of the value.
+ * @var aux			An auxiliar pointer that get
+ * 					the copy of the 'key=value'.
+ * @var temp		An auxiliar pointer that get
+ * 					the copy of '=' value.
  * 
- * @param data: a pointer to the data structure.
- * @param key: a pointer to the key.
- * @param value: a pointer to the value.
+ * @note			The function will add the enviromental variable
+ * 					to the copy of the enviromental variables freeing
+ * 					the memory of the key and value.
  */
 void	add_env_var(t_data *data, char *key, char *value)
 {
@@ -100,13 +120,19 @@ void	add_env_var(t_data *data, char *key, char *value)
 }
 
 /**
- * @brief Function to convert the enviromental variables
- * 		into a double char pointer.
+ * @brief 			Function to convert the enviromental variables
+ * 					into a double char pointer.
  * 
- * @param env: a pointer to the enviromental variables.
+ * @param env 		The pointer to the enviromental variables.
+ * @var env_cpy		The double char pointer that will contain
+ * 					the enviromental variables.
+ * @var temp		Temporary pointer to the enviromental variable.
+ * @var i			Counter.
+ * @return 			The double char pointer that contain
+ * 					the enviromental variables.
  * 
- * @return char**: a double char pointer that contain
- * 		the enviromental variables.
+ * @note			The function will allocate memory for the double char pointer
+ * 					and the caller is responsible for freeing it.
  */
 char	**ft_env_to_char(t_env *env)
 {

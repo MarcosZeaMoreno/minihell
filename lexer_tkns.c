@@ -13,13 +13,14 @@
 #include "minishell.h"
 
 /**
- * @brief Initializes a token with the given type and value.
- * This function allocates memory for a new token, sets its type and value,
- * and returns a pointer to the created token.
+ * @brief 			Initializes a token with the given type and value.
+ * 					This function allocates memory for a new token, 
+ * 					sets its type and value,
+ * 					and returns a pointer to the created token.
  *
- * @param type The type of the token.
- * @param value The value of the token.
- * @return A pointer to the created token.
+ * @param type 		The type of the token.
+ * @param value 	The value of the token.
+ * @return 			A pointer to the created token.
  */
 t_tkn	*ft_init_tkn(int type, char *value)
 {
@@ -44,11 +45,11 @@ t_tkn	*ft_init_tkn(int type, char *value)
 }
 
 /**
- * @brief Adds a token to the token list.
- *
- * @param head The head of the token list.
- * @param tkn The token to be added.
- * @return The updated head of the token list.
+ * @brief 			Adds a token to the token list.
+ *	
+ * @param head 		The head of the token list.
+ * @param tkn 		The token to be added.
+ * @return 			The updated head of the token list.
  */
 t_tkn_lst	*ft_add_tkn_to_lst(t_tkn_lst *head, t_tkn *tkn)
 {
@@ -80,12 +81,11 @@ t_tkn_lst	*ft_add_tkn_to_lst(t_tkn_lst *head, t_tkn *tkn)
 }
 
 /**
- * @brief Tokenizes the input string.
- * This function tokenizes the input string and stores 
- * the tokens in a token list in the data structure.
+ * @brief 			Tokenizes the input string and stores 
+ * 					the tokens in a token list in the data structure.
  *
- * @param input The input string.
- * @param data The main data structure.
+ * @param input 	The input string.
+ * @param data 		The main data structure.
  */
 void	ft_tknize_input(t_data *data)
 {
@@ -110,9 +110,9 @@ void	ft_tknize_input(t_data *data)
 }
 
 /**
- * @brief The function that frees the token list.
+ * @brief 		The function that frees the token list.
  * 
- * @param head The head of the token list. 
+ * @param head 	The head of the token list. 
  */
 void	ft_free_tkn_lst(t_tkn_lst *head)
 {
@@ -142,9 +142,9 @@ void	ft_free_tkn_lst(t_tkn_lst *head)
 }
 
 /**
- * @brief Function to free the lexer structure.
+ * @brief			Frees the memory allocated for a lexer object.
  * 
- * @param lexer 
+ * @param lexer 	The lexer object to be freed.
  */
 void	ft_free_lexer(t_lexer *lexer)
 {

@@ -13,10 +13,10 @@
 #include "minishell.h"
 
 /**
- * @brief Function to check exit status and return value
+ * @brief 			Function to check exit status and return value
  * 
- * @param data: a pointer to the data structure.
- * @return int
+ * @param data: 	a pointer to the data structure.
+ * @return int 		Exit status or first command argument.
  */
 int	check_exit(t_data *data)
 {
@@ -39,9 +39,12 @@ int	check_exit(t_data *data)
 }
 
 /**
- * @brief Function to get enviroment copy
+ * @brief 		Function to get the process ID (PID) 
+ * 				using `fork()` and `waitpid()`.
+ * 				The PID of the child process is stored 
+ * 				in the `data` structure.
  * 
- * @param data: a pointer to the data structure.
+ * @param data 	A pointer to the `t_data` structure.
  */
 void	ft_getpid(t_data *data)
 {
@@ -60,8 +63,8 @@ void	ft_getpid(t_data *data)
 }
 
 /**
- * @brief Inits main data structure
- * 
+ * @brief 		Function to inits main data structure
+ * 				and check arguments count
  */
 int	ft_init(t_data *data, int ac, char **av, char **env)
 {
@@ -89,11 +92,22 @@ int	ft_init(t_data *data, int ac, char **av, char **env)
 }
 
 /**
- * @brief Function to get promp
+ * @brief 			Function that prompts the user for input 
+ * 					and reads the input using the readline function.
+ * 					If the user input is NULL, it sets the data's 
+ * 					cmd to NULL, prints "exit", and returns 1.
+ * 					Otherwise, it adds the user input to the history, 
+ * 					parses the input using `ft_parser`,
+ * 					frees the user input, and executes the pipeline 
+ * 					if the cmd is not NULL.
+ * 					If the cmd is not NULL and the first argument 
+ * 					is "exit", it returns 1.
+ * 					Finally, it frees the cmd and returns 0.
  * 
- * @param data 
- * @param env 
- * @return int 
+ * @param data 		A pointer to the main data structure.
+ * 
+ * @return int 		1 if the user input is NULL 
+ * 					or the first argument is "exit", 0 otherwise.
  */
 int	get_prompt(t_data *data)
 {
@@ -121,12 +135,13 @@ int	get_prompt(t_data *data)
 }
 
 /**
- * @brief Main function 
+ * @brief 		Main function of the minishell program.
  * 
- * @param ac Argument count
- * @param av Argument value
- * @param env Enviroment vars
- * @return int
+ * @param ac 	Argument count.	
+ * @param av 	Array of arguments.
+ * @param env 	Array of enviromental variables.
+ * 
+ * @return int  0 if the program runs successfully.
  */
 int	main(int ac, char **av, char **env)
 {

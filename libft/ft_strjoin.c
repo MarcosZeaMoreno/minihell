@@ -13,6 +13,24 @@
 #include "libft.h"
 // #include <stdio.h>
 
+/**
+ * @brief 			Function that concatenates two strings 
+ * 					`s1` and `s2` into one. The resulting 
+ * 					string `dest` is allocated dynamically 
+ * 					using `malloc`, and it is terminated 
+ * 					with a null `\\0` character.
+ *
+ * @param s1 		The first string to be concatenated.
+ * @param s2 		The second string to be concatenated.
+ * @var dest 		The new string created by concatenating `s1` and `s2`.
+ * @var i 			An index to iterate over the strings.
+ * @var len1 		The length of the first string `s1`.
+ * @var len2 		The length of the second string `s2`.
+ * @return 			The concatenated string, or NULL if either 
+ * 					`s1` or `s2` is NULL or if memory allocation fails.
+ * @note 			The resulting string must be freed with `free(3)`.
+ * 					Original strings are not modified and not freed.
+ */
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	int		i;

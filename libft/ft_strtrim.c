@@ -12,6 +12,20 @@
 
 #include "libft.h"
 
+/**
+ * @brief 		Function trims consecutive characters 
+ * 				specified in `set` from the beginning 
+ * 				and end of a string `s1`, respectively.
+ * 
+ * @param s1 	The string to be trimmed.
+ * @param set 	The set of characters to be removed.
+ * @return 		A new dynamically allocated string 
+ * 				with the characters removed,
+ * 				or NULL if memory allocation fails.
+ * @example		ft_strtrim("  hello  ", " ") returns "hello".
+ * @note		The function allocates memory for the new string
+ * 				and the caller is responsible for freeing it.
+ */
 char	*ft_strtrim(const char *s1, const char *set)
 {
 	char	*res;

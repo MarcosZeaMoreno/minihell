@@ -55,9 +55,21 @@ SRC =  check_comand.c \
 		pipes.c \
 		redir.c \
 		./builtin/builtins.c \
-		./builtin/builtins2.c \
+		./builtin/export.c \
 		./builtin/echo.c \
 		./builtin/cd.c \
+
+#COLORS
+BOLD	:= \033[1m
+BLACK	:= \033[30;1m
+RED		:= \033[31;1m
+GREEN	:= \033[32;1m
+YELLOW	:= \033[33;1m
+BLUE	:= \033[34;1m
+MAGENTA	:= \033[35;1m
+CYAN	:= \033[36;1m
+WHITE	:= \033[37;1m
+DEFAULT	:= \033[0m
 
 OBJS := $(SRC:.c=.o)
 
@@ -84,11 +96,11 @@ fclean: libftfclean
 re: fclean all
 
 norma: libftnorma
-	@norminette $(SRC) philo.h
+	@norminette $(SRC) minishell.h
 libftnorma:
 	@make norma -C $(LIBFT)
 norma_color: libftnorma_color
-	@norminette $(SRC) philo.h 2>&1 | sed -e "s/Warning/\x1b[1;33m&\x1b[0m/" -e "s/Error/\x1b[1;31m&\x1b[0m/" -e "s/OK/\x1b[1;32m&\x1b[0m/"
+	@norminette $(SRC) minishell.h 2>&1 | sed -e "s/Warning/\x1b[1;33m&\x1b[0m/" -e "s/Error/\x1b[1;31m&\x1b[0m/" -e "s/OK/\x1b[1;32m&\x1b[0m/"
 libftnorma_color:
 	@make norma_color -C $(LIBFT)
 libftmake:
@@ -98,18 +110,6 @@ libftclean:
 libftfclean:
 	@make fclean -C $(LIBFT)
 libftre: libftclean libftmake
-
-#COLORS
-BOLD	:= \033[1m
-BLACK	:= \033[30;1m
-RED		:= \033[31;1m
-GREEN	:= \033[32;1m
-YELLOW	:= \033[33;1m
-BLUE	:= \033[34;1m
-MAGENTA	:= \033[35;1m
-CYAN	:= \033[36;1m
-WHITE	:= \033[37;1m
-DEFAULT	:= \033[0m
 
 .PHONY : all clean fclean re \
 libftmake libftclean libftfclean libftre

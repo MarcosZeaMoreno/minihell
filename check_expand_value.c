@@ -13,11 +13,13 @@
 #include "minishell.h"
 
 /**
- * @brief Function checks if the variables exist in the env_copy list
- * 
- * @param usr_input string to check
- * @param data main data structure
- * @return int 1 if all variables exist, -1 if any variable does not exist
+ * @brief 			Function to check the value of the variables
+ * 					and return that value if exists
+ * 	
+ * @param node 		The current node in the list
+ * @param data 		The main data structure
+ * @var var 		The structure that holds the variable name and value
+ * @return 			char* The value of the variable
  */
 char	*ft_check_vars(t_list *node, t_data *data)
 {
@@ -37,15 +39,15 @@ char	*ft_check_vars(t_list *node, t_data *data)
 }
 
 /**
- * @brief Function to fill the values of the variables in the list
+ * @brief 			Function to fill the values of the variables in the list
  * 
  * @param usr_input The user input string
- * @param data The main data structure
- * @var var_list The list of variables
- * @var tmp The pointer to the current node in the list
- * @var var_name The structure that holds the variable name, 
- * it's position in the string and value
- * @return t_list* The list of variables
+ * @param data 		The main data structure
+ * @var var_list 	The list of variables
+ * @var tmp 		The pointer to the current node in the list
+ * @var var_name 	The structure that holds the variable name, 
+ * 					it's position in the string and value
+ * @return t_list* 	The list of variables
  */
 t_list	*ft_fill_values(char *usr_input, t_data *data)
 {

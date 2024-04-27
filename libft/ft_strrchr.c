@@ -11,10 +11,25 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-// #include <stddef.h>
-// #include <stdio.h>
-// #include <string.h>
+// #include <stddef.h>	// for size_t
+// #include <stdio.h> 	// for printf
+// #include <string.h>	// for strrchr
 
+/**
+ * @brief 			Searches for the last occurrence 
+ * 					of a character `c` in a string `s`.
+ *
+ * @param s 		The string to search in.
+ * @param c 		The character to search for.
+ * @var count 		An unsigned integer to count the characters in the string.
+ * @var position 	A pointer to the string `s` as soon as `s` is cast to a char pointer.
+ * @var last 		An integer to store the last occurrence of the character `c`.
+ * @return 			A pointer to the last occurrence 
+ * 					`c` of the character in the string `s`,
+ *         			or NULL if `c` is not found.
+ * @note 			The `\\0` is considered part of the string.
+ * @compilation 	gcc -Wall -Wextra -Werror ft_strrchr.c ft_strlen.c libft.h
+ */
 char	*ft_strrchr(const char *s, int c)
 {
 	size_t	count;

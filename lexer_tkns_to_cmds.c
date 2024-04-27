@@ -13,15 +13,15 @@
 #include "minishell.h"
 
 /**
- * @brief Helper function to handle the token types
- * in the process of converting tokens to commands
- * (in ft_tkns_to_cmds function).
+ * @brief 			Helper function to handle the token types
+ * 					in the process of converting tokens to commands
+ * 					(in ft_tkns_to_cmds function).
  * 
- * @param tkn The token structure
- * @param tkn_lst Token list from data structure
- * @param tmp Temporary command structure
- * @param data Main data structure
- * (for structure types see minishell.h)
+ * @param tkn 		The token structure
+ * @param tkn_lst 	Token list from data structure
+ * @param tmp 		Temporary command structure
+ * @param data 		Main data structure
+ * 					(for structure types see minishell.h)
  */
 void	ft_handle_tkn_type(t_tkn *tkn,
 						t_tkn_lst **tkn_lst,
@@ -46,21 +46,21 @@ void	ft_handle_tkn_type(t_tkn *tkn,
 }
 
 /**
- * @brief Function checks correct usage 
- * of the symbols in the token list with 
- * helper functions (see cmd_errors_utils.c).
- * For e.g., after and before pipes we need
- * to have valid arguments (not NULL) or 
- * after redirection should go other token
- * that has word or string type. Then this function 
- * converts tokens to commands which are stored in
- * the main data structure (data->cmd).
+ * @brief 			Function checks correct usage 
+ * 					of the symbols in the token list with 
+ * 					helper functions (see cmd_errors_utils.c).
+ * 					For e.g., after and before pipes we need
+ * 					to have valid arguments (not NULL) or 
+ * 					after redirection should go other token
+ * 					that has word or string type. Then this function 
+ * 					converts tokens to commands which are stored in
+ * 					the main data structure (data->cmd).
  * 
- * @param data Main data structure
- * @var tmp Temporary command structure
- * @var tkn_lst Token list from data structure
- * @var tkn Token structure
- * (for structure types see minishell.h)
+ * @param data 		Main data structure
+ * @var tmp 		Temporary command structure
+ * @var tkn_lst 	Token list from data structure
+ * @var tkn 		Token structure
+ * 					(for structure types see minishell.h)
  */
 void	ft_tkns_to_cmds(t_data *data)
 {
@@ -81,10 +81,11 @@ void	ft_tkns_to_cmds(t_data *data)
 }
 
 /**
- * @brief Function to add arguments to the command structure.
- * @param cmd The command structure
- * @param tkn_lst The token list from data structure
- * (for structure types see minishell.h)
+ * @brief 			Function to add arguments to the command structure.
+ * 
+ * @param cmd 		The command structure
+ * @param tkn_lst 	The token list from data structure
+ * 					(for structure types see minishell.h)
  */
 void	ft_add_arg_to_cmd(t_cmd *cmd, t_tkn_lst **tkn_lst)
 {
@@ -100,13 +101,14 @@ void	ft_add_arg_to_cmd(t_cmd *cmd, t_tkn_lst **tkn_lst)
 }
 
 /**
- * @brief Function to create a new redirection structure
- * and add it to the command structure.
+ * @brief 				Function to create a new redirection structure
+ * 						and add it to the command structure.
  * 
- * @param cmd The command structure
- * @return t_redirect* The redirection structure
- * (for structure types see minishell.h)
- * @var redir The redirection list from the command structure
+ * @param cmd 			The command structure
+ * 
+ * @return t_redirect* 	The redirection structure
+ * 						(for structure types see minishell.h)
+ * @var redir 			The redirection list from the command structure
  */
 t_redirect	*ft_make_new_redir(t_cmd *cmd)
 {
@@ -129,13 +131,13 @@ t_redirect	*ft_make_new_redir(t_cmd *cmd)
 }
 
 /**
- * @brief Function to add redirection to each command.
+ * @brief 			Function to add redirection to each command.
  * 
- * @param data Main data structure
- * @param cmd The command structure
- * @param tkns_lst The token list from data structure
- * (for structure types see minishell.h)
- * @return int 1 if there is an error, 0 if not
+ * @param data 		Main data structure
+ * @param cmd 		The command structure
+ * @param tkns_lst 	The token list from data structure
+ * 					(for structure types see minishell.h)
+ * @return int 		1 if there is an error, 0 if not
  */
 int	ft_add_redir_to_cmd(t_data *data, t_cmd *cmd, t_tkn_lst **tkns_lst)
 {

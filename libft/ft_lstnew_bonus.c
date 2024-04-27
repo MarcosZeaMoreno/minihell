@@ -12,6 +12,15 @@
 
 #include "libft.h"
 
+/**
+ * @brief Function that creates a `new node` 
+ * within linked list with the given content.
+ *
+ * @param content The content to be stored in the new node
+ * (can be any content including structs and even NULL).
+ * @return A pointer to the newly created list node.
+ * @note If the memory allocation fails, the function returns `0`.
+ */
 t_list	*ft_lstnew(void *content)
 {
 	t_list	*lst;

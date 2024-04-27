@@ -12,6 +12,17 @@
 
 #include "libft.h"
 
+/**
+ * @brief 			Function finds the first occurrence 
+ * 					of the null-terminated string `needle`
+ * 					in the string `haystack`, 
+ * 					where not more than `len` characters are searched.
+ * 
+ * @param haystack  The string to search in.
+ * @param needle 	The string to search for.
+ * @param len 		The maximum number of characters to search.
+ * @return char*	The pointer to the first occurrence of the string `needle` 	
+ */
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
 	size_t	i;

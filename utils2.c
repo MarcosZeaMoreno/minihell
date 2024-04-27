@@ -102,6 +102,12 @@ char	*ft_strndup(const char *s, size_t n)
 	return (dup);
 }
 
+/**
+ * @brief function to check if a string is a number
+ * 
+ * @param str: a pointer to the string.
+ * @return int
+ */
 int	ft_isnumber(char *str)
 {
 	int	i;

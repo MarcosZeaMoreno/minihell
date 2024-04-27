@@ -12,6 +12,12 @@
 
 #include "libft.h"
 
+/**
+ * @brief 		Function to put `\\n` after the string `s` to the file descriptor `fd`.
+ *
+ * @param s 	The string to be written.
+ * @param fd 	The file descriptor to write to.
+ */
 void	ft_putendl_fd(char const *s, int fd)
 {
 	ft_putstr_fd(s, fd);

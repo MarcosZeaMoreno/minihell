@@ -13,11 +13,11 @@
 #include "minishell.h"
 
 /**
- * @brief Function to check if there is 
- * a tkn with the TKN_ERROR type in the list.
- * If so it prints the error message and returns 1.
- * @param data Main	data structure
- * @return int 1 if there is an error, 0 if not
+ * @brief 		Function to check if there is 
+ * 				a tkn with the TKN_ERROR type in the list.
+ * 				If so it prints the error message and returns 1.
+ * @param data 	Main data structure
+ * @return 		1 if there is an error, 0 if not
  */
 int	ft_tkns_error_exit(t_data *data)
 {
@@ -38,11 +38,11 @@ int	ft_tkns_error_exit(t_data *data)
 }
 
 /**
- * @brief Function to check if there are
- * valid tokens on the both sides of the pipe.
- * @param data Main data structure
- * @param tkns The list of tokens
- * @return int 1 if there is an error, 0 if not
+ * @brief 		Function to check if there are
+ * 				valid tokens on the both sides of the pipe.
+ * @param data 	Main data structure
+ * @param tkns 	The list of tokens
+ * @return 		int 1 if there is an error, 0 if not
  */
 int	ft_valid_pipe(t_tkn_lst *tkns, t_data *data)
 {
@@ -64,11 +64,11 @@ int	ft_valid_pipe(t_tkn_lst *tkns, t_data *data)
 }
 
 /**
- * @brief Function to check if there is 
- * valid tokens right next to redirection.
- * @param data Main data structure
- * @param tkns The list of tokens
- * @return int 1 if there is an error, 0 if not
+ * @brief 		Function to check if there is 
+ * 				valid tokens right next to redirection.
+ * @param data 	Main data structure
+ * @param tkns 	The list of tokens
+ * @return 		1 if there is an error, 0 if not
  */
 int	ft_valid_redir(t_tkn_lst *tkns, t_data *data)
 {

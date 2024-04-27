@@ -13,10 +13,10 @@
 #include "minishell.h"
 
 /**
- * @brief Function to delete one node of the list
+ * @brief 		Function to delete one node of the list
  * 
- * @param lst: a pointer to the list.
- * @param del: a pointer to the function that delete the value.
+ * @param lst: 	a pointer to the list.
+ * @param del: 	a pointer to the function that delete the value.
  */
 void	lst_delone(t_env *lst, void (*del)(void *))
 {
@@ -28,10 +28,10 @@ void	lst_delone(t_env *lst, void (*del)(void *))
 }
 
 /**
- * @brief Function clear a list
+ * @brief 		Function clear a list
  * 
- * @param lst: a pointer to the list.
- * @param del: a pointer to the function that delete the value.
+ * @param lst: 	a pointer to the list.
+ * @param del: 	a pointer to the function that delete the value.
  */
 void	lst_clear(t_env **lst, void (*del)(void *))
 {

@@ -34,4 +34,10 @@ Temporary Items
 ### VS Code files ###
 .vscode
 
+### TODOs ###
+TODO
+
+### Draw.io ###
+*.drawio
+
 # End 

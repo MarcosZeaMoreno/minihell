@@ -12,6 +12,14 @@
 
 #include "libft.h"
 
+/**
+ * @brief 			Function copies the string `src` to `dst` 
+ * 					(including the terminating `\\0` character).
+ * 
+ * @param dst 		String to copy to.
+ * @param src 		String to copy from.
+ * @return char* 	The pointer to the `dst`.
+ */
 char	*ft_strcpy(char *dst, const char *src)
 {
 	size_t	i;

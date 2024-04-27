@@ -13,10 +13,17 @@
 #include "minishell.h"
 
 /**
- * @brief Function used to detect if a command is a builtin.
+ * @brief 			Function used to detect if a command is a builtin:
+ * 					`echo`,
+ * 					`cd`,
+ * 					`pwd`,
+ * 					`export`,
+ * 					`unset`,
+ * 					`env`,
+ * 					`exit`.
  * 
- * @param cmds: a double char pointer that contain the string of readline.
- * @return int: return 1 if is a builtin, 0 if is not a builtin, -1 if fail.
+ * @param cmds 		A double char pointer that contain the string of readline.
+ * @return 			1 if is a builtin, 0 if is not a builtin, -1 if fail.
  */
 int	check_builtin(char **cmds)
 {
@@ -45,6 +52,20 @@ int	check_builtin(char **cmds)
 		return (0);
 }
 
+/**
+ * @brief		Function checks if the given command is a 
+ * 				especific built-in command that need
+ * 				to be executed outside a forked process:
+ * 				`cd`,
+ * 				`export`,
+ * 				`unset`.
+ *
+ * @param cmds 	An array of strings representing 
+ * 				the command and its arguments.
+ * @return 		1 if the command is a 'rare' built-in command
+ * 				(cd, export, unset), 0 otherwise.
+ *         		Returns -1 if cmds is NULL.
+ */
 int	check_builtin_rare(char **cmds)
 {
 	char	*value;
@@ -63,10 +84,12 @@ int	check_builtin_rare(char **cmds)
 }
 
 /**
- * @brief Function used to execute a builtin.
+ * @brief 		Function used to execute a builtin.
  * 
- * @param data: a pointer that contain the main data structure.
- * @param cmds: a double char pointer that contain the string of readline.
+ * @param data 	The pointer that contain the main data structure.
+ * @param cmds	The double char pointer that contain the string of readline.
+ * 
+ * @return 		Returns only if data or cmds is NULL.
  */
 void	exec_builtin(t_data *data, char **cmds)
 {
@@ -91,6 +114,18 @@ void	exec_builtin(t_data *data, char **cmds)
 		return ;
 }
 
+/**
+ * @brief		Function that execute a command that need
+ * 				to be executed outside a forked process:
+ * 				`cd`,
+ * 				`export`,
+ * 				`unset`.
+ *
+ * @param data 	The pointer that contain the main data structure.
+ * @param cmds 	An array of strings representing 
+ * 				the command and its arguments.
+ * @return 		Returns only if data or cmds is NULL.
+ */
 void	ft_do_builtin_rare(t_data *data, char **cmds)
 {
 	char	*value;

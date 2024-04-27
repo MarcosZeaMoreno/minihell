@@ -13,19 +13,18 @@
 #include "minishell.h"
 
 /**
- * @brief Function to send error message to the user
+ * @brief 				Function to send error message to the user
  * 
- * @param usr_input The user input string.
- * @param type_error The type of error:
- * 1: command not found
- * 2: command not exec
- * 3: no such file or directory
- * 4: is not a directory
- * 11: Wrong quotes usage
- * 12: Syntax error
- * 13: Syntax error near unexpected token
- * 14: Unexpected token in input
- * 
+ * @param usr_input 	The user input string.
+ * @param type_error 	The type of error:
+ * 						1: command not found
+ * 						2: command not exec
+ * 						3: no such file or directory
+ * 						4: is not a directory
+ * 						11: Wrong quotes usage
+ * 						12: Syntax error
+ * 						13: Syntax error near unexpected token
+ * 						14: Unexpected token in input
  */
 void	ft_error(char *usr_input, int type_error)
 {

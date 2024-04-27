@@ -13,12 +13,13 @@
 #include "minishell.h"
 
 /**
- * @brief Funciton that takes env variable
- * and save it to the new env_copy list node 
+ * @brief			Funciton that takes env variable
+ * 					and save it to the new env_copy list node 
  * 
- * @param data main data structure
- * @param env enviroment variable
- * @return t_env* 
+ * @param data 		main data structure
+ * @param env 		enviroment variable
+ * @return t_env* 	updated env_copy
+ * @var env_lst 	pointer to the new env_copy node
  */
 t_env	*ft_env_lst_new(t_data *data, char *env)
 {
@@ -35,10 +36,11 @@ t_env	*ft_env_lst_new(t_data *data, char *env)
 }
 
 /**
- * @brief Function finds the last node of the env list
+ * @brief 			Function finds the last node of the env list
  * 
- * @param data main data structure
- * @return t_env* updated env_copy
+ * @param data 		main data structure
+ * @return t_env* 	updated env_copy
+ * @var tmp 		temporary pointer to the env_copy
  */
 void	ft_env_lst_last(t_data *data, t_env *env_lst)
 {
@@ -56,11 +58,11 @@ void	ft_env_lst_last(t_data *data, t_env *env_lst)
 }
 
 /**
- * @brief Function adds new node to the end of the env list
+ * @brief 			Function adds new node to the end of the env list
  * 
- * @param data main data structure
- * @param env enviroment variable
- * @return t_env* updated env_copy
+ * @param data 		main data structure
+ * @param env 		enviroment variable
+ * @return t_env* 	updated env_copy
  */
 t_env	*ft_env_lst_add_back(t_data *data, char *env)
 {
@@ -84,12 +86,17 @@ t_env	*ft_env_lst_add_back(t_data *data, char *env)
 }
 
 /**
- * @brief Function that copies the enviroment variables
- * to the env_copy list
+ * @brief 			Function that copies the enviroment variables
+ * 					to the env_copy list
  * 
- * @param data main data structure
- * @param env enviroment variables
- * @return t_data* updated data
+ * @param data 		main data structure
+ * @param env 		enviroment variables
+ * @return t_data* 	updated data structure
+ * @var i 			counter
+ * @var env_var 	pointer to the env variable
+ * 
+ * @note			The function will allocate memory for the env_copy list
+ * 					and it should be freed after usage.
  */
 t_data	*ft_get_env_cpy(t_data *data, char **env)
 {
@@ -111,12 +118,14 @@ t_data	*ft_get_env_cpy(t_data *data, char **env)
 }
 
 /**
- * @brief Function to get a value from an environment variable
+ * @brief 			Function to get a value from an environment variable
  * 
- * @param env: a pointer to the enviromental variables.
- * @param key: a pointer to the key.
+ * @param env		The pointer to the enviromental variables.
+ * @param key 		The pointer to the key.
  *
- * @return char*: a pointer to the value.
+ * @return char* 	The pointer to the value.
+ *
+ * @note			The function will return NULL if the key is not found.
  */
 char	*get_env_value(t_env *env, char *key)
 {

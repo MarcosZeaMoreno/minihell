@@ -13,7 +13,7 @@
 #include "libft.h"
 
 /**
- * @brief returns 1 if the number is digit
+ * @brief returns 1 if the number is digit from 1 to 9
  * and 0 if it's not
  */
 int	ft_isdigit(int c)

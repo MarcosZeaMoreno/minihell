@@ -38,7 +38,7 @@ void	ft_print_redirections(t_redirect *redir)
  * @param cmd Single command from the data->cmd
  * (see struct s_cmd in lexer.h)
  * @param i the number of the command to print
- *  */
+ */
 void	ft_print_single_cmd(t_cmd *cmd, int i)
 {
 	int	j;

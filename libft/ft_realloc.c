@@ -12,6 +12,21 @@
 
 #include "libft.h"
 
+/**
+ * @brief 		42 implementation of a standart realloc function. 
+ * 				Reallocates a block of memory with a new size.
+ *
+ * @note 		If `ptr` is NULL, this function behaves 
+ * 				like `malloc(size)`.
+ * 				If `size` is 0, this function frees the memory 
+ * 				pointed to by `ptr` and returns NULL.
+ *
+ * @param ptr   Pointer to the memory to be reallocated.
+ * @param size  New size of the memory block.
+ * @var new    	Pointer to the new memory block.
+ * @return      Pointer to the reallocated memory, or NULL if the
+ *              reallocation failed.
+ */
 void	*ft_realloc(void *ptr, size_t size)
 {
 	void	*new;

@@ -12,6 +12,19 @@
 
 #include "libft.h"
 
+/**
+ * @brief 		Function makes lexicographical comparison 
+ * 				of two strings `s1` and `s2`.
+ *
+ * @param s1 	The first string to compare.
+ * @param s2 	The second string to compare.
+ * @return 		An integer greater than, equal to, or less than 0, 
+ * 				depending on whether the first string is greater than, 
+ * 				equal to, or less than the second string.
+ * @example 	ft_strcmp("abc", "abc") returns 0
+ * 				ft_strcmp("abc", "abd") returns -1
+ * 				ft_strcmp("abd", "abc") returns 1
+ */
 int	ft_strcmp(const char *s1, const char *s2)
 {
 	while (*s1 || *s2)

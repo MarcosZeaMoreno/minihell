@@ -12,6 +12,19 @@
 
 #include "libft.h"
 
+/**
+ * @brief Function searches for the first 
+ * occurrence of a character in a given memory area.
+ *
+ * @param s 	Pointer to the memory area to be searched.
+ * @param c     Character to be searched.
+ * @param n     Number of bytes or symbols to be searched.
+ *
+ * @return      Pointer to the first occurrence of the 
+ * 				character if found, or NULL if not found.
+ * @note		If the character is not found within the
+ * 				given memory area, the function returns `NULL`.
+ */
 void	*ft_memchr(const void *s, int c, size_t n)
 {
 	unsigned char	*str;

@@ -12,6 +12,20 @@
 
 #include "libft.h"
 
+/**
+ * @brief		Function converts an unsigned integer to a 
+ * 				string in a given number base.
+ *
+ * @param num 	The unsigned integer to convert.
+ * @param set 	The set of characters representing the number base
+ * 				(e.g. 0 to 9, 0 to 1, 0 to F and so on).
+ * 
+ * @return 		A pointer to the number converted to the string.
+ * 
+ * @note 		The function uses a static buffer to store the result.
+ * 				The buffer is 50 characters long, which should be enough
+ * 				for any number base up to base 16.	
+ */
 char	*ft_numbase(unsigned int num, char *set)
 {
 	static char	buffer[50];

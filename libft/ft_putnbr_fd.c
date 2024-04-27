@@ -12,7 +12,16 @@
 
 #include "libft.h"
 
-/* Puts number to the file descriptor */
+/**
+ * @brief 		Puts number to the file descriptor
+ * 
+ * @param n 	The number to be written.
+ * @param fd 	The file descriptor to write to.
+ * 
+ * @note 		Handles the case of `INT_MIN` by writing "-2147483648".
+ * @compilation	gcc -Wextra -Wall -Werror ft_putnbr_fd.c 
+ * 				ft_putstr_fd.c ft_putchar_fd.c ft_strlen.c
+ */
 void	ft_putnbr_fd(int n, int fd)
 {
 	if (n == -2147483648)

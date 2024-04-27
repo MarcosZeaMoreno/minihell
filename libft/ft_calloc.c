@@ -12,6 +12,22 @@
 
 #include "libft.h"
 
+/**
+ * @brief Function that allocates memory 
+ * for an array of elements and initializes 
+ * them to zero.
+ *
+ * @param count The number of elements 
+ * to allocate memory for.
+ * @param size The size of each element.
+ * @return A pointer to the allocated memory, 
+ * or NULL if the allocation fails.
+ * @var memory The pointer to the allocated memory.
+ * @var i The index of the current element.
+ * @note size_t used to represent the size of objects.
+ * It's lagre enough to represent the size of any object
+ * even depending on the system.
+ */
 void	*ft_calloc(size_t count, size_t size)
 {
 	char	*memory;

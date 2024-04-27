@@ -13,9 +13,12 @@
 #include "../minishell.h"
 
 /**
- * @brief Function to get current directory
+ * @brief Function to get current directory.
  *
- * @return char*
+ * @param data The data structure containing information about the program.
+ * @return A char pointer to a string representing the current working directory.
+ * Returns NULL and sets the exit status to 1 if an error occurs.
+ * @var pwd The current working directory.
  */
 char	*get_current_directory(t_data *data)
 {
@@ -32,10 +35,13 @@ char	*get_current_directory(t_data *data)
 }
 
 /**
- * @brief Function to change directory
- *
- * @param dir
- * @return int
+ * @brief Function to change directory from the current working 
+ * to the specified directory.
+ * Helper function for the `ft_cd` builtin.
+ * 
+ * @param dir The directory to change to.
+ * @param data The data structure containing information about the shell.
+ * @return 0 on success, -1 on failure.
  */
 int	change_directory(char *dir, t_data *data)
 {
@@ -49,11 +55,14 @@ int	change_directory(char *dir, t_data *data)
 }
 
 /**
- * @brief Function to update env variables
- *
- * @param data
- * @param pwd_old
- * @param pwd_new
+ * @brief Function updates the environment variables
+ * `OLDPWD` and `PWD` with new values.
+ * Helper function for the `ft_cd` builtin.
+ * 
+ * @param data The main data structure containing 
+ * the environment variables.
+ * @param pwd_old The old value of the "PWD" variable.
+ * @param pwd_new The new value of the "PWD" variable.
  */
 void	update_env_variables(t_data *data, char *pwd_old, char *pwd_new)
 {
@@ -62,6 +71,13 @@ void	update_env_variables(t_data *data, char *pwd_old, char *pwd_new)
 	free_cd(pwd_old, pwd_new);
 }
 
+/**
+ * @brief Frees the memory allocated for the `OLDPWD` and `PWD` variables.
+ * Helper function for the `ft_cd` builtin.
+ *
+ * @param pwd_old The pointer to the `OLDPWD`
+ * @param pwd_new The pointer to the `PWD`
+ */
 void	free_cd(char *pwd_old, char *pwd_new)
 {
 	free(pwd_old);
@@ -69,10 +85,18 @@ void	free_cd(char *pwd_old, char *pwd_new)
 }
 
 /**
- * @brief Function to handle the cd builtin
- *
- * @param data
- * @param cmds
+ * @brief Function to handle the cd builtin. 
+ * Changes the current working directory.
+ * If no arguments are provided, it changes to the home directory.
+ * If an argument is provided, it changes to the specified directory.
+ * 
+ * @param data The main data structure.
+ * @param cmds The array of command arguments.
+ * 
+ * @var pwd_old The old working directory.
+ * @var pwd_new The new working directory.
+ * @var dir The directory to change to.
+ * @var i The index of the command argument.
  */
 void	ft_cd(t_data *data, char **cmds)
 {

@@ -12,6 +12,14 @@
 
 #include "libft.h"
 
+/**
+ * @brief 		Function to put string to the standard output (1).
+ * 
+ * @param str  	The string to be written.
+ * @return int 	The number of characters written 
+ * 
+ * @note 		Prints (null) and returns 6 if the string is NULL.
+ */
 int	ft_putstr(char *str)
 {
 	if (!str)

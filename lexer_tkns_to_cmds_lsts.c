@@ -13,14 +13,14 @@
 #include "minishell.h"
 
 /**
- * @brief Function to reallocate memory 
- * for args in the command list
+ * @brief 			Function to reallocate memory 
+ * 					for args in the command list
  * 
- * @param cmd The command structure.
- * @param new_arg The new argument to be added.
- * @var new_args The new arguments list.
- * @var i The index of the current argument.
- * @var j The index of the new argument.
+ * @param cmd 		The command structure.
+ * @param new_arg 	The new argument to be added.
+ * @var new_args 	The new arguments list.
+ * @var i 			The index of the current argument.
+ * @var j 			The index of the new argument.
  */
 void	ft_realloc_args(t_cmd *cmd, char *new_arg)
 {

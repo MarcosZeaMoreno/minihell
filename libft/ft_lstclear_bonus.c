@@ -14,10 +14,13 @@
 
 /**
  * @brief function that clears the list
- * void (*del)(void *) is the pointer to the function
- * that receives void and returns nothing
+ * 
  * @param lst current list (or stack in our case)
- * @param del is the variablee which takes the address of the function.  
+ * @param del is the variablee which takes the 
+ * address of the function.
+ * 
+ * @note void (*del)(void *) is the pointer to the function
+ * that receives void and returns nothing
  */
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {

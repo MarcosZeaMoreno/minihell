@@ -13,10 +13,11 @@
 #include "../minishell.h"
 
 /**
- * @brief Function to handle the unset builtin
+ * @brief Function to handle the unset builtins. 
+ * It unsets environment variables sended on arguments.
  *
- * @param data
- * @param cmds
+ * @param data The data structure containing the environment variables.
+ * @param cmds An array of strings representing the command arguments.
  */
 void	ft_unset(t_data *data, char **cmds)
 {
@@ -35,9 +36,13 @@ void	ft_unset(t_data *data, char **cmds)
 }
 
 /**
- * @brief Function to handle the env builtin
- *
- * @param env
+ * @brief Function to handle the env builtin: prints 
+ * the environment variables stored in the linked list.
+ * 
+ * @param env The linked list of environment variables.
+ * @param flag The flag indicating the format of the output.
+ * If flag is 1, the output will be in the format "declare -x key="value"".
+ * If flag is 0, the output will be in the format "key=value".
  */
 void	ft_env(t_env *env, int flag)
 {
@@ -52,9 +57,13 @@ void	ft_env(t_env *env, int flag)
 }
 
 /**
- * @brief Function to handle the pwd builtin
+ * @brief Function to handle the pwd builtin: prints the current 
+ * working directory to the standard output. If the environment 
+ * variable "PWD" is set, it prints its value. Otherwise, it prints 
+ * the value of the "HOME" environment variable.
  *
- * @param data
+ * @param data A pointer to the main data structure that contains 
+ * the environment variables.
  */
 void	ft_pwd(t_data *data)
 {
