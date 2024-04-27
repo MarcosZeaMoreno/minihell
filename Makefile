@@ -21,43 +21,7 @@ CFLAGS = -Wall -Werror -Wextra
 #LDFLAGS for school
 LDFLAGS = -lreadline -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 LIBFT = libft
-SRC =  check_comand.c \
-		check_expand_value.c \
-		cmd_errors_utils.c \
-		env_fts.c \
-		env_to_lst.c\
-		error.c \
-		expand_value_utils.c \
-		fork.c \
-		input_errors.c \
-		lexer_print_tkns.c \
-		lexer_string_utils.c \
-		lexer_tkn_hander_helpers.c \
-		lexer_tkns_handlers.c \
-		lexer_tkns_to_cmds_lsts.c \
-		lexer_tkns_to_cmds_utils.c \
-		lexer_tkns_to_cmds.c \
-		lexer_tkns_utils.c \
-		lexer_tkns.c \
-		lexer.c \
-		lst_clear.c \
-		main.c \
-		new_input.c \
-		parser.c \
-		print_cmds_list.c \
-		print_entry.c \
-		printed_checks.c \
-		signals.c \
-		utils.c \
-		utils2.c \
-		utils3.c \
-		var_cleaning.c \
-		pipes.c \
-		redir.c \
-		./builtin/builtins.c \
-		./builtin/export.c \
-		./builtin/echo.c \
-		./builtin/cd.c \
+SRC =  $(shell find ./src -iname "*.c")
 
 #COLORS
 BOLD	:= \033[1m

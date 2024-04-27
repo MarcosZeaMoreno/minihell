@@ -4,7 +4,9 @@ Minishell is a 42 cursus preject, which is a lightweight shell implementation wr
 
 ## 📚Implementation📚
 
-To understood the porject, is needed to know it's parts. It breaks down the process into 4 steps: `expander`->`lexer`->`parser`->`executor`. This process may vary depend on the proyect.
+To understood the porject, is needed to know it's parts. It breaks down the process into 4 steps:
+
+`expander`->`lexer`->`parser`->`executor`. This process may vary depend on the proyect.
 
 ### Expander
 
