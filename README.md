@@ -89,9 +89,9 @@ typedef struct s_tkn
 	  TKN_STRING,			← The entirety of the content within the aforementioned quotation marks
 	  TKN_ERROR			← 3 and more consecutive >, < and more than 2 |
 	}			e_type;
-	char				*value; ← The value of the token
-	int					order;  ← The order of the token in the token list (e.g. 1, 2, 3, ...)
-}					t_tkn;
+	char			*value; ← The value of the token
+	int				order;  ← The order of the token in the token list (e.g. 1, 2, 3, ...)
+}				t_tkn;
 ```
 **NOTE** 
 
