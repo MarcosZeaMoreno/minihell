@@ -54,11 +54,11 @@ In our case, the variable expansion process was broken down into several steps:
 ```
 typedef struct s_var_name
 {
-	char		*name;      ← name of variable
-	char		*value;     ← value of variable
-	int		pos;        ← position of i when checking input
-	int		start;      ← position of the first letter in thevariable name 
-	int		end;        ← position of the last letter in the variable name
+  char		*name;      ← name of variable
+  char		*value;     ← value of variable
+  int		pos;        ← position of i when checking input
+  int		start;      ← position of the first letter in thevariable name 
+  int		end;        ← position of the last letter in the variable name
 }			t_var_name;
 ```
 
@@ -103,13 +103,13 @@ The objective of this component is to transform the tokens list into a command l
 ```
 typedef struct s_cmd
 {
-	char			**args;
-	int			flag_redir;
-	int			fd[2];
-	t_redirect		*redir;
-	int			redir_count[2];
-	int			save;
-	struct s_cmd		*next;
+  char			**args;
+  int			flag_redir;
+  int			fd[2];
+  t_redirect		*redir;
+  int			redir_count[2];
+  int			save;
+  struct s_cmd		*next;
 }				t_cmd;
 ```
 
