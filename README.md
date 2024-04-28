@@ -56,10 +56,10 @@ typedef struct s_var_name
 {
 	char			*name;      ← name of variable
 	char			*value;     ← value of variable
-	int				pos;        ← position of i when checking input
-	int				start;      ← position of the first letter in thevariable name 
-	int				end;        ← position of the last letter in the variable name
-}					t_var_name;
+	int			pos;        ← position of i when checking input
+	int			start;      ← position of the first letter in thevariable name 
+	int			end;        ← position of the last letter in the variable name
+}				t_var_name;
 ```
 
 ![Lexing process](/readme_imgs/newinput.svg)
