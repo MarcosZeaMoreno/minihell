@@ -32,13 +32,13 @@ Another important step in the development of a minishell program is to check whe
 
 typedef struct s_data
 {
-	int				exit_status;    ← here we save that status
-	t_env			*env_copy;
-	char			*input_copy;
-	t_cmd			*cmd;
-	t_token			*token;
-	pid_t			pid;
-}					t_data;
+	int					exit_status;    ← here we save that status
+	t_env				*env_copy;
+	char				*input_copy;
+	t_cmd				*cmd;
+	t_token				*token;
+	pid_t				pid;
+}						t_data;
 
 ```
 
