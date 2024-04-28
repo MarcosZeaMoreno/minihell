@@ -82,9 +82,9 @@ typedef struct s_tkn
 	{
 	  TKN_PIPE,			← Pipe symbol (|)
 	  TKN_REDIR_IN,			← Redirection input symbol (<)
-	  TKN_REDIR_OUT,			← Redirection output symbol (>)
-	  TKN_REDIR_APPEND,			← Redirection append symbol (>>)
-	  TKN_REDIR_HERE_DOC,			← Redirection here doc symbol (<<)
+	  TKN_REDIR_OUT,		← Redirection output symbol (>)
+	  TKN_REDIR_APPEND,		← Redirection append symbol (>>)
+	  TKN_REDIR_HERE_DOC,		← Redirection here doc symbol (<<)
 	  TKN_WORD,			← Those characters are to be grouped together between two spaces
 	  TKN_STRING,			← The entirety of the content within the aforementioned quotation marks
 	  TKN_ERROR			← 3 and more consecutive >, < and more than 2 |
