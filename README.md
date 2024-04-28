@@ -106,11 +106,11 @@ typedef struct s_cmd
 	char				**args;
 	int				flag_redir;
 	int				fd[2];
-	t_redirect				*redir;
+	t_redirect			*redir;
 	int				redir_count[2];
 	int				save;
-	struct s_cmd				*next;
-}				t_cmd;
+	struct s_cmd			*next;
+}					t_cmd;
 ```
 
 The `t_cmd struct` represents a linked list where each node represents a command line. This linked list is used to store the commands that are separated by pipes in the input string. For example, consider the line `echo "Hello World!" | cat -e`. This line contains two nodes of command list: first `echo "Hello World!"` and then `cat -e`. This process is repeated in a loop while there are no more arguments or pipes.
