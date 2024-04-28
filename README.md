@@ -65,7 +65,9 @@ typedef struct s_var_name
 }			t_var_name;
 ```
 
-![Lexing process](/readme_imgs/newinput.svg)
+<p align="center">
+  <img src="/readme_imgs/newinput.svg" />
+</p>
 
 Since we have a copy of all environment variables in the main structure (data→env_copy), which was done before Lexer was implemented, we need the names of expandable variables in the input to compare them with the environment variables to replace them later with a value or (!) with an empty string. Also we need to handle the case when we have `$?` which should expand to the exit status of the most recently executed foreground pipeline (exit error).
 
@@ -218,6 +220,6 @@ To exit the program:
 	exit
 
 ## Authors
-This is a collaborative educational project of **42Málaga** school created by 
+This is a collaborative educational project of **42Málaga** school. Created by:
 - **Marcos Zea Moreno** ([MarcosZeaMoreno](https://github.com/MarcosZeaMoreno)): responsable of project structure, built-in functions, execution, redirection, and piping.
 - **Vladimir Katasonov** ([vkatasonov](https://github.com/vkatasonov)): responsible for lexing, parsing, and input check.
