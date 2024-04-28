@@ -80,17 +80,17 @@ typedef struct s_tkn
 {
 	enum
 	{
-	  TKN_PIPE,			← Pipe symbol (|)
-	  TKN_REDIR_IN,			← Redirection input symbol (<)
-	  TKN_REDIR_OUT,		← Redirection output symbol (>)
-	  TKN_REDIR_APPEND,		← Redirection append symbol (>>)
-	  TKN_REDIR_HERE_DOC,		← Redirection here doc symbol (<<)
-	  TKN_WORD,			← Those characters are to be grouped together between two spaces
-	  TKN_STRING,			← The entirety of the content within the aforementioned quotation marks
-	  TKN_ERROR			← 3 and more consecutive >, < and more than 2 |
+	  TKN_PIPE,				← Pipe symbol (|)
+	  TKN_REDIR_IN,				← Redirection input symbol (<)
+	  TKN_REDIR_OUT,			← Redirection output symbol (>)
+	  TKN_REDIR_APPEND,			← Redirection append symbol (>>)
+	  TKN_REDIR_HERE_DOC,			← Redirection here doc symbol (<<)
+	  TKN_WORD,				← Those characters are to be grouped together between two spaces
+	  TKN_STRING,				← The entirety of the content within the aforementioned quotation marks
+	  TKN_ERROR				← 3 and more consecutive >, < and more than 2 |
 	}			e_type;
-	char			*value; ← The value of the token
-	int			order;  ← The order of the token in the token list (e.g. 1, 2, 3, ...)
+	char			*value; 	← The value of the token
+	int			order;  	← The order of the token in the token list (e.g. 1, 2, 3, ...)
 }				t_tkn;
 ```
 **NOTE** 
